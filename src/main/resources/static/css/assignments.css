@@ -1,0 +1,80 @@
+.previous-next-post {
+	padding: 120px 0px 280px 0px !important;
+}
+
+.quizzes .quizzes-grid .mdl-grid, .quizzes .quizzes-grid .mdl-cell {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.free-prep-name {
+	font-weight: bold !important;
+}
+
+.test-series-list {
+	margin-top: 48px;
+}
+
+.demo-ribbon {
+	background: url(../images/freePrep/multiplebg.png) center no-repeat;
+	background-size: cover;
+}
+
+.all-test-series .ns-card {
+	width: -webkit-fill-available;
+	padding: 18px 18px 8px 18px;
+}
+
+.price ~ a {
+	margin-top: 8px;
+}
+
+.all-courses-section {
+	padding: 16px 20px;
+}
+.all-test-series .course-listing{
+	margin-top: 60px;
+}
+.about-this-course{
+	margin-top: 48px;
+}
+.about-this-course li{
+	    font-family: open sans;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.88;
+    letter-spacing: normal;
+    text-align: left;
+    color: #333333;
+}
+.mdl-data-table td, .mdl-data-table th {
+    text-align: left;
+    font-size: 15px;
+    white-space: initial;
+    min-width: 150px;
+}
+.statements{
+	font-size: 14px!important;
+    padding: 0px 18px;
+    margin: 0;
+}
+.mdl-radio__label {
+	line-height: normal;
+}
+.submit-quiz{
+	line-height: 20px;
+    height: 40px;
+}
+.mdl-radio__ripple-container .mdl-ripple {
+    background: #f26722;
+}
+.mdl-radio__inner-circle{
+	background: #f26722;
+}
+.mdl-radio.is-checked .mdl-radio__outer-circle {
+    border: 2px solid #f26722;
+}

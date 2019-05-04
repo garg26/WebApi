@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+<head>
+<link
+	href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+
+			<!--<div class="panel-body">-->
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Posts</h1>
+				</div>
+			</div>
+			<div class="row voffsetneg10">
+				<div class="col-md-12">
+					<a href="/admin_writer/posts/add-post">
+						<button type="submit" class="submit btn btn-default"
+							id="create-new-post">
+							<i class="fa fa-plus"></i> Create
+						</button>
+					</a>
+				</div>
+			</div>
+			<div class="row voffset10">
+				<div class="col-lg-12">
+					<!--<table id="all-posts" class="table table-bordered table-hover">-->
+					<div class="panel panel-default">
+						<div class="table-responsive panel-body">
+							<table
+								class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
+								id="all-posts" role="grid"
+								aria-describedby="dataTables-example_info" style="width: 100%;">
+								<!--<table id="all-posts" class="table table-striped table-bordered"
+                                cellspacing="0" width="100%">-->
+								<thead>
+									<tr>
+										<th><input type="checkbox" name="select-all-posts"
+											id="select-all-posts"></th>
+										<th>ID</th>
+										<th>Slug</th>
+										<th>Title</th>
+										<th>Status</th>
+										<th>Category</th>
+										<th>Sub Category</th>
+										<th>Last Modified Date</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="post : ${posts}">
+										<td><input type="checkbox" name="select-post"
+											class="select-post" th:value="${post.postId}"></td>
+										<td id="post-id"><a th:href="@{'/' + ${post.postSlug}}"
+											th:text="${post.postId}" target="_blank"></a></td>
+										<td id="post-slug"><a th:href="@{'/' + ${post.postSlug}}"
+											th:text="${post.postSlug}" target="_blank"></a></td>
+										<td th:text="${post.title}" id="post-title"></td>
+										<td th:text="${post.status}"></td>
+										<td th:text="${post.category}"></td>
+										<td th:text="${post.postSubCategory}"></td>
+										<td th:text="${post.updatedAt}"></td>
+										<td><span><a th:href="@{'/admin_writer/posts/'+ ${post.postId + '/update'}}" target="_blank"><button class="btn btn-success"
+													th:value="${post.postId}" >Edit
+													Post</button></a> <a
+												th:href="@{'/admin_writer/posts/'+ ${post.postId + '/clone-post/'}}"
+												class="btn btn-primary" style="color: white">Clone Post</a>
+												<button class="btn btn-info" th:value="${post.postId}"
+													onclick="publishPost(this.value)">PublishPost</button>
+										<a
+												th:href="@{'/admin_writer/posts/'+ ${post.postSlug} + '/comments/'}"
+												class="btn btn-primary" style="color: white">Comments</a>
+										</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--	</div>-->
+			<!--	</div>-->
+
+		</div>
+
+	</div>
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/plug-ins/1.10.16/api/fnFindCellRowIndexes.js"></script>
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/post.js')}}"></script>
+
+	<script>
+		$(document).ready(function() {
+			var table = $('#all-posts').DataTable();
+			table.order([ 6, 'desc' ]).draw();
+		});
+	</script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+<link
+	href="https://cdnjs.cloudflare.com//admin/dist/js/freeprep.jsax/libs/summernote/0.8.9/summernote.css"
+	rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Add New Free Prep Post</h1>
+					</div>
+				</div>
+				<form name="add-new-post" id="add-new-post">
+					<div class="col-md-9">
+
+						<label>ID(URL)</label>
+						<div class="input-group">
+							<span class="input-group-addon">http://neostencil.com/</span> <input
+								type="text" name="post-id" id="post-id" value=""
+								class="form-control"
+								placeholder="Post ID e.g. upsc-prelims-philosophy" required>
+						</div>
+
+						<div class="form-group" style="margin-top: 10px";>
+							<label>Title</label> <input type="text" name="post-title"
+								id="post-title" value="" class="form-control"
+								placeholder="Title of the post" required>
+						</div>
+						<div class="form-group">
+							<label>Text</label>
+							<textarea id="summernote" name="summernote" required></textarea>
+						</div>
+						<div class="form-group">
+							<label class="error-single" id="add-new-post-text-error"></label>
+						</div>
+
+						<div class="form-group">
+							<label>Category</label> <select name="post-category"
+								id="post-category" class="form-control" required>
+								<option value="0" selected disabled>Select Post
+									Category</option>
+								<option th:each="category : ${category}" th:text="${category}"
+									th:value="${category}"></option>
+
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label>Related Posts</label> <select name="related-posts"
+								multiple id="related-posts" class="form-control selectpicker">
+								<option value="0">Select multiple related posts</option>
+								<option th:each="rp : ${relatedPosts}" th:text="${rp.title}"
+									th:value="${rp.postSummaryId}"></option>
+
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label>Sub Category</label> <select name="post-sub-category"
+								id="post-sub-category" class="form-control" required>
+								<option value="0" selected disabled>Select Post Sub
+									Category</option>
+								<option th:each="subcategory : ${subcategory}"
+									th:text="${subcategory}" th:value="${subcategory}"></option>
+							</select>
+						</div>
+
+						<div class="form-group tag_wrap"
+								 style="margin-top: 10px;">
+							<label>Tag</label>
+							<div class="input-group control-group add-tag">
+								<div class="row">
+									<div class="col-md-10">
+										<input type="text" required name="tags[]"
+													 id="tags" class="form-control"
+													 placeholder="Tag name....">
+									</div>
+
+									<div class="col-md-2">
+										<button
+												class="btn btn-success add-more-tag pull-right"
+												type="button">
+											<i class="fa fa-plus" aria-hidden="true"></i>
+										</button>
+									</div>
+								</div>
+
+
+							</div>
+							<div class="field_wrapper1"></div>
+						</div>
+
+						<!-- 
+						<label class="container"><input type="checkbox"
+							name="featured" id="featured">&nbsp;Featured</label> <label
+							class="container"><input type="checkbox" name="popular"
+							id="popular">&nbsp;Popular</label> <br>
+						<div class="form-group">
+							<label>ReadTime</label><input type="text" name="readTime"
+								id="readTime" value="" class="form-control"
+								placeholder="Read Time e.g 5 min read">
+						</div>
+						<div class="form-group">
+							<label>No. of Views</label><input type="number" min="0"
+								class="form-control" name="noofviews" id="noofviews"
+								placeholder="No. of Views (Temporarily)">
+						</div>
+
+						<div class="form-group">
+							<label>Brief</label><input type="text" class="form-control"
+								name="brief" id="brief"
+								placeholder="Add a small brief of the post">
+						</div> -->
+
+						<!-- <div class="form-group">
+							<label style="margin-top: 10px";>Previous Post</label> <select
+								name="previousPost" id="previousPost"
+								class="form-control selectpicker" data-live-search="true"
+								title="Select Previous Post">
+								<option th:each="cp : ${customPosts}" th:text="${cp.postName}"
+									th:value="${cp.slug}"></option>
+
+
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label style="margin-top: 10px";>Next Post</label> <select
+								name="nextPost" id="nextPost" class="form-control selectpicker"
+								data-live-search="true" title="Select Next Post">
+								<option th:each="cp : ${customPosts}" th:text="${cp.postName}"
+									th:value="${cp.slug}"></option>
+							</select>
+						</div> -->
+
+						<div class="row" id="addMetaPanel">
+
+							<div style="margin-top: 20px;" class="col-md-9">
+								<label> Title:</label> <input type="text"
+																							placeholder="Enter Title"
+																							id="titleTag" class="form-control">
+							</div>
+
+							<div style="margin-top: 20px;" class="col-md-9">
+								<label> Meta KeyWord:</label><input type="text"
+																										placeholder="Enter Meta KeyWord"
+																										id="titleKeyWord" class="form-control">
+								</select>
+							</div>
+
+							<div style="margin-top: 20px;" class="col-md-9">
+								<label> Meta Description:</label> <textarea
+									placeholder="Enter Meta Description"
+									id="txtMetaDescription" class="form-control">
+              </textarea>
+							</div>
+
+						</div>
+
+						<br />
+						<div class="panel panel-primary" id="pnlFeaturedImage">
+							<div class="panel-heading">Featured Image</div>
+							<div class="panel-body">
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Title:</label> <input type="text"
+										placeholder="Enter featured image title" id="txtFITitle"
+										class="form-control">
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Caption:</label> <input type="text"
+										placeholder="Enter featured image caption" id="txtFICaption"
+										class="form-control">
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Alt Text:</label> <input type="text"
+										placeholder="Enter featured image alt text" id="txtFIAltText"
+										class="form-control">
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Description:</label> <input type="text"
+										placeholder="Enter featured image description"
+										id="txtFIDescription" class="form-control">
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label>Upload Image:</label></br>
+									<label class="custom-file">
+										<input type="file" required
+													 id="featureImage" class="custom-file-input"> <span
+											class="custom-file-control"></span>
+									</label> <input type="button" class="button btn-primary" value="Upload"
+																	id="but_feature_upload">
+
+									<div style="display: none;" id="loaderFeatureUpload">
+										<img width="30px" height="30px"
+												 src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+									</div>
+									<img th:src="" name="thumbnail"
+											 id="upload-feature-img-tag" width="100px"/>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="panel panel-primary">
+							<div class="panel-heading">BreadCrumbs</div>
+							<div class="panel-body" id="panel-body">
+
+								<div class="saved-breadcrumb" id="saved-breadCrumb">
+									<div class="form-group">
+										<label style="margin-top: 10px" ;>BreadCrumb Level 1</label>
+
+										<select name="show-breadCrumb"
+														class="form-control show-breadCrumb"
+														title="Select BreadCrumb">
+
+											<option selected disabled>Select BreadCrumb</option>
+
+											<option th:each="breadCrumb : ${breadCrumbs}"
+															th:data-subtext="${breadCrumb.link}" th:text="${breadCrumb.text}"
+															th:value="${breadCrumb.breadcrumbId}"></option>
+
+										</select>
+
+
+									</div>
+								</div>
+
+								<button type="button" class="btn btn-default create-breadcrumb"
+												style="margin-top: 2px" onclick="createBreadCrumb()">
+									<span class="glyphicon glyphicon-plus-sign"></span> Create BreadCrumb
+								</button>
+
+							</div>
+						</div>
+
+						<br />
+
+						<div th:if="${enablePublishButton}">
+							<label class="radio-inline" style="margin-top: 10px;"><input
+									type="radio" name="status" id="publish" value="publish">Publish</label>
+							<label class="radio-inline" style="margin-top: 10px;"><input
+									type="radio" name="status" id="draft" value="draft">Draft</label>
+						</div>
+
+						<div class="row" style="margin-top: 10px";>
+							<div class="col-md-9">
+								<button type="submit" class="submit btn btn-primary" id="Submit">Submit</button>
+								<i class="fa fa-spinner fa-spin" id="loader"></i> <a
+									href="/admin_writer_editor/free-prep" class="btn btn-default"
+									style="margin-left: 60px;">All Free Prep</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-9">
+								<label class="error-single" id="add-new-post-error"></label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+	<script
+			th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/freeprep.js')}}"
+	></script>
+</body>
+
+</html>

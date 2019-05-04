@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+  <title>Neostencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dashboard.css')}}"
+      rel="stylesheet" media="screen"/>
+
+  <script
+      th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/login.js')}}"></script>
+  <style>
+    .mdl-layout__content {
+      margin-top: 118px !important;
+    }
+
+    .buttonBackground {
+      background: linear-gradient(to bottom, #f7a053, #e24d08) !important;
+    }
+
+    .address_checkout_profile {
+      display: block;
+      border-radius: 4px;
+      border: 1px #ddd solid;
+      background-color: #fff;
+    }
+
+    .addressShow {
+      float: left;
+      border: 1px #ddd solid;
+      border-radius: 4px;
+      display: block;
+      background-color: #fff;
+      padding: 10px;
+    }
+
+    .addressEditables {
+      color: #00f;
+      cursor: pointer;
+    }
+
+    .address_checkout_profile input {
+			width: 300px;
+      height: 44px;
+      border-radius: 2px;
+      background-color: #ffffff;
+      border-style: none;
+      border: 1px solid #979797;
+      outline: 0;
+      padding: 0 10px;
+      margin: 0px 0 16px 0;
+    }
+
+    .address_checkout_profile label {
+      font-family: open sans;
+      font-size: 14px;
+      font-weight: bold !important;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: left;
+      color: #000000;
+    }
+
+    .address_checkout_profile textarea {
+      width: 100%;
+      width: 664px;
+      padding: 10px;
+      font-family: open sans;
+      font-size: 13px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: left;
+      color: #b2b2b2;
+    }
+
+    @media screen and (max-width: 767px) {
+      .address_checkout_profile input, .address_checkout_profile textarea {
+        width: calc(100% - 16px);
+      }
+
+      .fullNameEdit, .passwordEdit {
+        margin-top: -50px !important;
+        margin-right: 10px !important;
+      }
+
+      .buttonBackground {
+        background-image: linear-gradient(352deg, #f7a053, #e24d08) !important;
+        margin: 5px;
+      }
+			.mobileNumberUpdate{
+				margin-right: 10px;
+			}
+
+    }
+		@media screen and (min-width: 767px) {
+			.mobileNumberUpdate{
+				margin-right: 40px;
+			}
+		}
+		@media screen and (max-width: 1024px){
+			.address_checkout_profile input {
+				width:auto;
+			}
+
+		}
+    .chip-selected{
+      background: #f4a639;
+      color: #ffffff;
+      font-weight: 900;
+    }
+    #userImageUploadBtn{
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+  <div class="mat-content mdl-layout__content">
+    <div class="container-header">
+      <div class="mdl-grid">
+        <div
+            class="profile-form mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+          <div>
+            <h4 style="float: left;">Personal & Contact Info</h4>
+            <h6 style="float: right; margin-top: 30px; color: #666;">
+              <span th:text="${user?.emailId}"></span>
+            </h6>
+          </div>
+          <div name="address_checkout_profile"
+               class="address_checkout_profile">
+            <div class="mdl-grid">
+              <input type="file" style="display: none;" id="uploadAttachment"/>
+              <div
+                  class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="    border-bottom: 1px solid #e7e7e7;padding-bottom: 10px">
+              <div style="width: fit-content;width: -moz-fit-content; margin: 0 auto;">
+                <img id= "userImageUploadBtn" accept="image/*" capture th:if="${user?.avatar} != null" th:src="${user?.avatar}+'=w70-h72-cc'" alt="userImage">
+                <img id= "userImageUploadBtn" accept="image/*" capture th:unless="${user?.avatar} != null" src="https://lh3.googleusercontent.com/Z4uHbjIjELCl1WaD_fGK7VnkE9sXzT_b4SLAmmapf7JbmtR9pNF17JW58z3vA7JsRuCGl0BiovQc7zuHiuOp6PZi7Cw=w70-h72-cc" alt="userImage">
+              </div>
+                <div class="mdl-tooltip mdl-tooltip--top 	" for="userImageUploadBtn">
+                  Click to Change Profile Picture
+                </div>
+                <div style="margin: 0px; position: relative; top: -13px; display: none; margin-top: -33px;" class="common-loader"
+                     id="loader-uploadImage">
+                  <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                </div>
+              </div>
+              <input type="hidden" id="emailId" name="emailId"
+                     th:value="${user?.emailId}">
+              <!--FullName Update Start-->
+              <!--<form name="fullNameUpdateForm">-->
+              <div
+                  class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                  style="border-bottom: 1px solid #e7e7e7;">
+                <!--<input type="hidden" id="emailId" name="emailId" th:value="${user?.emailId}">-->
+                <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                    style="float: left;">
+                  <label for="fullName">Full Name:</label><br/> <span
+                    th:text="${user?.fullName}"></span>
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone fullNameUpdate"
+                    style="display: none; float: left;">
+                  <label for="fullNameUpd">New Name</label><br/><input type="text"
+                                                                  id="fullNameUpd"
+                                                                  name="fullNameUpd"
+                                                                  th:value="${user?.fullName}"></input>
+                  <br/>
+                  <div class="errorShowFullName"></div>
+
+                  <button style="display: none;"
+                          class="fullNameChanges buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    SAVE
+                  </button>
+                  <button style="display: none;"
+                          class="fullNameCancelChanges buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    CANCEL
+                  </button>
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                    style="float: right;">
+                  <button style="float: right; margin-right: 40px;"
+                          class="fullNameEdit buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    EDIT
+                  </button>
+                  <!--<span class="fullNameEdit" style="float:right;"> Edit</span>-->
+                </div>
+              </div>
+              <!--</form>-->
+              <!--FullName Update End-->
+              <br/>
+              <br/>
+              <div style="clear: both;"></div>
+
+              <!--Password Update Start-->
+              <div
+                  class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                  style="border-bottom: 1px solid #e7e7e7;">
+                <!--<input type="hidden" id="emailId" name="emailId" th:value="${user?.emailId}">-->
+                <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                    style="float: left;">
+                  <label for="password">Password:</label><br/> <span>******</span>
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone passwordUpdate"
+                    style="display: none; float: left;">
+                  <label for="passwordUpd">New Password</label>
+									<br/><input
+                    type="password" id="passwordUpd" name="passwordUpd"/>
+                  <br/>
+                  <label for="confirmPassword">Confirm New Password</label><br/><input
+                    type="password" id="confirmPasswordUpd"
+                    name="confirmPassword"></input> <br/>
+                  <div class="errorShowPassword"></div>
+                  <button style="display: none;"
+                          class="passwordChanges buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    SAVE
+                  </button>
+                  <button style="display: none;"
+                          class="passwordCancelChanges buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    CANCEL
+                  </button>
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                    style="float: right;">
+                  <button style="float: right; margin-right: 40px;"
+                          class="passwordEdit buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    EDIT
+                  </button>
+                  <!--<span class="passwordEdit" style="float:right;"> Edit</span>-->
+                </div>
+              </div>
+              <!--Password Update End-->
+
+
+              <!--Mobile Number Update Start-->
+
+              <div
+                  class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                  style="border-bottom: 1px solid #e7e7e7;">
+                <!--<input type="hidden" id="emailId" name="emailId" th:value="${user?.emailId}">-->
+                <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--6-col-phone"
+                    style="float: left;">
+                  <label for="mobileNumberUpdate">Mobile No.:</label><br/>
+                  <span th:text="${user?.mobileNumber}"></span>
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mobileUpdate"
+                    style="display: none; float: left;">
+
+
+                  <label for="mobileNumberUpdate">New Mobile Number </label><br/>
+                  <input type="tel" id="mobileNumberUpdate" pattern="[0-9]{10}" maxlength="10" name="mobileNumberUpdate" required >
+                  <br/>
+
+                  <!--<label for="mobileNumberUpdate">Confirm New Mobile Number</label>-->
+                  <!--<input type="number" id="confirmMobileUpd" name="confirmMobileUpd">-->
+                  <!--<br/>-->
+
+                  <div class="errorShowMobile"></div>
+                  <button style="display: none;"
+													class=" mobileNumberSave buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    SAVE
+                  </button>
+                  <button style="display: none;"
+                          class=" mobileNumberCancel buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    CANCEL
+                  </button>
+
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--6-col-phone"
+                    style="float: right;">
+                  <button style="float: right;"
+                          class=" mobileNumberUpdate buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    EDIT
+                  </button>
+                  <!--<span class="passwordEdit" style="float:right;"> Edit</span>-->
+                </div>
+              </div>
+              <!--Mobile Number Update end-->
+
+              <!--<div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone" style="border-bottom: 1px solid #e7e7e7;">-->
+                <!--&lt;!&ndash;<input type="hidden" id="emailId" name="emailId" th:value="${user?.emailId}">&ndash;&gt;-->
+                <!--<div class="mdl-cell mdl-cell&#45;&#45;6-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;6-col-phone" style="float: left;">-->
+                  <!--<label for="mobileNumberUpdate">Exam Segment(s):</label><br>-->
+                  <!--<span>IAS, IES, SSC</span>-->
+                <!--</div>-->
+                <!--<div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone examUpdate" style="float: left; display: none;">-->
+                  <!--<div class="mdl-card__supporting-text" style="width: fit-content; width: -moz-fit-content; margin: 0 auto;">-->
+                    <!--<span type="button" class="mdl-chip" data-id="IAS">-->
+                      <!--<span class="mdl-chip__text">IAS</span>-->
+                    <!--</span>-->
+                    <!--<span type="button" class="mdl-chip" data-id="IES">-->
+                      <!--<span class="mdl-chip__text">IES</span>-->
+                    <!--</span>-->
+                    <!--<span type="button" class="mdl-chip" data-id="GATE">-->
+                      <!--<span class="mdl-chip__text">GATE</span>-->
+                    <!--</span>-->
+                    <!--<span type="button" class="mdl-chip" data-id="IIT-JEE">-->
+                      <!--<span class="mdl-chip__text">IIT-JEE</span>-->
+                    <!--</span>-->
+                    <!--<span type="button" class="mdl-chip" data-id="NEET">-->
+                      <!--<span class="mdl-chip__text">NEET</span>-->
+                    <!--</span>-->
+                    <!--<span type="button" class="mdl-chip" data-id="STATE_PCS">-->
+                      <!--<span class="mdl-chip__text">STATE PCS</span>-->
+                    <!--</span>-->
+                    <!--<span type="button" class="mdl-chip" data-id="SSC">-->
+                      <!--<span class="mdl-chip__text">SSC</span>-->
+                    <!--</span>-->
+                    <!--<span type="button" class="mdl-chip" data-id="LAW">-->
+                      <!--<span class="mdl-chip__text">LAW</span>-->
+                    <!--</span>-->
+                    <!--<span type="button" class="mdl-chip" data-id="RRB">-->
+                      <!--<span class="mdl-chip__text">RRB</span>-->
+                    <!--</span>-->
+                  <!--</div>-->
+
+                  <!--<div class="errorExamSegment"></div>-->
+                  <!--<div style="width: fit-content;width: -moz-fit-content; margin: 0 auto;">-->
+                    <!--<button id = 'saveExamSegments' class=" examSegmentSave buttonBackground mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent" data-upgraded=",MaterialButton,MaterialRipple">-->
+                      <!--SAVE-->
+                      <!--<span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>-->
+                    <!--<button style="" class=" examSegmentCancel buttonBackground mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent" data-upgraded=",MaterialButton,MaterialRipple">-->
+                      <!--CANCEL-->
+                      <!--<span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="mdl-cell mdl-cell&#45;&#45;6-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;6-col-phone" style="float: right;">-->
+                  <!--<button style="float: right; display: block;margin-right:40px ;" class=" examSegmentUpdate buttonBackground mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent" data-upgraded=",MaterialButton,MaterialRipple">-->
+                    <!--EDIT-->
+                    <!--<span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>-->
+                  <!--&lt;!&ndash;<span class="passwordEdit" style="float:right;"> Edit</span>&ndash;&gt;-->
+                <!--</div>-->
+              <!--</div>-->
+              <br/>
+              <br/>
+              <div style="clear: both;"></div>
+              <!--Address Details Update Start-->
+              <div
+                  class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                  style="border-bottom: 1px solid #e7e7e7;">
+                <div
+                    class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                    style="float: left;">
+                  <label>Contact Information & Address:</label><span
+                    id="addressNewAdd"
+                    style="float: right; cursor: pointer; color: blue;">(+
+											Add New Address)</span> <br/>
+                  <div
+                      class="addressShow mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                      th:each="ads : ${addresses}">
+                    <span th:text="${ads?.firstName}"></span> <span
+                      th:text="${ads?.lastname}"></span><br/> <span
+                      th:text="${ads?.addressText}"></span><br/>
+                    <span th:text="${ads?.city}"></span><span>, </span> <span
+                      th:text="${ads?.state}"></span><span> - </span><span
+                      th:text="${ads?.pincode}"></span><br/> <span><label>Mobile
+													Number: </label></span><span th:text="${ads?.mobileNumber}"> </span><br/>
+                    <br/> <span class="addressEditables"
+                                th:id="${'addressEdit'+ads?.addressId}"
+                                th:onclick="|editAddresses('${ads?.addressId}')|">Edit</span>
+                    | <span th:if="${ads?.defaultAddress}" style="color: #888">(Default)</span>
+                    <span th:unless="${ads?.defaultAddress}"
+                          class="addressEditables"
+                          th:id="${'setDefaultAddress'+ads?.addressId}"
+                          th:onclick="|setDefaultAddresses('${ads?.addressId}')|">Set
+												as Default</span>
+                  </div>
+                  <form name="addressDetailsUpdateForm"
+                        id="addressDetailsUpdateForm">
+                    <div
+                        class="addressDetailsShow mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+                    </div>
+                  </form>
+                  <!--<div class="addressDetailsShow mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone" style="display:none;">
+                    <input type="hidden" id="addressId" name="addressId" th:value="${addressDetail?.addressId}">
+                    <input type="hidden" id="defaultAddress" name="defaultAddress" th:value="${addressDetail?.defaultAddress}">
+                    <div class="mdl-cell mdl-cell&#45;&#45;6-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone" style="float:left;">
+                       <label for="firstName">First Name</label><br/> <input type="text" id="firstName" name="firstName" th:value="${addressDetail?.firstName}"><br />
+                    </div>
+                    <div class="mdl-cell mdl-cell&#45;&#45;6-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone" style="float:right;">
+                        <label for="lastname">Last Name</label><br/> <input type="text" id="lastname" name="lastname" th:value="${addressDetail?.lastname}"><br />
+                    </div>
+                    <div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                      <label>Address:</label><br/>
+                      <textarea rows="5" placeholder="Flat/House no. colony/ Street No." id="addressText" style="color:#030303 !important;" name="addressText" th:text="${addressDetail?.addressText}"> </textarea><br/>
+                    </div>
+                    <div class="mdl-cell mdl-cell&#45;&#45;6-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone" style="float:left;">
+                          <label for="pincode">Pincode</label><br/> <input type="number" id="pincode" name="pincode" th:value="${addressDetail?.pincode}"> <br />
+                        <label for="city">City</label><br/> <input type="text" id="city" name="city" th:value="${addressDetail?.city}"> <br />
+                    </div>
+                    <div class="mdl-cell mdl-cell&#45;&#45;6-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone" style="float:right;">
+                        <label for="mobileNumber">Mobile Number</label><br/> <input type="number" id="mobileNumber" name="mobileNumber" th:value="${addressDetail?.mobileNumber}"><br />
+                          <label for="state">State</label><br/> <input type="text" id="state" name="state" th:value="${addressDetail?.state}"><br />
+                    </div>
+                    <button class="addressChanges buttonBackground mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent">
+                        SAVE CHANGES
+                    </button>
+                    <button class="addressCancelChanges buttonBackground mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent">
+                        Cancel
+                    </button>
+
+                </div>-->
+                  <form name="addressDetailsCreateForm"
+                        id="addressDetailsCreateForm">
+                    <div
+                        class="addressDetailsCreate mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                        style="display: none;">
+                      <div
+                          class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                          style="float: left;">
+                        <label for="firstName">First Name</label><br/> <input
+                          type="text" id="firstNameAdd" tabindex="1"
+                          name="firstName"><br/>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                          style="float: right;">
+                        <label for="lastname">Last Name</label><br/> <input
+                          type="text" id="lastnameAdd" tabindex="2" name="lastname"><br/>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <label>Address:</label><br/>
+                        <textarea rows="5"
+                                  placeholder="Flat/House no. colony/ Street No."
+                                  id="addressTextAdd" tabindex="3"
+                                  style="color: #030303 !important;" name="addressText"></textarea>
+                        <br/>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                          style="float: left;">
+                        <label for="pincode">Pincode</label><br/> <input
+                          type="number" id="pincodeAdd" tabindex="4" name="pincode">
+                        <br/> <label for="city">City</label><br/> <input
+                          type="text" id="cityAdd" tabindex="6" name="city">
+                        <br/>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                          style="float: right;">
+                        <label for="mobileNumber">Mobile Number</label><br/> <input
+                          type="number" id="mobileNumberAdd" tabindex="5"
+                          name="mobileNumber"><br/> <label for="state">State</label><br/>
+                        <input type="text" id="stateAdd" tabindex="7" name="state"><br/>
+                      </div>
+                      <button type="submit"
+                              class="addressCreate buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                              tabindex="8">SAVE ADDRESS
+                      </button>
+                      <button onclick="closeOnCancel();" tabindex="9"
+                              class="addressCancelChanges buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <!--Address Details Update End-->
+              <div style="clear: both;"></div>
+              <div
+                  class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+                <button style="margin-top: 20px;" id=""
+                        class="buttonBackground save-and-continue  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+
+                  DONE
+                </button>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+</div>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var addressList = [[${addresses}]];
+  /*]]>*/
+
+</script>
+<script>
+  $(document).ready(function () {
+    $('#userImageUploadBtn').on('click',function () {
+      $('#uploadAttachment').trigger("click");
+    });
+  });
+  var userExamSegment = [];
+  var segmentList = '';
+  $('#saveExamSegments').on('click',function () {
+    userExamSegment=[];
+    $('.mdl-chip').each(function () {
+      if($(this).hasClass('chip-selected') ==true){
+        var exam =$(this).attr('data-id');
+        userExamSegment.push(exam);
+      }
+    });
+    segmentList = '';
+    for (var i in userExamSegment) {
+      segmentList =segmentList + userExamSegment[i] + ',';
+    }
+  });
+  $('.examUpdate .mdl-chip').on('click',function () {
+    if($(this).hasClass('chip-selected') ==true){
+      $(this).removeClass('chip-selected');
+    }
+    else{
+      $(this).addClass('chip-selected');
+    }
+  });
+
+  $(".fullNameEdit").click(function () {
+    $(".fullNameUpdate").show();
+    $(".fullNameChanges").show();
+    $(".fullNameEdit").hide();
+    $(".fullNameCancelChanges").show();
+    $(".save-and-continue").hide();
+
+  });
+  $(".fullNameCancelChanges").click(function () {
+    $(".fullNameUpdate").hide();
+    $(".fullNameChanges").hide();
+    $(".fullNameEdit").show();
+    $(".fullNameCancelChanges").hide();
+    $(".save-and-continue").show();
+  });
+
+  $(".passwordEdit").click(function () {
+    $(".passwordUpdate").show();
+    $(".passwordChanges").show();
+    $(".passwordEdit").hide();
+    $(".passwordCancelChanges").show();
+    $(".save-and-continue").hide();
+  });
+  $('.mobileNumberUpdate').click(function () {
+    $(".mobileUpdate").show();
+    $('.mobileNumberUpdate').hide();
+    $('.mobileNumberSave').show();
+    $('.mobileNumberCancel').show();
+    $(".passwordChanges").hide();
+    $(".passwordEdit").show();
+    $(".passwordCancelChanges").hide();
+    $(".save-and-continue").show();
+  });
+  $('.mobileNumberCancel').click(function () {
+    $(".mobileUpdate").hide();
+    $('.mobileNumberUpdate').show();
+  });
+  $(".passwordCancelChanges").click(function () {
+    $(".passwordUpdate").hide();
+    $(".passwordChanges").hide();
+    $(".passwordEdit").show();
+    $(".passwordCancelChanges").hide();
+    $(".save-and-continue").show();
+  });
+
+  $(".save-and-continue").click(function () {
+    window.location.href = "/";
+  });
+  $("#addressNewAdd").click(function () {
+    $(".addressDetailsCreate").show();
+    $(".addressShow").hide();
+    $(".save-and-continue").hide();
+    $(".addressDetailsShow").hide();
+  });
+  $('.examSegmentUpdate').click(function () {
+    $('.examSegmentUpdate').hide();
+    $('.examUpdate').show();
+    $(".mobileUpdate").hide();
+    $('.mobileNumberUpdate').show();
+    $('.mobileNumberSave').show();
+    $('.mobileNumberCancel').show();
+    $(".passwordChanges").hide();
+    $(".passwordEdit").show();
+    $(".passwordCancelChanges").hide();
+    $(".save-and-continue").show();
+  });
+  $('.examSegmentCancel').click(function () {
+    $(".examUpdate").hide();
+    $('.examSegmentUpdate').show();
+  });
+
+  function validateNumber(){
+    var number = $('#mobileNumberUpdate').val();
+    if(number.length == 10){
+
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  $(".mobileNumberSave").click(function (e) {
+    e.preventDefault();
+    var input = {
+      mobileNumber: $('#mobileNumberUpdate').val()
+    }
+    if (validateNumber() == true) {
+      $.ajax({
+        method: "POST",
+        url: apiBasePath + "/user/updateusermobilenumber",
+        data: JSON.stringify(input),
+        dataType: "json",
+        contentType: "application/json",
+        processData: false,
+
+        success: function (response) {
+          location.reload();
+        },
+
+        error: function (response) {
+          alert("Failed to update Mobile Number");
+        }
+      });
+    }
+    else{
+      $('.errorShowMobile').html('<font color="red">Please Provide 10 digit mobile number without country code</font>');
+    }
+  });
+
+
+  function setDefaultAddresses(addrId) {
+    var inputUpd = {
+      addressId: addrId
+
+    }
+    $.ajax({
+      method: "POST",
+      url: apiBasePath + "/user/updatedefaultaddressdetail",
+      data: JSON.stringify(inputUpd),
+      dataType: "json",
+      contentType: "application/json",
+      processData: false,
+
+      success: function (response) {
+        location.reload();
+      },
+
+      error: function (response) {
+        alert("Default Address Set Failed");
+      }
+    });
+  }
+
+  function editAddresses(addressId) {
+    var htmlToShowAddressDetails = '';
+    var htmlAddressDetailEdit = '<input type="hidden" id="addressId" name="addressId" value="#addressId#"> <input type="hidden" id="defaultAddress" name="defaultAddress" value="#defaultAddress#"> <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="float:left;"> <label for="firstName">First Name</label><br/> <input type="text" id="firstName" tabindex="1" name="firstName" value="#firstName#"><br /> </div> <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="float:right;"> <label for="lastname">Last Name</label><br/> <input type="text" id="lastname" tabindex="2" name="lastname" value="#lastname#"><br /></div> <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"> <label>Address:</label><br/> <textarea rows="5" placeholder="Flat/House no. colony/ Street No." tabindex="3" id="addressText" style="color:#030303 !important;" name="addressText">#AddressText#</textarea><br/> </div> <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="float:left;"> <label for="pincode">Pincode</label><br/> <input type="number" id="pincode" tabindex="4" name="pincode" value="#pincode#"> <br /> <label for="city">City</label><br/> <input type="text" id="city" tabindex="6" name="city" value="#city#"> <br /> </div> <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="float:right;"> <label for="mobileNumber">Mobile Number</label><br/> <input type="number" id="mobileNumber" tabindex="5" name="mobileNumber" value="#MobileNumber#"><br /> <label for="state">State</label><br/> <input type="text" id="state" name="state" tabindex="7" value="#state#"><br /></div> <button type="submit" class="addressChanges buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" tabindex="8" onclick="saveAddressUpdate();"> SAVE CHANGES </button> <button class="addressCancelChanges buttonBackground mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" tabindex="9" onclick="closeOnCancel();"> Cancel </button>';
+
+    $
+    .each(addressList,
+        function (index, element) {
+          if (addressId == element.addressId) {
+            htmlToShowAddressDetails += htmlAddressDetailEdit;
+            htmlToShowAddressDetails = htmlToShowAddressDetails.replace("#addressId#",
+                element.addressId);
+            htmlToShowAddressDetails = htmlToShowAddressDetails.replace("#defaultAddress#",
+                element.defaultAddress);
+            htmlToShowAddressDetails = htmlToShowAddressDetails.replace("#firstName#",
+                element.firstName);
+            htmlToShowAddressDetails = htmlToShowAddressDetails.replace("#lastname#",
+                element.lastname);
+            htmlToShowAddressDetails = htmlToShowAddressDetails.replace("#AddressText#",
+                element.addressText);
+            htmlToShowAddressDetails = htmlToShowAddressDetails.replace("#pincode#",
+                element.pincode);
+            htmlToShowAddressDetails = htmlToShowAddressDetails.replace("#city#", element.city);
+            htmlToShowAddressDetails = htmlToShowAddressDetails.replace("#MobileNumber#",
+                element.mobileNumber);
+            htmlToShowAddressDetails = htmlToShowAddressDetails.replace("#state#", element.state);
+
+          }
+        }
+    );
+    $('.addressDetailsShow').html(htmlToShowAddressDetails).show();
+    $(".addressShow").hide();
+    $(".addressDetailsCreate").hide();
+    $(".save-and-continue").hide();
+  }
+
+  function closeOnCancel() {
+    $(".addressDetailsShow").hide();
+    $(".addressShow").show();
+    $(".addressDetailsCreate").hide();
+
+  }
+
+  function saveAddressUpdate() {
+    $("form[name=addressDetailsUpdateForm]").validate({
+
+      rules: {
+        firstName: {
+          required: true
+        },
+        lastname: {
+          required: true
+        },
+        addressText: {
+          required: true,
+        },
+        mobileNumber: {
+          required: true,
+        },
+        city: {
+          required: true
+        },
+        state: {
+          required: true
+        },
+        pincode: {
+          required: true
+        }
+      },
+      messages: {
+        firstName: {
+          required: "Please provide your First Name"
+        },
+        lastname: {
+          required: "Please provide your Last Name"
+        },
+        addressText: {
+          required: "Please provide Your Address Detail",
+        },
+        mobileNumber: {
+          required: "Please provide your Mobile Number",
+        },
+        city: {
+          required: "Please provide your City Name"
+        },
+        state: {
+          required: "Please Enter Your State"
+        },
+        pincode: {
+          required: "Please Enter Your Pincode"
+        }
+      },
+      submitHandler: function (form, e) {
+        e.preventDefault();
+        var inputUpd = {
+          addressId: $('#addressId').val(),
+          emailId: $('#emailId').val(),
+          firstName: $('#firstName').val(),
+          lastname: $('#lastname').val(),
+          addressText: $('#addressText').val(),
+          pincode: $('#pincode').val(),
+          city: $('#city').val(),
+          state: $('#state').val(),
+          defaultAddress: $('#defaultAddress').val(),
+          mobileNumber: $('#mobileNumber').val(),
+        }
+        $.ajax({
+          method: "POST",
+          url: apiBasePath + "/user/updateuseraddressdetail",
+          data: JSON.stringify(inputUpd),
+          dataType: "json",
+          contentType: "application/json",
+          processData: false,
+
+          success: function (response) {
+            $('.addressDetailsShow').html(
+                '<font color="green">Address Details Updated Successfully</font>').delay(5000).hide(
+                1);
+            location.reload();
+          },
+
+          error: function (response) {
+            alert("Address Details Update Failed");
+          }
+        });
+      }
+    });
+  }
+  var fileUrl;
+  var fileName;
+  var fileType;
+
+  $("#uploadAttachment").on("change", function (e) {
+    $('#loader-uploadImage').show();
+    e.preventDefault();
+    var formData = new FormData();
+    var filetype = $('#uploadAttachment')[0].files[0].type;
+    formData.append('file', $('#uploadAttachment')[0].files[0]);
+    formData.append('type', 'attachments');
+    formData.append('contentType', $('#uploadAttachment')[0].files[0].type);
+    fileName = $('#uploadAttachment')[0].files[0].name;
+    fileType = $('#uploadAttachment')[0].files[0].type;
+    if (filetype != 'application/pdf') {
+      uploadFile(formData, function (response) {
+      if (response != null) {
+
+        getImageUrl(response, function (callback) {
+          fileUrl = callback;
+          updateProfilePicture(fileUrl,function (success) {
+            var fileName = $('#uploadAttachment')[0].files[0].name;
+            $('.succesfullyUploaded').show();
+            $('#loader-uploadImage').hide();
+            $('#userImageUploadBtn').attr("src",fileUrl+"=w70-h70-cc");
+            fileName = $('#uploadAttachment')[0].files[0].name;
+            fileType = $('#uploadAttachment')[0].files[0].type;
+          });
+        });
+
+      }
+
+      else {
+        $('#loader-uploadImage').hide();
+      }
+
+    });
+    }
+  });
+  function uploadFile(fd, callBack) {
+    $('#attachemtLoader').show();
+    $.ajax({
+      "async": true,
+      "crossDomain": true,
+      "url": apiBasePath + "/user/uploadfile",
+      "method": "POST",
+      "processData": false,
+      "contentType": false,
+      "mimeType": "multipart/form-data",
+      "data": fd,
+
+      success: function (response) {
+        if (callBack) {
+          return callBack(response);
+        }
+
+      },
+      error: function (response) {
+        alert("Failed in uploading image");
+        if (callBack) {
+          return callBack(null);
+        }
+      }
+    });
+  }
+  function getImageUrl(image, callBack) {
+    $
+    .ajax({
+      method: 'GET',
+      url: appEngineImageUrl + "fileName=" + image,
+      dataType: "text",
+      success: function (response) {
+        console.log(response);
+        if (callBack) {
+          return callBack(response);
+        }
+
+      },
+
+      error: function (response) {
+        alert("Failed while uploading image");
+        if (callBack) {
+          return callBack(null);
+        }
+      }
+    });
+  }
+  function updateProfilePicture(profilePicture,success) {
+    $
+    .ajax({
+      method: 'PUT',
+      async: true,
+      dataType: "TEXT",
+      url: apiBasePath + "/user/updateavatar?profilePicture=" + profilePicture,
+      success: function (response) {
+        $('#errorMessage').show();
+        if (success) {
+          return success(response);
+        }
+      },
+
+      error: function (response) {
+        $('#errorMessage').show();
+        $('#errorMessage').html('Failed to upload Picture');
+        $('#errorMessage').css("color","red");
+        if (success) {
+          return success("error");
+        }
+      }
+    });
+  }
+
+
+
+</script>
+
+</body>
+</html>

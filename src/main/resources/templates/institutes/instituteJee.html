@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+
+    <meta property="og:title"
+          content="Motion Education - Institute for IIT JEE Main & Advanced and NEET | NeoStencil"/>
+    <meta name="description"
+          content="Motion Education - one of the premier institutes in Kota provides online classes on NeoStencil for IIT JEE Main, JEE Advanced and NEET Exams. Nitin Vijay (NV Sir) is the director and most renowned physics teacher in Kota. Access Motion Education courses LIVE online now.">
+
+    <title>Motion Education - Institute for IIT JEE Main & Advanced and NEET | NeoStencil</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <link rel="stylesheet" media="screen"
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/home.css')}}"/>
+
+    <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.css"
+            rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" media="screen"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+    <link rel="stylesheet" media="screen"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+    <link rel="stylesheet" media="screen"
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+
+
+
+    <style>
+        #testimonialsJee img {
+            display: block;
+            width: 100px !important;
+            height: 100px;
+        }
+
+        .section-jee .mdl-tabs__tab {
+            border-bottom: 1px solid #ddd;
+            font-size: 24px;
+        }
+
+        .section-jee .mdl-tabs__tab-bar {
+            border: none;
+            border: none;
+            margin: 0px 0 32px 0;
+        }
+
+        .send-enquiry {
+            width: 140px;
+            height: 40px;
+            border-radius: 4px;
+
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            margin: 15px 0;
+            outline: 0;
+            border: 0;
+            cursor: pointer;
+            background-color: #615cdf;
+        }
+
+        .mdl-button--accent.mdl-button--accent.mdl-button--raised, .mdl-button--accent.mdl-button--accent.mdl-button--fab {
+            color: rgb(255, 255, 255);
+            background-color: #615cdf;
+            margin: 0 auto;
+        }
+
+        .slick-slide {
+            box-shadow: none;
+        }
+
+        .slick-slide:hover {
+            box-shadow: none;
+        }
+
+        body {
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .demo-scheduler {
+            background: url(https://lh3.googleusercontent.com/SqmbG7xLa0hqacq31HuukoMvvbbeEUiNGkbiNdQK7i0F4ll4jTqu0t7Rtr66ewCOVUSQnfAuAxhsA4zG9MJgRviKjDDQ) center no-repeat !important;
+            padding: 0 0 0 0 !important;
+            background-size: cover !important;
+            padding: 96px 0 0px 0 !important;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .pc-img {
+            margin: 0;
+            width: 60%;
+            display: block;
+            padding-top: 15px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: center;
+            color: white;
+            margin: 0;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .mat-slogan {
+            font-size: 42px;
+            font-weight: 600;
+            color: #555;
+            margin: 0;
+            text-align: left;
+            color: white;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        h2 {
+
+            font-size: 32px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            color: #000000;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+
+        }
+
+        .teacher-description-card {
+            margin: 0 0 16px;
+            font-family: Montserrat;
+            font-size: 18px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.67;
+            letter-spacing: normal;
+            color: #666666;
+        }
+
+        <!--
+        .p-t-b {
+            padding: 32px 15px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        -->
+
+        .testimonial-image-parent {
+            padding: 0;
+            text-align: center;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .testimonial-image-jee {
+            border-radius: 50%;
+            width: 65% !important;
+            /* float: right; */
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+
+        }
+
+        .testimonial-img-content {
+            clear: both;
+            text-align: center !important;
+            color: white;
+            font-size: 22px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            margin: 8px 0 4px 0;
+        }
+
+        .testimonial-image-parent .underline {
+            margin: 15px auto 15px auto !important;
+            border-bottom: 3px solid #fff;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .testimonials-name-con {
+            font-family: open sans;
+            font-size: 18px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 2;
+            letter-spacing: normal;
+            text-align: left;
+            color: #fff;
+            font-family: Montserrat;
+        }
+
+        .testimonials-bg {
+            background-image: linear-gradient(to right, #63d496, #5bcab9, #5dbee9);
+            background-size: cover !important;
+            padding: 40px 0 40px 0 !important;
+            min-height: 300px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .testimonials-bg-t {
+            background-image: linear-gradient(to right, #9c8396, #8496ba, #68ade8);
+            background-size: cover !important;
+            padding: 40px 0 40px 0 !important;
+            min-height: 400px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .slick-slide {
+            margin: 0px 10px;
+            width: 240px;
+            background: none;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .testimonial-name-and-image {
+            background: none;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .heading-jee {
+            padding: 0 0 0 24px;
+            color: white;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            font-size: 32px;
+        }
+
+        #testimonials-lazyload > div {
+            width: 100%;
+            float: left;
+            margin: 0 10px 24px 10px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .lazyload-heading-topper {
+            width: 100%;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+            display: inline-block;
+            line-height: 12px !important;
+            padding: 0;
+            color: #e9e9e9 !important;
+            font-size: 0px !important;
+            text-align: left;
+            margin: 10px 0 0 0;
+            height: 26px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .lazyload-testimonial-image {
+            float: none;
+            height: 156px;
+            width: 156px;
+            background: #e2e2e2;
+            border-radius: 50%;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            margin: 0 auto;
+        }
+
+        .lazyload-heading-img-content {
+            width: 70%;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+            display: inline-block;
+            line-height: 12px !important;
+            padding: 0;
+            color: #e9e9e9 !important;
+            font-size: 0px !important;
+            text-align: left;
+            margin: 10px 0 0 0px;
+            height: 26px;
+            margin-top: 30px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .lazyload-heading-underline {
+            border-bottom: 3px solid #e9e9e9;
+            width: 64px;
+            border-radius: 3px;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 17px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .lazyload-heading-nineTwo {
+            width: 16%;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+            display: inline-block;
+            line-height: 12px !important;
+            padding: 0;
+            color: #e9e9e9 !important;
+            font-size: 0px !important;
+            text-align: left;
+            margin: 10px 0 0 0px;
+            height: 32px;
+            margin-top: 20px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+
+        }
+
+        .testimonial-img-content-teacher {
+            width: 230px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 2;
+            letter-spacing: normal;
+            text-align: left;
+            color: #fff;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+
+        .item:hover .item-overlay.bottom {
+            bottom: 0;
+            z-index: 2;
+        }
+
+        .item-overlay.bottom div {
+            padding: 32px 16px;
+        }
+
+        .item:hover .item-overlay.left {
+            left: 0;
+        }
+
+        .item-overlay.jee11 {
+            font-size: 16px;
+            font-weight: 600;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            line-height: 24px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: #4285f4;
+            opacity: 1;
+            color: #fff;
+            overflow: hidden;
+            text-align: center;
+            -moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            -webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        }
+
+        .item-overlay.jee12 {
+            font-size: 16px;
+            font-weight: 600;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            line-height: 24px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: #e3ad17;
+            opacity: 1;
+            color: #fff;
+            overflow: hidden;
+            text-align: center;
+            -moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            -webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        }
+
+        .item-overlay.jee13 {
+            font-size: 16px;
+            font-weight: 600;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            line-height: 24px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: #0f9d58;
+            opacity: 1;
+            color: #fff;
+            overflow: hidden;
+            text-align: center;
+            -moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            -webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        }
+
+        .view-details-jee {
+            display: block;
+            border: 2px solid #fff;
+            width: 175px;
+            height: 40px;
+            line-height: 40px;
+            margin: 24px auto;
+            border-radius: 4px;
+            transition: 200ms;
+            cursor: pointer;
+        }
+
+        .item-overlay.bottom {
+            bottom: 100%;
+        }
+
+        .mat-landing-bar {
+            padding: 40px 0 24px 0;
+        }
+
+        .section-jee {
+            padding: 0;
+        }
+
+        .underline-jee {
+            border: solid 3px #e5ebef;
+            width: 71px;
+            margin: 24px 0 40px 0;
+        }
+
+
+        .mdl-card__title-text {
+            z-index: -1;
+        }
+
+
+        .mdl-layout__header.is-casting-shadow {
+            background: #fff !important;
+
+        }
+
+        .swiper-button-prev, .swiper-button-next {
+            background-image: none;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .course-rating i {
+            float: left;
+        }
+
+        /* @media screen and (max-width: 1024px) {
+            .user-icon-mobile {
+                right: 72px !important;
+                position: absolute !important;
+            }
+            form.search-mobile {
+                display: none;
+            }
+        } */
+        .main-home-page-banner-image-small {
+            display: none;
+        }
+
+        .input-call-me {
+            background: #fff;
+            border: 1px solid #999;
+            border-radius: 4px;
+            padding: 0 16px 0 56px;
+            height: 56px;
+            color: #000;
+            resize: none;
+            display: block;
+            width: calc(100% - 72px);
+            max-width: 400px;
+            outline: 0;
+            font-size: 18px;
+            margin: 24px 0 0 0;
+        }
+
+        .video-play-button {
+            z-index: 10;
+            transform: translateX(0%) translateY(0%);
+            box-sizing: content-box;
+            display: block;
+            width: 32px;
+            height: 44px;
+            /* background: #fa183d; */
+            border-radius: 50%;
+            padding: 18px 20px 18px 28px;
+        }
+
+        .video-play-button:before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            display: block;
+            width: 72px;
+            height: 72px;
+            background: #ff6600;
+            border-radius: 50%;
+            /* animation: pulse-border 1500ms ease-out infinite;*/
+        }
+
+        .video-play-button:after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            display: block;
+            width: 56px;
+            height: 56px;
+            background: #ff6600;
+            border-radius: 50%;
+            transition: all 200ms;
+        }
+
+        .video-play-button:hover:after {
+            background-color: darken(#ff6600, 10%);
+        }
+
+        .video-play-button img {
+            position: relative;
+            z-index: 3;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        .video-play-button span {
+            display: block;
+            position: relative;
+            z-index: 3;
+            width: 0;
+            height: 0;
+            border-left: 18px solid #fff;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin: 10px 6px;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .section-play-video-pulse label {
+            font-family: arimo;
+            font-size: 20px;
+            font-weight: 700;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .section-play-video-pulse p {
+            color: #555;
+            font-size: 18px;
+            font-family: arimo;
+            margin: 16px 0 4px 0;
+        }
+
+        .section-play-video-pulse {
+            margin: 8px 0 40px 0;
+        }
+
+
+        .section-call-me > div {
+            width: 100%;
+            max-width: 434px;
+        }
+
+        .btn-call-me {
+            float: right;
+            margin: -49px 6px 0 0;
+            border-radius: 27px;
+            background-color: #1e4864 !important;
+            height: 40px;
+            line-height: 40px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        #examSection .exam-details {
+            padding: 0 16px 16px 16px;
+            font-family: arimo;
+        }
+
+        #examSection .view-courses {
+            color: #02b3e4;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 56px 0 8px 0px;
+            display: block;
+            font-family: arimo;
+            cursor: pointer;
+            transition: 200ms;
+        }
+
+        #examSection .view-courses:hover {
+            color: #028bb1;
+        }
+
+        #examSection .mdl-cell {
+            padding: 16px 8px;
+        }
+
+        .counter-code {
+            margin: -57px 0 0 1px;
+            display: block;
+            width: 32px;
+            height: 56px;
+            line-height: 56px;
+            padding: 0 8px;
+            background: #d4e0e9;
+            border-radius: 4px 0px 0px 4px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        #getNumber #mobile-error {
+            position: absolute;
+        }
+
+        .call-shortly {
+            position: absolute;
+            color: green;
+        }
+
+        #loader-getNumber {
+            float: right;
+            margin: -44px 20px 0 0;
+            border-radius: 27px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        #getNumberCheck {
+            float: right;
+            margin: -44px 12px 0 0;
+            border-radius: 27px;
+            height: 32px;
+            line-height: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            background: #00e48d;
+            border-radius: 50%;
+            color: #fff;
+            width: 32px;
+        }
+
+        .landing-h2 {
+            margin: 0 0 16px !important;
+            font-family: Montserrat !important;
+            font-size: 18px !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+            font-stretch: normal !important;
+            line-height: 1.67 !important;
+            letter-spacing: normal !important;
+            color: #666666 !important;
+        }
+
+        #getNumberCheck i {
+            text-align: center;
+            display: block;
+            line-height: 32px;
+        }
+
+        @media screen and (min-width: 768px) {
+         .incididunt {
+            text-align: left;
+            }
+            .section-play-video-pulse {
+                margin-left: -16px;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+
+            .demo-video-big-screen {
+                 width: 200px!important;
+                 margin: 0 auto;
+            }
+
+            #demoVideoDialog {
+                position: fixed;
+                margin-top: 56px;
+            }
+
+            .input-call-me {
+                font-size: 12px;
+            }
+
+            .video-play-button {
+                margin: 0 auto;
+            }
+
+            .section-play-video-pulse p {
+                text-align: center;
+            }
+
+            .section-play-video-pulse label {
+                text-align: center;
+                display: block;
+            }
+
+            .main-home-page-banner-image-small {
+                display: block;
+            }
+
+            .main-home-page-banner-image-big {
+                display: none;
+            }
+
+            .section-jee .demo-card-square {
+                width: 100%;
+            }
+        }
+
+        .slick-next:before, .slick-prev:before {
+            opacity: 1 !important;
+            color: #ffffff !important;
+            font-size: 28px !important;
+        }
+
+        #sendEnquiryDialog input {
+            width: calc(100% - 32px) !important;
+            border: 1px solid #ddd;
+            outline: 0;
+            color: #666;
+            border-radius: 8px;
+            padding: 8px 16px;
+        }
+
+        #sendEnquiryDialog input[type=number]::-webkit-inner-spin-button,
+        #sendEnquiryDialog input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        @-moz-document url-prefix() {
+            #sendEnquiryDialog input[type=number] {
+                -moz-appearance: textfield;
+            }
+        }
+        .videoWrapper .hbspt-form {
+            padding: 24px 32px 80px 32px;
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, .2);
+        }
+
+        .hbspt-form .hs-button {
+            background-color: #ff6000 !important;
+            border: none;
+            height: 48px;
+            width: 100%;
+            color: #fff;
+            float: left;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+        }
+
+        .hbspt-form input {
+            height: 40px;
+            padding: 0 8px;
+            line-height: 40px;
+            width: calc(100% - 16px);
+            background: #eee;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+        }
+
+        .hbspt-form select {
+            height: 40px;
+            line-height: 40px;
+            width: 100%;
+            background: #eee;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+        }
+        .hbspt-form .actions{
+            margin: 0;
+            padding: 0;
+        }
+        .hbspt-form .inputs-list>li+li{
+            padding-top: 0;
+        }
+        .hs-form-radio input{
+            height: auto;
+            width: auto;
+            margin: 4px;
+        }
+        .hbspt-form ul{
+            list-style: none;
+            padding: 0;
+        }
+        .hbspt-form ul li{
+            width: 50%;
+            float: left;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+    <!--/*/ <th:block th:include="common/headerInstitute"></th:block> /*/-->
+
+
+    <div class="mat-content mdl-layout__content">
+        <div class="landing-darken" style="display: none;"></div>
+        <div class="">
+            <!--mat-be-together-section-->
+            <!--start top-->
+            <div class="demo-scheduler">
+                <div class="container">
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                            <h1 class="logo-font mat-slogan mat-slogan-slider-mobile">
+                                Motion Education
+                            </h1>
+                            <h3 class="incididunt">One of the top Institutes of Kota for IIT-JEE(Main & Advanced), NEET(Medical) and
+                                AIIMS
+                            </h3>
+                            <img width="200px"
+                                 class="img-video demo-video-big-screen pc-img"
+                                 alt="Neostencil Icon"
+                                 src="http://www.motioniitjee.com/wp-content/uploads/2017/12/cropped-Logo.png"
+                                 style="width: 300px;">
+                        </div>
+
+
+                        <div
+                                class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                                id="">
+                            <!--[if lte IE 8]>
+                            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+                            <![endif]-->
+                            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+                            <script>
+ hbspt.forms.create({
+portalId: "3966107",
+formId: "b499c9da-ff37-4974-a256-3d30bdce2ff9"
+});
+</script>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--start icon-->
+            <div class="mat-landing-bar mdl-typography--text-center">
+                <div class="container-header">
+                    <h2 class="landing-h2">NeoStencil partners with Motion Education to provide you with Live Lectures
+                        straight from Kota</h2>
+                    <div class="underline-jee" style="margin: 24px auto 40px auto;"></div>
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                            <img src="https://lh3.googleusercontent.com/UdMnhXydIg2IlbLwQkqYyq-FxU-pTyKFRo61z-sDYixMIZ-DjBhHXM7x0_NRN4F6qXN_wN0k3FOde8BZoFnOg5pcuuw=w150"
+                                 alt="Neostencil Live & Recorded Classes">
+                            <h2>
+                                <b>Live Classes</b><br/>
+                                <h3> 24/7 access
+                                    to live lectures</h3>
+                            </h2>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                            <img src="https://lh3.googleusercontent.com/gVX4PvaCnpqwnJI_bHgGKlkTAvjy86jThNGmBzGn-Qwwx4f1twkptWliAaPab2bRg8frxYg6gaew4H5YhNUaQ10oouI=w150"
+                                 alt="Neostencil Courses">
+                            <h2>
+                                <b>Parent Dashboard</b><br/>
+                                <h3>Help your child succeed</h3>
+                            </h2>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                            <img src="https://lh3.googleusercontent.com/CobzNDVe4VM2hWeM8fzW3c3czeJdY9RRWr4csYxlrmR8tmZqi9-qorongYuAd7t3gWwrbBW8yLC28bJRAIImZp1jpus=w150"
+                                 alt="Neostencil Top Teachers">
+                            <h2>
+                                <b>Comprehensive Learning</b><br/>
+                                <h3> Classes, tests and assignments</h3>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--end icon-->
+
+
+            <div class="section-jee">
+                <div class="container">
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                            <h2>Institute Highlights</h2>
+                            <div class="underline-jee"></div>
+                            <p class="teacher-description-card">Motion is one of the premier coaching institutes of
+                                India, providing classroom and distance learning coaching for JEE (Main), JEE
+                                (Advanced), Pre- medical (NEET- UG/ AllMS) and Early Lead foundation courses (Class V to
+                                X, NTSE & Olympiads). Motion started its historic journey in the year 2007 and since its
+                                inception, it has aimed to give exceptional coaching to its students and produce top
+                                results in all Engineering and Medical entrance exams.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--start-->
+
+            <div id="section-testimonials-lazyload" class="testimonials-bg">
+                <div class="container">
+                    <div class="testimonials-bg">
+                        <div id="testimonials-lazyload">
+                            <div>
+                                <div class="mdl-shadow--2dp">
+                                    <div class="ns-card">
+                                        <div class="mdl-grid">
+                                            <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                                                <div class="lazyload-heading-topper"></div>
+                                                <br/> <br/>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <br/> <br/>
+                                            </div>
+
+
+                                            <div
+                                                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+
+
+                                                <div class="testimonial-image-parent">
+                                                    <div class="lazyload-testimonial-image"></div>
+                                                    <div class="lazyload-heading-img-content"></div>
+                                                    <div class="lazyload-heading-underline"></div>
+                                                    <div class="lazyload-heading-nineTwo"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="section-jee">
+                <div style="display: none;" id="section-testimonials"
+                     class="testimonials-bg">
+                    <div class="container">
+                        <!--<div class="underline-jee"></div>-->
+                        <h2 class="heading-jee text-center">
+                            Toppers and Overall result
+                        </h2>
+                        <section id="testimonialsJee" class="regular slider">
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div
+                                            class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+
+                                        <span class="testimonials-name-con">Motion Faculty helped me in developing a strong foundation
+                            and I made it a
+                            point to solve questions on time. This helped me in developing my concepts
+                            steadily and clearly.</span>
+                                        <span
+                                                class="testimonials-rank-slick"></span>
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--6-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/Nl-lnNsDlxDvQarysMzE-E3Nx8u5v-PLvRLoL4gmeU_HxPCIE14Jg2Kbxxk67lynBXo_qDsJFCN8q3laqOY0eIE4noU=h100-w100">
+                                            <h2 class="testimonial-img-content"> Nishit Agarwal</h2>
+                                            <span class="testimonial-img-content">AIR 6, JEE Advanced</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div
+                                            class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+
+                                        <span class="testimonials-name-con">My Motion experience has been truly rewarding. I felt that
+                            it was the best
+                            way to clear up any of my residual doubts in all the subjects. My teachers
+                            were very knowledgeable and extremely patient. Thank you team Motion.</span>
+                                        <span
+                                                class="testimonials-rank-slick"></span>
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--6-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/2W6pocs9inUKUmGemcPcpRqrI9-H_kF1MBylKN36PTR5pD3KSWzwaKcqM-4lzY9O6CQYQXUsEGnw1u-I5cmMy5DlBQ">
+                                            <h2 class="testimonial-img-content"> Jashn Singhal</h2>
+                                            <span class="testimonial-img-content">AIR 52, JEE Main</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div
+                                            class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+
+                                        <span class="testimonials-name-con">I would like to give full credit of my success to Motion's
+                            system and faculty
+                            members at Motion, Kota. They have worked hard to see me succeed. They
+                            have become my guides for years to come.</span>
+                                        <span
+                                                class="testimonials-rank-slick"></span>
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--6-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/dN7pWEiW6XemTEvNsJEN4xAtMkVc2mFPnTjOQs7yZZElaAiMmSShD11bFL9KVCVhTKDyb1A0f80sAPmTchez-LDt0A">
+                                            <h2 class="testimonial-img-content"> Anmol Garg</h2>
+                                            <span class="testimonial-img-content">AIR 66, JEE Main</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div
+                                            class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+
+                                        <span class="testimonials-name-con">Genuinely, I would like to thank Motion for helping me
+                            crack JEE Main
+                            2018. The guidance by all the teachers, the support of office staff and the
+                            study material, everything is just perfect to take you through JEE and other
+                            exams. Thank you Motion for making my career.</span>
+                                        <span
+                                                class="testimonials-rank-slick"></span>
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--6-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/Y2N5AU_aqe1CRMQ5_blEDx5DsPVOcNQJF8n-g1Pcd0Aq0cId9WhX4jmArAfb2M_QhmCjklRugXDlpQDKyS57SIK-Bw">
+                                            <h2 class="testimonial-img-content"> Puneet Shyamsukha</h2>
+                                            <span class="testimonial-img-content">AIR 71, JEE Main</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+                        <!--<a href="/reviews-testimonials"
+                           class="btn-all-testimonial btn-cta-secondary mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent btn-View-all-teachers">See
+                            More Testimonials</a>-->
+
+                        <!--<div class="swiper-button-next"><span class="fa fa-angle-right"></span></div>
+                        <div class="swiper-button-prev"><span class="fa fa-angle-left"></span></div>-->
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--end-->
+
+            <!--start tab code-->
+            <div id="section-courses" class="section-jee" style="padding: 32px 0;">
+                <h2 style="text-align: center;margin: 0;">Courses offered by Motion</h2>
+                <div class="underline-jee" style="margin: 24px auto 40px auto;"></div>
+                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-cell mdl-cell--12-col scroll-tabs-overflow">
+                        <div class="mdl-tabs__tab-bar"><a href="#panel-iit" class="mdl-tabs__tab is-active">
+                            IIT-JEE </a> <a href="#panel-neet" class="mdl-tabs__tab"> NEET </a>
+                        </div>
+                    </div>
+                    <div class="mdl-tabs__panel is-active" id="panel-iit">
+                        <div class="container">
+                            <div class="mdl-grid">
+
+                                <div
+                                        class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                                        id="">
+                                    <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #4285F4;
+    border-radius: 6px;">
+                                        <div class="mdl-card__title mdl-card--expand">
+                                            <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Foundation - Class XI JEE Main + Advanced
+                                                Course</h2>
+                                        </div>
+                                        <div class="mdl-card__supporting-text">
+                                            BY Motion Education, KOTA
+                                        </div>
+                                        <div class="mdl-card__actions mdl-card--border">
+                                            <h5><i class="fa fa-inr"></i> 75,000</h5>
+                                        </div>
+                                        <div class="item-overlay bottom jee11">
+                                            <div>Complete package for students preparaing for IIT JEE and moving from class X to XI
+                                                <a href="/course/jee/foundation-class-xi-jee-main-course" class="view-details-jee">View
+                                                    Details</a></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div
+                                        class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                                        id="">
+                                    <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #e3ad17;
+    border-radius: 6px;">
+                                        <div class="mdl-card__title mdl-card--expand">
+                                            <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Fresher - Class XII JEE Main + Advanced
+                                                Course</h2>
+                                        </div>
+                                        <div class="mdl-card__supporting-text">
+                                            BY Motion Education, KOTA
+                                        </div>
+                                        <div class="mdl-card__actions mdl-card--border">
+                                            <h5><i class="fa fa-inr"></i> 80,000</h5>
+                                        </div>
+                                        <div class="item-overlay bottom jee12">
+                                            <div>Complete package for students preparaing for IIT JEE and moving from class XI to
+                                                XII
+                                                <a class="view-details-jee" href="/course/jee/fresher-class-xii-jee-main-course">View
+                                                    Details</a></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div
+                                        class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                                        id="">
+                                    <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #0F9D58;
+    border-radius: 6px;">
+                                        <div class="mdl-card__title mdl-card--expand">
+                                            <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Target - XII Pass JEE Main + Advanced
+                                                Course</h2>
+                                        </div>
+                                        <div class="mdl-card__supporting-text">
+                                            BY Motion Education, KOTA
+                                        </div>
+                                        <div class="mdl-card__actions mdl-card--border">
+                                            <h5><i class="fa fa-inr"></i> 80,000</h5>
+                                        </div>
+                                        <div class="item-overlay bottom jee13">
+                                            <div>Complete package for students preparaing for IIT JEE and who have given class
+                                                XII exams<a class="view-details-jee"
+                                                            href="/course/jee/target-xii-pass-jee-main-course">View
+                                                    Details</a></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mdl-tabs__panel" id="panel-neet">
+                        <div class="container">
+                            <div class="mdl-grid">
+
+                                <div
+                                        class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                                        id="">
+                                    <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #4285F4;
+    border-radius: 6px;">
+                                        <div class="mdl-card__title mdl-card--expand">
+                                            <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Foundation - Class XI NEET
+                                                Course</h2>
+                                        </div>
+                                        <div class="mdl-card__supporting-text">
+                                            BY Motion Education, KOTA
+                                        </div>
+                                        <div class="mdl-card__actions mdl-card--border">
+                                            <h5><i class="fa fa-inr"></i> 65,000</h5>
+                                        </div>
+                                        <div class="item-overlay bottom jee11">
+                                            <div>Complete package for students preparaing for NEET and moving from class X to XI
+                                                <a href="/course/neet/foundation-class-xi-neet-course" class="view-details-jee">View
+                                                    Details</a></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div
+                                        class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                                        id="">
+                                    <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #e3ad17;
+    border-radius: 6px;">
+                                        <div class="mdl-card__title mdl-card--expand">
+                                            <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Fresher - Class XII NEET
+                                                Course</h2>
+                                        </div>
+                                        <div class="mdl-card__supporting-text">
+                                            BY Motion Education, KOTA
+                                        </div>
+                                        <div class="mdl-card__actions mdl-card--border">
+                                            <h5><i class="fa fa-inr"></i> 70,000</h5>
+                                        </div>
+                                        <div class="item-overlay bottom jee12">
+                                            <div>Complete package for students preparaing for NEET and moving from class XI to
+                                                XII
+                                                <a class="view-details-jee" href="/course/neet/fresher-class-xii-neet-course">View
+                                                    Details</a></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div
+                                        class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                                        id="">
+                                    <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #0F9D58;
+    border-radius: 6px;">
+                                        <div class="mdl-card__title mdl-card--expand">
+                                            <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Target - XII Pass NEET
+                                                Course</h2>
+                                        </div>
+                                        <div class="mdl-card__supporting-text">
+                                            BY Motion Education, KOTA
+                                        </div>
+                                        <div class="mdl-card__actions mdl-card--border">
+                                            <h5><i class="fa fa-inr"></i> 70,000</h5>
+                                        </div>
+                                        <div class="item-overlay bottom jee13">
+                                            <div>Complete package for students preparaing for NEET and who have given class
+                                                XII exams<a class="view-details-jee"
+                                                            href="/course/neet/foundation-class-xi-neet-course">View
+                                                    Details</a></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--end tab code-->
+
+
+            <!--start Teacher-->
+
+            <div id="section-testimonials-lazyload-teacher" class="testimonials-bg-t">
+                <div class="container">
+                    <div class="testimonials-bg-t">
+                        <div id="testimonials-lazyload">
+                            <div>
+                                <div class="mdl-shadow--2dp">
+                                    <div class="ns-card">
+                                        <div class="mdl-grid">
+                                            <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                                                <div class="lazyload-heading-topper"></div>
+                                                <br/> <br/>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <div class="lazyload-heading"></div>
+                                                <br/> <br/>
+                                            </div>
+
+
+                                            <div
+                                                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+
+
+                                                <div class="testimonial-image-parent">
+                                                    <div class="lazyload-testimonial-image"></div>
+                                                    <div class="lazyload-heading-img-content"></div>
+                                                    <div class="lazyload-heading-underline"></div>
+                                                    <div class="lazyload-heading-nineTwo"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-jee">
+                <div style="display: none;" id="section-testimonials-teacher"
+                     class="testimonials-bg-t">
+                    <div class="container">
+                        <h2 class="heading-jee text-center">
+                            Teachers
+                        </h2>
+                        <!--<div class="underline-jee"></div>-->
+                        <section id="testimonialsJeeTeacher" class="regular slider">
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div
+                                            class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+
+                                        <span class="testimonials-name-con">He has 15 years of experience as a Physics faculty. His innovative teaching methodology
+has set new trends in the way Physics is taught for
+competitive exams. Over the years, he has established himself as a well renowned and highly respected educator, steering Motion to inch closer to the vision that started the journey itself. Under his visionary leadership and backed by a competent management, Motion has achieved tremendous growth over the years, spreading it’s wings across 35 loactions pan India.</span>
+                                        <span
+                                                class="testimonials-rank-slick"></span>
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--6-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/8a8kjcicf8bncF3kuevc_ihQnf6iQYbw9jkVL_xDe3c-l3YRTnlb7_IFB5mwgUYJJKcSnMdqpO0fkqVpRQoJhEPtSbjV">
+                                            <h2 class="testimonial-img-content">Nitin Vijay</h2>
+
+                                            <div class="testimonial-img-content-teacher">MD, Motion Education<br/>Physics
+                                                Faculty
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/9x4aLUCdhIoTJiQUI-8997pr-XzeaOP2F7bIxVL7cV6iaFIFLuvuUn6R9gedzgHNRnTO7IPu8XSwi3Wnjpu5NuAg41c">
+                                            <h2 class="testimonial-img-content"> Atish Agarwal</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Maths</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/sAJ1zduyhQ20w_lW_Y1HRmEQoM6OM5lK03X13joXF8rfaXMqQ9QLuH0acm-O_1J_f2bmQa_oxsJOtHL5xuUof30JXQ">
+                                            <h2 class="testimonial-img-content"> Ajay Prakash Gautam</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Biology</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/UALIyuTGePZk9p66WwBga5oHWLMdpNKilIGp2yMXPTluvqy2Yd3Kwd0MqhBHNdL9h08KSUa31J-1zO-Ts70KJCTYSMk">
+                                            <h2 class="testimonial-img-content"> Alok Kumar Gupta</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Biology</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/o8UV_ic2_eVh4mhYG66bX4NjVi0g5sT_Bp-pirzlz8DphxZIeYVeJ0yLTPxjT3w3f60qIpjVOXbSLd6irqCxnEnVQ74">
+                                            <h2 class="testimonial-img-content">Amit Kumar Rathore</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Physics</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/8nNQUdy4PWkj1lxlMpN-YPifQZBenLHOU-3NuAXAXc9EJy1EH_HVn2nunsGQKG43-mWPjCvLWwToeBiMxjC3SiSV1A">
+                                            <h2 class="testimonial-img-content">Amit Verma</h2>
+                                            <div class="testimonial-img-content-teacher">Physics</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/hpICwP-LPQ4WyG9iMI5D9mT8eWXWpJmLC1Z2UgqiK1F404DrB-9Phz_KKNKjktbRzuRMBsZnxerHyS_QKUSXeEu80mIA">
+                                            <h2 class="testimonial-img-content">Anurag Garg</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Chemistry</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/9sXi8AeXbJYcC37MLLsOWTbSjeG9pDd04Tob05TwW_daihrte2gBXnFPKYh483GGk8lJ0sJWe68vcHUthlmhdMpjhg">
+                                            <h2 class="testimonial-img-content">Arjun Gupta</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Maths</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/1GlbagLYb5RyxtPDiy-iBnuofapnkiqly2lBGR2csVsMMss9FyNoGMcB0viahNjiMpISfw7NOG532KMYIj_cyfATQE4">
+                                            <h2 class="testimonial-img-content">Bharat Bhushan Sonakiya</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Chemistry</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/mAyu55kTtHjs4bhVzESEUyQz_BI0xZx_DW1QxDzBUecDQn7tkaR9YHZVy8Yk8n0ZT--pGbCvn8xNj7XMRiZI69ifM64">
+                                            <h2 class="testimonial-img-content">Devki Nandan Pathak</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Chemistry</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/BDoA_gwnTrgE80G3aYjAEGhwY95fyiJvmn1NU4ms6vs6cxZaRFe9jDyZtMsxmz9NV9IiU1vQ58-DhfZAnQxjwz_4Jp-D">
+                                            <h2 class="testimonial-img-content">Durgesh Kumar Pandey</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Physics</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/1jnQWetJOszcGdByGv5WjxXf690PY2EaDKxFaOHPDBCaJ8Dp0hfAFIrGL0fca12JGagwjuYbs5t3ER0E-LFCRcAJ3dM0">
+                                            <h2 class="testimonial-img-content">Gavesh Bhardwaj</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Maths</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/pkZAwOUnAVYgSVAvG_pMSmNqFFQyGT9ts5_2y1kk6IOHYP91y5wAbi57yisaNnu35HH6z16PxtCuZ1VfBQThGpFR2wc">
+                                            <h2 class="testimonial-img-content">Harmeet Singh Bindra</h2>
+                                            <div class="testimonial-img-content-teacher"> Professor - Chemistry</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/uk7zUcKj_J-xK8kPC0eNBMcsNKggeyxd8BuA22y8QrVa7trdcCwCQFFIqouFfXDWuMlxsj2_KwAhlFwZpwi3DIWRwwT8">
+                                            <h2 class="testimonial-img-content">Jayant Chittora</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Maths</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/SZ3Z6k1aYxUZBiWbrJl20Y7ZXZGl5ss4iBapHBxOi7XndsYQ6zILIM4BxKmi-Lg98wm4mRItKw7UqsWQ9UiCbhiDyWc">
+                                            <h2 class="testimonial-img-content">Krantideep SIngh</h2>
+                                            <div class="testimonial-img-content-teacher"> Professor - Physics</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/afZ8nRW6JzBnWP9JDRsH0wERm0s28YiYeYeVnl3ujAruCJ_jStMoDvLGhBCuJOgE3DWb-JMQ_i7dy_PIPO59KDlB_Q">
+                                            <h2 class="testimonial-img-content">Kush Kumar Gulati</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Chemistry</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/QJNqF1poGIP5bXMKkPRRgvArehVT5PTdgMBL_zky5x-9xXgbnejEd-pUsl99QrQsKSXZaatNujXig7307N_IWkiZeQ">
+                                            <h2 class="testimonial-img-content">Nikhil Srivastav</h2>
+                                            <div class="testimonial-img-content-teacher">Maths</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/BF4EZmHQub3SXnCi149vpN8BO5ZDoH5HQ7WDhKBrnxEjQURaRDZQfpTageCwshtifkEs4_Mg6Qeozqfi93o0U8axkFQ">
+                                            <h2 class="testimonial-img-content">Nipun Mittal </h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Physics</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/vLYLLDON2_8Wqtf9yTcZ53g2G0b1BaDo4lgEt3x_QTLeRZgm1sBe3Nws2pRIP-uL-e7dwejqsVQe7enJt3fcgFT_lA">
+                                            <h2 class="testimonial-img-content">Nitin Dangi</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Maths</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/Sax5uBNmjgCWs2c2CxuJnhgmxwAnEk3sOEksX25HQLxTIVGvjkeksS-leqm2x1LfUFo4x2EKjFAoTpgyXS1DDKatkSA">
+                                            <h2 class="testimonial-img-content">Pavan Vijay </h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Physics</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/HUbRlLE01m1MYPecdKXy4Vy0CSYNcQSHJxHFySPEUPTS9su3yclNNWGQzu9rolOyYjMu-VuGnuvWcioxFCuGBCL1xA">
+                                            <h2 class="testimonial-img-content">Pravesh Garg </h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Chemistry</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/oAH5qwk00wAA8TZVD8YtsaYzaqhkYLb7thEABNbKqguz_fGx2P5O0WC2g1fVjpvq3y5CB_wpays8cR8ITVEGAsHoA3p6">
+                                            <h2 class="testimonial-img-content">Ram Kishor Kumawat</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Physics</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/GKrgeSjEMTch5MMuA4Qh_2eVHbZV4Erf9-F4H-U1Ij6qBpcwKUWUHYimOK_y3GQzPNOQiYpuQX8A-k-NjZW8lRuPN6c">
+                                            <h2 class="testimonial-img-content">Ram Ratan Dwivedi </h2>
+                                            <div class="testimonial-img-content-teacher">Joint Director</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/ShJYygmo2Ak0ojM8g7eS_Gnz9pBkhGmZaZpRHIC2mhhzLV2rRMFOgMIgKcALF4eWi7IOzlGek0v7r6rtZx6MomxCmfXW">
+                                            <h2 class="testimonial-img-content">Renu Singh </h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Biology</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/VayU_JeGDN6Dp0e9q1c9gOe2WkP6JFT2RZ_JG3wRfC7thk3XmUn87Xs6ySwpwklDGUM-Dx3h6iQfiycB4iHjVjQGrsk">
+                                            <h2 class="testimonial-img-content">Sanjeev Kumar Bhadoriya</h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Chemistry</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/RT_DenNvZa-8PJ2h6tOFF-SetYN9gSWCa5eMytCT7-952mfqLiwlKN1Xj3NEwle6y8JyXUl_6OUh1KOw0tGsQkDX4g">
+                                            <h2 class="testimonial-img-content">Shantanu Gupta </h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Chemistry</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/0EYZZP3GjaYtofMKmYvJQrq61163r5m_aVQkyTygAMj0wdwmURQvzjFK-1cOZ2YktXPxoN47f0vMX70YMUohS0O6ixM">
+                                            <h2 class="testimonial-img-content">Shobhit Patel </h2>
+                                            <div class="testimonial-img-content-teacher">Professor - Biology</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/6j6YnQKmbj6Lg6TP5LKN2ShzW7Vj3VZrpd9LOrETN6rwbrDT1dw8zXIQJt9TK4hgobIzDxtbDMl_UFJ-pBR0mvHlM-k">
+                                            <h2 class="testimonial-img-content">Vijay Pratap Singh</h2>
+                                            <div class="testimonial-img-content-teacher">Student Welfare Cell Head</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-name-and-image">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee"
+                                                 src="https://lh3.googleusercontent.com/SXYwWQWXf0CDLpQ8zBxAdM2uiMBcPxi4N_v1P4ZlcwQcmNW4lin0NF7I2iTsTcM3c9VhvNbkLwQpvUhqWyFRmt2C8A">
+                                            <h2 class="testimonial-img-content">Vipin Sharma </h2>
+                                            <div class="testimonial-img-content-teacher"> Professor - Maths</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee" src="">
+                                            <h2 class="testimonial-img-content"></h2>
+                                            <div class="testimonial-img-content-teacher"></div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                                        <div class="testimonial-image-parent">
+                                            <img class="testimonial-image-jee" src="">
+                                            <h2 class="testimonial-img-content"></h2>
+                                            <div class="testimonial-img-content-teacher"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+            <dialog tabindex="1" id="demoVideoDialog"
+                    class="mdl-dialog mdl-dialog-video">
+                <div class="mdl-dialog__content">
+                    <iframe id="video" width="100%" height=""
+                            src="https://www.youtube.com/embed/cfhx18lSPiw" allowfullscreen allow="autoplay">
+                    </iframe>
+                    <button
+                            class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+            </dialog>
+            <dialog id="sendEnquiryDialog" class="mdl-dialog">
+                <div class="mdl-dialog__content">
+                    <div class="show-dialog-form">
+                        <form id="sendEnquiryForm">
+                            <div class="mdl-grid" style="padding: 0px; margin-bottom: 10px">
+                                <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                                     style="margin-left: 0px">
+                                    <label for="emailAddress">Email<sup style="color: red">*</sup></label><br>
+                                    <input type="email" id="emailAddress" name="email" required="required"
+                                           placeholder="Enter valid Email address">
+                                </div>
+
+                                <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                                     style="margin-left: 0px">
+                                    <label for="mobileNumber">Mobile No.<sup style="color: red;">*</sup></label><br>
+                                    <input type="number" pattern="/^-?\d+\.?\d*$/" required="required"
+                                           placeholder="Enter 10 digit Mobile no."
+                                           onKeyPress="if(this.value.length==10){return false;}" id="mobileNumber"
+                                           name="mobileNumber" style="width: 97% !important;"/>
+                                </div>
+                            </div>
+                            <textarea placeholder="Write a message.." rows="4" required="required" id="textBox"
+                                      data-title="institute-jee"></textarea>
+                            <label style="display: none;" class="emptyMessage error">Please
+                                enter a message</label>
+
+                            <button type="button"
+                                    class="close mdl-button mdl-js-button mdl-js-ripple-effect"
+                                    style="margin-top: 10px">Close
+                            </button>
+                            <input type="submit"
+                                   class="send-enquiry-common mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                                   value="SEND"
+                                   style="width: 100px !important;margin-top: 10px; color: #ffffff;line-height: 10px;border: 0px;border-radius: 2px !important;"/>
+                        </form>
+                    </div>
+                    <div style="display: none;" class="message-has-been-sent">
+                        <p>Your message has been sent and is on its way</p>
+                        <button type="button"
+                                class="close mdl-button mdl-js-button mdl-js-ripple-effect">Close
+                        </button>
+                        <a href="/user-dashboard?goto=messages"
+                           class="view-sent-messages mat-signup mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sent
+                            Messages</a>
+                    </div>
+
+
+            </dialog>
+        </div>
+        <!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+    </div>
+
+    <!-- include scripts -->
+    <!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+    <script
+            src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+    <script
+            th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script
+            th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>
+
+    <script>$(window).load(function () {
+        $('#section-testimonials').css("display", "block");
+        $('#section-testimonials-lazyload').hide();
+    })</script>
+
+    <script>$(window).load(function () {
+        $('#section-testimonials-teacher').css("display", "block");
+        $('#section-testimonials-lazyload-teacher').hide();
+    })</script>
+
+    <script>
+        $("#testimonialsJee").slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+            arrows: true,
+            loop: true
+        });
+
+    </script>
+
+    <script>
+        $('.jee-nav-mobile a')
+            .click(function () {
+                $('.jee-nav-mobile').removeClass("is-visible");
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).position().top - 100
+                }, 400);
+                return false;
+            });
+        $('#scrollToSectionJee a')
+            .click(function () {
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).position().top - 100
+                }, 400);
+                return false;
+            });
+        $("#testimonialsJeeTeacher").slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+            arrows: true,
+            loop: true
+        });
+        /* send enquiry dialog */
+
+        (function () {
+            'use strict';
+            var dialogButton = document.querySelector('#sendEnquiryButton');
+            var dialog = document.querySelector('#sendEnquiryDialog');
+            if (!dialog.showModal) {
+                dialogPolyfill.registerDialog(dialog);
+            }
+            dialogButton.addEventListener('click', function () {
+                $('.send-enquiry-common').removeClass('btn-disabled');
+                dialog.showModal();
+                $('.emptyMessage').hide();
+                $('#sendEnquiryDialog').find('textarea').attr("data-id",
+                    $('#sendEnquiryButton').attr("data-messageTo"));
+                $('#sendEnquiryDialog').find('textarea').attr("data-title",
+                    $('#sendEnquiryButton').attr("data-topic"));
+            });
+            dialog.querySelector('.show-dialog-form .close').addEventListener('click',
+                function () {
+                    dialog.close();
+                    $('.show-dialog-form').show();
+                    $('.message-has-been-sent').hide();
+                });
+            dialog.querySelector('.message-has-been-sent .close').addEventListener(
+                'click', function () {
+                    dialog.close();
+                    $('.show-dialog-form').show();
+                    $('.message-has-been-sent').hide();
+                });
+        }());
+    </script>
+</body>
+</html>

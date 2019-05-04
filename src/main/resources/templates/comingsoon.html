@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Neostencil</title>
+
+  <meta name="google-signin-client_id"
+        content="304149465610-2u086cu33ktr88t49kplbmhln1tupvnu.apps.googleusercontent.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
+        rel='stylesheet'>
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/owl-carousel/owl.carousel.min.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/style.css')}}"
+          rel="stylesheet" media="screen" />
+</head>
+
+<body>
+<header></header>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <div class="mat-header mdl-layout__header mdl-layout__header--waterfall">
+    <div class="container-header">
+      <div id="header-menu" class="mdl-layout__header-row">
+            <span class="mat-title mdl-layout-title">
+                <a href="/"><img class="mat-logo-image"
+                                 src="../static/images/logo/neostencil%20logo.png"></a>
+            </span> <!-- Add spacer, to align navigation to the right in desktop -->
+        <!-- <div class="mat-header-spacer mdl-layout-spacer"></div> -->
+        <!-- <div class="mat-search-box mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;expandable mdl-textfield&#45;&#45;floating-label mdl-textfield&#45;&#45;align-right mdl-textfield&#45;&#45;full-width"> <label class="mdl-button mdl-js-button mdl-button&#45;&#45;icon" for="search-field"> <i class="material-icons">search</i> </label> <div class="mdl-textfield__expandable-holder"> <input class="mdl-textfield__input" type="text" id="search-field"> </div> </div>-->
+        <!-- Navigation -->
+        <div class="mat-navigation-container">
+          <nav class="mat-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Courses</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Teachers</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Exams</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Free Prep</a>
+          </nav>
+        </div>
+        <div class="mat-search-box box">
+          <div class="box">
+            <div class="container-4">
+              <label></label>
+              <input type="search" id="search" placeholder="Find a course..."/>
+              <button class="icon"><i class="fa fa-search"></i></button>
+
+            </div>
+          </div>
+        </div>
+        <span class="mat-mobile-title mdl-layout-title"> ns </span>
+        <button id="userDetails" class="mdl-button mdl-js-button mdl-button--icon">
+          <img id="userPic" src=""/>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            for="userDetails">
+          <li class="mdl-menu__item">Profile</li>
+          <li class="mdl-menu__item" id="logoutBtnFb" onclick="logOut();">Logout</li>
+        </ul>
+        <button style="display:none;" id="userDetailsGoogle"
+                class="userDetailsGoogle mdl-button mdl-js-button mdl-button--icon">
+          <img id="userPicGoogle" src=""/>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            for="userDetailsGoogle">
+          <li class="mdl-menu__item">Profile</li>
+          <li class="mdl-menu__item" id="logoutBtnG" onclick="signOut();">Logout</li>
+        </ul>
+        <a href="comingsoon.html"
+           class="mat-cart mat-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
+           id="more-button"><i class="material-icons">
+          <svg xmlns="http://www.w3.org/2000/svg"  version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 459.529 459.529" style="enable-background:new 0 0 459.529 459.529;" xml:space="preserve">
+<g>
+	<g>
+		<path d="M17,55.231h48.733l69.417,251.033c1.983,7.367,8.783,12.467,16.433,12.467h213.35c6.8,0,12.75-3.967,15.583-10.2    l77.633-178.5c2.267-5.383,1.7-11.333-1.417-16.15c-3.117-4.817-8.5-7.65-14.167-7.65H206.833c-9.35,0-17,7.65-17,17    s7.65,17,17,17H416.5l-62.9,144.5H164.333L94.917,33.698c-1.983-7.367-8.783-12.467-16.433-12.467H17c-9.35,0-17,7.65-17,17    S7.65,55.231,17,55.231z"/>
+		<path d="M135.433,438.298c21.25,0,38.533-17.283,38.533-38.533s-17.283-38.533-38.533-38.533S96.9,378.514,96.9,399.764    S114.183,438.298,135.433,438.298z"/>
+		<path d="M376.267,438.298c0.85,0,1.983,0,2.833,0c10.2-0.85,19.55-5.383,26.35-13.317c6.8-7.65,9.917-17.567,9.35-28.05    c-1.417-20.967-19.833-37.117-41.083-35.7c-21.25,1.417-37.117,20.117-35.7,41.083    C339.433,422.431,356.15,438.298,376.267,438.298z"/>
+	</g>
+</g>
+</svg>
+        </i></a>
+        <section class="wrapper">
+          <section class="material-design-hamburger">
+
+            <button onclick="matLoginClick();"
+                    class="mat-login mdl-button mdl-js-button mdl-button--primary" id="loginBtn"
+                    value="Login">Login
+            </button>
+            <button onclick="matSignupClick();" id="signup"
+                    class="mat-signup mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+              Signup
+            </button>
+          </section>
+          <section class="menu login-menu menu--off">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="signupMenuLogin"><a
+                class="mat-close"
+                style="display: none;"><i
+                class="material-icons" style="color: #fff;">close</i></a>
+              <div class="mdl-card__title"><h2 class="mdl-card__title-text form-heading">Login</h2>
+              </div>
+              <a onclick="logIn();" class="waves-effect waves-light btn-large social facebook"> <i
+                  class="fa fa-facebook"></i> <span>Login with Facebook</span> </a>
+              <!--<a class="signInButton waves-effect waves-light btn-large social google"> <i class="fa fa-google"></i> <span>Login with Google</span> </a>-->
+              <div data-title="hello" class="g-signin2" data-onsuccess="onSignIn"></div>
+              <!-- <div class="my-signin2" id="signInButton"></div>--> <br/>
+              <form name="login"><br/> <label class="error-single" id="errorLogin"></label><br/>
+                <label
+                    for="username_1">Email</label><br/> <input type="email" id="username_1"
+                                                               name="username_1"> <label
+                    for="password_1">Password</label>
+                <a class="show-password"><i class="text-right material-icons">remove_red_eye</i>
+                  Show</a>
+                <br/> <input type="password" id="password_1" name="password_1"> <br/> <label
+                    class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+                  <input
+                      type="checkbox" id="checkbox-2" class="mdl-checkbox__input"> <span
+                    class="mdl-checkbox__label remember-me">Remember me</span> </label> <span
+                    id="forgotPassword" class="mdl-checkbox__label remember-me forgot-password">Forgot Password?</span>
+                <button
+                    class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                  Signup
+                </button>
+                <div class="mdl-card__supporting-text create-account"> Don't have an account? <a
+                    id="createNow">Create now ></a></div>
+                <div class="mdl-card__supporting-text create-account tos"> By logging in, you agree
+                  to
+                  our <a>Terms of Service</a></div>
+              </form>
+            </div>
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="signupMenuSocial"><a
+                class="mat-close"
+                style="display: none;"><i
+                class="material-icons" style="color: #fff;">close</i></a>
+              <div class="mdl-card__title"><h2 class="mdl-card__title-text form-heading">Signup</h2>
+              </div>
+              <a onclick="logIn();" class="waves-effect waves-light btn-large social facebook"> <i
+                  class="fa fa-facebook"></i> <span>Connect with Facebook</span> </a>
+              <div class="g-signin2" data-onsuccess="onSignIn"></div>
+              <!--<a class="signInButton waves-effect waves-light btn-large social google"> <i class="fa fa-google"></i> <span>Continue with Google</span> </a>-->
+              <div class="mdl-card__supporting-text create-account signup-or"> OR</div>
+              <form>
+                <button
+                    class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                    id="continueWithEmail">Continue with Email
+                </button>
+                <div class="mdl-card__supporting-text create-account"> Already have an account? <a
+                    class="loginNow">Login now ></a></div>
+                <div class="mdl-card__supporting-text create-account tos"> By logging in, you agree
+                  to
+                  our <a>Terms of Service</a></div>
+              </form>
+            </div>
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="signupMenuForm"><a
+                class="mat-close"
+                style="display: none;"><i
+                class="material-icons" style="color: #fff;">close</i></a>
+              <div class="mdl-card__title"><h2 class="mdl-card__title-text form-heading">Signup</h2>
+              </div>
+              <form name="signup"><label class="error-single" id="errorSignup"></label><br/> <label
+                  for="name">Name</label><br/> <input type="text" id="name" name="name"> <label
+                  for="email">Email</label><br/> <input type="email" id="email" name="email"> <label
+                  for="password">Password</label> <a class="show-password"><i
+                  class="text-right material-icons">remove_red_eye</i> Show</a><br/> <input
+                  type="password" id="password"
+                  name="password">
+                <button
+                    class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                  Signup
+                </button>
+                <div class="mdl-card__supporting-text create-account"> Already have an account? <a
+                    class="loginNow">Login now ></a></div>
+                <div class="mdl-card__supporting-text create-account tos"> By logging in, you agree
+                  to
+                  our <a>Terms of Service</a></div>
+              </form>
+            </div>
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="resetPasswordForm"><a
+                class="mat-close"
+                style="display: none;"><i
+                class="material-icons" style="color: #fff;">close</i></a>
+              <div class="mdl-card__title"><h2 class="mdl-card__title-text form-heading">Reset
+                Password</h2> <br/></div>
+              <div class="mdl-card__supporting-text reset-password">Enter the email address
+                associated
+                with your account, and we will email you a link to reset your password.
+              </div> <!-- <hr class="border-margin"> -->
+              <form name="resetPassword"><label class="error-single"
+                                                id="errorPassword"></label><br/>
+                <label for="email">Email</label><br/> <input type="text" id="email-id" name="email">
+                <button id="sendResetLink"
+                        class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                  Send reset link
+                </button>
+                <div class="mdl-card__supporting-text create-account"><a class="loginNow">< Back to
+                  Login
+                </a></div>
+                <div class="mdl-card__supporting-text create-account tos"> By logging in, you agree
+                  to
+                  our <a>Terms of Service</a></div>
+              </form>
+            </div>
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="emailSentForm"><a
+                class="mat-close"
+                style="display: none;"><i
+                class="material-icons" style="color: #fff;">close</i></a>
+              <div class="mdl-card__title"><h2 class="mdl-card__title-text form-heading">
+                Link Sent</h2> <br/></div>
+              <div class="mdl-card__supporting-text reset-password"><img
+                  src="../static/images/icons/link%20sent.svg">
+                <p class="text-success">A link to reset your password has been
+                  sent to anupsrivaastav@gmail.com.</p>
+              </div> <!-- <hr class="border-margin"> -->
+              <form name="resetPassword">
+                <input type="text" id="email-id-reset" name="email">
+                <button
+                    class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                  Send reset link
+                </button>
+                <div class="mdl-card__supporting-text create-account"><a class="loginNow">< Back to
+                  Login
+                </a></div>
+                <div class="mdl-card__supporting-text create-account tos"> By logging in, you agree
+                  to
+                  our <a>Terms of Service</a></div>
+              </form>
+            </div>
+          </section>
+        </section>
+        <!-- <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button"> <li class="mdl-menu__item">list1</li> <li class="mdl-menu__item">list2</li> <li disabled class="mdl-menu__item">list3</li> <li class="mdl-menu__item">list4</li> </ul> -->
+      </div>
+    </div>
+  </div>
+  <!-- <div class="mat-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title">
+  </span>
+
+</div> -->
+  <div class="mat-drawer mdl-layout__drawer">
+			<span class="mdl-layout-title"> <img class="mat-logo-image"
+                                           src="https://neostencil.com/wp-content/themes/neostencil/images/head-logo.png"></span>
+
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Courses</a> <a
+        class="mdl-navigation__link" href="">Teachers</a> <a
+        class="mdl-navigation__link" href="">Test Series</a>
+    </nav>
+  </div>
+
+
+  <div class="mat-content mdl-layout__content">
+    <div class="load-bar">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+
+    <div class="press" style="height: 500px;">
+      <div class="container">
+        <img
+            src="http://www.speedtiger.com.tw/en/upload/investors_b/11a5cfc0a7c33d85c26bcde73069d08b.png"
+            style="margin: 80px auto; display: block;">
+
+      </div>
+    </div>
+
+
+    <footer class="mat-footer mdl-mega-footer">
+      <div class="container">
+        <div class="">
+          <a onclick="$('.mat-content').scrollTop(0);">
+            <button
+                class="mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+              <i class="material-icons">expand_less</i>
+            </button>
+          </a>
+          <!--<div class="mdl-mega-footer&#45;&#45;left-section">
+              <button class="mdl-mega-footer&#45;&#45;social-btn"></button>
+              &nbsp;
+              <button class="mdl-mega-footer&#45;&#45;social-btn"></button>
+              &nbsp;
+              <button class="mdl-mega-footer&#45;&#45;social-btn"></button>
+          </div>-->
+          <!--  <div class="mdl-mega-footer--right-section">
+             <a class="mdl-typography--font-light" href="#top">
+               Back to Top
+               <i class="material-icons">expand_less</i>
+             </a>
+           </div> -->
+        </div>
+
+
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div class="mdl-mega-footer--middle-section">
+              <img class="mat-logo-image"
+                   src="https://neostencil.com/wp-content/themes/neostencil/images/head-logo.png">
+              <p class="mdl-typography--font-light p-intro">Prepare for India's Most Coveted Jobs,
+                Live
+                Online.
+                NeoStencil is founded by AIIMS, IIT, IIM Alumni and
+                aims to revolutionize test preparation by connecting
+                teachers and students seemlessly.</p>
+              <div class="border"></div>
+              <p class="mdl-typography--font-light p-address">23/57, Sarhadi Gandhi Marg, Old
+                Rajinder
+                Nagar<br/>
+                +91 095990 75552<br/>
+                info@neostencil.com</p>
+
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div class="mdl-grid li-footer">
+              <div class="mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                <h1 class="mdl-mega-footer__heading">Features</h1>
+                <ul class="mdl-mega-footer__link-list">
+                  <li><a href="#">About us</a></li>
+                  <li><a href="#">Our team</a></li>
+                  <li><a href="#">Careers</a></li>
+                  <li><a href="#">Newsletters</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="#">Terms</a></li>
+                </ul>
+              </div>
+              <div class="mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                <h1 class="mdl-mega-footer__heading">Quick Links</h1>
+                <ul class="mdl-mega-footer__link-list">
+                  <li><a href="#">Create account</a></li>
+                  <li><a href="#">100% Purchase Protection</a></li>
+                  <li><a href="#">FAQs</a></li>
+                  <li><a href="#">Announcements</a></li>
+                </ul>
+              </div>
+              <div class="mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                <h1 class="mdl-mega-footer__heading">Explore</h1>
+                <ul class="mdl-mega-footer__link-list">
+                  <li><a href="#">UPSC Prelims Answer<br/>
+                    Key 2017</a></li>
+                  <li><a href="#">IAS Answer Key -<br/>
+                    Solution & Cut Off</a></li>
+                  <li><a href="#">Study Materials</a></li>
+                </ul>
+              </div>
+              <div class="mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                <h1 class="mdl-mega-footer__heading">Get In Touch</h1>
+                <ul class="mdl-mega-footer__link-list">
+                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">+91 959-907-5552 </a></li>
+                  <li><a href="#">info@neostencil.com</a></li>
+                  <li><a href="#">corporate@neostencil.com</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div class="mdl-mega-footer--middle-section">
+              <p class="mdl-typography--font-light p-address">@ 2014-2017, NeoStencil, Inc. All
+                Rights
+                Reserved.</p>
+
+            </div>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone text-right">
+            <div class="float-right">
+              <a class="social-icon" href="https://www.facebook.com/NeoStencil"><i
+                  class="fa fa-facebook"></i></a>
+              <a class="social-icon" href="https://twitter.com/NeoStencil"><i
+                  class="fa fa-twitter"></i></a>
+              <a class="social-icon" href="https://www.linkedin.com/company/neostencil-inc-/"><i
+                  class="fa fa-linkedin"></i></a>
+              <a class="social-icon" href="https://plus.google.com/+Neostencil"><i
+                  class="fa fa-google-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<dialog class="mdl-dialog mdl-dialog-video">
+  <div class="mdl-dialog__content">
+    <iframe width="100%" height="500px"
+            src="https://www.youtube.com/embed/Wi6DObEp4vU" allowfullscreen>
+    </iframe>
+    <button
+        class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
+</dialog>
+
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
+<script src="https://connect.facebook.net/en_US/all.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton"></script>
+<!--
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+
+
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/static/js/login.js')}}"
+       ></script>
+<!--<script>
+    $(document).ready(function(){
+        var data = { header: ''};
+        var template = "{{{ header }}}";
+
+        var text = Mustache.render(template, data);
+
+        $('header').html(text);
+    })
+
+
+
+</script>-->
+
+
+</body>
+</html>

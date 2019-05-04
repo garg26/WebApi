@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<body>
+
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 th:inline="text" class="page-header">[[${title}]]</h1>
+        </div>
+      </div>
+
+      <form role="form" action="" name="createreview"
+            id="createreview" method="POST">
+        <div class="row">
+          <div class="col-md-6">
+
+
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+
+                  <div class="col-sm-6">
+                    <label style="margin-top: 10px" ;>Review Type</label>
+
+                    <select name="reviewType" required id="reviewType"
+                            class="form-control selectpicker" data-live-search="true"
+                            title="Select Review Type">
+
+                      <option value="0" selected disabled>Select Review Type</option>
+                      <option value="COURSE">Course</option>
+                      <option value="TEACHER">Teacher</option>
+                      <option value="INSTITUTE">Institute</option>
+
+                    </select>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Slug</label> <select name="reviewSlug" required id="reviewSlug"
+                                                class="form-control" data-live-search="true"
+                                                title="Select Slug">
+                  </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+
+                  <div class="col-sm-6">
+                    <label>Author Name</label> <input type="text" name="authorName"
+                                                      id="authorName" class="form-control"
+                                                      placeholder="Enter author name..." autofocus
+                                                      required>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Author Email</label> <input type="email" name="authorEmail"
+                                                       id="authorEmail" class="form-control"
+                                                       placeholder="Enter author email">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+
+                  <div class="col-sm-6">
+                    <label>Review Title</label> <textarea rows="3" type="text" name="reviewTitle"
+                                                          id="reviewTitle" class="form-control"
+                                                          autofocus required></textarea>
+                  </div>
+                  <div class="col-sm-6">
+                    <label>Review Text</label> <textarea rows="3" type="text" name="reviewTitle"
+                                                          id="reviewText" class="form-control"
+                                                          autofocus required></textarea>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Review Rating</label> <input type="number" min="0" max="5" name="reviewRating"
+                                                        id="reviewRating" class="form-control"
+                                                        placeholder="Enter review rating">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Review Date</label>
+              <div class='input-group date'>
+                <input type='text' class="form-control" id='reviewDate'
+                       name="reviewDate"/> <span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+              </div>
+            </div>
+
+            <label class="radio-inline" style="margin-top: 10px;"><input
+                type="radio" name="optradio" id="publish" value="publish">Publish</label>
+            <label class="radio-inline" style="margin-top: 10px;"><input
+                type="radio" name="optradio" id="draft" value="draft">Draft</label>
+
+            <div class="row">
+              <div class="col-md-9" style="margin-top: 20px;">
+                <button class="submit btn btn-success" type="submit"
+                        value="submit">Submit
+                </button>
+                <i class="fa fa-spinner fa-spin" id="loader"></i> 
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+!--/*/
+<th:block th:include="admin/footer"></th:block>
+/*/-->
+<script
+    src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+<script>
+
+  $(document).ready(function () {
+    $('#reviewDate').datepicker({
+      format : 'dd-mm-yyyy'
+    });
+  });
+
+  $("#reviewType").change(function (event) {
+    event.preventDefault();
+    es = $(this).val();
+
+    if (es == 'COURSE') {
+      getAllCourse();
+    }
+    else if (es == 'TEACHER') {
+      getAllTeacher();
+    }
+    else if (es == 'INSTITUTE') {
+      getAllInstitute();
+    }
+  });
+
+  function getAllCourse() {
+
+    $
+    .ajax({
+      type: 'GET',
+      async: false,
+      dataType: 'json',
+      url: apiBasePath + "/courses/names",
+      success: function (response) {
+        var htmlToShow = '<option value="0" disabled>Select Course(s)</option>';
+        var teachersList = '<option value="#slug#">#coursetitle# (#courseId#)</option>';
+        if (response.length > 0) {
+          $.each(response, function (index, element) {
+            i = index + 1;
+            htmlToShow = htmlToShow += teachersList;
+            htmlToShow = htmlToShow.replace(
+                /#slug#/g, element.courseOldSlug);
+            htmlToShow = htmlToShow.replace(
+                "#coursetitle#",
+                element.courseTitle);
+            htmlToShow = htmlToShow.replace(
+                "#courseId#",
+                element.courseId);
+
+          });
+          $('#reviewSlug').html(htmlToShow);
+        } else {
+          $('#reviewSlug').html("");
+        }
+      },
+
+    });
+    $('#reviewSlug').selectpicker('refresh');
+
+  }
+
+  function getAllTeacher() {
+
+    $
+    .ajax({
+      type: 'GET',
+      async: false,
+      dataType: 'json',
+      url: apiBasePath + "/teachers/names",
+      success: function (response) {
+        var htmlToShow = '<option value="0" disabled>Select Teachers(s)</option>';
+        var teachersList = '<option value="#slug#">#coursetitle#</option>';
+        if (response.length > 0) {
+          $.each(response, function (index, element) {
+            i = index + 1;
+            htmlToShow = htmlToShow += teachersList;
+            htmlToShow = htmlToShow.replace(
+                /#slug#/g, element.slug);
+            htmlToShow = htmlToShow.replace(
+                "#coursetitle#",
+                element.teacherName);
+
+          });
+          $('#reviewSlug').html(htmlToShow);
+        } else {
+          $('#reviewSlug').html("");
+        }
+      },
+
+    });
+    $('#reviewSlug').selectpicker('refresh');
+
+  }
+
+  function getAllInstitute() {
+
+    $
+    .ajax({
+      type: 'GET',
+      async: false,
+      dataType: 'json',
+      url: apiBasePath + "/institutes/names",
+      success: function (response) {
+        var htmlToShow = '<option value="0" disabled>Select Institutes(s)</option>';
+        var teachersList = '<option value="#id#">#coursetitle#</option>';
+        if (response.length > 0) {
+          $.each(response, function (index, element) {
+            i = index + 1;
+            htmlToShow = htmlToShow += teachersList;
+            htmlToShow = htmlToShow.replace(
+                /#id#/g, element.instituteSlug);
+            htmlToShow = htmlToShow.replace(
+                "#coursetitle#",
+                element.name);
+
+          });
+          $('#reviewSlug').html(htmlToShow);
+        } else {
+          $('#reviewSlug').html("");
+        }
+      },
+
+    });
+    $('#reviewSlug').selectpicker('refresh');
+
+  }
+
+  $('#createreview').validate({
+
+    rules: {
+      authorName: {
+        required: true
+      },
+      reviewTitle: {
+        required: true
+      },
+      reviewRating: {
+        required: true
+      },
+      reviewDate: {
+        required: true
+      }
+
+
+    },
+    messages: {
+
+      authorName: {
+        required: "Please enter author name"
+      },
+      reviewTitle: {
+        required: "Please enter review title"
+      },
+      reviewRating: {
+        required: "Please enter review ratingg"
+      },
+      reviewDate: {
+        required: "Please enter review date"
+      }
+
+    },
+    submitHandler: function () {
+      submitRequest();
+      $('#loader').show();
+    }
+    
+  });
+  
+  function submitRequest() {
+
+    var input = {
+
+      slug: $('#reviewSlug').val(),
+      slugType: $('#reviewType').val(),
+      name: $('#authorName').val(),
+      email: $('#authorEmail').val(),
+      date: $('#reviewDate').val(),
+      reviewTitle: $('#reviewTitle').val(),
+      reviewRating: $('#reviewRating').val(),
+      text:$('#reviewText').val(),
+      commentedBy:{
+        userId:userId,
+      },
+      type:'REVIEW',
+      status:getStatus()
+
+    }
+
+    $.ajax({
+      url: apiBasePath + "/user/comments",
+      type: "post",
+      data: JSON.stringify(input),
+      dataType: "json",
+      contentType: "application/json",
+      processData: false,
+      "headers": {
+        <!--"authorization": "Bearer "-->
+        <!--+ window.localStorage.getItem('access_token'),-->
+
+        <!--},-->
+
+        success: function (response) {
+          $('#loader').hide();
+          location.reload();
+          alert("Review Add successfully");
+
+        },
+
+        error: function (response) {
+          $('#loader').hide();
+          alert("Review add failed");
+        }
+      }
+    });
+
+  }
+
+  function getStatus() {
+    var status;
+    if (document.getElementById('publish').checked) {
+      status = document.getElementById('publish').value;
+    } else if (document.getElementById('draft').checked) {
+      status = document.getElementById('draft').value;
+    } else {
+      status = document.getElementById('draft').value;
+    }
+
+    return status;
+  }
+
+</script>
+</body>
+</html>

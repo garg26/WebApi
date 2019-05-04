@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head></head>
+<body>
+	Hello NeoStencil,
+	<br />
+
+	<span th:text="${message}"></span>
+	<br />
+	<br />
+	Message URL: <span th:text="${messageUrl}"></span>
+	<br />
+	<span> From </span>
+	<br />
+	<span th:text="${messageFrom}"></span>
+	<br/>
+	<div th:if="${mobileNo} !=null">
+	<span> Mobile No. </span><br/>
+	<span th:text="${mobileNo}"> </span>
+	</div>
+	<div th:remove="tag" th:utext="${htmlcode}"></div>
+
+
+	<a th:href="@{${activateLink}}" th:text="${activateLinkText}" />
+
+
+
+</body>
+</html>

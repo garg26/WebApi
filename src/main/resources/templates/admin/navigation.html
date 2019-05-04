@@ -1,0 +1,134 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="/"><img src="/admin/dist/images/nslogo.png"></a>
+	</div>
+	<!-- /.navbar-header -->
+
+	<ul class="nav navbar-top-links navbar-right">
+
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+			</a>
+			<ul class="dropdown-menu dropdown-user">
+				<li><a href="#"><i class="fa fa-user fa-fw"></i> Profile</a>
+				</li>
+				<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+				</li>
+				<li class="divider"></li>
+				<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+				</li>
+			</ul>
+			<!-- /.dropdown-user -->
+		</li>
+		<!-- /.dropdown -->
+	</ul>
+	<!-- /.navbar-top-links -->
+
+	<div class="navbar-default sidebar" role="navigation">
+		<div class="sidebar-nav navbar-collapse">
+			<ul class="nav in" id="side-menu">
+
+
+				<li id="admin-dashboard">
+					<a><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+
+				<li><a href="#"><i class="fa fa-graduation-cap fa-fw"></i>
+					LMS<span class="fa arrow"></span></a>
+
+					<ul class="nav nav-second-level">
+
+						<li><a href="/admin_lmsadmin/lms/courses">Courses</a></li>
+						<li><a href="/admin_techops_lmsadmin/lms/all-units">Units</a></li>
+						<li><a href="/approver_admin/video-requests">Video Requests</a></li>
+						<li><a href="/admin_lmsadmin/lms/teachers">Teachers</a></li>
+						<li><a href="/admin_lmsadmin/lms/institutes">Institutes</a></li>
+						<li><a href="/admin_lmsadmin_sales/lms/assignments">Assignment
+							Alert</a></li>
+						<li><a href="/admin_techops_lmsadmin/lms/jwmacro">JWMacro</a></li>
+						<li><a href="/admin_techops_lmsadmin/lms/wowzamacro">Wawzo
+							Macro</a></li>
+						<li><a href="/admin_lmsadmin/lms/reviews">Reviews</a></li>
+					</ul></li>
+
+				<li><a href="/admin_sales/users/"><i
+						class="fa fa-users fa-fw"></i> Users<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="/admin_sales/users">All Users</a></li>
+						<li><a href="/admin_sales/users/add-user">Add User</a></li>
+					</ul></li>
+
+				<li><a href="/admin_writer_editor/posts/"><i
+						class="fa fa-pencil-square-o fa-fw"></i> Posts<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="/admin_writer_editor/posts">All Posts</a></li>
+						<li><a href="/admin_writer/posts/add-post">Add Post</a></li>
+						<li><a href="/admin_writer_editor/quiz/all-quiz">All Quiz</a></li>
+						<li><a href="/admin_writer_editor/free-prep">Free Prep</a></li>
+						<li><a href="/admin_writer_editor/answer-sheet">Answer
+							Sheet</a></li>
+						<li><a href="/admin_writer_editor/update-announcement-header">Header Update</a></li>
+						<li><a href="/admin_writer_editor/breadcrumb">BreadCrumb</a></li>
+					</ul></li>
+
+
+				<li><a href="#"><i class="fa fa-shopping-cart fa-fw"></i>
+					E-commerce<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="/admin_sales/ecommerce/orders">Orders</a></li>
+						<li><a href="/admin_sales/ecommerce/orders-export">Orders
+							Export</a></li>
+						<li><a href="/admin_sales/ecommerce/sales-report">Sales
+							Report </a></li>
+						<li><a href="/admin_sales/ecommerce/coupons">Coupons</a></li>
+						<li><a href="/admin/ecommerce/credit-neo-cash">Credit NeoCash</a></li>
+						<li><a href="/admin_techops_lmsadmin_sales/extrainfo">Extra Info</a></li>
+					</ul></li>
+
+				<li><a href="#"><i
+						class="fa fa-wrench fa-fw"></i> Developer's Tools<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="/actuator/logfile">Latest Logs</a></li>
+
+					</ul></li>
+
+				<li><a href="#"><i
+						class="fa fa-copy" style="font-weight: bold"></i>      &nbsp;Media Attachments<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<div id ="global_attachment_window" style="margin: 0 auto;width: 238px;display: block;margin-top: 10px;">
+
+
+								<input type="file" id="attachment" name="files[]" multiple="" style="float: left;margin-top: 4px;margin-bottom: 4px; width: 240px">
+								<i class="fa fa-spinner fa-spin" id="attachemtLoader"
+								   style="display: none;"></i>
+								<button id = "uploadAttachmentFile" style="float: left;margin: 4px 0px;">Upload </button>
+								<br/>
+								<br>
+
+								<input type="textbox" name="URL" id ="copyLinkUrl" class="custom-share-link" value="" style="display: block;float: left;">
+								<span style="    background-color: #e2e2ea;     border: 1px solid #000000;     display: block;     float: left;     width: 30px;">
+          <i class="fa fa-copy" style="line-height: 23px; cursor: pointer; font-size: 21px; margin-left: -16px;" onclick="copyAttachmentUrl();"></i>
+          </span>
+
+								<label id="attachment-error" class="error float-left text-left"></label>
+							</div>
+						</li>
+
+					</ul></li>
+
+			</ul>
+		</div>
+		<!-- /.sidebar-collapse -->
+	</div>
+	<!-- /.navbar-static-side -->
+</nav>

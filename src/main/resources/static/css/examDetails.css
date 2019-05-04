@@ -1,0 +1,57 @@
+html, body{
+	font-family: open sans!important;
+}
+.mdl-layout__drawer .mdl-navigation{
+	padding: 0;
+}
+.mdl-card-exams .mdl-card__supporting-text{
+	    font-family: open sans;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    text-align: left;
+    color: #666666;
+	padding: 0;
+}
+.mat-exams-slogan{
+	font-family: open sans;
+	font-size: 32px;
+	font-weight: 700;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.44;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 20px 0 0 0;
+}
+ .underline{
+	 margin: 30px 4px!important;
+}
+.mdl-card-exams{
+	padding: 20px 60px;
+} 
+.sidenav{
+	position: fixed;
+}
+.mdl-exam-content{
+	margin-left: 210px;
+}
+.sidenav a{
+	margin: 20px 0;
+}
+.mdl-course-card{
+	margin: 0 -13px;
+}
+.mat-header{
+	position: fixed;
+}
+.mat-content{
+	margin-top: 70px;
+}
+.mdl-card__supporting-text{
+	width: 95%;
+}

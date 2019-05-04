@@ -1,0 +1,388 @@
+<div class="landing-darken" style="display: none;"></div>
+<div id="" class="accordian-active">
+    <div id="accordion-announcements" class="">
+        <div id="headerText"></div>
+    </div>
+</div>
+<header id="header" style="overflow: initial;"
+        class="mdl-layout__header mdl-layout__header--transparent mdl-layout__header--waterfall">
+
+    <div id="header-menu" class="container-header mdl-layout__header-row">
+        <a href="/" class="mat-title mdl-layout-title"> <img
+                class="mat-logo-image" alt="Neostencil Logo" src="https://lh3.googleusercontent.com/7Rek8EgYYxLRsyJ4cDf-L5gcAaQ6VCDvCqdt8tDAAnNdxzdciByhLQkteQMsK6nte6p9eRWhOXBa2-1-wsJotGaP9g">
+        </a>
+        <!-- Add spacer, to align navigation to the right in desktop -->
+        <!-- <div class="mat-header-spacer mdl-layout-spacer"></div> -->
+        <!-- <div class="mat-search-box mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;expandable mdl-textfield&#45;&#45;floating-label mdl-textfield&#45;&#45;align-right mdl-textfield&#45;&#45;full-width"> <label class="mdl-button mdl-js-button mdl-button&#45;&#45;icon" for="search-field"> <i class="material-icons">search</i> </label> <div class="mdl-textfield__expandable-holder"> <input class="mdl-textfield__input" type="text" id="search-field"> </div> </div>-->
+        <div class="search-container">
+            <form>
+                <label for="searchHeader"></label> <input type="text"
+                                                          placeholder="Search for Courses,Teachers..." name="search"
+                                                          id="searchHeader">
+                <div style="display: none;" class="" id="loader-search">
+                    <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                </div>
+                <button style="pointer-events: none;" aria-label="search button"
+                        type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+                <a style="display: none;" class="clear-search"> <i
+                        class="fa fa-times"></i>
+                </a>
+            </form>
+            <a style="display: none;" class="search-results">
+                <div id="searchCourses">
+                    <h3>Courses</h3>
+                    <div id="courseSearchList"></div>
+                    <hr>
+                </div>
+                <div id="searchTeachers">
+                    <h3>Teachers</h3>
+                    <div id="teacherSearchList"></div>
+                </div>
+                <hr>
+                <div id="searchInstitutes">
+                    <h3>Institutes</h3>
+                    <div id="instituteSearchList"></div>
+                    <hr>
+                </div>
+                <div id="searchPosts">
+                    <h3>Posts</h3>
+                    <div id="postSearchList"></div>
+                </div>
+
+                <h3 style="display: none;" id="noSearchResultsCommon">No
+                    results to show. Please try another keyword.</h3>
+            </a>
+        </div>
+        <!-- Navigation -->
+
+        <!--/*/ <th:block th:include="common/commonNavigationInstitute"></th:block> /*/-->
+
+
+        <!-- <a class="mdl-button mdl-js-button mdl-button--icon " id="searchBtnMobileScreen" style="display: none;"><i class="material-icons"> search </i> </a> -->
+        <div class="user-icon-mobile" style="position: relative; order: 6;">
+            <a style="display: none;" id="user"
+               class="mdl-button mdl-js-button mdl-button--icon"> </a>
+            <ul
+                    class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    for="user">
+                <li class="mdl-menu__item"><a href="/user-dashboard">Dashboard</a></li>
+                <li class="mdl-menu__item"><a href="/profile">My Profile</a></li>
+                <li class="mdl-menu__item"><a href="/orders">My orders</a></li>
+                <li class="mdl-menu__item"><a id="logout"
+                                              onclick="signOut_common();">Logout</a></li>
+            </ul>
+
+        </div>
+        <form class="search-mobile" action="#">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                <label class="mdl-button mdl-js-button mdl-button--icon"
+                       for="sample6"> <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" id="sample6">
+                    <label class="mdl-textfield__label" for="sample-expandable">Expandable
+                        Input</label>
+                </div>
+            </div>
+        </form>
+        <div id="cartDropdown" class="mat-more-button"
+             style="position: relative">
+            <a
+                    class="mat-cart mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-button mdl-js-button mdl-badge mdl-badge--overlap"
+                    id="cart_dropdown"><i class="material-icons">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1"
+                        x="0px" y="0px" viewBox="0 0 459.529 459.529"
+                        style="enable-background: new 0 0 459.529 459.529;"
+                        xml:space="preserve">
+<g>
+	<g>
+		<path
+                d="M17,55.231h48.733l69.417,251.033c1.983,7.367,8.783,12.467,16.433,12.467h213.35c6.8,0,12.75-3.967,15.583-10.2    l77.633-178.5c2.267-5.383,1.7-11.333-1.417-16.15c-3.117-4.817-8.5-7.65-14.167-7.65H206.833c-9.35,0-17,7.65-17,17    s7.65,17,17,17H416.5l-62.9,144.5H164.333L94.917,33.698c-1.983-7.367-8.783-12.467-16.433-12.467H17c-9.35,0-17,7.65-17,17    S7.65,55.231,17,55.231z"/>
+        <path
+                d="M135.433,438.298c21.25,0,38.533-17.283,38.533-38.533s-17.283-38.533-38.533-38.533S96.9,378.514,96.9,399.764    S114.183,438.298,135.433,438.298z"/>
+        <path
+                d="M376.267,438.298c0.85,0,1.983,0,2.833,0c10.2-0.85,19.55-5.383,26.35-13.317c6.8-7.65,9.917-17.567,9.35-28.05    c-1.417-20.967-19.833-37.117-41.083-35.7c-21.25,1.417-37.117,20.117-35.7,41.083    C339.433,422.431,356.15,438.298,376.267,438.298z"/>
+	</g>
+</g>
+</svg>
+
+            </i></a>
+            <div id="cartDropdownSection"
+                 class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                 for="cart_dropdown">
+                <div style="display: none;" id="cartNotEmpty">
+                    <h3>
+                        Your Cart <span id="numItems"></span>
+                    </h3>
+                    <div id="cartItemsDropdown"></div>
+                    <br/>
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+                            <p class="cart-subtotal text-left">Subtotal</p>
+                        </div>
+                        <div
+                                class="mdl-cell-cart mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--12-col-phone text-right">
+                            <p class="cart-subtotal text-right">
+                                <b id="cartDropdownSubtotal"></b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mdl-grid cart-dropdown-checkout">
+                        <div
+                                class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+                            <a href="/cart" id="gtm_viewCart"
+                               class="btn-cart mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                VIEW CART</a>
+                        </div>
+                        <div
+                                class="mdl-cell-cart mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--12-col-phone text-right">
+                            <a id="checkoutDropdown" style="margin-top: 5px;"
+                               class="btn-cart mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                CHECKOUT</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="cartEmpty">
+                    <p>Your Shopping Cart Is Empty</p>
+                </div>
+            </div>
+
+        </div>
+        <section class="wrapper" style="margin: 0;">
+            <section class="material-design-hamburger">
+
+                <button style="display: none;" onclick="matSignupClick();"
+                        id="signup"
+                        class="mat-signup mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    Sign in
+                </button>
+            </section>
+            <section class="menu login-menu menu--off">
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp"
+                     id="signupMenuLogin">
+                    <a class="mat-close" style="display: none;"><i
+                            class="material-icons" style="color: #fff;">close</i></a>
+                    <div class="mdl-card__title">
+                        <p class="mdl-card__title-text form-heading">Log in</p>
+                    </div>
+                    <a
+                            class="loginUsingFacebook waves-effect waves-light btn-large social facebook">
+                        <i class="fa fa-facebook-f"></i> <span>Connect with
+							Facebook</span>
+                    </a> <a
+                        class="loginUsingGoogle waves-effect waves-light btn-large social google">
+                    <i class="fa fa-google"></i> <span>Connect with Google</span>
+                </a> <br/>
+                    <form name="login">
+                        <br/> <label class="error-single" id="errorLogin"></label><br/>
+                        <label for="username_login">Email</label><br/> <input
+                            type="email" id="username_login" name="username_login"> <label
+                            for="password_login">Password</label> <a class="show-password"><i
+                            class="text-right material-icons">remove_red_eye</i> Show</a> <br/>
+                        <input type="password" id="password_login" name="password">
+                        <br/> <label
+                            class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                            for="checkbox-2"> <input type="checkbox" id="checkbox-2"
+                                                     class="mdl-checkbox__input"> <span
+                            class="mdl-checkbox__label remember-me">Remember me</span>
+                    </label> <span id="forgotPassword"
+                                   class="mdl-checkbox__label remember-me forgot-password">Forgot
+							Password?</span>
+                        <div style="display: none;" class="common-loader"
+                             id="loader-login">
+                            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                        </div>
+                        <button id="btn-login"
+                                class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+
+                            Log in
+                        </button>
+                        <div class="mdl-card__supporting-text create-account">
+                            Don't have an account? <a id="createNow">Create now ></a>
+                        </div>
+                        <div class="mdl-card__supporting-text create-account tos">
+                            By logging in, you agree to our <a href="/terms/">Terms of
+                            Service</a> and <a href="/privacy/">Privacy Policy</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp"
+                     id="signupMenuSocial">
+                    <a class="mat-close" style="display: none;"><i
+                            class="material-icons" style="color: #fff;">close</i></a>
+                    <div class="mdl-card__title">
+                        <p class="mdl-card__title-text form-heading">Sign up</p>
+                    </div>
+                    <a
+                            class="loginUsingFacebook waves-effect waves-light btn-large social facebook">
+                        <i class="fa fa-facebook-f"></i> <span>Connect with
+							Facebook</span>
+                    </a> <a
+                        class="loginUsingGoogle waves-effect waves-light btn-large social google">
+                    <i class="fa fa-google"></i> <span>Connect with Google</span>
+                </a>
+                    <div class="mdl-card__supporting-text create-account signup-or">
+                        OR
+                    </div>
+                    <form>
+                        <button
+                                class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                                id="continueWithEmail">Continue with email
+                        </button>
+                        <div class="mdl-card__supporting-text create-account">
+                            Already have an account? <a class="loginNow">Log in now ></a>
+                        </div>
+                        <div class="mdl-card__supporting-text create-account tos">
+                            By logging in, you agree to our <a href="/terms/">Terms of
+                            Service</a> and <a href="/privacy/">Privacy Policy</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp"
+                     id="signupMenuForm">
+                    <a class="mat-close" style="display: none;"><i
+                            class="material-icons" style="color: #fff;">close</i></a>
+                    <div class="mdl-card__title">
+                        <p class="mdl-card__title-text form-heading">Sign up</p>
+                    </div>
+                    <form name="signup">
+                        <!--duplicate id= name  here and post.html-->
+                        <label class="error-single" id="errorSignup"></label><br/> <label
+                            for="name">Name</label><br/> <input type="text" id="name"
+                                                                name="name"> <label for="email">Email</label><br/>
+                        <input
+                                type="email" id="email" name="email"> <label
+                            for="password">Password</label> <a class="show-password"><i
+                            class="text-right material-icons">remove_red_eye</i> Show</a><br/>
+                        <input type="password" id="password" name="password">
+                        <div style="display: none;" class="common-loader"
+                             id="loader-signup">
+                            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                        </div>
+                        <button id="btn-signup"
+                                class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+
+                            Sign up
+                        </button>
+                        <div class="mdl-card__supporting-text create-account">
+                            Already have an account? <a class="loginNow">Log in now ></a>
+                        </div>
+                        <div class="mdl-card__supporting-text create-account tos">
+                            By logging in, you agree to our <a href="/terms/">Terms of
+                            Service</a> and <a href="/privacy/">Privacy Policy</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp"
+                     id="resetPasswordForm">
+                    <a class="mat-close" style="display: none;"><i
+                            class="material-icons" style="color: #fff;">close</i></a>
+                    <div class="mdl-card__title">
+                        <p class="mdl-card__title-text form-heading">Reset Password</p>
+                        <br/>
+                    </div>
+                    <div class="mdl-card__supporting-text reset-password">Enter
+                        the email address associated with your account, and we will email
+                        you a link to reset your password.
+                    </div>
+                    <!-- <hr class="border-margin"> -->
+                    <form name="resetPassword">
+                        <label class="error-single" id="errorPassword"></label><br/> <label
+                            for="email">Email</label><br/> <input type="text" id="email-id"
+                                                                  name="email">
+                        <div style="display: none;" class="" id="loader-reset-password">
+                            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                        </div>
+                        <button id="sendResetLink"
+                                class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            Send reset link
+                        </button>
+                        <div class="mdl-card__supporting-text create-account">
+                            <a class="loginNow">< Back to Login </a>
+                        </div>
+                        <div class="mdl-card__supporting-text create-account tos">
+                            By logging in, you agree to our <a href="/terms/">Terms of
+                            Service</a> and <a href="/privacy/">Privacy Policy</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp"
+                     id="emailSentForm">
+                    <a class="mat-close" style="display: none;"><i
+                            class="material-icons" style="color: #fff;">close</i></a>
+                    <div class="mdl-card__title">
+                        <p class="mdl-card__title-text form-heading">Link Sent</p>
+                        <br/>
+                    </div>
+                    <div class="mdl-card__supporting-text reset-password">
+                        <!-- <img src="images/icons/link%20sent.svg"> -->
+                        <p id="linkSentAgain" class="text-success">
+                            A link to reset your password has been sent to <span
+                                id="reset-password-email-again"></span>
+                        </p>
+                    </div>
+                    <!-- <hr class="border-margin"> -->
+                    <form name="resetPasswordResendLink">
+                        <label class="error-single" id="errorPasswordReset"></label><br/>
+                        <input type="text" id="email-id-reset" name="email">
+                        <div style="display: none; text-align: center;" class=""
+                             id="loader-reset-password-resend">
+                            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                        </div>
+                        <button id="sendLinkAgain"
+                                class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            Send reset link
+                        </button>
+                        <div class="mdl-card__supporting-text create-account">
+                            <a class="loginNow">< Back to Login </a>
+                        </div>
+                        <div class="mdl-card__supporting-text create-account tos">
+                            By logging in, you agree to our <a href="/terms/">Terms of
+                            Service</a> and <a href="/privacy/">Privacy Policy</a>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </section>
+        <!-- <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button"> <li class="mdl-menu__item">list1</li> <li class="mdl-menu__item">list2</li> <li disabled class="mdl-menu__item">list3</li> <li class="mdl-menu__item">list4</li> </ul> -->
+    </div>
+</header>
+<div class="mat-drawer mdl-layout__drawer jee-nav-mobile">
+    <div class="mdl-grid login-nav-mobile">
+        <div
+                class="mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+            <a href='/login' class="mat-login-mobile">LOGIN</a>
+        </div>
+        <div
+                class="mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+            <a href='/login?signup' class="mat-signup-mobile">SIGN UP</a>
+        </div>
+    </div>
+    <nav class="mdl-navigation mdl-navigation-mobile">
+        <div>
+
+            <a href="#section-testimonials"
+               class="mdl-mega-footer__heading mdl-navigation__link">Testimonials</a>
+        </div>
+        <div>
+
+            <a href="#section-courses"
+               class="mdl-mega-footer__heading mdl-navigation__link">Courses</a>
+        </div>
+        <div>
+
+            <a href="#section-testimonials-teacher"
+               class="mdl-mega-footer__heading mdl-navigation__link">Teachers</a>
+        </div>
+        <div>
+        </div>
+    </nav>
+</div>
+<div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button class="mdl-snackbar__action" type="button"></button>
+</div>

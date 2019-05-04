@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>500+ Courses - IAS, IES/GATE, IIT-JEE, NEET, State PCS, SSC | NeoStencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/courses.css')}}"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.css')}}"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick-theme.css')}}"/>
+
+  <link rel="canonical" href="https://neostencil.com/courses"/>
+
+  <meta name="description"
+        content="All popular courses for UPSC, IES/GATE, State PCS, IIT-JEE, NEET, SSC & RRB preparation. We have 75+ top teachers providing LIVE online coaching. Check out all courses here.">
+
+  <meta name="twitter:description"
+        content="All popular courses for UPSC, IES/GATE, State PCS, IIT-JEE, NEET, SSC & RRB preparation. We have 75+ top teachers providing LIVE online coaching. Check out all courses here."/>
+  <meta name="twitter:site" content="@neostencil"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title"
+        content="All popular courses for UPSC, IES/GATE, State PCS, IIT-JEE, NEET, SSC & RRB preparation. We have 75+ top teachers providing LIVE online coaching. Check out all courses here."/>
+
+  <meta property="og:url"
+        content="500+ Courses - IAS, IES/GATE, IIT-JEE, NEET, State PCS, SSC | NeoStencil"/>
+  <meta property="og:title"
+        content="All popular courses for UPSC, IES/GATE, State PCS, IIT-JEE, NEET, SSC & RRB preparation. We have 75+ top teachers providing LIVE online coaching. Check out all courses here."/>
+  <meta property="og:image:secure_url"
+        content="https://lh3.googleusercontent.com/OAfilKcwYT3HkT_m1ScnXaJD3tfyk8KcZRyKwL05PEBlKI_ZHfENcbFUEHR_bOY5s2IeCrqQOhD5h6Z-cYwE0c3T6GI"/>
+  <meta property="og:image"
+        content="https://lh3.googleusercontent.com/OAfilKcwYT3HkT_m1ScnXaJD3tfyk8KcZRyKwL05PEBlKI_ZHfENcbFUEHR_bOY5s2IeCrqQOhD5h6Z-cYwE0c3T6GI"/>
+
+  <!-- <link
+          href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+          rel="stylesheet" media="screen" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+       -->
+  <style>
+    .price ~ .view-details {
+      width: 100%;
+      height: 38px;
+      border-radius: 3px;
+      border: solid 1px #162840;
+      background: transparent !important;
+      color: #162840 !important;
+      font-size: 14px !important;
+      line-height: 40px;
+      padding: 0;
+      box-shadow: none;
+      transition: 300ms;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .price ~ .view-details:hover, .price ~ .view-details:active {
+      /*background-image: linear-gradient(108deg, #f7a053, #e24d08) !important;*/
+      border: 1px solid #ff6600;
+      color: #fff !important;
+      box-shadow: none;
+      background: #ff6000 !important;
+    }
+    .hbspt-form fieldset{
+      max-width: none !important;
+    }
+    .hbspt-form input#name-ffa0f910-381d-4cc0-913b-1b095076b802,.hbspt-form input#phone-ffa0f910-381d-4cc0-913b-1b095076b802, .hbspt-form input#email-ffa0f910-381d-4cc0-913b-1b095076b802{
+      height: 40px;
+      border-radius: 2px;
+      background-color: #fff;
+      border-style: none;
+      border: 1px solid #979797;
+      outline: 0;
+      padding: 0 10px;
+      margin: 0 0 25px 0;
+      width: 100%;
+    }
+    .hbspt-form input#name-ffa0f910-381d-4cc0-913b-1b095076b802:focus,.hbspt-form input#phone-ffa0f910-381d-4cc0-913b-1b095076b802:focus, .hbspt-form input#email-ffa0f910-381d-4cc0-913b-1b095076b802:focus{
+      outline: none;
+      box-shadow: none;
+    }
+    .hbspt-form input.hs-button.primary.large{
+      background: #ff6600 !important;
+      color: #ffffff !important;
+      box-shadow: none;
+      border: none;
+      height: 26px;
+      font-size: 14px !important;
+      font-weight: 400;
+      width: 100%;
+      max-width: 193px;
+      cursor: pointer;
+      border-radius: 0px;
+      text-shadow: none;
+    }
+    .hbspt-form .hs_submit.hs-submit{
+      float: left;
+      position: relative;
+      top: 52px;
+    }
+    .hbspt-form input.hs-button.primary.large:active{
+      border: none;
+    }
+    .all-course-hubspotForm{
+        display: none;
+    }
+    .hbspt-form fieldset.form-columns-3{
+      float: left;
+    }
+    .hbspt-form .submitted-message.hs-main-font-element.hs-form-ffa0f910-381d-4cc0-913b-1b095076b802.hs-form-ffa0f910-381d-4cc0-913b-1b095076b802_de41a26d-cc61-49bc-829d-782386e22b29 {
+      padding: 15px 40px;
+    }
+    @media screen and (max-width: 1069px) {
+      .hbspt-form .hs_submit.hs-submit{
+        top: -39px;
+      }
+    }
+    @media screen and (max-width: 480px){
+      .course-single-card-list {
+        padding: 0px !important;
+      }
+    }
+    @media screen and (max-width: 1270px) {
+      .hbspt-form .hs_submit.hs-submit{
+        top: -31px;
+      }
+    }
+    .hs_error_rollup{
+      float: left;
+      width: fit-content;
+    }
+    @media screen and (max-width: 766px) {
+      .hb-Container .fa-times{
+        margin: 0 !important;
+      }
+      .hb-Container{
+        padding: 20px 20px 0;
+      }
+      .hbspt-form .hs_submit.hs-submit{
+        top: -31px;
+      }
+      .hbspt-form .hs_name.hs-name.hs-fieldtype-text.field.hs-form-field, .hbspt-form .hs_phone.hs-phone.hs-fieldtype-text.field.hs-form-field, .hbspt-form .hs_email.hs-email.hs-fieldtype-text.field.hs-form-field{
+        margin-bottom: 0px;
+      }
+      .hbspt-form .actions{
+        margin-top: 0px;
+      }
+      .hbspt-form h5{
+        font-size: 18px;
+      }
+    }
+    @media screen and (max-width: 767px) {
+      .all-course-hubspotForm {
+        display: none !important;
+      }
+    }
+
+    @media screen and (max-width: 767px) and  (min-width: 480px){
+      .hbspt-form .hs_submit.hs-submit{
+        width: calc(100% - 24px);
+      }
+      .hbspt-form h5{
+        font-size: 17px;
+      }
+      .hbspt-form {
+        position: relative;
+        top: -20px;
+      }
+      .hb-Container .hbspt-form .hs_name.hs-name,.hb-Container .hbspt-form .hs_phone.hs-phone,.hb-Container .hbspt-form .hs_email.hs-email{
+        width: 100%;
+      }
+      .hb-Container .hbspt-form input{
+        margin: 0 0 13px 0 !important;
+      }
+      .course-single-card-list{
+        padding: 0 10px !important;
+      }
+      .hb-Container .hbspt-form .hs_submit.hs-submit{
+        height: 57px !important;
+      }
+      .hb-Container .hbspt-form .hbspt-form input.hs-button.primary.large{
+        height: 35px !important;
+        padding: 0 10px;
+      }
+    }
+    @media screen and (max-width: 1027px) and (min-width: 767px) {
+      .hb-Container{
+        padding: 0 40px;
+      }
+    }
+    #gridStyle .hb-Container .hs-custom-style fieldset.form-columns-3 .hs-form-field, .hs-custom-style>div.form-columns-3 .hs-form-field{
+      width: 100%;
+      margin-bottom: 0;
+    }
+    #gridStyle .hb-Container  .hbspt-form h5 {
+      font-size: 14px;
+    }
+    #gridStyle .hb-Container .hbspt-form .hs_submit.hs-submit{
+      float: none;
+      top: 0;
+    }
+    #gridStyle .hb-Container .hbspt-form  .actions{
+      margin: 0px;
+    }
+    #gridStyle .hb-Container .hbspt-form  form#hsForm_ffa0f910-381d-4cc0-913b-1b095076b802 {
+      margin: 0;
+    }
+    #gridStyle .hb-Container .hbspt-form input#name-ffa0f910-381d-4cc0-913b-1b095076b802,  #gridStyle .hb-Container .hbspt-form input#phone-ffa0f910-381d-4cc0-913b-1b095076b802, #gridStyle .hb-Container  .hbspt-form input#email-ffa0f910-381d-4cc0-913b-1b095076b802{
+      height: 39px;
+      margin: 0 0 13px 0;
+    }
+    #gridStyle .hb-Container{
+      height: auto;
+    }
+    #gridStyle .hb-Container .fa-times{
+      cursor: pointer;
+    }
+    /*.chip-selected{*/
+      /*background-color: #f4a639 !important;*/
+      /*color: #ffffff;*/
+      /*font-weight: 900;*/
+    /*}*/
+    /*#saveExamSegments{*/
+      /*background: #ff6000;*/
+      /*padding: 0 30px;*/
+      /*font-weight: 500;*/
+      /*color: #FFFFFF;*/
+    /*}*/
+    /*#examSegmentDialog {*/
+      /*width: 36%;*/
+    /*}*/
+    /*#examSegmentDialog::backdrop {*/
+      /*background: rgba(0, 0, 0, 0.5);*/
+    /*}*/
+    /*#examSegmentDialog .mdl-chip{*/
+      /*margin: 0px 10px 10px 0px;*/
+      /*background-color: #f1eded;*/
+    /*}*/
+    /*#examSegmentDialog .mdl-chip__text{*/
+      /*line-height: 36px;*/
+    /*}*/
+    /*@media screen and (max-width: 1024px) {*/
+      /*#examSegmentDialog {*/
+        /*width: 80%;*/
+      /*}*/
+      /*#examSegmentDialog .mdl-card__title-text{*/
+        /*font-size: 17px;*/
+      /*}*/
+    /*}*/
+    /*#examSegmentDialog.mdl-spinner {*/
+      /*width: fit-content !important;*/
+      /*width: -moz-fit-content !important;*/
+      /*height: 64px !important;*/
+      /*margin: 0 auto;*/
+    /*}*/
+
+    /*#examSegmentDialog .mdl-spinner__circle {*/
+      /*border-width: 6px !important;*/
+    /*}*/
+
+    /*@media screen and (max-width: 767px){*/
+      /*#examSegmentDialog.mdl-spinner {*/
+        /*height: 32px !important;*/
+      /*}*/
+      /*#examSegmentDialog .mdl-spinner__circle {*/
+        /*border-width: 4px !important;*/
+      /*}*/
+
+    /*}*/
+    /*#examSegmentDialog #saving{*/
+      /*font-size: 15px;*/
+      /*color: #5d5757;*/
+      /*width: fit-content;*/
+      /*margin: 16px auto;*/
+      /*display: none;*/
+      /*animation: blinker 1s linear infinite;*/
+    /*}*/
+    /*@keyframes blinker {*/
+      /*50% {*/
+        /*opacity: 0;*/
+      /*}*/
+    /*}*/
+</style>
+</head>
+
+<body class="all-courses-page">
+
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+  <div class="mat-content mdl-layout__content">
+    <div class="landing-darken" style="display: none;"></div>
+    <!-- <div class="load-bar">
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+</div> -->
+    <div style="display: none;" id="p2"
+         class="load-courses-progress-bar mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+
+    <div class="skew">
+      <section class="course-listing">
+        <div class="container-header">
+          <div class="mdl-grid">
+            <div
+                class="course-filter-card mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <button class="btn-explore apply-filter-mobile">Apply
+                filter
+              </button>
+              <div class="demo-card-square mdl-card mdl-shadow--2dp" id="">
+                <div class="course-filter-header">
+                  Course Filter
+                  <button onclick="reset();"
+                          class="reset mdl-button mdl-js-button mdl-js-ripple-effect">
+                    Reset
+                  </button>
+                </div>
+                <!-- <select name="" class="courseSortBy">
+                  <option value="Select" disabled="disabled" selected="selected">Sort
+                    by</option>
+                  <option value="popular">Popular</option>
+                  <option value="atoz">Order: A to Z</option>
+                  <option value="ztoa">Order: Z to A</option>
+                </select> -->
+
+                <div id="courseDynamicFilters"></div>
+                <div id="filterMedium" style="display: none;">
+                  <label class="mdl-checkbox mdl-js-checkbox" for="mediumFilterEnglish"
+                         style="margin-left: 12px;">
+                    <input type="checkbox" id="mediumFilterEnglish"
+                           class="mdl-checkbox__input" onchange="changeFilterTabs();"
+                           value="courseMedium:English"
+                           data-value="courseSubCategory:Medium">
+                    <span class="mdl-checkbox__label">ENGLISH</span>
+                  </label>
+                  <br/>
+                  <label class="mdl-checkbox mdl-js-checkbox" for="mediumFilterHindi"
+                         style="margin-left: 12px;">
+                    <input type="checkbox" id="mediumFilterHindi"
+                           class="mdl-checkbox__input" onchange="changeFilterTabs();"
+                           value="courseMedium:Hindi" data-value="courseSubCategory:Medium">
+                    <span class="mdl-checkbox__label">HINDI</span>
+                  </label>
+                </div>
+
+              </div>
+            </div>
+            <div
+                class="course-listing-card mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div id="course-listing-card"
+                   class="demo-card-square mdl-card mdl-shadow--2dp">
+                <div class="course-filter-header course-filter-dropdowns">
+                  <div class="all-courses-tab mdl-tabs__tab-bar">
+                    <a data-id="IAS" onclick="fetchFilters('IAS','ALL','popular');"
+                       class="mdl-tabs__tab is-active">IAS</a>
+
+                    <a
+                        class="mdl-tabs__tab"
+                        onclick="fetchFilters('IES','ALL','popular');" data-id="IES">IES</a>
+                    <a class="mdl-tabs__tab"
+                       onclick="fetchFilters('GATE','ALL','popular');"
+                       data-id="GATE">GATE</a>
+
+                    <a class="mdl-tabs__tab"
+                       onclick="fetchFilters('JEE','ALL','popular');"
+                       data-id="JEE">IIT-JEE</a>
+                    <a class="mdl-tabs__tab" onclick="fetchFilters('NEET','ALL','popular');"
+                       data-id="NEET">NEET</a>
+
+                    <a class="mdl-tabs__tab"
+                       onclick="fetchFilters('STATE PSC','ALL','popular');"
+                       data-id="STATE_PSC">STATE PCS</a> <a
+                      class="mdl-tabs__tab"
+                      onclick="fetchFilters('SSC','ALL','popular');" data-id="SSC">SSC</a>
+                    <a class="mdl-tabs__tab"
+                       onclick="fetchFilters('LAW','ALL','popular');"
+                       data-id="LAW">LAW</a>
+                    <a class="mdl-tabs__tab" onclick="fetchFilters('RRB','ALL','popular');"
+                       data-id="RRB">RRB</a>
+
+
+                  </div>
+                </div>
+                <div id="filtersTab"></div>
+                <div style="display: none;" class="common-loader"
+                     id="loader-all-courses">
+                  <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                </div>
+                <p style="display: none;" id="error-courses"
+                   class="text-center">Some error occured. Please try some
+                  other category</p>
+                <div class="all-courses-section">
+                  <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-grid">
+                      <div
+                          class=" mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+                        <h3 class="course-card-head">
+                          <label id="totalCourses"></label>&nbsp;&nbsp;
+                          <!-- <span>Showing 1-6 of 50</span> -->
+                        </h3>
+                      </div>
+                      <div
+                          class=" mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+                        <div class="float-right">
+                          <!-- <select class="" name="" id="courseSortBy">
+                            <option value="Select" disabled="disabled"
+                              selected="selected">Sort by</option>
+                            <option value="popular">Popular</option>
+                            <option value="atoz">Order: A to Z</option>
+                            <option value="ztoa">Order: Z to A</option>
+                          </select> -->
+
+                          <div class="all-courses-tab mdl-tabs__tab-bar">
+                            <a href="#listStyle" class="mdl-tabs__tab is-active"><i
+                                class="material-icons">list</i></a> <a href="#gridStyle"
+                                                                       class="mdl-tabs__tab"><i
+                              class="material-icons">apps</i></a>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <a href="/courses"
+                       class="back-to-category-mobile course-filter-header"> <i
+                        class="material-icons">keyboard_arrow_left</i><span
+                        class="back-to-category-mobile-span"></span>
+                      <button onclick="reset();"
+                              class="reset mdl-button mdl-js-button mdl-js-ripple-effect">
+                        Reset
+                      </button>
+                    </a> <a class="show-filter-mobile">Filter Course</a>
+                    <div class="mdl-tabs__panel is-active">
+                      <div class="all-courses-card all-course-hubspotForm">
+                        <div class="hb-Container">
+                          <i class="fa fa-times" aria-hidden="true" style=" position: relative; float: right; margin: 10px; cursor: pointer"></i>
+                        <div class="mdl-grid">
+                          <div
+                              class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                            <div class="course-single-card-list" style="margin: 0 auto;padding: 0 40px;">
+                              <!--[if lte IE 8]>
+                              <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+                              <![endif]-->
+                              <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+                              <script>
+                                hbspt.forms.create({
+                                  portalId: "3966107",
+                                  formId: "ffa0f910-381d-4cc0-913b-1b095076b802"
+                                });
+                              </script>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                      <div id="listStyle"></div>
+                    </div>
+                    <div class="mdl-tabs__panel" id="gridStyle">
+                      <div class="mdl-grid mdl-course-card">
+                      </div>
+                    </div>
+                    <div id="pageNavigation"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+
+        </div>
+      </section>
+    </div>
+
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+</div>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/courses.js')}}"></script>
+
+<!--author :- Satish kumar-->
+
+
+<script>
+  var userExamSegment =[];
+  var segmentList='';
+  $(document).ready(function () {
+    $(document).on('click','.hb-Container .fa-times',function() {
+      $('.all-course-hubspotForm').hide();
+    });
+    if (window.location.href.indexOf("category") != -1) {
+      var categoryFromUrl = getParameterByName('category');
+      if (window.location.href.indexOf("value") != -1) {
+        var subCategoryFromUrl = getParameterByName('value');
+      } else {
+        var subCategoryFromUrl = 'ALL';
+      }
+    } else if (window.location.href.indexOf("courseExamSegment") != -1) {
+      var categoryFromUrl = getParameterByName('courseExamSegment');
+      if (window.location.href.indexOf("courseCategory") != -1) {
+        var subCategoryFromUrl = getParameterByName('courseCategory');
+      }
+      else {
+        var subCategoryFromUrl = 'ALL';
+      }
+
+    }
+    else {
+
+      var categoryFromUrl = 'IAS';
+      var subCategoryFromUrl = 'ALL';
+    }
+    fetchFilters(categoryFromUrl, subCategoryFromUrl, 'popular');
+  });
+
+  $(function () {
+    $("#accordion-mobile-courses").accordion({
+      header: "h3",
+      collapsible: true,
+      active: false
+    });
+  });
+  $(document).on('click','.hbspt-form .hs-button',function() {
+    setTimeout(function(){ $('.course-single-card-list').css("margin-top","20px");}, 500);
+     });
+</script>
+</body>
+</html>

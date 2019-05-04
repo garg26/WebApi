@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Neostencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dashboard.css')}}"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/style.css')}}"/>
+
+  <link href="https://cdn.datatables.net/1.10.19/css/dataTables.material.min.css" rel="stylesheet"
+        type="text/css">
+
+  <style>
+    #header{
+      top: 0px;
+    }
+     #studentstbl {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+    }
+    #studentTbleToDisplay_wrapper{
+      margin-top: 10px;
+    }
+    .mdl-data-table {
+      white-space: inherit !important;
+      width: 100% !important;
+    }
+    #studentstbl td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    #studentstbl{
+      padding: 16px;
+      background: #fff;
+    }
+    .mdl-navigation__link .is-clicked{
+      background-color: #e0e0e0;
+    }
+
+
+    .viewStudentProfile{
+      width: 93px;
+      border-radius: 20px;
+      background-color: #5cb85c;
+      color: #fff;
+      padding: 6px;
+    }
+    .viewStudentProfile span {
+      top: 2px;
+      position: relative;
+      font-weight: 900;
+    }
+    .mdl-layout__drawer > * {
+      height: 70px;
+      background: #fff;
+    }
+
+    .mdl-color--blue-grey-900 {
+      background-color: #ffffff !important;
+    }
+
+    .mdl-color--blue-grey-800 {
+      background-color: #ffffff !important;
+    }
+
+    .box-1-free-demo, .box-2-free-demo, .box-3-free-demo, .box-4-free-demo {
+      margin: 0;
+      padding: 30px 30px 0 30px;
+    }
+
+    .box-heading {
+      font-size: 50px !important;
+    }
+
+    .demo-card-wide {
+      width: 100%;
+    }
+
+    h6 {
+      padding: 20px 24px;
+      margin: 0;
+      background: #162840;
+      color: #fff;
+    }
+
+    .mdl-card__supporting-text b {
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    #students .mdl-cell--3-col {
+      padding: 8px;
+    }
+
+    /*#earnings .box-1-free-demo, #earnings .box-2-free-demo, #earnings .box-3-free-demo,*/
+    /*#earnings .box-4-free-demo {*/
+      /*padding: 30px 0 0 30px;*/
+      /*width: calc(100% - 30px);*/
+    /*}*/
+
+    #earnings {
+      margin-top: 32px;
+    }
+
+    #chartdiv {
+      width: 100%;
+      height: 500px;
+    }
+
+    .amcharts-chart-div > a, .amcharts-export-menu {
+      display: none !important;
+    }
+
+    .mdl-layout__content mdl-color--white-100{
+      margin-top: 79px !important;
+    }
+    #studentstbl .mdl-data-table td,#studentstbl .mdl-data-table th, #earningsTbl .mdl-data-table td,#earningsTbl .mdl-data-table th{
+      text-align: left;
+      padding: 16px;
+      font-size: 14px;
+    }
+    select.form-control.input-sm {
+      height: 32px;
+      border-radius: 2px;
+      background-color: #ffffff;
+      border: solid 0.5px #f2f2f2;
+      padding: 0 8px;
+      font-family: open sans;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 0px 0px 0px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+      border-left: none;
+      border-right: none;
+      margin: 0 4px;
+      outline:0;
+    }
+    input.form-control.input-sm {
+      height: 40px;
+      border-radius: 4px;
+      background-color: #ffffff;
+      border-style: none;
+      border: 1px solid #b4b4b4;
+      outline: 0;
+      padding: 0 8px;
+    }
+    .dataTables_paginate button.mdl-button.mdl-button--raised.mdl-button--colored {
+      background: #1e4864;
+      color: #fff;
+    }
+    .dataTables_paginate button.mdl-button {
+      color: #000;
+      font-size: 14px;
+      padding: 0;
+      margin: 0 4px;
+      height: 32px;
+      line-height: 32px;
+      min-width: 48px;
+      border-radius: 4px;
+    }
+    #studentTbleToDisplay thead {
+      background: #f6f6f6;
+    }
+     #earningsTbl .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric {
+       text-align: left;
+       border: 1px solid #cecdcd;
+       padding: 9px 12px;
+     }
+    #earningsTbl thead{
+      background: #f6f6f6;
+    }
+    #earningsTbl th.mdl-data-table__cell--non-numeric.sorting_asc {
+      width: 75px;
+    }
+    #earningsTbl th.mdl-data-table__cell--non-numeric.sorting {
+      width: 70px;
+    }
+    .mdl-layout__content {
+       margin-top: 79px;
+    }
+    @media screen and (max-width: 767px) {
+      #messages h5 {
+        top: 70px;
+      }
+      #messages .send-message {
+        float: right;
+        margin: 8px 2px 0px 0 !important;
+        width: 100px;
+        display: block !important;
+        height: 48px;
+      }
+
+      #messages textarea {
+        width: calc(89% - 20px);
+        margin: 0 34px;
+        padding: 8px 16px;
+        border: 1px solid #ddd;
+        outline: 0;
+        color: #666;
+        border-radius: 8px;
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+      }
+    }
+    @media screen and (max-width: 377px){
+        #messages .send-message {
+          width: 80px;
+        }
+      }
+    @media screen and (max-width: 360px){
+        #messages textarea {
+          width: calc(78% - 20px);
+        }
+      }
+  </style>
+</head>
+<body class="dashboard">
+    <div
+        class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <!--/*/ <th:block th:include="common/headerDashboard"></th:block> /*/-->
+      <div
+          class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header">
+          <div class="demo-avatar-dropdown">
+            <a href="/" class="mat-title mdl-layout-title"> <img
+                class="mat-logo-image" th:src="@{/images/logo/neostencilLogo.png}">
+            </a>
+            <div class="mdl-layout-spacer"></div>
+          </div>
+        </header>
+        <nav id="dashboard-sidenav-links"
+             class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+          <a href
+                                                              class="mdl-navigation__link"
+                                                              onclick="getTeachersSummary();"><i
+            class="mdl-color-text--blue-grey-400 material-icons"
+            role="presentation">chrome_reader_mode</i>&nbsp;Summary</a>
+          <a href
+                                                              class="mdl-navigation__link"
+                                                              data-value="courses"
+                                                              onclick="getTeachersCourses();"><i
+            class="mdl-color-text--blue-grey-400 material-icons"
+            role="presentation">folder</i>&nbsp;My Courses</a> <a href
+                                                                  class="mdl-navigation__link"
+                                                                  data-value="students"
+                                                                  onclick="getTeacherStudents();"><i
+            class="mdl-color-text--blue-grey-400 material-icons"
+            role="presentation">supervised_user_circle</i>&nbsp;My Students</a> <a
+            href class="mdl-navigation__link" data-value="earnings"
+            onclick="getTeacherEarnings();"><i
+            class="mdl-color-text--blue-grey-400 material-icons"
+            role="presentation">monetization_on</i>&nbsp;My Earnings</a> <a href
+                                                                            class="mdl-navigation__link"
+                                                                            data-value="messages"
+                                                                            onclick="getAllMessageThreads();"><i
+            class="mdl-color-text--blue-grey-400 material-icons"
+            role="presentation">email</i>&nbsp;My Messages</a>
+        </nav>
+      </div>
+
+
+      <main class="mdl-layout__content mdl-color--white-100">
+        <div id="page-wrapper" style="min-height: -webkit-fill-available;">
+          <div>
+            <!--teacher summary-->
+            <div  class="" id ="summaryContainer">
+              <div class="common-loader"
+                   id="loader-dashboard-summary" style="display: none">
+                <div class="mdl-spinner mdl-js-spinner is-active"></div>
+              </div>
+              <div class="mdl-grid">
+                <div id="noOfBatches" style="background: #607d8b"
+                     class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-shadow--3dp">
+                </div>
+                <div id="noOfCourses" style="background: #8bc24a"
+                     class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-shadow--3dp">
+                </div>
+                <div id="noOfStudents" style="background: #20bbd4"
+                     class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-shadow--3dp">
+                </div>
+              </div>
+            </div>
+
+          <div class="" id="courses">
+
+            <div class="common-loader" id="loader-dashboard-courses" style="display: none;">
+              <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
+            <div  class="mdl-grid mdl-course-card"
+                 style="display: none;"></div>
+            <div id="boughtCourses" class="mdl-grid mdl-course-card"
+                 style="display: none;"></div>
+          </div>
+
+
+          <!--Enrolled Students-->
+
+          <div style="display: none;" id="students">
+
+            <div style="display: none;" class="common-loader" id="loader-dashboard-students">
+              <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
+              <div class="table-responsive" id="studentstbl"></div>
+          </div>
+
+          <!--Teacher Earnings-->
+
+          <div style="display: none;" class="" id="earnings">
+
+            <div style="display: none;" class="common-loader" id="loader-dashboard-earnings">
+              <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
+
+              <div id="earningsTbl"
+                   class="table-responsive">
+              </div>
+          </div>
+
+          <!--Teachers Messages -->
+
+          <div style="display: none;" class="" id="messages">
+            <div style="display: none;" class="common-loader"
+                 id="loader-dashboard-messages">
+              <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
+            <div
+                class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="mdl-grid">
+                <div
+                    class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                  <h5>Messaging</h5>
+                  <div id="messageThreads" class="mdl-tabs__tab-bar"></div>
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                  <div style="display: none;" class="common-loader">
+                    <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                  </div>
+                  <div id="messageLists"></div>
+                </div>
+              </div>
+            </div>
+            <p>You don't have any messages yet</p>
+          </div>
+        </div>
+        </div>
+      </main>
+      <dialog id="sendEnquiryDialog" class="mdl-dialog">
+        <div class="mdl-dialog__content">
+          <div class="show-dialog-form">
+            <p>Send new message</p>
+            <textarea placeholder="Write a message or attach a file.." rows="4" style="width: 100%;"></textarea>
+            <label style="display: none;" class="emptyMessage error">Please
+              enter a message</label>
+            <button type="button" style="float: left; font-size: 13px; width: 100px; height: 36px;"
+                    class="close mdl-button mdl-js-button mdl-js-ripple-effect">Close
+            </button>
+            <button onclick="sendNewMessageToStudent(this);"
+                    class="send-enquiry-common mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+              Send
+            </button>
+          </div>
+          <div style="display: none;" class="message-has-been-sent">
+            <p>Your message has been sent and is on its way</p>
+            <button type="button" style="float: left; font-size: 13px; width: 100px; height: 36px;"
+                    class="close mdl-button mdl-js-button mdl-js-ripple-effect">Close
+            </button>
+            <a onclick="getAllMessageThreads();"
+               class="view-sent-messages mat-signup mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sent
+              Messages</a>
+          </div>
+        </div>
+
+
+      </dialog>
+
+    </div>
+
+
+
+
+<!--<svg xmlns="http://www.w3.org/2000/svg" version="1.1"-->
+     <!--style="position: fixed; left: -1000px; height: -1000px;">-->
+  <!--<defs>-->
+    <!--<mask id="piemask" maskContentUnits="objectBoundingBox">-->
+      <!--<circle cx=0.5 cy=0.5 r=0.49 fill="white"/>-->
+      <!--<circle cx=0.5 cy=0.5 r=0.40 fill="black"/>-->
+    <!--</mask>-->
+    <!--<g id="piechart">-->
+      <!--<circle cx=0.5 cy=0.5 r=0.5/>-->
+      <!--<path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z"-->
+            <!--stroke="none" fill="rgba(255, 255, 255, 0.75)"/>-->
+    <!--</g>-->
+  <!--</defs>-->
+<!--</svg>-->
+<!--<svg version="1.1" xmlns="http://www.w3.org/2000/svg"-->
+     <!--viewBox="0 0 500 250"-->
+     <!--style="position: fixed; left: -1000px; height: -1000px;">-->
+  <!--<defs>-->
+    <!--<g id="chart">-->
+      <!--<g id="Gridlines">-->
+        <!--<line fill="#888888" stroke="#888888" stroke-miterlimit="10"-->
+              <!--x1="0" y1="27.3" x2="468.3" y2="27.3"/>-->
+        <!--<line fill="#888888" stroke="#888888" stroke-miterlimit="10"-->
+              <!--x1="0" y1="66.7" x2="468.3" y2="66.7"/>-->
+        <!--<line fill="#888888" stroke="#888888" stroke-miterlimit="10"-->
+              <!--x1="0" y1="105.3" x2="468.3" y2="105.3"/>-->
+        <!--<line fill="#888888" stroke="#888888" stroke-miterlimit="10"-->
+              <!--x1="0" y1="144.7" x2="468.3" y2="144.7"/>-->
+        <!--<line fill="#888888" stroke="#888888" stroke-miterlimit="10"-->
+              <!--x1="0" y1="184.3" x2="468.3" y2="184.3"/>-->
+      <!--</g>-->
+      <!--<g id="Numbers">-->
+        <!--<text transform="matrix(1 0 0 1 485 29.3333)" fill="#888888"-->
+              <!--font-family="'Roboto'" font-size="9">500-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 485 69)" fill="#888888"-->
+              <!--font-family="'Roboto'" font-size="9">400-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 485 109.3333)" fill="#888888"-->
+              <!--font-family="'Roboto'" font-size="9">300-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 485 149)" fill="#888888"-->
+              <!--font-family="'Roboto'" font-size="9">200-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 485 188.3333)" fill="#888888"-->
+              <!--font-family="'Roboto'" font-size="9">100-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 0 249.0003)" fill="#888888"-->
+              <!--font-family="'Roboto'" font-size="9">1-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 78 249.0003)" fill="#888888"-->
+              <!--font-family="'Roboto'" font-size="9">2-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 154.6667 249.0003)"-->
+              <!--fill="#888888" font-family="'Roboto'" font-size="9">3-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 232.1667 249.0003)"-->
+              <!--fill="#888888" font-family="'Roboto'" font-size="9">4-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 309 249.0003)" fill="#888888"-->
+              <!--font-family="'Roboto'" font-size="9">5-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 386.6667 249.0003)"-->
+              <!--fill="#888888" font-family="'Roboto'" font-size="9">6-->
+        <!--</text>-->
+        <!--<text transform="matrix(1 0 0 1 464.3333 249.0003)"-->
+              <!--fill="#888888" font-family="'Roboto'" font-size="9">7-->
+        <!--</text>-->
+      <!--</g>-->
+      <!--<g id="Layer_5">-->
+        <!--<polygon opacity="0.36" stroke-miterlimit="10"-->
+                 <!--points="0,223.3 48,138.5 154.7,169 211,88.5-->
+              <!--294.5,80.5 380,165.2 437,75.5 469.5,223.3 	"/>-->
+      <!--</g>-->
+      <!--<g id="Layer_4">-->
+        <!--<polygon stroke-miterlimit="10"-->
+                 <!--points="469.3,222.7 1,222.7 48.7,166.7 155.7,188.3 212,132.7-->
+              <!--296.7,128 380.7,184.3 436.7,125 	"/>-->
+      <!--</g>-->
+    <!--</g>-->
+  <!--</defs>-->
+<!--</svg>-->
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+
+
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.min.js')}}"
+></script>
+
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/custom.js')}}"
+></script>
+
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dashboard.js')}}"
+></script>
+<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src = "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src = "https://cdn.datatables.net/1.10.19/js/dataTables.material.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.16/api/fnFindCellRowIndexes.js"></script>
+
+<script>
+  function showSendEnquiryDialog(studentEmail) {
+    $('#sendEnquiryDialog').find('textarea').val("");
+    $('.show-dialog-form').show();
+    $('.message-has-been-sent').hide();
+      var dialog = document.querySelector('#sendEnquiryDialog');
+      if (!dialog.showModal) {
+        dialogPolyfill.registerDialog(dialog);
+      }
+
+        dialog.showModal();
+        $('.emptyMessage').hide();
+        $('#sendEnquiryDialog').find('textarea').attr("data-id",studentEmail);
+      dialog.querySelector('.show-dialog-form .close').addEventListener('click',
+          function () {
+            dialog.close();
+            $('.show-dialog-form').show();
+            $('.message-has-been-sent').hide();
+          });
+      dialog.querySelector('.message-has-been-sent .close').addEventListener(
+          'click', function () {
+            dialog.close();
+            $('.show-dialog-form').show();
+            $('.message-has-been-sent').hide();
+          });
+  }
+
+</script>
+<script>
+
+
+  var chart = AmCharts
+  .makeChart(
+      "chartdiv",
+      {
+        "type": "pie",
+        "theme": "light",
+        "dataProvider": [{
+          "earnings": 7252
+        }, {
+          "earnings": 3882
+        }, {
+          "earnings": 1809
+        }, {
+          "earnings": 1322
+        }, {
+          "earnings": 1122
+        }, {
+          "earnings": 414
+        }, {
+          "earnings": 384
+        }, {
+          "earnings": 211
+        }],
+        "valueField": "earnings",
+        "startEffect": "elastic",
+        "startDuration": 2,
+        "labelRadius": 15,
+        "innerRadius": "50%",
+        "depth3D": 10,
+        "balloonText": "<span style='font-size:14px'><b>[[value]]</b></span>",
+        "angle": 15,
+        "export": {
+          "enabled": true
+        },
+        "labelsEnabled": false
+      });
+
+  $(document).ready(function() {
+    getTeachersSummary();
+  } );
+</script>
+
+</body>
+</html>

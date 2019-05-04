@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<body>
+
+<div id="wrapper">
+
+    <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+    <div id="page-wrapper">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Edit Teacher</h1>
+                </div>
+            </div>
+
+            <form role="form" name="newTeacher" id="newTeacher">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <input type="hidden" id="teacherId" th:value="${teacher?.id}">
+                            <label>Name</label> <input type="text" name="teacherName"
+                                                       id="teacherName" onkeyup="generateSlug(this.value,'teacher');"
+                                                       th:value="${teacher?.teacherName}"
+                                                       class="form-control" maxlength="255"
+                                                       placeholder="Enter name of the teacher...">
+                        </div>
+
+                        <!--<div class="slug_wrapper"></div>-->
+
+                        <label>Slug(URL)</label>
+                        <div class="input-group">
+
+                            <span class="input-group-addon" id="slug-name">https://neostencil.com/teacher/</span>
+
+                            <input id="slug" type="text" class="form-control" name="slug"
+                                   th:value="${teacher?.slug}" placeholder="slug..."
+                                   onkeypress="slugExistence(event,this.value,'teacher')"
+                                   maxlength="255">
+                        </div>
+                        <div id="errMsg"></div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea type="text" name="teacherDescription"
+                                      id="teacherDescription" rows="4" th:text="${teacher?.teacherDescription}" class="form-control"
+                                      placeholder="Enter description of the teacher..."></textarea>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label style="margin-top: 10px";>Institute</label> <select
+                                name="teacherInstitute" id="teacherInstitute"
+                                class="form-control selectpicker" data-live-search="true"
+                                title="Select Institute">
+                            <option th:each="institute : ${institutes}"
+                                    th:data-subtext="${institute.id}" th:text="${institute.name}"
+                                    th:selected="${teacher?.institute?.name == institute?.name}"
+                                    th:value="${institute.id}"></option>
+
+
+                        </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <textarea name="teacher-bio" id="teacherBio"
+                                      th:text="${teacher?.teacherBio}"
+                                      class="form-control" rows="4"
+                                      placeholder="Enter teacher bio..."></textarea>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label style="margin-top: 10px";>Experience (in years)</label> <input
+                                type="number" min="0" class="form-control"
+                                th:value="${teacher?.totalExperience}"
+                                name="teacherExperience" id="teacherExperience"
+                                placeholder="Enter total experience of the teacher (in years)...">
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="row">
+
+                                <div class="">
+                                    <div class="col-sm-6">
+                                        <label>Teacher ExamSegment</label> <select
+                                            name="teacherExamSegment" required id="teacherExamSegment"
+                                            class="form-control">
+
+                                    </select>
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+                                        <label>Teacher Category</label> <select
+                                            name="teacherCategory" disabled id="teacherCategory"
+                                            class="form-control">
+
+                                    </select>
+                                    </div>
+
+                                    <div class="col-sm-6 teacherSubjects_wrap">
+                                        <label>Teacher Subject</label> <select
+                                            name="teacherSubject" id="teacherSubject"
+                                            multiple class="form-control">
+
+                                    </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="margin-top: 10px";>Teacher Rating</label> <input
+                                type="number" min="1" max="5" class="form-control"
+                                th:value="${teacher?.teacherRating}"
+                                name="teacherRating" id="teacherRating"
+                                placeholder="Enter teacher's rating upto 5..">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Location</label> <input type="text"
+                                                           name="teacher-location" id="teacherLocation"
+                                                           th:value="${teacher?.teacherLocation}"
+                                                           class="form-control" maxlength="255"
+                                                           placeholder="Enter location of the teacher...">
+                        </div>
+
+                        <div class="">
+                            <label>Choose Teacher Image</label>
+                            <div>
+
+                                <label class="custom-file"> <input type="file" required
+                                                                   id="file" class="custom-file-input"> <span
+                                        class="custom-file-control"></span>
+                                </label> <input type="button" class="button btn-primary" value="Upload"
+                                                id="but_upload">
+                                <div style="display: none;" id="loaderUpload">
+                                    <img width="30px" height="30px"
+                                         src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                                </div>
+
+                            </div>
+                            <br/> <img th:src="${teacher?.displayPictureUrl}"
+                                       id="upload-img-tag" width="100px"/><br/> <a
+                                th:text="${teacher?.displayPictureUrl}"></a><br/>
+                            <br/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Image Alt Text</label> <input type="text" required
+                                                                 name="imageAltText" class="form-control" id="imageAltText"
+                                                                 th:value="${teacher?.imageAltText}"
+                                                                 placeholder="Enter alt text of the image.....">
+
+                        </div>
+
+
+                        <div class="form-group education_wrap">
+                            <label>Teacher Education</label>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label id="teacherEducationId" style="display: none"></label>
+                                    <input type="text" required name="TeacherEducationText[]"
+                                           id="TeacherEducationText" class="form-control"
+                                           placeholder="Text" maxlength="150" minlength="2">
+                                </div>
+
+                                <div class="col-md-7">
+                                    <input type="text" required
+                                           name="TeacherEducationDescription[]"
+                                           id="TeacherEducationDescription" class="form-control"
+                                           placeholder="Description" maxlength="150" minlength="10">
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-success add-education-more pull-right"
+                                            type="button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="field_wrapper1"></div>
+
+                        </div>
+
+                        <div class="form-group highlight_wrap">
+                            <label>Teacher Highlight</label>
+                            <div class="highlight_row" id="highlight_row_id">
+                                <div class="row">
+                                    <div class="col-md-4">
+
+                                        <label class="custom-file"> <input type="file"
+                                                                           required name="multipleImageIcon[]"
+                                                                           id="TeacherHighlightIcon" class="custom-file-input">
+                                            <span class="custom-file-control"></span>
+                                        </label>
+
+
+                                    </div>
+                                    <div style="position: absolute; left: 300px; display: none;"
+                                         id="loaderIconUpload">
+                                        <img width="30px" height="30px"
+                                             src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                                    </div>
+
+                                    <div class="col-md-7">
+                                        <input type="text" required
+                                               name="TeacherHighlightDescription[]"
+                                               id="TeacherHighlightDescription" class="form-control"
+                                               placeholder="Description" maxlength="150" minlength="2">
+
+
+                                    </div>
+
+
+                                    <div class="col-md-1">
+                                        <button class="btn btn-success add-more-highlight pull-right"
+                                                type="button">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="field_wrapper"></div>
+
+                            </div>
+
+                            <input type="button" class="button btn-primary" value="Upload"
+                                   id="but_icon_upload">
+
+
+                        </div>
+
+                        <div class="form-group experience_wrap">
+                            <label>Teacher Experience</label>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label id="teacherExperienceId" style="display: none"></label>
+                                    <input type="text" required name="TeacherExperienceText[]"
+                                           id="TeacherExperienceText" class="form-control"
+                                           placeholder="Text" maxlength="150" minlength="2">
+                                </div>
+
+                                <div class="col-md-7">
+                                    <input type="text" required
+                                           name="TeacherExperienceDescription[]"
+                                           id="TeacherExperienceDescription" class="form-control"
+                                           placeholder="Description" maxlength="150" minlength="2">
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-success add-more-experience pull-right"
+                                            type="button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="field_wrapper2"></div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Address</label> <input type="text" name="teacher-address"
+                                                          id="teacherAddress" class="form-control"
+                                                          th:value="${teacher?.address}"
+                                                          placeholder="Enter Address of the teacher..." maxlength="20000">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contact No.</label> <input type="text"
+                                                              name="teacher-contact-no" id="teacherContactNo"
+                                                              th:value="${teacher?.contactNo}"
+                                                              class="form-control"
+                                                              placeholder="Enter Contact of the teacher..." maxlength="255">
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="row">
+
+                                <div class="">
+
+                                    <div class="col-sm-6">
+                                        <label>EmailId</label> <input type="email"
+                                                                      name="teacher-emailId" id="teacherEmailId"
+                                                                      th:value="${teacher?.emailId}"
+                                                                      class="form-control" maxlength="255"
+                                                                      placeholder="Enter teacher emailId..... " autofocus>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Website</label> <input type="url"
+                                                                      name="teacher-website" id="teacherWebsite"
+                                                                      th:value="${teacher?.website}"
+                                                                      class="form-control" maxlength="255"
+                                                                      placeholder="Enter teacher website....">
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="row" style="margin-top: 10px;">
+
+                                <div class="">
+
+                                    <div class="col-sm-6">
+                                        <label>Facebook Url</label> <input type="url"
+                                                                           name="teacher-facebook" id="teacherFacebook"
+                                                                           th:value="${teacher?.facebookUrl}"
+                                                                           class="form-control" maxlength="255"
+                                                                           placeholder="Enter teacher facebook url....." autofocus>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Twitter Url</label> <input type="url"
+                                                                          name="teacher-twitter" id="teacherTwitter"
+                                                                          th:value="${teacher?.twitterUrl}"
+                                                                          class="form-control" maxlength="255"
+                                                                          placeholder="Enter teacher twitter url....">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-horizontal">
+                            <div class="row" style="margin-top: 10px;">
+
+                                <div class="">
+
+                                    <div class="col-sm-6">
+                                        <label>Linkedin Url</label> <input type="url"
+                                                                           name="teacher-linkedin" id="teacherLinkedin"
+                                                                           th:value="${teacher?.linkedinUrl}"
+                                                                           class="form-control" maxlength="255"
+                                                                           placeholder="Enter teacher linkedin url....." autofocus>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Google Plus Url</label> <input type="url"
+                                                                              name="teacher-google-plus" id="teacherGooglePlus"
+                                                                              th:value="${teacher?.googlePlusUrl}"
+                                                                              class="form-control" maxlength="255"
+                                                                              placeholder="Enter teacher google plus url....">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="margin-top: 10px;">Commission Percentage</label> <input
+                                type="number" min="0" class="form-control"
+                                th:value="${teacher?.commissionPercentage}"
+                                name="commissionPercentage" id="commissionPercentage"
+                                placeholder="Enter the teacher commission in percentage"></input>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label style="margin-top: 10px;">Teacher Current Status</label>
+                            <textarea class="form-control" name="teacher-current-status"
+                                      id="teacherCurrentStatus" rows="6"
+                                      th:value="${teacher?.status}"
+                                      placeholder="Enter the teacher current status"></textarea>
+                        </div>
+
+                        <div class="form-group teacher_certificate"
+                             style="margin-top: 10px;">
+                            <label>Certificates/Galley Image</label>
+                            <div class="certificate_row" id="certificate_row_id">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="custom-file"> <input type="file"
+                                                                           name="teacherCertificate[]" id="teacherCertificate"
+                                                                           class="custom-file-input"> <span
+                                                class="custom-file-control"></span>
+                                        </label>
+                                    </div>
+
+                                    <div style="position: absolute; left: 300px; display: none;"
+                                         id="loaderCertificateUpload">
+                                        <img width="30px" height="30px"
+                                             src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                                    </div>
+
+
+                                    <div class="col-md-1">
+                                        <button
+                                                class="btn btn-success add-more-certificate pull-right"
+                                                type="button">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="field_wrapper3"></div>
+                            </div>
+
+                            <input type="button" class="button btn-primary" value="Upload"
+                                   id="but_certificate_upload">
+
+
+                        </div>
+
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Meta Information</div>
+                            <div class="panel-body">
+                                <div class="row" id="metaPanel"></div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Meta Title :</label> <input type="text"
+                                                                        placeholder="Enter Meta Title" id="titleTag"
+                                                                        class="form-control">
+                                </div>
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <h4>Other Meta Info</h4>
+                                </div>
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Meta Type :</label> <input type="text"
+                                                                       value="description" readonly="readonly" id="metaDesc"
+                                                                       class="form-control">
+                                </div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Meta Content:</label> <input type="text"
+                                                                         placeholder="Enter meta description" id="txtMetaDesc"
+                                                                         class="form-control" required="required">
+                                </div>
+                                <div style="margin-top: 20px;" class="col-md-9" id ="socialImageContainer">
+                                    <label> Social Image:</label> <br /> <label
+                                        class="custom-file"> <input type="file" required
+                                                                    id="socialImage" class="custom-file-input"> <span
+                                        class="custom-file-control"></span>
+                                </label> <input type="button" class="btn btn-primary" value="Upload"
+                                                id="but_social_upload">
+
+                                    <div style="display: none;" id="loaderSocialUpload">
+                                        <img width="30px" height="30px"
+                                             src="https://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                                    </div>
+                                    <br/>
+                                    <img src="" id="upload-social-img-tag" width="100px" /><br/>
+                                </div>
+                                <div class="row">
+                                    <div style="margin-top: 20px;" class="col-md-9">
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="showAddMetaPanel();">Add More MetaData</button>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" id="addMetaPanel">
+
+                                    <div style="margin-top: 20px;" class="col-md-9">
+                                        <label> Meta Type:</label><select
+                                            class="form-control selectpicker" id="ddMetaType"
+                                            data-live-search="true">
+                                        <option value="twitter:card">twitter:card</option>
+                                        <option value="twitter:description">twitter:description</option>
+                                        <option value="og:locale">og:locale</option>
+                                        <option value="twitter:title">twitter:title</option>
+                                        <option value="twitter:site">twitter:site</option>
+                                        <option value="og:site_name">og:site_name</option>
+                                        <option value="article:section">article:section</option>
+                                        <option value="og:type">og:type</option>
+                                        <option value="og:description">og:description</option>
+                                        <option value="fb:app_id">fb:app_id</option>
+                                        <option value="og:url">og:url</option>
+                                        <option value="article:publisher">article:publisher</option>
+                                        <option value="og:title">og:title</option>
+                                    </select>
+                                    </div>
+
+                                    <div style="margin-top: 20px;" class="col-md-9">
+                                        <label> Meta Content:</label> <input type="text"
+                                                                             placeholder="Enter comma separated meta content"
+                                                                             id="txtMetaContent" class="form-control">
+                                    </div>
+
+                                    <div style="margin-top: 20px;" class="col-md-9">
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="addMetaInfo();">Save Meta</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="panel panel-primary" id="pnlFeaturedImage">
+                            <div class="panel-heading">Featured Image</div>
+                            <div class="panel-body">
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Title:</label> <input type="text"
+                                                                  placeholder="Enter featured image title" id="txtFITitle"
+                                                                  th:value="${teacher?.featuredImage?.title}"
+                                                                  maxlength="255" class="form-control">
+                                </div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Caption:</label> <input type="text"
+                                                                    placeholder="Enter featured image caption" id="txtFICaption"
+                                                                    th:value="${teacher?.featuredImage?.caption}"
+                                                                    maxlength="255" class="form-control">
+                                </div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Alt Text:</label> <input type="text"
+                                                                     placeholder="Enter featured image alt text" id="txtFIAltText"
+                                                                     th:value="${teacher?.featuredImage?.altText}"
+                                                                     maxlength="255" class="form-control">
+                                </div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Description:</label> <input type="text"
+                                                                        placeholder="Enter featured image description"
+                                                                        th:value="${teacher?.featuredImage?.description}"
+                                                                        maxlength="255" id="txtFIDescription" class="form-control">
+                                </div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label>Upload Image:</label></br> <label class="custom-file">
+                                    <input type="file" required id="featureImage"
+                                           class="custom-file-input"> <span
+                                        class="custom-file-control"></span>
+                                </label> <input type="button" class="button btn-primary"
+                                                value="Upload" id="but_feature_upload">
+
+                                    <div style="display: none;" id="loaderFeatureUpload">
+                                        <img width="30px" height="30px"
+                                             src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                                    </div>
+                                    <img th:src="${teacher?.featuredImage?.url}"
+                                         id="upload-feature-img-tag" width="100px"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">BreadCrumbs</div>
+                            <div class="panel-body" id="panel-body">
+
+                                <div class="saved-breadcrumb" id="saved-breadCrumb">
+                                    <div class="form-group">
+                                        <label style="margin-top: 10px";>BreadCrumb Level 1</label> <select
+                                            name="show-breadCrumb" class="form-control show-breadCrumb"
+                                            title="Select BreadCrumb">
+
+                                        <option selected disabled>Select BreadCrumb</option>
+
+                                        <option th:each="breadCrumb : ${breadCrumbs}"
+                                                th:data-subtext="${breadCrumb.link}"
+                                                th:text="${breadCrumb.text}"
+                                                th:value="${breadCrumb.breadcrumbId}"></option>
+
+                                    </select>
+
+
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-default create-breadcrumb"
+                                        style="margin-top: 2px" onclick="createBreadCrumb()">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Create
+                                    BreadCrumb
+                                </button>
+
+                            </div>
+                        </div>
+
+                        <br /> <label class="radio-inline" style="margin-top: 10px;"><input
+                            type="radio" name="status" checked id="publish" value="publish"
+                            th:checked="${#strings.toString(teacher?.status)} == 'publish'">Publish</label>
+                        <label class="radio-inline" style="margin-top: 10px;"><input
+                                type="radio" name="status" id="draft" th:checked="${#strings.toString(teacher?.status)} == 'draft'"
+                                value="draft">Draft</label>
+
+                        <div class="row">
+                            <div style="margin-top: 20px;" class="col-md-9">
+                                <button class="submit btn btn-success" type="submit"
+                                        value="submit">Update</button>
+                                <i class="fa fa-spinner fa-spin" id="loader"></i> <a
+                                    href="/admin_lmsadmin/lms/teachers" class="btn btn-default"
+                                    style="margin-left: 60px;">All Teacher</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/bootstrap-maxlength.js')}}"
+></script>
+<!--<script-->
+        <!--th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/teacher.js')}}"-->
+<!--&gt;</script>-->
+<script th:inline="javascript">
+  /*<![CDATA[*/
+
+  var teacherEducations = [[${teacher?.education}]];
+  var teacherAchievements = [[${teacher?.teacherAchievements}]];
+  var teacherExperiences = [[${teacher?.experience}]];
+  var teacherID = [[${teacher?.id}]];
+
+  /*]]>*/
+</script>
+<script>
+    var teacherImageUrl;
+var featureImageUrl;
+var highlightList = [];
+var certificateList = [];
+var metaInfoList = [];
+var postSocialImageUrl;
+
+function initMaxLengthForEducation() {
+	$('input#TeacherEducationText').maxlength({
+		alwaysShow : true,
+		warningClass : "label label-info",
+		limitReachedClass : "label label-warning",
+		placement : 'top',
+		message : 'used %charsTyped% of %charsTotal% chars.',
+		validate : true,
+		appendToParent : true
+	});
+
+	$('input#TeacherEducationDescription').maxlength({
+		alwaysShow : true,
+		warningClass : "label label-info",
+		limitReachedClass : "label label-warning",
+		placement : 'top',
+		message : 'used %charsTyped% of %charsTotal% chars.',
+		validate : true,
+		appendToParent : true
+	});
+}
+
+function initMaxLengthForHighlight() {
+	$('input#TeacherHighlightDescription').maxlength({
+		alwaysShow : true,
+		warningClass : "label label-info",
+		limitReachedClass : "label label-warning",
+		placement : 'top',
+		message : 'used %charsTyped% of %charsTotal% chars.',
+		validate : true
+	});
+
+}
+
+function initMaxLengthForExperience() {
+	$('input#TeacherExperienceText').maxlength({
+		alwaysShow : true,
+		warningClass : "label label-info",
+		limitReachedClass : "label label-warning",
+		placement : 'top',
+		message : 'used %charsTyped% of %charsTotal% chars.',
+		validate : true
+	});
+
+	$('input#TeacherExperienceDescription').maxlength({
+		alwaysShow : true,
+		warningClass : "label label-info",
+		limitReachedClass : "label label-warning",
+		placement : 'top',
+		message : 'used %charsTyped% of %charsTotal% chars.',
+		validate : true
+	});
+}
+
+$(document).ready(function() {
+
+	$('#addMetaPanel').hide();
+	$('#metaPanel').hide();
+	getExamSegment();
+	initMaxLengthForEducation();
+	initMaxLengthForHighlight();
+	initMaxLengthForExperience();
+});
+
+/*
+ * Delete New Row on clicking remove button on institute highlight
+ */
+$(document).on('click', '.remove-highlight-btn', function() {
+	$(this).parent().parent('div').remove();
+
+});
+
+$('input#teacherName').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#teacherSubjects').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#teacherLocation').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#teacherAddress').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#teacherContactNo').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#teacherEmailId').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#teacherWebsite').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#teacherFacebook').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#teacherTwitter').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#teacherLinkedin').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#teacherGooglePlus').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#txtFITitle').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#txtFICaption').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+$('input#txtFIAltText').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+$('input#txtFIDescription').maxlength({
+	alwaysShow : true,
+	warningClass : "label label-info",
+	limitReachedClass : "label label-warning",
+	placement : 'top',
+	message : 'used %charsTyped% of %charsTotal% chars.',
+	validate : true
+});
+
+function getExamSegment() {
+
+	$.ajax({
+		type : 'GET',
+		dataType : 'json',
+		url : apiBasePath + "/teacherexamsegments",
+		// "headers": {
+		// "authorization": "Bearer "
+		// + window.localStorage.getItem('access_token'),
+		//
+		// },
+		success : function(response) {
+			var htmlToShow = '<option value="0">Select Exam Segment</option>';
+			var examSegmentList = '<option value="#name#">#name#</option>';
+			if (response.length > 0) {
+				$.each(response, function(index, element) {
+					i = index + 1;
+					htmlToShow = htmlToShow += examSegmentList;
+					htmlToShow = htmlToShow.replace(/#name#/g, element);
+
+				});
+				$('#teacherExamSegment').html(htmlToShow);
+
+			} else {
+				$('#teacherExamSegment').html("");
+			}
+		},
+
+		error : function(response) {
+
+		}
+	});
+
+}
+
+
+$("#teacherExamSegment").change(function(event) {
+	es = $(this).val();
+	getTeacherCategoryByExamSegment(es);
+});
+
+function getTeacherCategoryByExamSegment(category) {
+
+	$
+			.ajax({
+				type : 'GET',
+				dataType : 'json',
+				// "headers": {
+				// "authorization": "Bearer "
+				// + window.localStorage.getItem('access_token'),
+				//
+				// },
+				url : apiBasePath + "/teacherexamsegments/teachercategory/" + category,
+				success : function(response) {
+					var htmlToShow = '<option value="0">Select Teacher Category</option>';
+					var categoryList = '<option value="#name#">#name#</option>';
+					if (response.length > 0) {
+						$.each(response,
+								function(index, element) {
+									i = index + 1;
+									htmlToShow = htmlToShow += categoryList;
+									htmlToShow = htmlToShow.replace(/#name#/g,
+											element);
+
+								});
+						$('#teacherCategory').html(htmlToShow).removeAttr(
+								'disabled');
+
+					} else {
+						$('#teacherCategory').html("");
+					}
+				},
+
+				error : function(response) {
+
+				}
+			});
+
+}
+
+$("#teacherCategory").change(function(event) {
+	es = $(this).val();
+	ss = $("#teacherExamSegment").val();
+	getTeacherSubjectByTeacherCategory(ss, es);
+});
+
+function getTeacherSubjectByTeacherCategory(examsegment, teacherCategory){
+
+    $
+        .ajax({
+            type : 'GET',
+            dataType : 'json',
+            url : apiBasePath + "/teacherexamsegments/" + examsegment + "/teachercategory/" + teacherCategory + "/teachersubject",
+
+            success : function(response){
+                var htmlToShow = '<option value="0">Select Teacher Subject</option>';
+                var subjectList = '<option value="#subject#">#subject#</option>';
+                if (response.length > 0) {
+                	$.each(response,
+               		function(index, element) {
+               			i = index + 1;
+                		htmlToShow = htmlToShow += subjectList;
+           				htmlToShow = htmlToShow.replace(/#subject#/g,
+                					element);
+
+               			});
+                		$('#teacherSubject').html(htmlToShow).removeAttr(
+                				'disabled');
+
+                } else {
+               			$('#teacherSubject').html("");
+              	}
+            },
+
+            error : function(response){
+
+            }
+        });
+}
+
+/*
+ * Add new row on clicking add button on institute highlight
+ */
+$('.add-more-highlight')
+		.click(
+				function() {
+
+					blank = false;
+					$(".highlight_wrap input").each(function(index, elm) {
+						if ($(elm).val() == "") {
+							blank = true;
+						}
+					})
+
+					if (!blank) {
+						var fieldHTML = '<div class="row">\n'
+								+ '                                <div class="col-md-4">\n'
+								+ '\n'
+								+ '                                    <label class="custom-file">\n'
+								+ '                                        <input type="file" required name="multipleImageIcon[]" id="TeacherHighlightIcon"\n'
+								+ '                                               class="custom-file-input">\n'
+								+ '                                        <span class="custom-file-control"></span>\n'
+								+ '                                    </label>\n'
+								+ '\n'
+								+ '\n'
+								+ '                                </div><div style="position: absolute; left: 300px; display: none;" id="loaderIconUpload">\n'
+								+ '                <img width="30px" height="30px"\n'
+								+ '                     src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">\n'
+								+ '              </div>\n'
+								+ '\n'
+								+ '                                <div class="col-md-7">\n'
+								+ '                                    <input type="text" required name="TeacherHighlightDescription[]"\n'
+								+ '                                           id="TeacherHighlightDescription" class="form-control"\n'
+								+ '                                           placeholder="Description" maxlength="150" minlength="2">\n'
+								+ '                                </div>\n'
+								+ '\n'
+								+ '                                <div class="col-md-1">\n'
+								+ '                                    <button class="btn btn-danger remove-highlight-btn pull-right" type="button"><i class="glyphicon glyphicon-remove"></i></button>\n'
+								+ '                                </div>\n'
+								+ '                            </div>';
+
+						$('.field_wrapper').append(fieldHTML);
+						initMaxLengthForHighlight();
+					}
+
+				});
+
+/*
+ * Delete New Row on clicking remove button on institute highlight
+ */
+$(document).on('click', '.remove-certificate-btn', function() {
+	$(this).parent().parent('div').remove();
+
+});
+
+/**
+ * Add certificate row
+ */
+$('.add-more-certificate')
+		.click(
+				function() {
+
+					var fieldHTML = '<div class="row">\n'
+							+ '                                <div class="col-md-4">\n'
+							+ '                                    <label class="custom-file">\n'
+							+ '                                        <input type="file" required name="teacherCertificate[]" id="teacherCertificate"\n'
+							+ '                                               class="custom-file-input">\n'
+							+ '                                        <span class="custom-file-control"></span>\n'
+							+ '                                    </label>\n'
+							+ '                                </div><div style="position: absolute; left: 300px; display: none;" id="loaderCertificateUpload">\n'
+							+ '                  <img width="30px" height="30px"\n'
+							+ '                       src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">\n'
+							+ '                </div>'
+							+ '\n'
+							+ '\n'
+							+ '                                <div class="col-md-1">\n'
+							+ '                                    <button class="btn btn-danger remove-certificate-btn pull-right" type="button"><i class="glyphicon glyphicon-remove"></i></button>     \n'
+							+ '                                </div>\n' + '\n'
+							+ '                            </div>';
+
+					$('.field_wrapper3').append(fieldHTML);
+
+				});
+
+$('.field_wrapper2').on('click', '.remove-experience-btn', function() {
+	$(this).parent().parent('div').remove();
+
+});
+
+$('.add-more-experience')
+		.click(
+				function() {
+
+					blank = false;
+					$(".experience_wrap input").each(function(index, elm) {
+						if ($(elm).val() == "") {
+							blank = true;
+						}
+					})
+
+					if (!blank) {
+
+						var fieldHTML = '<div class="row">\n'
+								+ '                                <div class="col-md-4">\n'
+								+ '\n'
+								+ '                                    <input type="text" required name="TeacherExperienceText[]" id="TeacherExperienceText"\n'
+								+ '                                           class="form-control"\n'
+								+ '                                           placeholder="Text" maxlength="150" minlength="2">\n'
+								+ '                                </div>\n'
+								+ '\n'
+								+ '                                <div class="col-md-7">\n'
+								+ '                                    <input type="text" required name="TeacherExperienceDescription[]"\n'
+								+ '                                           id="TeacherExperienceDescription" class="form-control"\n'
+								+ '                                           placeholder="Description" maxlength="150" minlength="2">\n'
+								+ '                                </div>\n'
+								+ '                                <div class="col-md-1">\n'
+								+ '                                    <button class="btn btn-danger remove-experience-btn pull-right" type="button"><i class="glyphicon glyphicon-remove"></i></button>\n'
+								+ '                                </div>\n'
+								+ '                            </div>'
+
+						$('.field_wrapper2').append(fieldHTML);
+						initMaxLengthForExperience();
+					}
+				});
+
+$('.field_wrapper1').on('click', '.remove-education-btn', function() {
+	$(this).parent().parent('div').remove();
+
+});
+
+$('.add-education-more')
+		.click(
+				function() {
+
+					blank = false;
+					$(".education_wrap input").each(function(index, elm) {
+						if ($(elm).val() == "") {
+							blank = true;
+						}
+					})
+
+					if (!blank) {
+
+						var fieldHTML = '<div class="row">\n'
+								+ '                                <div class="col-md-4">\n'
+								+ '\n'
+								+ '                                    <input type="text" required name="TeacherEducationText[]" id="TeacherEducationText"\n'
+								+ '                                           class="form-control"\n'
+								+ '                                           placeholder="Text" maxlength="150" minlength="2">\n'
+								+ '                                </div>\n'
+								+ '\n'
+								+ '                                <div class="col-md-7">\n'
+								+ '                                    <input type="text" required name="TeacherEducationDescription[]"\n'
+								+ '                                           id="TeacherEducationDescription" class="form-control"\n'
+								+ '                                           placeholder="Description" maxlength="150" minlength="2">\n'
+								+ '                                </div>\n'
+								+ '                                <div class="col-md-1">\n'
+								+ '                                    <button class="btn btn-danger remove-education-btn pull-right" type="button"><i class="glyphicon glyphicon-remove"></i></button>\n'
+								+ '                                </div>\n'
+								+ '                            </div>';
+
+						$('.field_wrapper1').append(fieldHTML);
+						initMaxLengthForEducation();
+					}
+				});
+
+/**
+ * Upload Teacher Image
+ */
+$("#but_upload").click(function() {
+	$('#loaderUpload').show();
+
+	var files = $('#file')[0].files[0];
+	var fd = new FormData();
+	fd.append('file', files);
+	fd.append('type', "teachers");
+	fd.append('contentType', files.type);
+
+	uploadFile(fd, function(response) {
+		if (response != null) {
+			alert("Upload File " + response + " " + "successfully");
+			getImageUrl(response, function(imageUrlResponse) {
+
+				if (imageUrlResponse != null) {
+					$('#loaderUpload').hide();
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#upload-img-tag').attr('src', e.target.result);
+					};
+					reader.readAsDataURL($('#file')[0].files[0]);
+
+					teacherImageUrl = imageUrlResponse;
+				} else {
+					$('#loaderUpload').hide();
+
+				}
+			});
+
+		}
+
+		else {
+			$('#loaderUpload').hide();
+
+		}
+
+	});
+
+});
+
+/**
+ * Upload Mutiple Icons
+ */
+$("#but_icon_upload")
+		.click(
+				function() {
+					$('#but_icon_upload').hide();
+
+					$('#highlight_row_id .row')
+							.each(
+									function(index, elm) {
+										$(elm).find('#loaderIconUpload').show()
+										file = $(elm).find(
+												'#TeacherHighlightIcon')[0].files[0];
+										var form = new FormData();
+										form.append("file", file);
+										form.append('type', 'icons');
+										form.append('contentType', file.type);
+
+										uploadFile(
+												form,
+												function(response) {
+													if (response != null) {
+
+														getImageUrl(
+																response,
+																function(
+																		imageUrlResponse) {
+
+																	if (imageUrlResponse != null) {
+																		$(elm)
+																				.find(
+																						'#loaderIconUpload')
+																				.hide();
+																		iconUrl = imageUrlResponse;
+																		iconName = response;
+																		description = $(
+																				elm)
+																				.find(
+																						"#TeacherHighlightDescription")
+																				.val();
+
+																		var input = {
+																				iconUrl : iconUrl,
+																				iconName : iconName,
+																				description : description
+																		};
+																		highlightList
+																				.push(input);
+
+																	} else {
+																		alert("Failed in uploading certificate");
+																		$(elm)
+																				.find(
+																						'#loaderIconUpload')
+																				.hide();
+																	}
+
+																});
+
+													}
+
+													else {
+														alert("Failed in uploading certificate");
+														$(elm)
+																.find(
+																		'#loaderIconUpload')
+																.hide();
+													}
+
+												});
+									});
+
+				});
+
+/**
+ * Upload Mutiple Teacher Certificate
+ */
+$("#but_certificate_upload").click(function() {
+	$('#but_certificate_upload').hide();
+
+	$('#certificate_row_id .row').each(function(index, elm) {
+		$(elm).find('#loaderCertificateUpload').show();
+		file = $(elm).find('#teacherCertificate')[0].files[0];
+		var form = new FormData();
+		form.append("file", file);
+		form.append('type', 'certificate');
+		form.append('contentType', file.type);
+
+		uploadFile(form, function(response) {
+			if (response != null) {
+				getImageUrl(response, function(imageUrlResponse) {
+
+					if (imageUrlResponse != null) {
+						$(elm).find('#loaderCertificateUpload').hide();
+						icon = imageUrlResponse;
+						certificateList.push(icon);
+					} else {
+						$(elm).find('#loaderCertificateUpload').hide();
+						alert("Failed in uploading certificate");
+					}
+
+				});
+
+			}
+
+			else {
+				$(elm).find('#loaderCertificateUpload').hide();
+				alert("Failed in uploading certificate");
+			}
+
+		});
+	});
+
+});
+
+$('#newTeacher').validate({
+
+	rules : {
+		teacherName : {
+			required : true
+		},
+		teacherDescription : {
+			required : true
+		},
+		teacherSubjects : {
+			required : true
+		},
+		teacherInstitute : {
+			required : true
+		},
+		teacherSlug : {
+			required : true
+		},
+		teacherImage : {
+			required : true
+		},
+
+	},
+	messages : {
+
+		teacherName : {
+			required : "Please enter Teacher name"
+		},
+		teacherDescription : {
+			required : "Please enter Teacher description"
+		},
+		teacherSubjects : {
+			required : "Please enter Teacher image"
+		},
+		teacherInstitute : {
+			required : "Please Select institute"
+		},
+		teacherSlug : {
+			required : "Please enter teacher slug"
+		},
+		teacherImage : {
+			required : "Please enter teacher image"
+		},
+	},
+	submitHandler : function() {
+		submitRequest();
+		$('#loader').show();
+	}
+
+});
+
+function submitRequest() {
+	var featuredImageReq = {};
+
+	featuredImageReq["url"] = featureImageUrl;
+	featuredImageReq["name"] = $('#featureImage')[0].files[0].name;
+	featuredImageReq["title"] = $('#txtFITitle').val();
+	featuredImageReq["caption"] = $('#txtFICaption').val();
+	featuredImageReq["altText"] = $('#txtFIAltText').val();
+	featuredImageReq["description"] = $('#txtFIDescription').val();
+
+	// for adding description
+
+	var metaDesc = {};
+
+	metaDesc["type"] = "description";
+	metaDesc["content"] = $('#txtMetaDesc').val();
+	metaDesc["attributeType"] = "name";
+
+	metaInfoList.push(metaDesc);
+
+	// For adding social image
+
+	var metaImg = {};
+
+	metaImg["type"] = "og:image";
+	metaImg["content"] = postSocialImageUrl;
+	metaImg["attributeType"] = "property";
+
+	metaInfoList.push(metaImg);
+
+	metaImg["type"] = "og:image:secure_url";
+
+	metaInfoList.push(metaImg);
+
+	metaImg["type"] = "twitter:image";
+	metaImg["attributeType"] = "name";
+
+	metaInfoList.push(metaImg);
+
+	var input = {
+        id : $('#teacherId').val(),
+		teacherName : $('#teacherName').val(),
+		teacherDescription : $('#teacherDescription').val(),
+		displayPicture : $('#file')[0].files[0].name,
+		displayPictureUrl : teacherImageUrl,
+		subjects : getTeacherSubjects(),
+		institute : {
+			id : $('#teacherInstitute').val()
+		},
+		teacherBio : $('#teacherBio').val(),
+		slug : $('#slug').val(),
+		totalExperience : $('#teacherExperience').val(),
+		teacherLocation : $('#teacherLocation').val(),
+    achievements : highlightList,
+    educations : getTeacherEducation(),
+    experiences : getTeacherExperience(),
+		address : $('#teacherAddress').val(),
+		contactNo : $('#teacherContactNo').val(),
+		emailId : $('#teacherEmailId').val(),
+		website : $('#teacherWebsite').val(),
+		facebookUrl : $('#teacherFacebook').val(),
+		linkedinUrl : $('#teacherLinkedin').val(),
+		twitterUrl : $('#teacherTwitter').val(),
+		googlePlusUrl : $('#teacherGooglePlus').val(),
+		currentStatus : $('#teacherCurrentStatus').val(),
+		certificates : certificateList,
+		status : getStatus(),
+		teacherRating : $('#teacherRating').val(),
+		metaList : metaInfoList,
+		titleTag : $('#titleTag').val(),
+		featuredImage : featuredImageReq,
+		teacherExamSegment : $('#teacherExamSegment').val() != "" ? $(
+				'#teacherExamSegment').val() : null,
+		teacherCategory : $('#teacherCategory').val() != "" ? $(
+				'#teacherCategory').val() : null,
+
+		breadCrumb : {
+			breadcrumbId : breadCrumbParentId
+		},
+		commissionPercentage : $('#commissionPercentage').val(),
+		imageAltText : $('#imageAltText').val()
+	};
+
+	$.ajax({
+		url : apiBasePath + "/admin_lmsadmin/teachers/" + teacherID,
+		type : "put",
+		data : JSON.stringify(input),
+		contentType : "application/json",
+		processData : false,
+
+		success : function(response) {
+			$('#loader').hide();
+			location.reload();
+			alert("Teacher Updated successfully");
+		},
+
+		error : function(response) {
+			$('#loader').hide();
+			if (response.status == 403) {
+				window.location.href = "/permission-error";
+			} else {
+				alert("Teacher Update failed");
+			}
+
+		}
+	});
+}
+
+function getTeacherExperience() {
+	list = [];
+    $(".experience_wrap .row").each(function(index, elm) {
+    	text = $(elm).find("#TeacherExperienceText").val();
+    	description = $(elm).find("#TeacherExperienceDescription").val();
+    	var input = {
+    			text : text,
+    			description : description
+    	};
+
+    	list.push(input);
+    });
+    return list;
+
+}
+
+function getTeacherEducation() {
+	list = [];
+	$(".education_wrap .row").each(function(index, elm) {
+		text = $(elm).find("#TeacherEducationText").val();
+		description = $(elm).find("#TeacherEducationDescription").val();
+		var input = {
+				text : text,
+				description : description
+		};
+
+		list.push(input);
+	});
+	return list;
+}
+
+function getTeacherSubjects() {
+    var stringTeacherSubjects = "";
+    $(".teacherSubjects_wrap select").each(function (index, elm) {
+      if(index == 0){
+        stringTeacherSubjects += $(elm).val();
+      } else {
+        stringTeacherSubjects += "," + $(elm).val();
+      }
+    });
+    return stringTeacherSubjects;
+  }
+
+function getStatus() {
+	var status;
+	if (document.getElementById('publish').checked) {
+		status = document.getElementById('publish').value;
+	} else if (document.getElementById('draft').checked) {
+		status = document.getElementById('draft').value;
+	} else {
+		status = document.getElementById('draft').value;
+	}
+
+	return status;
+}
+
+$("#but_feature_upload")
+		.click(
+				function() {
+					$('#loaderFeatureUpload').show();
+
+					var files = $('#featureImage')[0].files[0];
+					var fd = new FormData();
+					fd.append('file', files);
+					fd.append('type', "featureImage/teachers");
+					fd.append('contentType', files.type);
+
+					uploadFile(
+							fd,
+							function(response) {
+								if (response != null) {
+									getImageUrl(
+											response,
+											function(imageUrlResponse) {
+
+												if (imageUrlResponse != null) {
+													$('#loaderFeatureUpload')
+															.hide();
+													var reader = new FileReader();
+													reader.onload = function(e) {
+														$(
+																'#upload-feature-img-tag')
+																.attr(
+																		'src',
+																		e.target.result);
+													};
+													reader
+															.readAsDataURL($('#featureImage')[0].files[0]);
+													featureImageUrl = imageUrlResponse;
+												} else {
+													$('#loaderFeatureUpload')
+															.hide();
+
+												}
+											});
+
+								}
+
+								else {
+									$('#loaderFeatureUpload').hide();
+
+								}
+
+							});
+
+				});
+
+function showAddMetaPanel() {
+	$('#addMetaPanel').show();
+}
+
+function addMetaInfo() {
+	var meta = {};
+
+	meta["type"] = $('#ddMetaType').val();
+	meta["content"] = $('#txtMetaContent').val();
+	switch ($('#ddMetaType').val()) {
+	case "og:locale":
+	case "og:site_name":
+	case "og:type":
+	case "og:description":
+	case "fb:app_id":
+	case "og:url":
+		meta["attributeType"] = 'property';
+		break;
+	default:
+		meta["attributeType"] = 'name';
+		break;
+	}
+
+	metaInfoList.push(meta);
+
+	$('#ddMetaType').prop('selectedIndex', 0);
+	$('#txtMetaContent').prop('value', '');
+
+	$('#addMetaPanel').hide();
+	showMetaDetails();
+}
+
+function showMetaDetails() {
+	htmlToShow = '';
+	htmlBeg = '<div class="row">';
+	htmlRow = '<div style="margin-top: 20px;" class="col-md-9">	<label id="lblType" style="font-weight:  bold;"> Meta Type:&nbsp;&nbsp;</label ><input type="text" value="#metaType#" readonly="readonly" style="border-bottom:  0; border-top: 0; border-left:  0; border-right:  0;"></div><div style="margin-top: 20px;" class="col-md-9"><label id="lblContent" style="font-weight:  bold;"> Meta Content:&nbsp;&nbsp;</label> <input type="text" value="#metaContent#" readonly="readonly" style="border-bottom:  0; border-top: 0; border-left:  0; border-right:  0;"></div>';
+	htmlEnd = '</div><br/>';
+
+	if (metaInfoList != null && metaInfoList.length > 0) {
+		htmlToShow += htmlBeg;
+
+		$.each(metaInfoList, function(index, element) {
+			htmlToShow += htmlRow;
+
+			htmlToShow = htmlToShow.replace("#metaType#", element.type);
+			htmlToShow = htmlToShow.replace("#metaContent#", element.content);
+		});
+		htmlToShow += htmlEnd;
+
+		$('#metaPanel').html(htmlToShow).show();
+	}
+
+}
+
+$("#but_social_upload")
+		.click(
+				function() {
+					$('#loaderSocialUpload').show();
+					$('#but_social_upload').hide();
+
+					var files = $('#socialImage')[0].files[0];
+					var fd = new FormData();
+					fd.append('file', files);
+					fd.append('type', "socialImage/post");
+					fd.append('contentType', files.type);
+
+					uploadFile(
+							fd,
+							function(response) {
+								if (response != null) {
+									getImageUrl(
+											response,
+											function(imageUrlResponse) {
+
+												if (imageUrlResponse != null) {
+													$('#loaderSocialUpload')
+															.hide();
+													var reader = new FileReader();
+													reader.onload = function(e) {
+														$(
+																'#upload-social-img-tag')
+																.attr(
+																		'src',
+																		e.target.result);
+													};
+													reader
+															.readAsDataURL($('#socialImage')[0].files[0]);
+													postSocialImageUrl = imageUrlResponse;
+													if ($("#upload-social-img-tag").length > 0) {
+
+														var mydiv = document
+																.getElementById("socialImageContainer");
+														var aTag = document
+																.createElement('a');
+														aTag
+																.setAttribute(
+																		'href',
+																		postSocialImageUrl);
+														aTag
+																.setAttribute(
+																		'id',
+																		"social-image-url");
+														aTag.innerHTML = postSocialImageUrl;
+														mydiv.appendChild(aTag);
+
+													} else {
+														var mydiv = document
+																.getElementById("socialImageContainer");
+														var aTag = document
+																.createElement('a');
+														aTag
+																.setAttribute(
+																		'href',
+																		imageUrlResponse);
+														aTag
+																.setAttribute(
+																		'id',
+																		"social-image-url");
+														aTag.innerHTML = imageUrlResponse;
+														mydiv.appendChild(aTag);
+													}
+
+												} else {
+													$('#loaderSocialUpload')
+															.hide();
+													$('#but_social_upload')
+															.show();
+												}
+											});
+
+								}
+
+								else {
+									$('#loaderSocialUpload').hide();
+									$('#but_social_upload').show();
+								}
+
+							});
+
+				});
+
+if(teacherEducations!=null) {
+  teacherEducations.forEach(function (element, index) {
+
+    if (index == 0) {
+      $('#TeacherEducationText').val(element.text);
+      $('#TeacherEducationDescription').val(element.description);
+    }
+
+    else {
+      var fieldHTML = '<div class="row">\n'
+          + '                                    <div class="col-md-4">\n'
+          + '\n'
+          + '                                          <label id="teacherEducationId" style="display: none">#educationText#</label><input type="text" required name="TeacherEducationText[]" id="TeacherEducationText" value="#TeacherEducationTextInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Text" maxlength="255" minlength="2">\n'
+          + '                                    </div>\n'
+          + '\n'
+          + '                                    <div class="col-md-7">\n'
+          + '                                       <input type="text" required name="TeacherEducationDescription[]" id="TeacherEducationDescription" value="#TeacherEducationDescriptionInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Description" maxlength="255" minlength="10">\n'
+          + '                                    </div>\n'
+          + '                                    <div class="col-md-1">\n'
+          + '                                        <button class="btn btn-danger remove-btn"  style="width: 100px;padding-left: 2px;padding-right: 100px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;" type="button"><i class="fa fa-times" aria-hidden="true"></i> Remove Field</button>\n'
+          + '                                    </div>\n'
+          + '                                </div>';
+
+      fieldHTML = fieldHTML.replace("#TeacherEducationTextInfo#", element.text);
+      fieldHTML = fieldHTML.replace("#TeacherEducationDescriptionInfo#", element.description);
+
+      $('.field_wrapper1').append(fieldHTML);
+    }
+  });
+}
+
+if(teacherExperiences!=null) {
+  teacherExperiences.forEach(function (element, index) {
+
+    if (index == 0) {
+      $('#TeacherExperienceText').val(element.text);
+      $('#TeacherExperienceDescription').val(element.description);
+    }
+
+    else {
+      var fieldHTML = '<div class="row">\n'
+          + '                                    <div class="col-md-4">\n'
+          + '\n'
+          + '                                          <label id="teacherExperienceId" style="display: none">#experienceText#</label><input type="text" required name="TeacherExperienceText[]" id="TeacherExperienceText" value="#TeacherExperienceTextInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Text" maxlength="255" minlength="2">\n'
+          + '                                    </div>\n'
+          + '\n'
+          + '                                    <div class="col-md-7">\n'
+          + '                                       <input type="text" required name="TeacherExperienceDescription[]" id="TeacherExperienceDescription" value="#TeacherExperienceDescriptionInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Description" maxlength="255" minlength="10">\n'
+          + '                                    </div>\n'
+          + '                                    <div class="col-md-1">\n'
+          + '                                        <button class="btn btn-danger remove-btn"  style="width: 100px;padding-left: 2px;padding-right: 100px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;" type="button"><i class="fa fa-times" aria-hidden="true"></i> Remove Field</button>\n'
+          + '                                    </div>\n'
+          + '                                </div>';
+
+      fieldHTML = fieldHTML.replace("#TeacherExperienceText#", element.text);
+      fieldHTML = fieldHTML.replace("#TeacherExperienceDescriptionInfo#", element.description);
+
+      $('.field_wrapper2').append(fieldHTML);
+    }
+  });
+}
+
+if(teacherAchievements!=null) {
+  teacherAchievements.forEach(function (element, index) {
+
+    if (index == 0) {
+      $('#TeacherHighlightIcon').val(element.iconUrl);
+      $('#TeacherHighlightDescription').val(element.description);
+    }
+
+    else {
+      var fieldHTML = '<div class="row">\n'
+          + '                                    <div class="col-md-4">\n'
+          + '\n'
+          + '                                          <label id="teacherAchievementsId" style="display: none">#highlight#</label><input type="file" required name="multipleImageIcon[]" id="TeacherHighlightIcon" src="#teacherHighlightIconInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Text" maxlength="255" minlength="2">\n'
+          + '                                    </div>\n'
+          + '\n'
+          + '                                    <div class="col-md-7">\n'
+          + '                                       <input type="text" required name="TeacherHighlightDescription[]" id="TeacherHighlightDescription" value="#TeacherHighlightDescriptionInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Description" maxlength="255" minlength="10">\n'
+          + '                                    </div>\n'
+          + '                                    <div class="col-md-1">\n'
+          + '                                        <button class="btn btn-danger remove-btn"  style="width: 100px;padding-left: 2px;padding-right: 100px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;" type="button"><i class="fa fa-times" aria-hidden="true"></i> Remove Field</button>\n'
+          + '                                    </div>\n'
+          + '                                </div>';
+
+      fieldHTML = fieldHTML.replace("#teacherHighlightIconInfo#", element.iconUrl);
+      fieldHTML = fieldHTML.replace("#TeacherHighlightDescriptionInfo#", element.description);
+
+      $('.field_wrapper1').append(fieldHTML);
+    }
+  });
+}
+
+
+</script>
+
+</body>
+
+</html>

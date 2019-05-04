@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Neostencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/freePrep.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/blogs.css')}}"
+          rel="stylesheet" media="screen" />
+  <style>
+.blog-heading {
+	margin: 0 0 0 28px!important;
+}
+.blog-course-card {
+    width: 200px;
+    margin: 8px -38px!important;
+}
+@media screen and (max-width: 767px) {
+	.blog-course-card {
+		width: calc(100% - 16px);
+		margin: 8px !important;
+	}
+}
+
+
+
+  </style>
+</head>
+
+<body class="all-courses-page">
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+  <!-- <div class="mat-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title">
+  </span>
+
+</div> -->
+
+
+  <div class="mat-content mdl-layout__content">
+    <div class="landing-darken" style="display: none;"></div>
+    <div class="mat-free-prep-bg mdl-typography--text-center">
+      <div class="container">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <h3>Toppers Answer Booklet</h3>
+            <p>
+              IAS Topper’s Answer Booklet for the benefit of aspirants<br/>
+              preparing and aiming to clear UPSC/IAS exam.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="free-prep-tab"></div>
+    <div class="container">
+      <h3 class="blog-heading">POPULAR</h3>
+      <div class="line line-left"></div>
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <div class="mdl-grid" style="padding: 0;">
+            <div
+                class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div class="non-masonry-card">
+                <div class="trending-courses-card mdl-card__media">
+                  <img th:src="@{/images/courses/course-img.png}">
+                </div>
+                <div class="ns-card">
+                  <span class="blog-genre">Education</span><br/> <span
+                    class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+											2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                    class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                  Discussion Untill Mains Lukmaan Academy</h3></a>
+                  <p>Importance of Guidance in UPSC Preparation for those
+                    who given feedback is…</p>
+                  <br/> <span class="minutes-read">8 min read
+											&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+										</span>
+                </div>
+              </div>
+            </div>
+            <div
+                class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div class="non-masonry-card">
+                <div class="trending-courses-card mdl-card__media">
+                  <img th:src="@{/images/courses/course-img.png}">
+                </div>
+                <div class="ns-card">
+                  <span class="blog-genre">Education</span><br/> <span
+                    class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+											2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                    class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                  Discussion Untill Mains Lukmaan Academy</h3></a>
+                  <p>Importance of Guidance in UPSC Preparation for those
+                    who given feedback is…</p>
+                  <br/> <span class="minutes-read">8 min read
+											&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+										</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-grid" style="padding: 0;">
+            <div
+                class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div class="non-masonry-card">
+                <div class="trending-courses-card mdl-card__media">
+                  <img th:src="@{/images/courses/course-img.png}">
+                </div>
+                <div class="ns-card">
+                  <span class="blog-genre">Education</span><br/> <span
+                    class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+											2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                    class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                  Discussion Untill Mains Lukmaan Academy</h3></a>
+                  <p>Importance of Guidance in UPSC Preparation for those
+                    who given feedback is…</p>
+                  <br/> <span class="minutes-read">8 min read
+											&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+										</span>
+                </div>
+              </div>
+            </div>
+            <div
+                class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div class="non-masonry-card">
+                <div class="trending-courses-card mdl-card__media">
+                  <img th:src="@{/images/courses/course-img.png}">
+                </div>
+                <div class="ns-card">
+                  <span class="blog-genre">Education</span><br/> <span
+                    class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+											2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                    class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                  Discussion Untill Mains Lukmaan Academy</h3></a>
+                  <p>Importance of Guidance in UPSC Preparation for those
+                    who given feedback is…</p>
+                  <br/> <span class="minutes-read">8 min read
+											&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+										</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-grid" style="padding: 0;">
+            <div
+                class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div class="non-masonry-card">
+                <div class="trending-courses-card mdl-card__media">
+                  <img th:src="@{/images/courses/course-img.png}">
+                </div>
+                <div class="ns-card">
+                  <span class="blog-genre">Education</span><br/> <span
+                    class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+											2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                    class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                  Discussion Untill Mains Lukmaan Academy</h3></a>
+                  <p>Importance of Guidance in UPSC Preparation for those
+                    who given feedback is…</p>
+                  <br/> <span class="minutes-read">8 min read
+											&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+										</span>
+                </div>
+              </div>
+            </div>
+            <div
+                class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div class="non-masonry-card">
+                <div class="trending-courses-card mdl-card__media">
+                  <img th:src="@{/images/courses/course-img.png}">
+                </div>
+                <div class="ns-card">
+                  <span class="blog-genre">Education</span><br/> <span
+                    class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+											2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                    class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                  Discussion Untill Mains Lukmaan Academy</h3></a>
+                  <p>Importance of Guidance in UPSC Preparation for those
+                    who given feedback is…</p>
+                  <br/> <span class="minutes-read">8 min read
+											&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+										</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div
+            class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <div class="blog-course-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img src="images/courses/course-img.png">
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html"><h3>Editorial Discussion
+              Untill Mains Lukmaan Academy</h3></a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div style="display: flex;">
+									<span class="number-students float-right"><i
+                      class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+          <div class="blog-course-card">
+            <div class="trending-courses-card mdl-card__media">
+
+              <img src="images/courses/course-img.png">
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html"><h3>Editorial Discussion
+              Untill Mains Lukmaan Academy</h3></a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div style="display: flex;">
+									<span class="number-students float-right"><i
+                      class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+          <div class="blog-course-card">
+            <div class="trending-courses-card mdl-card__media">
+
+              <img src="images/courses/course-img.png">
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html"><h3>Editorial Discussion
+              Untill Mains Lukmaan Academy</h3></a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div style="display: flex;">
+									<span class="number-students float-right"><i
+                      class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+          <div class="blog-course-card">
+            <div class="trending-courses-card mdl-card__media">
+
+              <img src="images/courses/course-img.png">
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html"><h3>Editorial Discussion
+              Untill Mains Lukmaan Academy</h3></a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div style="display: flex;">
+									<span class="number-students float-right"><i
+                      class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <br/>
+      <hr style="border-color: #dadada;">
+      <br/>
+      <h3 class="blog-heading">POPULAR</h3>
+      <div class="line line-left"></div>
+
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <div class="blog-horizontal-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}">
+            </div>
+            <div class="blog-horizontal-card-text">
+              <div class="ns-card">
+                <span class="blog-genre">Education</span><br/> <span
+                  class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+										2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                  class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                Discussion Untill Mains Lukmaan Academy</h3></a>
+                <p>Importance of Guidance in UPSC Preparation for those who
+                  given feedback is…</p>
+                <br/> <span class="minutes-read">8 min read
+										&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+									</span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <div class="blog-horizontal-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}">
+            </div>
+            <div class="blog-horizontal-card-text">
+              <div class="ns-card">
+                <span class="blog-genre">Education</span><br/> <span
+                  class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+										2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                  class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                Discussion Untill Mains Lukmaan Academy</h3></a>
+                <p>Importance of Guidance in UPSC Preparation for those who
+                  given feedback is…</p>
+                <br/> <span class="minutes-read">8 min read
+										&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+									</span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <div class="blog-horizontal-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}">
+            </div>
+            <div class="blog-horizontal-card-text">
+              <div class="ns-card">
+                <span class="blog-genre">Education</span><br/> <span
+                  class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+										2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                  class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                Discussion Untill Mains Lukmaan Academy</h3></a>
+                <p>Importance of Guidance in UPSC Preparation for those who
+                  given feedback is…</p>
+                <br/> <span class="minutes-read">8 min read
+										&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+									</span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <div class="blog-horizontal-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}">
+            </div>
+            <div class="blog-horizontal-card-text">
+              <div class="ns-card">
+                <span class="blog-genre">Education</span><br/> <span
+                  class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+										2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                  class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                Discussion Untill Mains Lukmaan Academy</h3></a>
+                <p>Importance of Guidance in UPSC Preparation for those who
+                  given feedback is…</p>
+                <br/> <span class="minutes-read">8 min read
+										&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+									</span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <div class="blog-horizontal-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}">
+            </div>
+            <div class="blog-horizontal-card-text">
+              <div class="ns-card">
+                <span class="blog-genre">Education</span><br/> <span
+                  class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+										2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                  class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                Discussion Untill Mains Lukmaan Academy</h3></a>
+                <p>Importance of Guidance in UPSC Preparation for those who
+                  given feedback is…</p>
+                <br/> <span class="minutes-read">8 min read
+										&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+									</span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <div class="blog-horizontal-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}">
+            </div>
+            <div class="blog-horizontal-card-text">
+              <div class="ns-card">
+                <span class="blog-genre">Education</span><br/> <span
+                  class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+										2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                  class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+                Discussion Untill Mains Lukmaan Academy</h3></a>
+                <p>Importance of Guidance in UPSC Preparation for those who
+                  given feedback is…</p>
+                <br/> <span class="minutes-read">8 min read
+										&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+									</span>
+              </div>
+            </div>
+          </div>
+          <br/>
+
+
+        </div>
+        <div
+            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}">
+            </div>
+            <div class="ns-card">
+              <span class="blog-genre">Education</span><br/> <span
+                class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+									2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+              Discussion Untill Mains Lukmaan Academy</h3></a>
+              <p>Importance of Guidance in UPSC Preparation for those who
+                given feedback is…</p>
+              <br/> <span class="minutes-read">8 min read
+									&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+								</span>
+            </div>
+          </div>
+          <br/>
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}">
+            </div>
+            <div class="ns-card">
+              <span class="blog-genre">Education</span><br/> <span
+                class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+									2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+              Discussion Untill Mains Lukmaan Academy</h3></a>
+              <p>Importance of Guidance in UPSC Preparation for those who
+                given feedback is…</p>
+              <br/> <span class="minutes-read">8 min read
+									&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+								</span>
+            </div>
+          </div>
+          <br/>
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}">
+            </div>
+            <div class="ns-card">
+              <span class="blog-genre">Education</span><br/> <span
+                class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+									2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+              Discussion Untill Mains Lukmaan Academy</h3></a>
+              <p>Importance of Guidance in UPSC Preparation for those who
+                given feedback is…</p>
+              <br/> <span class="minutes-read">8 min read
+									&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+								</span>
+            </div>
+          </div>
+          <br/>
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}">
+            </div>
+            <div class="ns-card">
+              <span class="blog-genre">Education</span><br/> <span
+                class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+									2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+              Discussion Untill Mains Lukmaan Academy</h3></a>
+              <p>Importance of Guidance in UPSC Preparation for those who
+                given feedback is…</p>
+              <br/> <span class="minutes-read">8 min read
+									&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+								</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+
+</div>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+</body>
+</html>
+

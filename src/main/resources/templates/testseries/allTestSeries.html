@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Neostencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/courses.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/assignments.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick-theme.css')}}"
+          rel="stylesheet" media="screen" />
+
+  <!-- <link
+    href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+    rel="stylesheet" media="screen" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+   -->
+
+</head>
+
+<body class="all-test-series">
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+  <!-- <div class="mat-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title">
+  </span>
+
+</div> -->
+
+
+  <div class="mat-content mdl-layout__content">
+    <div class="landing-darken" style="display: none;"></div>
+    <!-- <div class="load-bar">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div> -->
+    <img class="course-bg"
+         src="images/background/Allcourse/Allcoursemainbg.png">
+
+
+    <section class="course-listing">
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class="course-filter-card mdl-cell mdl-cell--2-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+            <div class="demo-card-square mdl-card mdl-shadow--2dp">
+              <div class="course-filter-header">Test Series Filter</div>
+              <div class="course-filters mdl-card__actions mdl-card--border">
+                <p>MAINS CATEGORY</p>
+                <span class="filter-label">OPTIONAL <span>(mains)</span></span><br/>
+                <label
+                    class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                    for="filter1"> <input type="checkbox" id="filter1"
+                                          class="mdl-checkbox__input"> <span
+                    class="mdl-checkbox__label">Public Administration</span>
+                </label> <br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter2"> <input type="checkbox" id="filter2"
+                                        class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Sociology</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter3"> <input type="checkbox" id="filter3"
+                                        class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Geography</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter4"> <input type="checkbox" id="filter4"
+                                        class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Philosophy</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter5"> <input type="checkbox" id="filter5"
+                                        class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Political Science</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter6"> <input type="checkbox" id="filter6"
+                                        class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">History</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter7"> <input type="checkbox" id="filter7"
+                                        class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Anthropology</span>
+              </label>
+
+              </div>
+              <div class="course-filters mdl-card__actions mdl-card--border">
+                <span class="filter-label">GENERAL STUDIES <span>(mains)</span></span><br/>
+                <label
+                    class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                    for="filter8"> <input type="checkbox" id="filter8"
+                                          class="mdl-checkbox__input"> <span
+                    class="mdl-checkbox__label">GS Paper 1</span>
+                </label> <br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter9"> <input type="checkbox" id="filter9"
+                                        class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">GS Paper 2</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter10"> <input type="checkbox" id="filter10"
+                                         class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">GS Paper 3</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter11"> <input type="checkbox" id="filter11"
+                                         class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">GS Paper 4</span>
+              </label><br/>
+              </div>
+              <div class="course-filters mdl-card__actions mdl-card--border">
+                <span class="filter-label">TEACHERS</span><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter13"> <input type="checkbox" id="filter13"
+                                         class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Alok Ranjan</span>
+              </label> <br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter14"> <input type="checkbox" id="filter14"
+                                         class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Anup Sinha</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter15"> <input type="checkbox" id="filter15"
+                                         class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Pavan Kumar</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter16"> <input type="checkbox" id="filter16"
+                                         class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Majid Hussain</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter17"> <input type="checkbox" id="filter17"
+                                         class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Praveen Kishore</span>
+              </label><br/> <label
+                  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                  for="filter18"> <input type="checkbox" id="filter18"
+                                         class="mdl-checkbox__input"> <span
+                  class="mdl-checkbox__label">Salamuddin Ansari</span>
+              </label><br/>
+              </div>
+
+
+            </div>
+          </div>
+          <div
+              class="course-listing-card mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+            <div id="course-listing-card"
+                 class="demo-card-square mdl-card mdl-shadow--2dp">
+              <div class="course-filter-header">Test Series</div>
+              <div id="filtersTab"></div>
+
+              <div class="all-courses-section">
+                <div class="" id="">
+                  <div class="mdl-grid mdl-course-card">
+                    <div
+                        class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+                      <div class="trending-courses-card mdl-card__media">
+                        <a><img src='/images/courses/course-img.png'></a>
+                      </div>
+                      <div class="ns-card">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i></span> <span
+                          class="starts-on">Starts on <span
+                          class="starts-on-date">27-nov-2017</span>
+													</span> <a href="/test-series"><h3>Ethics Full Course | Case Studies &
+                        Test
+                        Series By Lukmaan IAS</h3></a>
+                        <p class="ns-card-p">
+														<span class="p-grid-1"><i>by</i> <a><span
+                                class="ns-card-teacher">Amit Sinha</span></a> <br/> (<span>AAI
+																IAS</span>) </span> <span class="p-grid-2"><i
+                            class="material-icons">person_outline</i> <span
+                            class="num-teacher"">22 Students</span> </span>
+                        </p>
+                        <div class="">
+                          <h3 class="price">
+                            <i class="fa fa-inr">&nbsp;</i>14,880
+                          </h3>
+                          <a class="mat-link" href="comingsoon.html"> View
+                            Details <i class="material-icons">chevron_right</i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                        class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+                      <div class="trending-courses-card mdl-card__media">
+                        <a><img src='/images/courses/course-img.png'></a>
+                      </div>
+                      <div class="ns-card">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i></span> <span
+                          class="starts-on">Starts on <span
+                          class="starts-on-date">27-nov-2017</span>
+													</span> <a><h3>Ethics Full Course | Case Studies & Test
+                        Series By Lukmaan IAS</h3></a>
+                        <p class="ns-card-p">
+														<span class="p-grid-1"><i>by</i> <a><span
+                                class="ns-card-teacher">Amit Sinha</span></a> <br/> (<span>AAI
+																IAS</span>) </span> <span class="p-grid-2"><i
+                            class="material-icons">person_outline</i> <span
+                            class="num-teacher"">22 Students</span> </span>
+                        </p>
+                        <div class="">
+                          <h3 class="price">
+                            <i class="fa fa-inr">&nbsp;</i>14,880
+                          </h3>
+                          <a class="mat-link" href="comingsoon.html"> View
+                            Details <i class="material-icons">chevron_right</i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                        class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+                      <div class="trending-courses-card mdl-card__media">
+                        <a><img src='/images/courses/course-img.png'></a>
+                      </div>
+                      <div class="ns-card">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i></span> <span
+                          class="starts-on">Starts on <span
+                          class="starts-on-date">27-nov-2017</span>
+													</span> <a><h3>Ethics Full Course | Case Studies & Test
+                        Series By Lukmaan IAS</h3></a>
+                        <p class="ns-card-p">
+														<span class="p-grid-1"><i>by</i> <a><span
+                                class="ns-card-teacher">Amit Sinha</span></a> <br/> (<span>AAI
+																IAS</span>) </span> <span class="p-grid-2"><i
+                            class="material-icons">person_outline</i> <span
+                            class="num-teacher"">22 Students</span> </span>
+                        </p>
+                        <div class="">
+                          <h3 class="price">
+                            <i class="fa fa-inr">&nbsp;</i>14,880
+                          </h3>
+                          <a class="mat-link" href="comingsoon.html"> View
+                            Details <i class="material-icons">chevron_right</i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                        class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+                      <div class="trending-courses-card mdl-card__media">
+                        <a><img src='/images/courses/course-img.png'></a>
+                      </div>
+                      <div class="ns-card">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i></span> <span
+                          class="starts-on">Starts on <span
+                          class="starts-on-date">27-nov-2017</span>
+													</span> <a><h3>Ethics Full Course | Case Studies & Test
+                        Series By Lukmaan IAS</h3></a>
+                        <p class="ns-card-p">
+														<span class="p-grid-1"><i>by</i> <a><span
+                                class="ns-card-teacher">Amit Sinha</span></a> <br/> (<span>AAI
+																IAS</span>) </span> <span class="p-grid-2"><i
+                            class="material-icons">person_outline</i> <span
+                            class="num-teacher"">22 Students</span> </span>
+                        </p>
+                        <div class="">
+                          <h3 class="price">
+                            <i class="fa fa-inr">&nbsp;</i>14,880
+                          </h3>
+                          <a class="mat-link" href="comingsoon.html"> View
+                            Details <i class="material-icons">chevron_right</i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                        class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+                      <div class="trending-courses-card mdl-card__media">
+                        <a><img src='/images/courses/course-img.png'></a>
+                      </div>
+                      <div class="ns-card">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i></span> <span
+                          class="starts-on">Starts on <span
+                          class="starts-on-date">27-nov-2017</span>
+													</span> <a><h3>Ethics Full Course | Case Studies & Test
+                        Series By Lukmaan IAS</h3></a>
+                        <p class="ns-card-p">
+														<span class="p-grid-1"><i>by</i> <a><span
+                                class="ns-card-teacher">Amit Sinha</span></a> <br/> (<span>AAI
+																IAS</span>) </span> <span class="p-grid-2"><i
+                            class="material-icons">person_outline</i> <span
+                            class="num-teacher"">22 Students</span> </span>
+                        </p>
+                        <div class="">
+                          <h3 class="price">
+                            <i class="fa fa-inr">&nbsp;</i>14,880
+                          </h3>
+                          <a class="mat-link" href="comingsoon.html"> View
+                            Details <i class="material-icons">chevron_right</i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                        class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+                      <div class="trending-courses-card mdl-card__media">
+                        <a><img src='/images/courses/course-img.png'></a>
+                      </div>
+                      <div class="ns-card">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i></span> <span
+                          class="starts-on">Starts on <span
+                          class="starts-on-date">27-nov-2017</span>
+													</span> <a><h3>Ethics Full Course | Case Studies & Test
+                        Series By Lukmaan IAS</h3></a>
+                        <p class="ns-card-p">
+														<span class="p-grid-1"><i>by</i> <a><span
+                                class="ns-card-teacher">Amit Sinha</span></a> <br/> (<span>AAI
+																IAS</span>) </span> <span class="p-grid-2"><i
+                            class="material-icons">person_outline</i> <span
+                            class="num-teacher"">22 Students</span> </span>
+                        </p>
+                        <div class="">
+                          <h3 class="price">
+                            <i class="fa fa-inr">&nbsp;</i>14,880
+                          </h3>
+                          <a class="mat-link" href="comingsoon.html"> View
+                            Details <i class="material-icons">chevron_right</i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                        class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+                      <div class="trending-courses-card mdl-card__media">
+                        <a><img src='/images/courses/course-img.png'></a>
+                      </div>
+                      <div class="ns-card">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i></span> <span
+                          class="starts-on">Starts on <span
+                          class="starts-on-date">27-nov-2017</span>
+													</span> <a><h3>Ethics Full Course | Case Studies & Test
+                        Series By Lukmaan IAS</h3></a>
+                        <p class="ns-card-p">
+														<span class="p-grid-1"><i>by</i> <a><span
+                                class="ns-card-teacher">Amit Sinha</span></a> <br/> (<span>AAI
+																IAS</span>) </span> <span class="p-grid-2"><i
+                            class="material-icons">person_outline</i> <span
+                            class="num-teacher"">22 Students</span> </span>
+                        </p>
+                        <div class="">
+                          <h3 class="price">
+                            <i class="fa fa-inr">&nbsp;</i>14,880
+                          </h3>
+                          <a class="mat-link" href="comingsoon.html"> View
+                            Details <i class="material-icons">chevron_right</i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <br/> <br/>
+
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+
+</div>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"
+></script>
+
+
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('js/custom.js')}}"
+></script>
+
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('js/courses.js')}}"
+></script>
+</body>
+</html>

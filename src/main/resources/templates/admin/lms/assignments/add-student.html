@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 th:inline="text" class="page-header">Assignment Alert</h1>
+					</div>
+				</div>
+
+				<form role="form" name="add-student-assignment"
+					id="add-student-assignment">
+
+					<div class="row">
+						<div class="col-md-10">
+
+							<div class="row">
+								<div class="col-md-12">
+
+									<div class="form-horizontal">
+										<div class="row">
+
+											<div class="col-sm-6">
+												<label>Course</label> <select name="courses" required
+													id="courses" class="form-control selectpicker"
+													data-live-search="true" title="Select Course">
+
+													<option th:each="course : ${courses}"
+														th:value="${course.id}" th:data-subtext="${course.id}"
+														th:text="${course.courseTitle}"></option>
+
+												</select>
+											</div>
+
+											<div class="col-sm-6">
+												<label>Course Batch</label> <select name="courseBatch"
+													required id="courseBatch" class="form-control selectpicker"
+													data-live-search="true" title="Select Course Batch">
+
+
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group" style="margin-top: 10px">
+										<label>Unit</label> <select name="unit" required id="unit"
+											class="form-control selectpicker" data-live-search="true"
+											title="Select Unit">
+
+
+										</select>
+
+									</div>
+
+									<div class=""
+										style="border: 1px solid #ddd; padding: 10px; margin-top: 40px">
+
+										<div class="form-horizontal" style="margin-bottom: 20px">
+											<div class="row">
+
+												<div class="">
+													<div class="col-sm-4">
+														<button class="btn btn-primary" data-toggle="modal"
+															data-target="#assignmentModel" type="button">
+															<i class="glyphicon glyphicon-plus"></i> Add Student
+															Assignment
+														</button>
+													</div>
+													<div class="">
+														<select name="changeStatus" id="changeStatus"
+															class="form-control" selectpicker
+															style="width: 20%; float: right; margin-right: 40px;">
+															<option value="0" disabled selected>Change
+																Status</option>
+															<option value="RECEIVED">Received</option>
+															<option value="SENT_TO_TEACHER">Sent to teacher</option>
+															<option value="TEACHER_RECEIVED">Teacher
+																Received</option>
+															<option value="CHECKED">Checked</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+										<table id="assignment-table"
+											class="table table-striped table-bordered" cellspacing="0"
+											width="100%">
+											<thead>
+
+												<tr>
+													<th><input class="list-group-item active all"
+														name="select_all" value="1" id="select-all"
+														type="checkbox" /></th>
+													<th class="id">Id</th>
+													<th class="name">Name</th>
+													<th class="emailId">Email Id</th>
+													<th class="fileName">Upload File</th>
+													<th class="assignmentType">Assignment Type</th>
+													<th class="assignmentUrl">Assignment Url</th>
+													<th class="date">Upload Date</th>
+													<th class="status">Upload Status</th>
+													<th class="action">Action</th>
+
+												</tr>
+
+											</thead>
+
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-9" style="margin-top: 20px;">
+									<button class="submit btn btn-success" type="submit"
+										value="submit">Sent Alert</button>
+									<i class="fa fa-spinner fa-spin" id="loader"></i>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</form>
+
+				<input type="file" id="fileLoader" style="display: none"
+					name="files" onchange="uploadNewAttachment()" title="Load File" />
+
+			</div>
+		</div>
+
+
+	</div>
+
+	<!-- Modal -->
+	<div id="assignmentModel" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Add Assignment</h4>
+				</div>
+				<div class="modal-body">
+					<form id="assignmentForm">
+						<div class="row">
+
+							<div class="">
+								<div class="col-sm-6">
+									<label>Student Name</label> <input type="text"
+										class="form-control" name="studentName" id="studentName"
+										placeholder="Enter the Student Name">
+								</div>
+
+								<div class="col-sm-6">
+									<label>Student Email Id</label> <input type="email"
+										class="form-control" name="studentEmailId" id="studentEmailId"
+										placeholder="Enter the Student Email Id">
+								</div>
+
+							</div>
+						</div>
+
+						<div class="" style="margin-top: 10px">
+							<label>Upload Assignment</label>
+							<div>
+
+								<label class="custom-file"> <input type="file" required
+									id="assignmentPdf" name="assignmentPdf"
+									class="custom-file-input"> <span
+									class="custom-file-control"></span>
+								</label>
+							</div>
+
+						</div>
+
+						<div class="row" style="margin-top: 10px">
+
+							<div class="">
+
+								<div class="col-sm-6">
+									<label>Upload Date</label> <input type="date"
+										class="form-control" name="uploadDate" id="uploadDate"
+										placeholder="Enter the Upload Date">
+								</div>
+
+								<div class="col-sm-6">
+									<label>Upload Status</label> <select name="uploadStatus"
+										required id="uploadStatus" class="form-control">
+										<option value="0" disabled selected>Select Course
+											Type</option>
+										<option value="RECEIVED">Received</option>
+										<option value="SENT_TO_TEACHER">Sent to teacher</option>
+										<option value="TEACHER_RECEIVED">Teacher Received</option>
+										<option value="CHECKED">Checked</option>
+									</select>
+								</div>
+
+								<input type="hidden" name="rowIndex" id="rowIndex">
+
+							</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button id="addAssignment" type="button" class="btn btn-primary">
+						<i class="fa fa-plus"></i> Add
+					</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	!--/*/
+	<th:block th:include="admin/footer"></th:block>
+	/*/-->
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script>
+
+  var assignmentTable;
+  var map = {};
+  var rowIndex;
+  var unitId;
+
+  $(document).ready(function () {
+
+    assignmentTable = $('#assignment-table').DataTable({
+      aoColumns: [
+        {
+          bSortable: false,
+        },
+        {
+          bSortable: true,
+          className: "id"
+        },
+        {
+          bSortable: true,
+          className: "name"
+        },
+        {
+          bSortable: true,
+          className: "emailId"
+        },
+        {
+          bSortable: true,
+          className: "fileName"
+        },
+        {
+          bSortable: true,
+          className: "assignmentType"
+        },
+        {
+          bSortable: true,
+          className: "assignmentUrl"
+        },
+        {
+          bSortable: true,
+          className: "date"
+        },
+        {
+          bSortable: true,
+          className: "status"
+        },
+        {
+          bSortable: true,
+          mRender: function (o) {
+            return '<a title="Add Final Attachment" class="add_attachment"><i class="glyphicon glyphicon-file" style="font-size:  larger"></i></a>'
+          }
+        },
+
+      ]
+    });
+  });
+
+  $('#select-all').on('click', function () {
+    // Check/uncheck all checkboxes in the table
+    var rows = assignmentTable.rows({'search': 'applied'}).nodes();
+    $('input[type="checkbox"]', rows).prop('checked', this.checked);
+  });
+
+  $(document).on('click', ".editor_delete", function (e) {
+    e.preventDefault();
+    var dtRow = $(this).parents('tr');
+    var rowIndex = assignmentTable.row($(this).closest('tr')).index();
+    var conf = confirm("Are you sure to delete this row?");
+    if (conf) {
+      var table = $('#assignment-table').DataTable();
+      table.row(dtRow[0].rowIndex - 1).remove().draw();
+    }
+  });
+
+  $(document).on('click', ".add_attachment", function (e) {
+    rowIndex = assignmentTable.row($(this).closest('tr')).index();
+    $("#fileLoader").click();
+
+  });
+
+  function uploadNewAttachment() {
+    var form = new FormData();
+    form.append('file', $('#fileLoader')[0].files[0]);
+    form.append('type', 'assignment_submission');
+    form.append('contentType',$('#fileLoader')[0].files[0].type);
+    var assignmentUrl = uploadAssignment(form);
+
+    if(assignmentUrl!=null) {
+      assignmentTable.cell({row: rowIndex, column: 1}).data(0);
+      assignmentTable.cell({row: rowIndex, column: 4}).data('<span style="color: red;">' + $(
+          '#fileLoader')[0].files[0].name + '</span>');
+      assignmentTable.cell({row: rowIndex, column: 5}).data('<span style="color: red;">' + $(
+          '#fileLoader')[0].files[0].type + '</span>');
+      assignmentTable.cell({row: rowIndex, column: 6}).data('<span style="color: red;">' + assignmentUrl+ '</span>');
+
+      assignmentTable.draw();
+    }
+    else{
+      alert("Failed in uploading assignment");
+    }
+  }
+
+  $("#courses").change(function (event) {
+    es = $(this).val();
+    getCourseBatch(es)
+  });
+
+  $("#courseBatch").change(function (event) {
+    es = $(this).val();
+    getUnit(es)
+  });
+
+  $("#unit").change(function (event) {
+    es = $(this).val();
+    unitId = es;
+    getUserByUnit(es);
+  });
+
+  $("#changeStatus").change(function (event) {
+    es = $(this).val();
+
+    $("#assignment-table tbody tr").each(function (index, elm) {
+      if ($(elm).find("td .list-group-item:checked").length > 0) {
+        assignmentTable.cell({row: index, column: 8}).data('<span style="color: red;">' + es
+            + '</span>').draw();
+      }
+    });
+  });
+
+  function getUnit(id) {
+    $.ajax({
+      type: 'GET',
+      async: false,
+      dataType: 'json',
+      url: apiBasePath + "/coursebatches/" + id,
+      success: function (response) {
+        var htmlToShow = '<option value="0" disabled>Select Unit</option>';
+        var unitList = '<option data-subtext= "#unitId#" value="#unitId#">#unitName#</option>';
+        if (response.units.length > 0) {
+          $
+          .each(
+              response.units,
+              function (index, element) {
+                if (element.type == 'ASSIGNMENT' || element.type == 'TEST') {
+                  i = index + 1;
+                  htmlToShow = htmlToShow += unitList;
+                  htmlToShow = htmlToShow
+                  .replace(
+                      /#unitId#/g,
+                      element.unitId);
+                  htmlToShow = htmlToShow
+                  .replace(
+                      "#unitName#",
+                      element.title);
+                  $('#unit').html(htmlToShow);
+                }
+
+              });
+        } else {
+          $('#unit').html("");
+        }
+      }
+    });
+    $('#unit').selectpicker('refresh');
+  }
+
+  function getCourseBatch(id) {
+    $.ajax({
+      type: 'GET',
+      async: false,
+      dataType: 'json',
+      url: apiBasePath + "/courses/" + id,
+      success: function (response) {
+        var htmlToShow = '<option value="0" disabled>Select Course Batch</option>';
+        var courseBatchList = '<option value="#batchId#" data-subtext="#batchId#">#batchName#</option>';
+        if (response.batches.length > 0) {
+          $
+          .each(
+              response.batches,
+              function (index, element) {
+                i = index + 1;
+                htmlToShow = htmlToShow += courseBatchList;
+                htmlToShow = htmlToShow
+                .replace(
+                    /#batchId#/g,
+                    element.id);
+                htmlToShow = htmlToShow
+                .replace(
+                    "#batchName#",
+                    element.batchName);
+                $('#courseBatch').html(htmlToShow);
+
+              });
+        } else {
+          $('#courseBatch').html("");
+        }
+      },
+    });
+    $('#courseBatch').selectpicker('refresh');
+  }
+
+  function getUserByUnit(id) {
+    $.ajax({
+      type: 'GET',
+      async: false,
+      dataType: 'json',
+      url: apiBasePath + "/units/" + id + "/user",
+      success: function (response) {
+
+        if (response.length > 0) {
+          assignmentTable.clear().draw();
+
+          $
+          .each(
+              response, function (index, element) {
+
+                if (element.assignmentSubmission != null) {
+									var uploadDate = null;
+                  if(element.assignmentSubmission.submittedDate!=null){
+                    uploadDate = new Date(element.assignmentSubmission.submittedDate).toDateString();
+                  }
+
+                  assignmentTable.row.add(
+                      ['<input class="list-group-item" type="checkbox"></input>',
+                        element.linkageId,
+                        element.user.fullName,
+                        element.user.emailId,
+                        element.assignmentSubmission.attachmentName,
+                        element.assignmentSubmission.type,
+                        element.assignmentSubmission.attachmentUrl,
+                        uploadDate,
+                        element.assignmentSubmission.status]);
+                  assignmentTable.draw();
+                }
+
+              });
+
+        }
+      },
+    });
+
+  }
+
+  $(document).on('submit', "#add-student-assignment", function (event) {
+    event.preventDefault();
+    var assignmentList = [];
+
+    $("#assignment-table tbody tr").each(function (index, elm) {
+      if ($(elm).find("td .list-group-item:checked").length > 0) {
+
+        var input = {
+          linkageId: $(elm).find(".id").text(),
+          unit: {unitId: parseInt($('#unit').val())},
+          user: {
+            emailId: $(elm).find(".emailId").text(),
+            fullName: $(elm).find(".name").text()
+          },
+          assignmentSubmission: {
+            attachmentUrl: $(elm).find(".assignmentUrl").text(),
+            attachmentName: $(elm).find(".fileName").text(),
+            type: $(elm).find(".assignmentType").text(),
+            submittedDate: $(elm).find(".date").text()!=null ? new Date($(elm).find(".date").text()).getTime() : null,
+            status: $(elm).find(".status").text()
+          }
+
+        };
+
+        assignmentList.push(input);
+
+      }
+
+    });
+
+
+    if(assignmentList!=null) {
+      addStudentAssignment(assignmentList);
+    }
+
+
+  });
+
+  function addStudentAssignment(assignmentList) {
+
+    $.ajax({
+      async: true,
+      crossDomain: true,
+      url: apiBasePath + "/admin_sales/updateuserassignment",
+      method: "PUT",
+      data: JSON.stringify(assignmentList),
+      contentType: "application/json",
+      processData: false,
+      <!--headers: {-->
+        <!--"authorization": "Bearer " + window.localStorage.getItem('access_token'),-->
+
+      <!--},-->
+      dataType: "text",
+
+      success: function (response) {
+        sendAlert(assignmentList);
+
+      },
+
+      error: function (response) {
+        alert("Failed");
+      }
+    });
+
+  }
+
+  function sendAlert(assignmentList) {
+
+    $.ajax({
+      url: apiBasePath + "/admin_sales/course/+"+$('#courses').val() +"/sendassignmentemails",
+      type: "PUT",
+      data: JSON.stringify(assignmentList),
+      dataType: "json",
+      contentType: "application/json",
+      processData: false,
+      dataType: "text",
+
+      success: function (response) {
+        alert("Alert Successfully Sent");
+        assignmentTable.clear().draw();
+        getUserByUnit(unitId);
+
+      },
+
+      error: function (response) {
+        alert("Failed");
+      }
+    });
+
+  }
+
+  $('#addAssignment').on('click', function () {
+
+    var form = new FormData();
+    form.append('file', $('#assignmentPdf')[0].files[0]);
+    form.append('type', 'attachments');
+    form.append('contentType',$('#assignmentPdf')[0].files[0].type);
+
+    var assignmentUrl = uploadAssignment(form);
+    if(assignmentUrl!=null){
+      addRow(assignmentUrl);
+    }
+    else{
+      alert("Failed in uploading assignment");
+    }
+
+  });
+
+  function uploadAssignment(form) {
+    var jqXHR = $.ajax({
+      async: false,
+      "crossDomain": true,
+      "url": apiBasePath + "/user/uploadfile",
+      "method": "POST",
+      "processData": false,
+      "contentType": false,
+      "mimeType": "multipart/form-data",
+      "data": form
+    });
+
+    return jqXHR.responseText;
+  }
+
+  function addRow(assignmentUrl) {
+    var assignmentDataTemp = {
+      studentName: $('#studentName').val(),
+      studentEmailId: $('#studentEmailId').val(),
+      assignmentPdfName: $('#assignmentPdf')[0].files[0].name,
+      assignmentPdfType: $('#assignmentPdf')[0].files[0].type,
+      assignmentUrl: assignmentUrl,
+      uploadDate: $('#uploadDate').val(),
+      uploadStatus: $('#uploadStatus').val()
+
+    };
+
+    assignmentTable.row.value = $('#assignmentPdf')[0].files[0];
+
+    assignmentTable.row.add(['<input class="list-group-item" type="checkbox"></input>', 0,
+      assignmentDataTemp.studentName,
+      assignmentDataTemp.studentEmailId,
+      assignmentDataTemp.assignmentPdfName, assignmentDataTemp.assignmentPdfType,
+      assignmentDataTemp.assignmentUrl,
+      assignmentDataTemp.uploadDate,
+      assignmentDataTemp.uploadStatus]);
+
+    assignmentTable.draw();
+
+    $('#assignmentModel').modal("hide");
+    $('#assignmentForm')[0].reset();
+  }
+
+
+</script>
+
+</body>
+</html>

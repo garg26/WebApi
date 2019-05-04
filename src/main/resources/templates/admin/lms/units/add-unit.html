@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/css/loader.css')}}"
+      rel="stylesheet" media="screen"/>
+  <!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
+      rel="stylesheet">
+</head>
+<body>
+
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">Add New Unit</h1>
+        </div>
+      </div>
+
+      <form name="newUnit" id="newUnit">
+
+        <div class="row">
+          <div class="col-md-9">
+
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Course Batch Id</label> <input type="number"
+                                                          class="form-control" disabled
+                                                          th:value="${courseBatch.id}"
+                                                          name="courseBatchId" id="courseBatchId">
+                  </div>
+
+
+                  <div class="col-sm-6">
+                    <label>Course Title</label> <input type="text"
+                                                       class="form-control" disabled
+                                                       th:value="${courseBatch.batchName}"
+                                                       name="courseBatchTitle"
+                                                       id="courseBatchTitle">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div style="display: none;" id="loaderUpload">
+              <img id="loading-image"
+                   src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif"
+                   alt="Loading...">
+            </div>
+
+            <div class="form-group">
+              <label>Unit Title</label> <input class="form-control"
+                                               type="text" id="txtTitle"
+                                               placeholder="Enter Unit Title">
+            </div>
+
+            <div id="upload-attachment">
+              <label>Upload Attachment</label>
+              <div>
+
+                <label class="custom-file"> <input type="file"
+                                                   id="uploadAttachment" class="custom-file-input">
+                  <span
+                      class="custom-file-control"></span>
+                </label> <input type="button" class="button btn-primary" value="Upload"
+                                id="but_upload">
+                <div style="display: none;" id="loaderUploadAttachment">
+                  <img width="30px" height="30px"
+                       src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 40px">
+              <label>Unit Description</label>
+              <textarea id="unitDescription" name="unitDescription"></textarea>
+            </div>
+
+
+            <div class="form-group">
+              <label class="container"><input type="checkbox"
+                                              name="product" id="product" onchange="showPrice();">Product</label>
+              <label class="container"><input type="checkbox"
+                                              name="publiclyBuyable" id="publiclyBuyable" >Publically Buyable</label>
+              <label id="lblPrice">Price</label> <input type="number" min="0"
+                                                        class="form-control" name="price" id="price"
+                                                        placeholder="Enter the unit's Price">
+            </div>
+            <div class="form-group">
+              <label>Unit Type</label> <select name="unitType" required
+                                               id="unitType" class="form-control">
+              <option value="0" disabled selected>Select Unit Type</option>
+              <option value="LECTURE">Lecture</option>
+              <option value="ASSIGNMENT">Assignment</option>
+              <option value="NOTES">Notes</option>
+              <option value="QUIZ">Quiz</option>
+            </select>
+            </div>
+
+            <div class="form-group">
+              <label>Unit Topic</label> <select name="unitTopic"
+                                                id="unitTopic" class="form-control">
+              <option value="0" selected>Select Unit Topic</option>
+              <option th:each="topic : ${topics}" th:value="${topic}"
+                      th:text="${topic}"></option>
+            </select> <a id="addTopic" onclick="addTopic();"><i
+                class="glyphicon glyphicon-plus"></i></a> <input type="text"
+                                                                 id="txtTopic"/>
+            </div>
+
+            <div class="form-group">
+              <label class="container"><input type="checkbox"
+                                              name="free" id="free">is Free</label>
+            </div>
+
+            <div class="form-group">
+              <label class="radio-inline" style="margin-top: 10px;"><input
+                  type="radio" name="status" id="publish" value="publish">Publish</label>
+              <label class="radio-inline" style="margin-top: 10px;"><input
+                  type="radio" name="status" id="draft" value="draft">Draft</label>
+            </div>
+
+            <div class="row">
+              <div class="col-md-9">
+                <button class="submit btn btn-primary" type="submit"
+                        id="btnSubmit" value="submit">Submit
+                </button>
+                <div style="display: none;" id="loaderIconUpload">
+                  <img width="30px" height="30px"
+                       src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                </div>
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+<div class="modal fade" id="lectureModel" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="lectureModelLabel">Lecture</h4>
+
+      </div>
+      <div class="modal-body">
+        <form id="lectureForm">
+
+          <div class="form-group">
+            <label>Wowza Link</label> <input class="form-control" name="url"
+                                             type="text" id="url"
+                                             placeholder="Enter the url of the lecture">
+          </div>
+
+          <div class="row" style="margin-top: 10px;">
+
+            <div class="">
+
+              <div class="col-sm-6">
+                <label style="margin-top: 10px" ;>JWMacro</label> <select
+                  name="jwMacro" id="jwMacro" value="" class="form-control">
+
+              </select>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 10px;">
+
+            <div class="">
+
+              <div class="col-sm-6">
+                <label>Duration</label> <input type="time" class="form-control"
+                                               name="duration" id="duration"
+                                               placeholder="Enter the duration of the lecture">
+              </div>
+
+
+              <div class="col-sm-6">
+                <label>Release Date</label>
+                <div class='input-group date'>
+                  <input type='text' class="form-control" id='releaseDate'
+                         name="releaseDate"/> <span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 10px">
+            <label>Heading</label> <input type="text" class="form-control" name="heading"
+                                          id="heading"
+                                          placeholder="Enter the lecture heading">
+          </div>
+
+          <div class="form-group" style="margin-top: 40px">
+            <label>Note</label>
+            <textarea id="footerNotes" name="footerNotes"></textarea>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">Close
+        </button>
+        <button id="addLectureBtn" type="button" class="btn btn-primary">Add
+          Lecture
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="quizModel" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="quizModelLabel">Quiz</h4>
+
+      </div>
+      <div class="modal-body">
+        <form id="quizForm">
+          <div class="form-group">
+            <label>Title</label> <input class="form-control" name="quiz-title"
+                                        type="text" id="quiz-title"
+                                        placeholder="Enter the quiz title">
+          </div>
+
+          <div class="form-group">
+            <label>Instructions</label> <textarea class="form-control" name="quiz-description"
+                                                  id="quiz-description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Quiz Type</label> <select name="quizType" required
+                                             id="quizType" class="form-control">
+            <option value="0" disabled selected>Select Quiz Type</option>
+            <option value="PRACTICE_QUIZ">Practice Test</option>
+            <option value="MOCK_TEST">Mock Test</option>
+            <option value="SCHOLARSHIP_TEST">Scholarship Test</option>
+          </select>
+          </div>
+
+          <div class="form-group">
+            <label class="container"><input type="checkbox"
+                                            name="quiz-topic-wise-question"
+                                            id="quiz-topic-wise-question">Show Topic Wise
+              Question</label>
+
+          </div>
+
+          <div class="form-group">
+            <label class="container"><input type="checkbox"
+                                            name="quiz-topic-wise-analysis"
+                                            id="quiz-topic-wise-analysis">Show Topic Wise
+              Analysis</label>
+
+          </div>
+
+          <div class="form-group">
+            <label class="container"><input type="checkbox"
+                                            name="quiz-topic-wise-analysis"
+                                            id="shuffle-question">Shuffle Question</label>
+
+          </div>
+
+          <div class="">
+            <label>Import Quiz Question</label>
+            <div>
+
+              <label class="custom-file"> <input type="file" required
+                                                 id="quiz-question-file" class="custom-file-input">
+                <span
+                    class="custom-file-control"></span>
+              </label> <input type="button" class="button btn-primary" value="Upload"
+                              id="but_quiz_question_upload">
+              <div style="display: none;" id="quizQuestionLoaderUpload">
+                <img width="30px" height="30px"
+                     src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 10px;">
+
+            <div class="">
+
+              <div class="col-sm-6">
+                <label>Total Question</label> <input class="form-control" name="quiz-total-question"
+                                                     required
+                                                     type="text" id="quiz-total-question"
+                                                     placeholder="Enter quiz total question number">
+
+              </div>
+
+              <div class="col-sm-6">
+                <label>Total Marks</label> <input class="form-control" name="quiz-total-marks"
+                                                  required
+                                                  type="text" id="quiz-total-marks"
+                                                  placeholder="Enter quiz total marks">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 10px;">
+
+            <div class="">
+
+              <div class="col-sm-6">
+                <label>+ Mark/Question</label> <input class="form-control"
+                                                      name="quiz-total-question"
+                                                      placeholder="Positive mark per question"
+                                                      required
+                                                      type="text" id="positive-mark-per-question">
+
+              </div>
+
+              <div class="col-sm-6">
+                <label>- Mark/Question</label> <input class="form-control" name="quiz-total-marks"
+                                                      placeholder="Negative mark per question"
+                                                      required
+                                                      type="text" id="negative-mark-per-question">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Quiz Time Limit(in mins)</label><input class="form-control"
+                                                          name="quiz-time-limit" required
+                                                          type="number" id="quiz-time-limit"
+                                                          placeholder="Enter a quiz time limit in mins">
+
+          </div>
+
+          <div class="form-group">
+            <label class="radio-inline" style="margin-top: 10px;"><input
+                type="radio" name="status" id="quiz-publish" value="publish">Publish</label>
+            <label class="radio-inline" style="margin-top: 10px;"><input
+                type="radio" name="status" id="quiz-draft" value="draft">Draft</label>
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">Close
+        </button>
+        <button id="addQuizBtn" type="button" class="btn btn-primary">Add
+          Quiz
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+!--/*/
+<th:block th:include="admin/footer"></th:block>
+/*/-->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<style>
+  .datepicker {
+    z-index: 1600 !important; /* has to be larger than 1050 */
+  }
+</style>
+
+<script>
+  var lms;
+  var docxHTML;
+
+  $(document)
+  .ready(
+      function () {
+        $('#price').hide();
+        $('#lblPrice').hide();
+        $('#releaseDate').datepicker({
+          format: 'dd-mm-yyyy'
+        });
+
+        $('#uploadDate').datepicker({
+          format: 'dd-mm-yyyy'
+        });
+        $('#txtTopic').hide();
+        $('select[name=unitType]').change(function () {
+
+          if ($(this).val() == 'LECTURE') {
+            $('.note-toolbar-wrapper').removeAttr('style');
+            $('.note-toolbar').removeAttr('style');
+            $('#lectureModel').modal("show");
+            fetchAllMacro();
+
+          }
+
+          else if ($(this).val() == 'QUIZ') {
+            $('.note-toolbar-wrapper').removeAttr('style');
+            $('.note-toolbar').removeAttr('style');
+            $('#quizModel').modal("show");
+          }
+
+        });
+        $('#unitDescription').summernote(
+            {
+
+              styleTags: ['p', 'pre', 'h2', 'h3',
+                'h4', 'h5', 'h6'],
+              height: 200, // set editor height
+              minHeight: null, // set minimum height of editor
+              maxHeight: null, // set maximum height of editor
+              focus: true
+              // set focus to editable area after initializing summernote
+            });
+        $('#footerNotes').summernote({
+          styleTags: ['p', 'h2'],
+          height: 200, // set editor height
+          minHeight: null, // set minimum height of editor
+          maxHeight: null, // set maximum height of editor
+          focus: true,
+        });
+
+        $('#quiz-description').summernote({
+          styleTags: ['p', 'h2'],
+          height: 200, // set editor height
+          focus: true
+        });
+
+        $('#addLectureBtn').on('click', function () {
+
+          var lectureInput = {
+            url: $('#url').val(),
+            releaseDate: $('#releaseDate').val(),
+            duration: $('#duration').val(),
+            heading: $('#heading').val(),
+            footerNotes: $('#footerNotes').summernote('code'),
+            jwMacro: {name: $('#jwMacro').val()}
+          };
+
+          $.ajax({
+            url: apiBasePath + "/admin_techops/lectures",
+            type: "post",
+            data: JSON.stringify(lectureInput),
+            dataType: "json",
+            contentType: "application/json",
+            processData: false,
+
+            success: function (response) {
+              $('#lectureModel').modal("hide");
+              $('#lectureForm')[0].reset();
+              lms = response.id;
+              alert("Successfully create lecture");
+
+            },
+            error: function (response) {
+              alert("Failed creating lecture");
+
+            }
+          });
+
+        });
+
+      });
+
+  $('#lectureModel').on('shown.bs.modal', function () {
+    $('.input-group.date').datepicker({
+      format: "dd-mm-yyyy",
+      autoclose: true,
+      todayHighlight: true,
+      container: '#lectureModel modal-body'
+    });
+  });
+
+  $('#newUnit').validate({
+
+    rules: {
+      getBatchData: {
+        required: true
+      },
+
+      unitType: {
+        required: true
+      }
+    },
+
+    messages: {
+      getBatchData: {
+        required: "Please select course batch"
+      },
+
+      unitType: {
+        required: "Please select unit type"
+      }
+    },
+
+    submitHandler: function () {
+      submitRequest();
+      $('#loader').show();
+    }
+
+  });
+
+  function submitRequest() {
+    if (document.getElementById('product').checked) {
+      $('#product').attr('checked', true);
+      $('input[name="product"]').val(true);
+    } else {
+      $('#product').attr('checked', false);
+      $('input[name="product"]').val(false);
+    }
+
+    if (document.getElementById('free').checked) {
+      $('#free').attr('checked', true);
+      $('input[name="free"]').val(true);
+    } else {
+      $('#free').attr('checked', false);
+      $('input[name="free"]').val(false);
+    }
+
+    if (document.getElementById('publiclyBuyable').checked) {
+      $('#publiclyBuyable').attr('checked', true);
+      $('input[name="publiclyBuyable"]').val(true);
+    } else {
+      $('#publiclyBuyable').attr('checked', false);
+      $('input[name="publiclyBuyable"]').val(false);
+    }
+
+    $('#loader').show();
+    var input = {};
+
+    if ($('#unitType').val() == "LECTURE" || $('#unitType').val() == "QUIZ") {
+      input = {
+        description: $('#unitDescription').summernote('code'),
+        title: $('#txtTitle').val(),
+        type: $('#unitType').val(),
+        typeId: lms,
+        batch: {id: $('#courseBatchId').val()},
+        product: $('#product').val(),
+        publiclyBuyable : $('#publiclyBuyable').val(),
+        price: ($('#price').val() != null) ? $('#price').val() : 0,
+        free: $("#free").val(),
+        status: getStatus()
+
+      };
+    } else {
+      input = {
+        description: $('#unitDescription').summernote('code'),
+        type: $('#unitType').val(),
+        title: $('#txtTitle').val(),
+        batch: {id: $('#courseBatchId').val()},
+        product: $('#product').val(),
+        publiclyBuyable : $('#publiclyBuyable').val(),
+        price: ($('#price').val() != null) ? $('#price').val() : 0,
+        free: $("#free").val(),
+        status: getStatus()
+
+      };
+    }
+    if ($('#unitTopic').val() != 0) {
+      input["topic"] = $('#unitTopic').val();
+    } else {
+      input["topic"] = $('#txtTopic').val();
+    }
+    $.ajax({
+      url: apiBasePath + "/admin_techops_lmsadmin/units",
+      type: "POST",
+      data: JSON.stringify(input),
+      dataType: "json",
+      contentType: "application/json",
+      processData: false,
+
+      success: function (response) {
+        $('#loader').hide();
+        location.reload();
+        alert("Unit Add Successfully");
+      },
+
+      error: function (response) {
+        $('#loader').hide();
+        alert("Unit add failed");
+
+      }
+    });
+
+  };
+
+  function showPrice() {
+    if (document.getElementById('product').checked) {
+      $('#price').show();
+      $('#lblPrice').show();
+    } else {
+      $('#price').hide();
+      $('#lblPrice').hide();
+    }
+  }
+
+  function fetchAllMacro() {
+    $
+    .ajax({
+      async: true,
+      crossDomain: true,
+      type: 'GET',
+      processData: false,
+      url: apiBasePath + "/admin_techops/jwmacros",
+      success: function (response) {
+        var htmlToShow = '<option value="0" disabled selected>Select JWMacro</option>';
+        var macroList = '<option value="#name#">#name#</option>';
+        if (response.length > 0) {
+          $.each(response, function (index, element) {
+            i = index + 1;
+            htmlToShow = htmlToShow += macroList;
+            htmlToShow = htmlToShow.replace(/#name#/g,
+                element.name);
+
+          });
+          $('#jwMacro').html(htmlToShow);
+        } else {
+          $('#jwMacro').html(htmlToShow);
+        }
+      },
+
+      error: function (response) {
+
+      }
+    });
+  }
+
+  function addTopic() {
+    $('#txtTopic').show();
+  }
+
+  $("#but_upload").click(function (e) {
+    e.preventDefault();
+    var formData = new FormData();
+
+    fileName = $('#uploadAttachment')[0].files[0].name;
+    fileType = $('#uploadAttachment')[0].files[0].type;
+
+    formData.append('file', $('#uploadAttachment')[0].files[0]);
+    formData.append('type', 'assignments');
+    formData.append('contentType', fileType);
+
+    if (fileType == 'application/pdf') {
+      $('#loaderUploadAttachment').show();
+      $.ajax({
+        "async": true,
+        "crossDomain": true,
+        "url": apiBasePath
+        + "/user/uploadfile",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": formData,
+
+        success: function (response) {
+          $('#loaderUploadAttachment').hide();
+          alert("Upload File " + fileName + " " + "successfully");
+
+          if (response != null) {
+            $('#upload-attachment-url').remove();
+            var mydiv = document.getElementById("upload-attachment");
+            var aTag = document.createElement('a');
+            aTag.setAttribute('href', response);
+            aTag.setAttribute('id', "upload-attachment-url");
+            aTag.innerHTML = response;
+            mydiv.appendChild(aTag);
+          }
+          else {
+            var mydiv = document.getElementById("upload-attachment");
+            var aTag = document.createElement('a');
+            aTag.setAttribute('href', response);
+            aTag.setAttribute('id', "upload-attachment-url");
+            aTag.innerHTML = response;
+            mydiv.appendChild(aTag);
+          }
+
+        },
+        error: function (response) {
+          $('#loaderUploadAttachment').hide();
+          alert('Failed to Upload File');
+
+        }
+      });
+    }
+    else {
+      uploadFile(formData, function (response) {
+        if (response != null) {
+
+          getImageUrl(response, function (callback) {
+            fileUrl = callback;
+            alert("Upload File " + fileName + " " + "successfully");
+            $('#loaderUploadAttachment').hide();
+
+            if (fileUrl != null) {
+              $('#upload-attachment-url').remove();
+              var mydiv = document.getElementById("upload-attachment");
+              var aTag = document.createElement('a');
+              aTag.setAttribute('href', fileUrl);
+              aTag.setAttribute('id', "upload-attachment-url");
+              aTag.innerHTML = fileUrl;
+              mydiv.appendChild(aTag);
+            }
+            else {
+              var mydiv = document.getElementById("upload-attachment");
+              var aTag = document.createElement('a');
+              aTag.setAttribute('href', fileUrl);
+              aTag.setAttribute('id', "upload-attachment-url");
+              aTag.innerHTML = fileUrl;
+              mydiv.appendChild(aTag);
+            }
+
+          });
+
+        }
+
+        else {
+          $('#loaderUploadAttachment').hide();
+
+        }
+
+      });
+
+    }
+  });
+
+  function getStatus() {
+    var status;
+    if (document.getElementById('publish').checked) {
+      status = document.getElementById('publish').value;
+    } else if (document.getElementById('draft').checked) {
+      status = document.getElementById('draft').value;
+    } else {
+      status = document.getElementById('draft').value;
+    }
+
+    return status;
+  }
+
+  /**
+   *  MCQQuiz Creation
+   */
+
+  $('#addQuizBtn').click(function () {
+
+    if (document.getElementById('quiz-topic-wise-question').checked) {
+      $('#quiz-topic-wise-question').attr('checked', true);
+      $('input[name="quiz-topic-wise-question"]').val(true);
+    } else {
+      $('#quiz-topic-wise-question').attr('checked', false);
+      $('input[name="quiz-topic-wise-question"]').val(false);
+    }
+
+    if (document.getElementById('quiz-topic-wise-analysis').checked) {
+      $('#quiz-topic-wise-analysis').attr('checked', true);
+      $('input[name="quiz-topic-wise-analysis"]').val(true);
+    } else {
+      $('#quiz-topic-wise-analysis').attr('checked', false);
+      $('input[name="quiz-topic-wise-analysis"]').val(false);
+    }
+
+    if (document.getElementById('shuffle-question').checked) {
+      $('#shuffle-question').attr('checked', true);
+      $('input[name="shuffle-question"]').val(true);
+    } else {
+      $('#shuffle-question').attr('checked', false);
+      $('input[name="shuffle-question"]').val(false);
+    }
+
+
+
+    var input = {
+      title: $('#quiz-title').val(),
+      description: $('#quiz-description').summernote('code'),
+      topicWiseQuestion: $('#quiz-topic-wise-question').val(),
+      topicWiseAnalysis: $('#quiz-topic-wise-analysis').val(),
+      shuffleQuestion: $('#shuffle-question').val(),
+      quizType: $('#quizType').val(),
+      publishStatus: getQuizStatus(),
+      timeLimit: $('#quiz-time-limit').val(),
+      totalNoOfQuestion: $('#quiz-total-question').val(),
+      totalMarks: $('#quiz-total-marks').val(),
+      positiveMarkPerQuestion: $('#positive-mark-per-question').val(),
+      negativeMarkPerQuestion: $('#negative-mark-per-question').val()
+
+    };
+
+    var files = $('#quiz-question-file')[0].files[0];
+    var fd = new FormData();
+    fd.append("file", files);
+    fd.append("quiz", JSON.stringify(input));
+
+    $
+    .ajax({
+      async: true,
+      crossDomain: true,
+      type: 'POST',
+      url: apiBasePath + "/admin_techops_lmsadmin/createquiz",
+      data: fd,
+      mimeType: "multipart/form-data",
+      processData: false,
+      contentType: false,
+
+      success: function (response) {
+        if (response != null) {
+          lms = JSON.parse(response).quizId;
+          alert("Quiz Create Successfully");
+        }
+        else {
+          alert("Failed while creating quiz");
+        }
+      },
+
+      error: function (response) {
+        alert("Failed while importing question");
+      }
+    });
+  });
+
+  function getQuizStatus() {
+    var status;
+    if (document.getElementById('quiz-publish').checked) {
+      status = document.getElementById('quiz-publish').value;
+    } else if (document.getElementById('quiz-draft').checked) {
+      status = document.getElementById('quiz-draft').value;
+    } else {
+      status = document.getElementById('quiz-draft').value;
+    }
+
+    return status;
+  }
+</script>
+
+</body>
+</html>

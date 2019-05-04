@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title th:utext="${response?.title}"></title>
+
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+
+  <!--<link
+    th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.css')}}"
+    rel="stylesheet" media="screen" />-->
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+  <!--<link
+    th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick-theme.css')}}"
+    rel="stylesheet" media="screen" />-->
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/blogs.css')}}"
+      rel="stylesheet" media="screen"/>
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/discussion.css')}}"
+      rel="stylesheet" media="screen"/>
+
+</head>
+<body class="">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+  <nav role="navigation" id="navigation" style="top: 100px; position: relative; display: none;">
+    <div id="menuToggle">
+      <input type="checkbox" />
+      <span></span>
+      <span></span>
+      <span></span>
+      <ul id="menu" class="blog-share">
+        <li  ><a href="/discussions"><i class="material-icons side-nav-bar"> supervisor_account </i>&nbsp;
+          All Discussions</a>
+        </li>
+        <li class="is-clicked" ><a href="/user-discussions"><i class="material-icons side-nav-bar "> question_answer </i>&nbsp;
+          My Discussions</a>
+        </li>
+        <!--<li><a ><i class="material-icons side-nav-bar"> reply_all </i>&nbsp;My Participation</a>-->
+        <!--</li>-->
+      </ul>
+    </div>
+  </nav>
+  <img src="https://lh3.googleusercontent.com/bO7HpwjNud9Fwlt2W8P9YwRmnRYCrTb1PEkQxHuGqtW7Ros4Gmct-HMtpmu3KXnGQv6F1ftFNqZtGec-z54DqLeWFjo=w1800" style="
+    width: 100%;
+    position: absolute;">
+  <div class="mat-content mdl-layout__content" id="mat-content">
+    <div class="container-header" style="margin-top: 30px;">
+
+
+      <h3 style="margin: 0 auto; width: fit-content; padding: 20px;">MY DISCUSSIONS</h3>
+      <hr class="hr">
+      <div class="mdl-grid">
+
+        <div
+            class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone navigation">
+          <ul class="blog-share">
+            <li  ><a href="/discussions"><i class="material-icons side-nav-bar"> supervisor_account </i>&nbsp;
+              All Discussions</a>
+            </li>
+            <li class="is-clicked" ><a href="/user-discussions"><i class="material-icons side-nav-bar "> question_answer </i>&nbsp;
+              My Discussions</a>
+            </li>
+            <!--<li><a ><i class="material-icons side-nav-bar"> reply_all </i>&nbsp;My Participation</a>-->
+            <!--</li>-->
+          </ul>
+        </div>
+        <div
+            class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone discussion-container">
+
+          <div class="mdl-grid" style="margin: 0;padding: 0;">
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="height: fit-content;">
+              <div style=" width: fit-content; float: right; " class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="createDiscussionsBtn" onclick="openDiscussionDialog();">create</div>
+            </div>
+          </div>
+         <!--<div style="width: -webkit-fill-available; width: -moz-available; border: 1px solid #000000;cursor: pointer" id="createDiscussionsBtn"> <span>Start a Discussion.</span> <span id="dropDown" style="float: right;"><i class="material-icons"> keyboard_arrow_down </i></span></div>-->
+          <div class="mdl-grid" id="noDiscussionsError" style="padding: 0">
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div style="width: fit-content;width: -moz-fit-content; margin: 0 auto"><i class="fa fa-comments" style="font-size: 100px"></i></div>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div style="width: fit-content;width: -moz-fit-content; margin: 0 auto"><span>You Haven't started any discussions yet.</span><span id="createNowBtn"> Start Now</span></div>
+            </div>
+          </div>
+
+          <div style="display: none;" class="common-loader"
+               id="loader-discussions">
+            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+          </div>
+
+          <div id="user-discussion-list" ></div>
+
+         </div>
+        <dialog id="createNewDiscussion" class="mdl-dialog" >
+          <h3 class="mdl-dialog__title">Create New Discussion</h3>
+          <div class="mdl-dialog__content">
+            <div class="mdl-grid" id="createDiscussions">
+              <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                    <label>Discussion Title</label>
+                    <input type="text" id ="title" minlength="100" placeholder="Please enter Title for your discussion.">
+                    <div class="error-message" id = "errorTitle"> Please fill a title for this Discussion.</div>
+                  </div>
+
+                  <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                    <label>Exam Segment</label>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: -webkit-fill-available; width: -moz-available;padding: 0px">
+                      <select class="mdl-textfield__input" id ="examsegment" onchange="$('#errorSegment').hide();" name="examsegment" style="height: 46px; border: 1px solid #a8a8a8;">
+                        <option value="">Select exam segment</option>
+                        <option value="IAS">IAS</option>
+                        <option value="IES">IES</option>
+                        <option value="GATE">GATE</option>
+                        <option value="STATE_PSC">STATE PSC</option>
+                        <option value="JEE">IIT-JEE</option>
+                        <option value="NEET">NEET</option>
+                        <option value="RRB">RRB</option>
+                        <option value="SSC">SSC</option>
+                        <option value="LAW">LAW</option>
+                      </select>
+                    </div>
+                    <div class="error-message" id ="errorSegment"> Please select Exam Segment</div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                    <label>Body</label>
+                    <textarea name="discussionContent" id="discussionContent" minlength="100" placeholder="" cols="10" rows="5"></textarea>
+                    <div class="error-message" id = "errorContent"> Please write the description. </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-dialog__actions"style="padding-right: 25px">
+            <button class=" createBtn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="createNewDiscussion();">
+              Create
+            </button>
+
+            <div style="display: none;" class=""
+                 id="loader-create-discussion">
+              <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
+            <button type="button" id ="closeBtn" class="mdl-button">Close</button>
+          </div>
+        </dialog>
+
+      </div>
+
+    </div>
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+  <!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+</div>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<!--<script
+  th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"></script>
+<script
+  th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>-->
+<!--<script-->
+<!--th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/post.js')}}"></script>-->
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/discussion.js')}}"></script>
+
+<script>
+  $( document ).ready(function() {
+      getUserDiscussions();
+
+
+      // $('#createDiscussionsBtn').on("click",function () {
+      //   $('#createDiscussions').toggle(500);
+      //   $('#noDiscussionsError').toggle();
+      // });
+
+   });
+
+</script>
+
+</body>
+</html>
+
+
+
+
+

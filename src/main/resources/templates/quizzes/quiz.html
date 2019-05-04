@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title th:utext="${quizTemplate?.titleTag}"></title>
+  <meta name="robots" content="nofollow, noindex" />
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/blogs.css')}}"
+      rel="stylesheet" media="screen"/>
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/assignments.css')}}"
+      rel="stylesheet" media="screen"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+  <!--<link-->
+  <!--th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dashboard.css')}}"-->
+  <!--rel="stylesheet" media="screen"/>-->
+  <style>
+    .mcq-question-list {
+      padding: 24px 0;
+      border-bottom: 1px solid #ddd;
+      margin: 0 16px;
+    }
+
+    .mcq-question-list label {
+      display: block;
+      margin: 4px 0;
+      height: auto;
+    }
+
+    .mcq-question-list p, .mcq-question-list span {
+      color: #000;
+    }
+
+    .sticky {
+      position: fixed;
+      width: 345px !important;
+      top: 0;
+    }
+
+    .containerLeader .mdl-grid {
+      /*border-bottom: 0.5px solid #c2bfbf;*/
+      height: 40px;
+
+    }
+
+    .user-info h5 {
+      font-family: open sans;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: left;
+      color: #000000;
+    }
+
+    .containerLeader h5 {
+      margin: 0;
+      padding: 15px;
+      background: #162840;
+      color: #ffffff;
+      font-weight: 900;
+    }
+
+    .rank {
+      top: -7px;
+      position: relative;
+      color: #f5a739;
+      font-size: 12px;
+      font-weight: 900;
+
+    }
+
+    #countdownTimer {
+      position: relative;
+      top: -16px;
+      font-size: 20px;
+      background: #f5a739;
+      padding: 4px 21px;
+      border: #000000;
+      border-radius: 22px;
+      color: #fff;
+      border-top-left-radius: 0PX;
+      border-top-right-radius: 0px;
+    }
+
+    .countdownTimerFixed {
+      position: fixed !important;
+      top: 118px !important;
+      right: 418px !important;
+    }
+
+    .countdownTimerFixedMobile {
+      position: fixed !important;
+      top: 118px !important;
+      right: 12px !important;
+      font-size: 15px !important;
+    }
+
+    .start-quiz {
+      line-height: 16px !important;
+    }
+
+    .scoreCard {
+      margin: 0 auto;
+      width: fit-content;
+      padding: 30px;
+      background-color: #FFF9C4;
+      color: #212121;
+      min-height: 20px !important;
+    }
+
+    #quiz-result .mdl-dialog {
+      border: none;
+      box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+      width: 280px;
+    }
+
+    #quiz-result .mdl-dialog__title {
+      padding: 24px 24px 0;
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    #quiz-result .mdl-dialog__actions {
+      padding: 8px 8px 8px 24px;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-direction: row-reverse;
+      -ms-flex-direction: row-reverse;
+      flex-direction: row-reverse;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+
+    #quiz-result .mdl-dialog__actions > * {
+      margin-right: 8px;
+      height: 36px;
+    }
+
+    #quiz-result .mdl-dialog__actions > *:first-child {
+      margin-right: 0;
+    }
+
+    .mdl-dialog__actions--full-width {
+      padding: 0 0 8px 0;
+    }
+
+    #quiz-result .mdl-dialog__actions--full-width > * {
+      height: 48px;
+      -webkit-flex: 0 0 100%;
+      -ms-flex: 0 0 100%;
+      flex: 0 0 100%;
+      padding-right: 16px;
+      margin-right: 0;
+      text-align: right;
+    }
+
+    #quiz-result .mdl-dialog__content {
+      padding: 20px 24px 24px 24px;
+      color: rgba(0, 0, 0, 0.54);
+    }
+
+    #user-form input {
+      width: calc(100% - 32px) !important;
+      margin-right: 110px !important;
+    }
+@media screen and (max-width: 840px){
+.containerLeader{
+    width: 425px;
+    margin: 0px auto;
+}
+.containerLeader img {
+   width: 39px!important;
+    height: 39px!important;
+}
+
+}
+@media screen and (max-width: 480px){
+.containerLeader{
+    width: 100%;
+    margin: 0px auto;
+}
+.containerLeader .mdl-cell--1-col-phone.mdl-cell--1-col-phone {
+    width: calc(13% - 16px);
+}
+.mdl-cell--2-col-phone.mdl-cell--2-col-phone {
+    width: calc(74% - 16px);
+}
+}
+@media screen and (max-width: 420px){
+.containerLeader{
+    width: 100%;
+    margin: 0px auto;
+}
+.containerLeader .mdl-cell--1-col-phone.mdl-cell--1-col-phone {
+    width: calc(15% - 16px);
+}
+.mdl-cell--2-col-phone.mdl-cell--2-col-phone {
+    width: calc(70% - 16px);
+}
+}
+@media screen and (max-width: 360px){
+
+.containerLeader .mdl-cell--1-col-phone.mdl-cell--1-col-phone {
+    width: calc(17% - 16px);
+}
+.mdl-cell--2-col-phone.mdl-cell--2-col-phone {
+    width: calc(66% - 16px);
+}
+}
+    #quiz-result {
+      position: fixed;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  </style>
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+  <div class="mat-content mdl-layout__content">
+    <div class="demo-ribbon"></div>
+    <div class="blog container">
+      <div style="display: none;" class="common-loader"
+           id="loader-all-courses">
+        <div class="mdl-spinner mdl-js-spinner is-active"></div>
+      </div>
+      <div class="content">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <h3 class="blog-heading"></h3>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <h3 class="blog-heading quiz-title"></h3>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <span id="countdownTimer" class="float-right" style="display: none"><i
+                class="fa fa-clock-o" aria-hidden="true"></i></span>
+          </div>
+        </div>
+        <br/>
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div id="instructionsContainer" style="display: none">
+              <div id="instructions"></div>
+              <button
+                  class="start-quiz btn-explore mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Start
+              </button>
+            </div>
+
+            <div id="allQuestionsContainer" style="display: none;">
+              <div id="allQuestions">
+              </div>
+
+              <div class="user-info">
+
+                <h5>Please fill the below details to submit the test</h5>
+                <form class="user-form" name="user-form" id="user-form" role="form">
+
+                  <div class="mdl-grid" style="margin: 0px; padding: 0px">
+
+                    <div
+                        class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                        style="margin-left: 0px;margin-top: 6px">
+                      <label>NAME*</label><br/> <input
+                        style="padding: 10px;width: calc(100% - 100px);" required="required"
+                        type="text" id="username" name="username">
+                    </div>
+                    <div
+                        class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                        style="margin-left: 0px;margin-top: 6px">
+                      <label>EMAIL*</label><br/> <input
+                        style="padding: 10px;width: calc(100% - 100px);" required="required"
+                        type="email" id="useremail" name="useremail">
+                    </div>
+                    <div
+                        class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                        style="margin-left: 0px;margin-top: 6px">
+                      <label>Mobile Number*</label><br/>
+                      <input type="number"
+                             style="padding: 10px;width: calc(100% - 100px);" onKeyPress="if(this.value.length==10){return false;}" id="usermobilenumber"
+                             name="usermobilenumber" required="required">
+
+                    </div>
+
+                    <div
+                        class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                        style="margin-left: 0px;margin-top: 6px">
+                      <label>City*</label><br/>
+                      <input type="text" style="padding: 10px;width: calc(100% - 100px);"
+                             id="usercity" name="usercity" required="required">
+                    </div>
+                    <script>
+
+                      function activatePlacesSearch() {
+                        var input = document.getElementById('usercity');
+                        var autocomplete = new google.maps.places.Autocomplete(input);
+                      }
+
+                    </script>
+                    <script type="text/javascript"
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3KMP9bhOx7Msb_RnBlOqYUWmzKAb3ZGw&libraries=places&callback=activatePlacesSearch"></script>
+                    <div
+                        class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                        style="margin-left: 0px">
+                      <button style="margin-top: 12px;"
+                              class="submit-quiz btn-explore mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                        Submit
+                      </button>
+                    </div>
+
+                  </div>
+
+                </form>
+
+              </div>
+
+
+              <div style="display: none;float: left; margin-top: 10px;"
+                   id="quiz-submit-loader">
+                <div class="mdl-spinner mdl-js-spinner is-active"></div>
+              </div>
+              <button onclick="window.location.reload();"
+                      style="display: none;line-height: 10px;margin-top: 23px;"
+                      class="retake-quiz btn-explore mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Retake Quiz
+              </button>
+            </div>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--4-col  mdl-cell--12-col-tablet mdl-cell--12-col-phone ">
+            <div class="containerLeader mdl-shadow--2dp"
+                 style="display: block;padding-bottom: 15px">
+              <h5>Toppers Ranking</h5>
+              <div class="mdl-grid" th:each="leaderbard : ${leaderbard}"
+                   th:if="${leaderbard.rank} <11">
+                <div
+                    class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone imgRight">
+                  <img th:if="${leaderbard.avatar} == null"
+                       src="https://lh3.googleusercontent.com/Z4uHbjIjELCl1WaD_fGK7VnkE9sXzT_b4SLAmmapf7JbmtR9pNF17JW58z3vA7JsRuCGl0BiovQc7zuHiuOp6PZi7Cw=cc"
+                       style="margin: 0"/>
+                  <img th:unless="${leaderbard.avatar} == null"
+                       th:src="${leaderbard.avatar}"
+                       style="margin: 0"/>
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone">
+                  <div th:text="${leaderbard.name}"></div>
+                  <div class="rank" th:text="@{'#'+${leaderbard.rank}+' rank'}">#1 rank</div>
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">
+                  <img th:if="${leaderbard.rank} == 1"
+                       src="https://lh3.googleusercontent.com/__1b0xYfu9QjY6GesOI2g0d-101fJgEwFbwAD0a0haWwBumwk6aN0fAfRisJJrwNlTlI6ugeqVJa1sekpgWuEEqPocg"
+                       style="margin: 0"/>
+                  <img th:if="${leaderbard.rank} == 2"
+                       src="https://lh3.googleusercontent.com/myEaLrvfn2nh_Aw_HZIpLxcrPQlpi4RaQP_TOoPHLcrnn529iTboWHrLuSYtZ31rwxHGJC6_Av16u-pg6RadHx8sHi0"
+                       style="margin: 0"/>
+                  <img th:if="${leaderbard.rank} == 3"
+                       src="https://lh3.googleusercontent.com/myEaLrvfn2nh_Aw_HZIpLxcrPQlpi4RaQP_TOoPHLcrnn529iTboWHrLuSYtZ31rwxHGJC6_Av16u-pg6RadHx8sHi0"
+                       style="margin: 0"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <dialog id="quiz-result" class="mdl-dialog"
+            style="padding: 0;width: fit-content;width: -moz-fit-content;position: fixed">
+      <h3 class="mdl-dialog__title" style="width: fit-content; margin: 0 auto; font-weight: 900;">
+        Quiz Results</h3>
+      <div class="mdl-dialog__content">
+        <div style="display: none" class="scoreCard mdl-grid mdl-shadow--2dp">
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"><p
+              id="marksObtained">Marks Obtained: <b>0</b></p>
+            <p id="noOfAttemptQuestion">Questions Attempted: <b>0</b></p>
+            <p id="noOfCorrectQuestion">Correct Answers: <b>0</b></p></div>
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"><p
+              id="noOfIncorrectQuestion">Incorrect Answers: <b>0</b></p>
+            <p id="noOfSkippedQuestion">Questions Skipped: <b>100</b></p>
+            <p id="totalNoOfQuestion">Total Questions: <b>100</b></p></div>
+        </div>
+      </div>
+      <div class="mdl-dialog__actions" style="background: #fef5c4;">
+        <button type="button" class="mdl-button" style="font-weight: 900;">Close</button>
+        <button type="button" class="mdl-button" style="font-weight: 900;"
+                onclick="$('html, body').animate({ scrollTop: $('.quiz-title').offset().top }, 2000); dialog.close();">
+          View Correct Answers
+        </button>
+      </div>
+    </dialog>
+  </div>
+
+  <section id="reviews" class="reviews" style="display: none">
+    <div class="container">
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"></div>
+        <div
+            class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <div
+              class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div
+                class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <br/>
+              <div class="logo-font mat-teachers-slogan comment-count"
+                   id="total-comments">
+										<span class="comment-count-value"
+                          style="font-size: 32px; font-weight: 800; color: #000000">0</span>
+                Comments
+              </div>
+              <br/>
+            </div>
+            <div id="viewAllComments"></div>
+            <br/> <br/>
+            <hr>
+            <div class="drop-a-comment">
+              <h5>Your email address will not be published. Required
+                Fields are marked*</h5>
+              <form name="create-comment" id="create-comment">
+                <div class="mdl-grid" style="margin: 0px; padding: 0px">
+                  <div id="comment-box"
+                       class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                       style="margin: 0px">
+                    <label for="username_login">Comment*</label><br/>
+                    <textarea rows="7" id="commentsBox" name="commentsBox"></textarea>
+
+                    <br/> <input
+                      style="width: auto; height: auto; float: left;" type="file"
+                      id="uploadAttachment" accepts=".pdf"/> <i
+                      class="fa fa-spinner fa-spin" id="attachemtLoader"
+                      style="display: none;"></i><br/>
+                  </div>
+
+
+                  <br/>
+                  <button id="post-comment" class="post-comment">POST
+                    COMMENT
+                  </button>
+                </div>
+              </form>
+              <div class="comment_wrapper">
+                <div class="mdl-spinner mdl-js-spinner is-active" id="loader"></div>
+              </div>
+            </div>
+            <div class="login-to-comment">
+              <h5>To post a comment, Please Login </h5>
+              <button
+                  class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                  id="btn-login" data-upgraded=",MaterialButton,MaterialRipple"
+                  style="width: 200px;margin-top: 0px" onclick="loginToComment();">
+
+                Log in<span class="mdl-button__ripple-container"><span
+                  class="mdl-ripple is-animating"
+                  style="width: 609.631px; height:609.631px; transform: translate(-50%, -50%) translate(146px, 22px);"></span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <input type="hidden" id="checkIsPost" value="isPost">
+
+  </section>
+  <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+</div>
+</div>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+<!--<script th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/custom.js}')}}"></script>-->
+
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<script th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/main.js')}}"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+<script th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/post.js')}}"></script>
+
+<script>
+  // var navWrap, nav, startPosition, stopPosition;
+
+  $(document).ready(function () {
+
+    if (window.localStorage.getItem('comment-height') == null) {
+      window.scrollTo(0, 0);
+      window.localStorage.setItem('comment-height', null);
+    }
+    else {
+      window.scrollTo(0, window.localStorage.getItem('comment-height') - 100);
+      window.localStorage.setItem('comment-height', null);
+    }
+
+    if (isUserLoggedIn() == true) {
+      $('#username').val(user_name);
+      $('#username').attr("disabled", true);
+      $('#useremail').val(username);
+      $('#useremail').attr("disabled", true);
+
+      if (city != null) {
+        $('#usercity').val(city);
+        $('#usercity').attr("disabled", true);
+      }
+
+      if (phonenumber != null) {
+        $('#usermobilenumber').val(phonenumber);
+        $('#usermobilenumber').attr("disabled", true);
+      }
+
+      $('.login-to-comment').hide();
+    }
+    else {
+      $('.login-to-comment').show();
+      $('.drop-a-comment').hide();
+
+    }
+  });
+  // $(window).scroll(function () {
+  //   var x = $(window).width();
+  //   if (x > 1080) {
+  //     var y = $(this).scrollTop() + navWrap.outerHeight();
+  //     if (y > startPosition) {
+  //       navWrap.addClass('sticky');
+  //       if (y > stopPosition) {
+  //         navWrap.css('top', stopPosition - y + startPosition);
+  //       } else {
+  //         navWrap.css('top', startPosition);
+  //       }
+  //     } else {
+  //       navWrap.removeClass('sticky');
+  //       navWrap.css('top', 0);
+  //     }
+  //   }
+  // });
+
+  function loginToComment() {
+
+    window.localStorage.setItem('comment-height', $('.drop-a-comment').offset().top);
+
+    if ($(window).width() > 1024) {
+      matLoginClick();
+    } else {
+      window.location.href = "/login";
+    }
+
+  }
+
+  var dialog = document.querySelector('#quiz-result');
+  var timeLimitInSeconds, quizId;
+  quizId = location.pathname.substring(1,location.pathname.length);
+  var postId = quizId;
+  $('document').ready(function () {
+    $('.common-loader').show();
+
+    $
+    .ajax({
+      url: apiBasePath + "/getquizbyid/" + quizId,
+      type: "GET",
+      async: true,
+      crossDomain: true,
+      success: function (response) {
+        $('.common-loader').css("display", "none");
+        fetchQuestionList(response.questions, null);
+        timeLimitInSeconds = response.quizTemplate.quiz.timeLimit * 60;
+        $('#instructions').html(response.quizTemplate.quiz.description);
+        var fullDate = new Date(response.quizTemplate.quiz.createdAt);
+        $('#date').html(fullDate.getDate());
+        $('#year').html(fullDate.getFullYear());
+        var month = new Array();
+        month[0] = "JAN";
+        month[1] = "FEB";
+        month[2] = "MAR";
+        month[3] = "APR";
+        month[4] = "MAY";
+        month[5] = "JUN";
+        month[6] = "JUL";
+        month[7] = "AUG";
+        month[8] = "SEPT";
+        month[9] = "OCT";
+        month[10] = "NOV";
+        month[11] = "DEC";
+        $('#month').html(month[fullDate.getMonth()]);
+        $('#instructionsContainer').show();
+        $('.quiz-title').html(response.quizTemplate.quiz.title);
+
+      },
+      error: function (response) {
+        $('.common-loader').hide();
+        alert("quiz load failed");
+      }
+    });
+  });
+
+  function f() {
+
+  }
+
+  var htmlToShow = '';
+
+  function fetchQuestionList(mapOrList, topicName) {
+
+    var completeQuestion = '<div class="mcq-question-list">#completeQuestion##figure##htmlTble##completeOptionsInQuestion##options##requestObject#</div>';
+    $
+    .each(
+        mapOrList,
+        function (key, value) {
+          var figure = '';
+          var questionHtmlTble = '';
+          var questionList = '';
+          var optionsInQuestionList = '';
+          var options = '';
+          var questionNumber = value.position;
+          htmlToShow = htmlToShow + completeQuestion;
+          $.each(JSON.parse(value.questionText), function (key,
+              optionValueofQuestion) {
+            if (key == 0) {
+              questionList = "<p style='font-size: 16px;'>"
+                  + questionList + "<b>" + questionNumber
+                  + "</b>" + ". " + optionValueofQuestion
+                  + "</p>";
+            } else {
+              optionsInQuestionList = "<p>"
+                  + optionsInQuestionList
+                  + optionValueofQuestion + "</p>";
+            }
+          })
+          $
+          .each(
+              JSON.parse(value.optionJson),
+              function (key, optionValue) {
+                options = options
+                    + '<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="'
+                    + +questionNumber
+                    + '_'
+                    + key
+                    + '"> <input onchange="checkboxAsRadio(this);" type="checkbox" id="'
+                    + questionNumber
+                    + '_'
+                    + key
+                    + '" class="mdl-checkbox__input" name="answer_'
+                    + questionNumber
+                    + '" value="'
+                    + optionValue
+                    + '"> <span data-option-value="'
+                    + optionValue
+                    + '" style="font-size: 14px;" class="mdl-checkbox__label">'
+                    + "<span class='question-number'>"
+                    + (String
+                    .fromCharCode(key + 65))
+                    + ")</span>&nbsp;&nbsp;"
+                    + optionValue
+                    + '</span> </label>';
+              })
+          $.each(JSON.parse(value.figureJson), function (key,
+              image) {
+            figure = figure + "<img src='" + image + "'>";
+          });
+          /*questionHtmlTble = questionHtmlTble + "<span>"
+                + value.questionHtml
+               +"</span>";*/
+          htmlToShow = htmlToShow.replace("#completeQuestion#",
+              questionList);
+          htmlToShow = htmlToShow.replace("#options#", options);
+          htmlToShow = htmlToShow.replace(
+              "#completeOptionsInQuestion#",
+              optionsInQuestionList);
+          htmlToShow = htmlToShow
+          .replace("#figure#",
+              "<div class='figure-mcqs'>" + figure
+              + "</div>");
+          htmlToShow = htmlToShow
+          .replace("#htmlTble#", questionHtmlTble);
+          htmlToShow = htmlToShow
+          .replace(
+              "#requestObject#",
+              '<input type="hidden" name="questionId" value="'
+              + value.questionId
+              + '"><span class="explanation"></span>');
+        })
+    $('#allQuestions').html(htmlToShow);
+  }
+
+  function checkboxAsRadio(e) {
+    $(e).parent('.mdl-checkbox').addClass("is-checked");
+    $(e).attr("checked", "checked");
+    $(e).parent('.mdl-checkbox').siblings('.mdl-checkbox').removeClass(
+        "is-checked");
+    $(e).parent('.mdl-checkbox').siblings('.mdl-checkbox').find(
+        '.mdl-checkbox__input').removeAttr("checked");
+  }
+
+  var x;
+
+  function countdownTimer(seconds) {
+    var time = seconds;
+    x = setInterval(
+        function () {
+          time = time - 1;
+          var hours = Math.floor(time / (60 * 60));
+          var minutes = Math.floor((time / 60) % 60);
+          var seconds = Math.floor(time % 60);
+          document.getElementById(
+              "countdownTimer").innerHTML = "<i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;"
+              + hours + ":" + minutes + ":" + seconds;
+          if (time < 0) {
+            clearInterval(x);
+            document.getElementById("countdownTimer").innerHTML = "TIME OVER";
+            $('.submit-quiz').trigger("click");
+          }
+        }, 1000);
+  }
+
+  $('.start-quiz').on('click', function () {
+
+    if (isUserLoggedIn() == true) {
+      countdownTimer(timeLimitInSeconds);
+      $('#countdownTimer').show();
+      $('#allQuestionsContainer').show();
+      $('#reviews').show();
+      $('#instructionsContainer').hide();
+    }
+    else {
+      if ($(window).width() > 1024) {
+        matLoginClick();
+      } else {
+        window.location.href = "/login";
+      }
+    }
+
+  });
+
+  $("form[name='user-form']").validate({
+
+    rules: {
+      usermobilenumber: {
+        required: true,
+        maxlength: 10,
+        minlength: 10
+      }
+    },
+    messages: {
+      usermobilenumber: {
+        required: "Please enter your number",
+        maxlength: "Please enter a valid number",
+        minlength: "Please enter a valid number"
+      }
+    },
+
+    submitHandler: function (form, e) {
+      e.preventDefault();
+      submitQuiz(quizId);
+
+    }
+
+  });
+
+  function submitQuiz(quizId) {
+
+    $('#quiz-submit-loader').show();
+    $('.submit-quiz').hide();
+    $('#loader-quiz').show();
+    $('.btn-quiz').hide();
+    $('.scoreCard').show();
+    var quizSubmissionList = [];
+
+    $('.mcq-question-list').each(function () {
+      var questionId = $(this).find('input[name="questionId"]').val();
+      if ($(this).find('.mdl-checkbox__input:checked').length > 0) {
+        var answer = $(this).find('.mdl-checkbox__input:checked').val();
+        quizSubmissionList.push({
+          attempt: true,
+          answer: answer,
+          questionId: questionId
+        })
+      } else {
+        quizSubmissionList.push({
+          attempt: false,
+          questionId: questionId
+        })
+      }
+    })
+
+    var input = {
+      name: $('#username').val(),
+      emailId: $('#useremail').val(),
+      mobile: $('#usermobilenumber').val(),
+      city: $('#usercity').val(),
+      list: quizSubmissionList
+    };
+    $
+    .ajax({
+      url: apiBasePath + "/quizsubmission/"
+      + quizId + "?timetaken=" + $('#countdownTimer').text(),
+      type: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify(input),
+      success: function (response) {
+
+        if (isUserLoggedIn() == true && response.token != null) {
+          loginUser(response.token, "");
+          userDetailsShow();
+        }
+
+        $
+        .each(
+            response.solution,
+            function (key, solution) {
+              var questionExplanation = '';
+              var questionExplanationImage = '';
+              var questionExplanationHtml = '';
+              var questionid_solution = solution.question.questionId;
+              $
+              .each(
+                  JSON
+                  .parse(solution.explanation),
+                  function (key,
+                      explanation) {
+                    questionExplanation = questionExplanation
+                        + "<p style='color: #003362;font-weight: 600;'>"
+                        + explanation
+                        + "</p>";
+                  });
+              $
+              .each(
+                  JSON
+                  .parse(solution.question.explanationImage),
+                  function (imageIndex,
+                      explanationImage) {
+                    if (explanationImage != null) {
+                      questionExplanationImage = questionExplanationImage
+                          + "<img src ='"
+                          + explanationImage
+                          + "' >";
+                    }
+                  });
+              $
+              .each(
+                  solution.explanationHtml,
+                  function (htmlIndex,
+                      explanationHtml) {
+                    if (explanationHtml != null) {
+                      questionExplanationHtml = questionExplanationHtml
+                          + "<span>"
+                          + explanationHtml
+                          + "</span>"
+                    }
+                  });
+              $('.mcq-question-list').find(
+                  'input[value="'
+                  + questionid_solution
+                  + '"]').siblings(
+                  ".explanation").html(questionExplanation + questionExplanationImage + questionExplanationHtml);
+              if (solution.userAnswer == solution.answer) {
+                $('.mcq-question-list')
+                .find(
+                    'input[value="'
+                    + questionid_solution
+                    + '"]')
+                .siblings("label")
+                .find(
+                    "span[data-option-value='"
+                    + solution.answer
+                    + "']")
+                .css({"color": "green", "font-weight": "bold"});
+              } else {
+                $('.mcq-question-list')
+                .find(
+                    'input[value="'
+                    + questionid_solution
+                    + '"]')
+                .siblings("label")
+                .find(
+                    "span[data-option-value='"
+                    + solution.answer
+                    + "']")
+                .css({"color": "green", "font-weight": "bold"});
+                $('.mcq-question-list')
+                .find(
+                    'input[value="'
+                    + questionid_solution
+                    + '"]')
+                .siblings("label")
+                .find(
+                    "span[data-option-value='"
+                    + solution.userAnswer
+                    + "']")
+                .css("color", "red");
+              }
+
+            });
+        $('#marksObtained').html(
+            'Marks Obtained: <b>'
+            + response.sectionLevel.marksObtained
+            + '</b>');
+        $('#noOfAttemptQuestion').html(
+            'Questions Attempted: <b>'
+            + response.sectionLevel.noOfAttemptQuestion
+            + '</b>');
+        $('#noOfCorrectQuestion').html(
+            'Correct Answers: <b>'
+            + response.sectionLevel.noOfCorrectQuestion
+            + '</b>');
+        $('#noOfIncorrectQuestion')
+        .html(
+            'Incorrect Answers: <b>'
+            + response.sectionLevel.noOfIncorrectQuestion
+            + '</b>');
+        $('#noOfSkippedQuestion').html(
+            'Questions Skipped: <b>'
+            + response.sectionLevel.noOfSkippedQuestion
+            + '</b>');
+        $('#totalNoOfQuestion').html(
+            'Total Questions: <b>'
+            + response.sectionLevel.totalNoOfQuestion
+            + '</b>');
+        $('.scoreCard').show();
+        $('#loader-quiz').hide();
+        $('.retake-quiz').show();
+        $('.mcq-question-list input').attr("disabled");
+        $(".mdl-layout__content").animate({
+          scrollTop: 0
+        }, 400);
+        $('#countdownTimer').hide();
+        if (response.topicLevel != null) {
+          $('#showDetailedScore').show();
+          var detailedScore = '<thead> <tr><th>Topic</th><th>Marks Obtained</th><th>Questions Attempted</th><th>Correct</th><th>Incorrect</th><th>Skipped</th><th>Total</th></tr></thead> <tbody> #tr# </tbody>';
+          var tr = '';
+          $.each(response.topicLevel, function (key,
+              topicLevelScore) {
+            tr = tr + '<tr><td>' + key + '</td><td>'
+                + topicLevelScore.marksObtained
+                + '</td><td>'
+                + topicLevelScore.noOfAttemptQuestion
+                + '</td><td>'
+                + topicLevelScore.noOfCorrectQuestion
+                + '</td><td>'
+                + topicLevelScore.noOfIncorrectQuestion
+                + '</td><td>'
+                + topicLevelScore.noOfSkippedQuestion
+                + '</td><td>'
+                + topicLevelScore.totalNoOfQuestion
+                + '</td></tr>';
+          });
+          detailedScore = detailedScore.replace("#tr#", tr);
+          $('#detailedScore').html(detailedScore);
+        }
+        (function () {
+          'use strict';
+          if (!dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
+          }
+          dialog.showModal();
+          dialog.querySelector('button:not([disabled])')
+          .addEventListener('click', function () {
+            dialog.close();
+          });
+        }());
+        $('.retake-quiz').show();
+        $('#quiz-submit-loader').hide();
+      },
+      error: function (response) {
+        $('.scoreCard').show();
+        $('.btn-quiz').show();
+        $('#quiz-submit-loader').hide();
+
+      }
+    });
+  }
+
+  $(document).scroll(function () {
+
+    if ($(window).width() > 1024) {
+      if ($(document).scrollTop() > 150) {
+        $('#countdownTimer').addClass("countdownTimerFixed");
+      }
+      if ($(document).scrollTop() > ($('#reviews').offset().top - 500)) {
+        $('#countdownTimer').removeClass("countdownTimerFixed");
+      }
+      if ($(document).scrollTop() < 150) {
+        $('#countdownTimer').removeClass("countdownTimerFixed");
+      }
+    } else {
+      if ($(document).scrollTop() > 150) {
+        $('#countdownTimer').addClass("countdownTimerFixedMobile");
+      }
+      if ($(document).scrollTop() > ($('#reviews').offset().top - 500)) {
+        $('#countdownTimer').removeClass("countdownTimerFixedMobile");
+      }
+      if ($(document).scrollTop() < 150) {
+        $('#countdownTimer').removeClass("countdownTimerFixedMobile");
+      }
+    }
+
+  });
+
+
+</script>
+</body>
+</html>

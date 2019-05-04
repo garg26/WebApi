@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title>Neostencil</title>
+
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/courses.css')}}"
+	rel="stylesheet" media="screen" />
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/cart.css')}}"
+	rel="stylesheet" media="screen" />
+<style>
+.progress-button {
+	margin-top: -80px;
+	pointer-events: none;
+}
+
+.ui-accordion .ui-accordion-header {
+	pointer-events: none;
+}
+
+.mdl-tabs__tab .mdl-tabs__ripple-container .mdl-ripple,
+	.mdl-radio__ripple-container .mdl-ripple {
+	background: #ff6600;
+}
+
+.mdl-radio.is-checked .mdl-radio__outer-circle {
+	border: 2px solid #ff6600;
+}
+
+.mdl-radio__inner-circle {
+	background: #ff6600;
+}
+</style>
+</head>
+
+<body class="all-teachers-page">
+
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+		<!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+		<div class="mat-content mdl-layout__content">
+			<div class="landing-darken" style="display: none;"></div>
+			<div class="checkout-main container-header">
+				<div class="mdl-grid">
+					<div
+						class="mdl-9 mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+						<div id="cart">
+							<h4>
+								<a th:href="@{/cart}" class="back-from-cart"> <i
+									class="material-icons">keyboard_backspace</i>&nbsp;&nbsp;View
+									Cart
+								</a>
+							</h4>
+							<div class="padding">
+								<div style="margin-top: 200px;" id="checkoutLoader"
+									class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+								<div class="checkout" id="accordion" style="visibility: hidden;">
+									<h3>
+										<i class="is-submitted material-icons">check_circle</i>&nbsp;&nbsp;1.
+										LOGIN ID<span style="font-weight: normal;"
+											class="saved-accordian" id="username"></span>
+										<!-- <a
+                    class="checkout-email-change">Change</a> -->
+									</h3>
+									<div>
+										<div class="dots-list">sergff</div>
+									</div>
+									<h3>
+										<i style="display: none;"
+											class="is-submitted is-submitted-2 material-icons">check_circle</i>&nbsp;&nbsp;2.
+										ADDRESS&nbsp;&nbsp;&nbsp;&nbsp;
+										<p style="display: inline-block;" id="saved-address-accordian"
+											class="saved-accordian"></p>
+									</h3>
+									<div>
+										<div class="dots-list">
+											<div id="existingAddressSection">
+												<div class="mdl-grid" id="existingAddress"></div>
+												<br />
+												<div class="mdl-grid">
+													<div
+														class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<a id="gtm_saveAndContinueExisting">
+														<button onclick="saveAddress();"
+															id="saveAndContinueExisting"
+															class="save-and-continue  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+															SAVE AND CONTINUE</button>
+														</a>
+														<div style="display: none;" id="addressLoader"
+															class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+													</div>
+													<div
+														class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"></div>
+													<div
+														class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<a id="gtm_addNew">
+														<button id="addNew"
+															class="add-new-address mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+															+Add new address</button>
+														</a>
+													</div>
+												</div>
+											</div>
+											<form name="address_checkout" id="addressCheckout"
+												style="display: none;">
+												<h4>
+													<a id="viewSaved" class="back-from-cart"> <i
+														class="material-icons">keyboard_backspace</i>&nbsp;&nbsp;View
+														saved address
+													</a>
+												</h4>
+												<div class="mdl-grid">
+													<div
+														class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<label for="firstName">First Name*</label><br /> <input
+															type="text" id="" name="firstName"> <br />
+													</div>
+													<div
+														class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<label for="lastname">Last Name*</label><br /> <input
+															type="text" id="" name="lastname"> <br />
+													</div>
+													<div
+														class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<label for="mobileNumber">Mobile Number*</label><br /> <input
+															type="number" id="" name="mobileNumber"> <br />
+													</div>
+													<div
+														class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<label for="pincode">Pincode*</label><br /> <input
+															type="number" id="" name="pincode"> <br />
+													</div>
+													<div
+														class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<label for="city">City*</label><br /> <input type="text"
+															id="" name="city"> <br />
+													</div>
+													<div
+														class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<label for="state">State</label><br /> <input type="text"
+															id="" name="state"> <br />
+													</div>
+													<div
+														class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<label for="addressText">Address*</label><br />
+														<textarea rows="5"
+															placeholder="Flat/House no. colony/ Street No."
+															name="addressText"></textarea>
+													</div>
+													<div
+														class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<label for="alternateMobileNumber">Alternate
+															Mobile Number</label><br /> <input type="text" id=""
+															name="alternateMobileNumber"> <br />
+														<button id="saveAndContinueNew"
+															class="save-and-continue  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+															SAVE AND CONTINUE</button>
+														<div style="display: none;" id="addressLoaderNew"
+															class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+									<h3>
+										<i style="display: none;"
+											class="is-submitted is-submitted-3 material-icons">check_circle</i>&nbsp;&nbsp;3.
+										REVIEW ORDER
+									</h3>
+									<div>
+										<div class="dots-list">
+											<p style="display: none;" id="emptyCart">Your cart is
+												empty.</p>
+											<table style="display: none;" id="cartTable"
+												class="mdl-data-table mdl-js-data-table">
+												<thead>
+													<tr>
+														<th class="mdl-data-table__cell--non-numeric">Your
+															Cart Item</th>
+														<th></th>
+														<th class="cart-table-price">Price</th>
+														<th class="cart-table-price">Quantity</th>
+														<th class="cart-table-price">Total</th>
+													</tr>
+												</thead>
+												<tbody id="cartItems">
+												</tbody>
+
+											</table>
+											<div id="cartLoader"
+												class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+											<a onclick="createOrder();" id="createOrderBtn"
+												class="save-and-continue  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+												SAVE AND CONTINUE</a>
+											<div style="display: none; width: 320px;"
+												class="common-loader" id="loader-create-order-for-free-checkout">
+												<div class="mdl-spinner mdl-js-spinner is-active"></div>
+											</div>
+											<div style="display: none; width: 320px;"
+												id="createOrderLoader"
+												class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+										</div>
+									</div>
+									<h3>4. MAKE PAYMENT</h3>
+									<div>
+										<div class="dots-list">
+											<div
+												class="mdl-tabs vertical-mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+												<div class="mdl-grid mdl-grid--no-spacing">
+													<div
+														class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<div class="mdl-tabs__tab-bar">
+															<a href="#tab1-panel" class="mdl-tabs__tab is-active">
+																<span class="hollow-circle"></span> Debit/Credit/Netbanking
+															</a>
+															<!-- <a href="#tab2-panel" class="mdl-tabs__tab"> <span
+																class="hollow-circle"></span> PayU Money
+															</a> -->
+															<a href="#tab3-panel" class="mdl-tabs__tab"> <span
+																class="hollow-circle"></span> NEFT/RTGS
+															</a>
+
+															<a href="#tab4-panel" class="mdl-tabs__tab"> <span
+																	class="hollow-circle"></span> EMI (0% interest)
+															</a>
+														</div>
+													</div>
+													<div class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<div class="mdl-tabs__panel is-active" id="tab1-panel">
+															<div class="mdl-grid">
+
+																<div id="divUseNeoCashRazor"
+																	class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+																	<div class='mdl-grid'>
+																		<div
+																			class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+																			<span>Useable NeoCash:&nbsp;</span> <input
+																				id="ipUseableCashRazor" style='width: inherit'>
+																		</div>
+																		<div
+																			class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+																			<span>Total NeoCash:&nbsp;</span> <span
+																				id="ipTotalCashRazor"></span>
+																		</div>
+																		<div
+																			class="mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+																			<button
+																				class="mdl-button mdl-js-button mdl-js-ripple-effect"
+																				id="btnRedeemNCRazor"
+																				style="border-radius: 20px; background-color: #ff6600; color: #ffffff; font-weight: 900; font-size: 13px;">Redeem
+																				NeoCash</button>
+																		</div>
+																		<div
+																			class="mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
+																			id="invalidNCRazor" style="color: red; font-size: 12px;">
+																			<span id="spInvalidNCRazor">Invalid NeoCash
+																				Amount!! Upto 10% of the payable amount can be paid
+																				using NeoCash!!</span>
+																		</div>
+																	</div>
+																</div>
+
+																<div
+																	class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+																	<p>
+																		Pay Rs <b class="finalAmount"></b> using RazorPay
+																	</p>
+
+
+																	<p>
+																		I have read and accepted the <a
+																			style="color: #dd9933 !important; cursor: pointer;"
+																			href="/terms" target="_blank">terms &
+																			conditions. </a> I
+																		understand that Cyber Crime and Criminal Offenses such
+																		as downloading or sharing copyrighted material shall
+																		fall under Moral Turpitude and may lead to debarring
+																		an eligible candidate from joining a cadre of services
+																		even if selected. <br /> As a part of our Student
+																		Verification Process you will be required to submit a
+																		copy of a government issued Photo ID and a recent
+																		photograph to <a href="mailto:info@neostencil.com"
+																										 style="color: #dd9933 !important;">info@neostencil.com</a>.<span
+																			style="color: red">*</span>
+																	</p>
+																	<!--<p style="float: right; display: none;"
+																		id=termsConditionsAccordion>
+
+																		I have read and accepted the terms & conditions. I
+																		understand that Cyber Crime and Criminal Offenses such
+																		as downloading or sharing copyrighted material shall
+																		fall under Moral Turpitude and may lead to debarring
+																		an eligible candidate from joining a cadre of services
+																		even if selected. <br /> As a part of our Student
+																		Verification Process you will be required to submit a
+																		copy of a government issued Photo ID and a recent
+																		photograph to <a href="mailto:info@neostencil.com"
+																			style="color: #dd9933 !important;">info@neostencil.com</a>.<span
+																			style="color: red">*</span>
+																	</p>-->
+																	<p style="color: green">
+																		<label
+																			class="mdl-radio mdl-js-radio mdl-js-ripple-effect"
+																			for="termsConditions"> <input type="checkbox"
+																			id="termsConditions" class="mdl-radio__button"
+																			name="options" value="termsConditions" #isDefault#>
+																			<span class="mdl-radio__label"> </span>
+																		</label> I understand and accept. <span style="color: red">*</span>
+																	</p>
+																	<a id="gtm_rzp-button1">
+																	<button onclick="submitOrder('razorpay')"
+																		id="rzp-button1" disabled="disabled"
+																		style="color: #ffffff; opacity: 0.6"
+																		class="save-and-continue  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+																		Proceed to pay</button>
+																	</a>
+																</div>
+															</div>
+														</div>
+														<div class="mdl-tabs__panel" id="tab3-panel">
+															<div class="mdl-grid">
+																<div id="divUseNeoCashNEFT"
+																	class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+																	<div class='mdl-grid'>
+																		<div
+																			class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+																			<span>Useable NeoCash:&nbsp;</span> <input
+																				id="ipUseableCashNEFT" style='width: inherit'>
+																		</div>
+																		<div
+																			class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+																			<span>Total NeoCash:&nbsp;</span> <span
+																				id="ipTotalCashRazorNEFT"></span>
+																		</div>
+																		<div
+																			class="mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+																			<button
+																				class="mdl-button mdl-js-button mdl-js-ripple-effect"
+																				id="btnRedeemNCNEFT"
+																				style="border-radius: 20px; background-color: #ff6600; color: #ffffff; font-weight: 900; font-size: 13px;">Redeem
+																				NeoCash</button>
+																		</div>
+																		<div
+																			class="mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
+																			id="invalidNCNEFT" style="color: red; font-size: 12px;">
+																			<span id="spInvalidNCNEFT">Invalid NeoCash
+																				Amount!! Upto 10% of the payable amount can be paid
+																				using NeoCash!!</span>
+																		</div>
+																	</div>
+																</div>
+																<div
+																	class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+																	<p>
+																		Transfer <b class="finalAmount"></b> to our Bank
+																		Account
+																	</p>
+																	<p>
+																		NeoStencil India Private Limited:<br />Bank : <b>Axis
+																			Bank Limited</b><br />Account Number : <b>915020000302990</b><br />IFSC
+																		: <b>UTIB0000552</b>
+																	</p>
+																	<p>
+																		I have read and accepted the <a
+																			style="color: #dd9933 !important; cursor: pointer;"
+																			href="/terms" target="_blank">terms
+																			& conditions. </a> I
+																		understand that Cyber Crime and Criminal Offenses such
+																		as downloading or sharing copyrighted material shall
+																		fall under Moral Turpitude and may lead to debarring
+																		an eligible candidate from joining a cadre of services
+																		even if selected. <br /> As a part of our Student
+																		Verification Process you will be required to submit a
+																		copy of a government issued Photo ID and a recent
+																		photograph to <a href="mailto:info@neostencil.com"
+																										 style="color: #dd9933 !important;">info@neostencil.com</a>.<span
+																			style="color: red">*</span>
+																	</p>
+																	<!--<p style="float: right; display: none;"
+																		id=bankTransferTermsConditions>
+
+																		I have read and accepted the terms & conditions. I
+																		understand that Cyber Crime and Criminal Offenses such
+																		as downloading or sharing copyrighted material shall
+																		fall under Moral Turpitude and may lead to debarring
+																		an eligible candidate from joining a cadre of services
+																		even if selected. <br /> As a part of our Student
+																		Verification Process you will be required to submit a
+																		copy of a government issued Photo ID and a recent
+																		photograph to <a href="mailto:info@neostencil.com"
+																			style="color: #dd9933 !important;">info@neostencil.com</a>.<span
+																			style="color: red">*</span>
+																	</p>-->
+																	<p style="color: green">
+																		<label
+																			class="mdl-radio mdl-js-radio mdl-js-ripple-effect"
+																			for="termsConditionsOfBank"> <input
+																			type="checkbox" id="termsConditionsOfBank"
+																			class="mdl-radio__button" name="bankOptions"
+																			value="termsConditionsOfBank"> <span
+																			class="mdl-radio__label"> </span>
+																		</label> I understand and accept. <span style="color: red">*</span>
+																	</p>
+																	<a id="gtm_bankTransferPaymentType">
+																	<button onclick="submitOrder('neft')"
+																		id="bankTransferPaymentType" disabled="disabled"
+																		style="color: #ffffff; opacity: 0.6"
+																		class="save-and-continue-neft  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+																		Save and Continue</button>
+																	</a>
+																</div>
+															</div>
+														</div>
+
+														<div class="mdl-tabs__panel" id="tab4-panel">
+															<div class="mdl-grid">
+																<div id="divUseNeoCashZest"
+																	class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+																	<div class='mdl-grid'>
+																		<div
+																			class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+																			<span>Useable NeoCash:&nbsp;</span> <input
+																				id="ipUseableCashZest" style='width: inherit'>
+																		</div>
+																		<div
+																			class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+																			<span>Total NeoCash:&nbsp;</span> <span
+																				id="ipTotalCashZest"></span>
+																		</div>
+																		<div
+																			class="mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+																			<button
+																				class="mdl-button mdl-js-button mdl-js-ripple-effect"
+																				id="btnRedeemNCZest"
+																				style="border-radius: 20px; background-color: #ff6600; color: #ffffff; font-weight: 900; font-size: 13px;">Redeem
+																				NeoCash</button>
+																		</div>
+																		<div
+																			class="mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
+																			id="invalidNCZest" style="color: red; font-size: 12px;">
+																			<span id="spInvalidNCZest">Invalid NeoCash
+																				Amount!! Upto 10% of the payable amount can be paid
+																				using NeoCash!!</span>
+																		</div>
+																	</div>
+																</div>
+																<div
+																		class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+																	<p>
+																		Pay <b class="finalAmount"></b> using  <img src="https://lh3.googleusercontent.com/haKc9tz1u0i9QNxiwd8Dw0tu0HLUWCmXPXXCHC_pbWFRlBmqSJOrFMdBPjA1UuvKsmDj8d1cHTWf9xa0yd_YAmYX1N8=w18-h18" alt="ZestMoney" align="middle"> ZestMoney
+																	</p>
+
+																	<p>
+																		I have read and accepted the <a
+																			style="color: #dd9933 !important; cursor: pointer;"
+																			href="/terms" target="_blank">terms &
+																		conditions. </a> I
+																		understand that Cyber Crime and Criminal Offenses such
+																		as downloading or sharing copyrighted material shall
+																		fall under Moral Turpitude and may lead to debarring
+																		an eligible candidate from joining a cadre of services
+																		even if selected. <br /> As a part of our Student
+																		Verification Process you will be required to submit a
+																		copy of a government issued Photo ID and a recent
+																		photograph to <a href="mailto:info@neostencil.com"
+																										 style="color: #dd9933 !important;">info@neostencil.com</a>.<span
+																			style="color: red">*</span>
+																	</p>
+
+																	<p>*Only salaried individuals are eligible for the EMI facility by ZestMoney. For students, their parents can apply on their behalf.
+																	</p>
+																	<p style="font-weight: bold; color: #ff6600;">You will have to pay 20% of the course fee as down payment</p>
+
+
+																	<p style="color: green">
+																		<label
+																				class="mdl-radio mdl-js-radio mdl-js-ripple-effect"
+																				for="termsConditionsOfZestmoney"> <input type="checkbox"
+																																			id="termsConditionsOfZestmoney" class="mdl-radio__button"
+																																			name="options" value="termsConditions" #isDefault#>
+																			<span class="mdl-radio__label"> </span>
+																		</label> I understand and accept. <span style="color: red">*</span>
+																	</p>
+																	<a id="gtm_zm-button">
+
+																		<button onclick="submitOrder('zestmoney')"
+																						id="zm-button" disabled="disabled"
+																						style="color: #ffffff; opacity: 0.6"
+																						class="save-and-continue  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+																			Save and Continue</button>
+
+																	</a>
+																</div>
+															</div>
+														</div>
+
+													</div>
+
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div
+						class="mdl-3 mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+						<div class="order-summary">
+							<div class="order-summary-header">
+								<h3>Order Summary</h3>
+							</div>
+							<div class="order-summary-div">
+								<div class="isPromocodeApplied">
+									<p class="promo-code">Applied Promocode!</p>
+									<form action="#" class="validate">
+										<div class="mdl-textfield mdl-js-textfield">
+											<input class="mdl-textfield__input" type="text" id="sample1">
+											<label class="mdl-textfield__label" for="sample1">Apply
+												/Enter Promocode</label>
+										</div>
+										<br /> <a id="removeCoupon" class="remove-coupon"></a>
+
+										<div class="progress-button" data-result="true">
+											<button>
+												<span><b>GO</b></span>
+											</button>
+
+											<!-- svg circle for progress indication -->
+											<svg class="progress-circle" width="70" height="70">
+                      <path
+													d="m35,2.5c17.955803,0 32.5,14.544199 32.5,32.5c0,17.955803 -14.544197,32.5 -32.5,32.5c-17.955803,0 -32.5,-14.544197 -32.5,-32.5c0,-17.955801 14.544197,-32.5 32.5,-32.5z" />
+                    </svg>
+
+											<!-- checkmark to show on success -->
+											<svg class="checkmark" width="70" height="70">
+                      <path d="m31.5,46.5l15.3,-23.2" />
+                      <path d="m31.5,46.5l-8.5,-7.1" />
+                    </svg>
+
+											<!-- cross to show on error -->
+											<svg class="cross" width="70" height="70">
+                      <path d="m35,35l-9.3,-9.3" />
+                      <path d="m35,35l9.3,9.3" />
+                      <path d="m35,35l-9.3,9.3" />
+                      <path d="m35,35l9.3,-9.3" />
+                    </svg>
+
+										</div>
+
+									</form>
+								</div>
+								<div class="cart-subtotal">
+									<p class="subtotal">
+										Subtotal <span class="float-right" id="subtotal"></span>
+									</p>
+									<p class="couponMoney">
+										Discount <span class="float-right" id="couponMoney"></span>
+									</p>
+									<p class="neoCash">
+										NeoCash <span class="float-right" id="neoCash"></span>
+									</p>
+								</div>
+								<p class="subtotal">
+									<b>Amount Payable</b> <span class="float-right"><b
+										id="amountPayable"></b></span>
+								</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+	</div>
+
+
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/checkout.js')}}"></script>
+
+</body>
+</html>

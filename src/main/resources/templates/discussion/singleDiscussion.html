@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+
+  <title th:utext="${response?.title}"></title>
+
+  <meta property="og:title" th:content="${response?.title}" />
+  <meta name="description"
+        th:content="${response?.content}">
+
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+
+  <!--<link
+    th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.css')}}"
+    rel="stylesheet" media="screen" />-->
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/answerkey.css')}}"
+      rel="stylesheet" media="screen"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+  <!--<link
+    th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick-theme.css')}}"
+    rel="stylesheet" media="screen" />-->
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/blogs.css')}}"
+      rel="stylesheet" media="screen"/>
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/discussion.css')}}"
+      rel="stylesheet" media="screen"/>
+
+  <link rel="canonical"
+        th:href="${'https://neostencil.com/'+post?.postSlug}"/>
+</head>
+<body class="">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+  <nav role="navigation" id="navigation" style="top: 100px; position: relative; display: none;">
+    <div id="menuToggle">
+      <input type="checkbox" />
+      <span></span>
+      <span></span>
+      <span></span>
+      <ul id="menu" class="blog-share">
+        <li ><a href="/discussions"><i class="material-icons side-nav-bar"> supervisor_account </i>&nbsp;
+          All Discussions</a>
+        </li>
+        <li ><a href="/user-discussions"><i class="material-icons side-nav-bar "> question_answer </i>&nbsp;
+          My Discussions</a>
+        </li>
+        <!--<li><a ><i class="material-icons side-nav-bar"> reply_all </i>&nbsp;My Participation</a>-->
+        <!--</li>-->
+      </ul>
+    </div>
+  </nav>
+  <img src="https://lh3.googleusercontent.com/bO7HpwjNud9Fwlt2W8P9YwRmnRYCrTb1PEkQxHuGqtW7Ros4Gmct-HMtpmu3KXnGQv6F1ftFNqZtGec-z54DqLeWFjo=w1800" style="
+    width: 100%;
+    position: absolute;">
+  <div class="mat-content mdl-layout__content" id="mat-content">
+    <div class="container-header" style="margin-top: 30px;">
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone navigation">
+          <ul class="blog-share">
+            <li ><a href="/discussions"><i class="material-icons side-nav-bar"> supervisor_account </i>&nbsp;
+              All Discussions</a>
+            </li>
+            <li ><a href="/user-discussions"><i class="material-icons side-nav-bar "> question_answer </i>&nbsp;
+              My Discussions</a>
+            </li>
+            <!--<li><a ><i class="material-icons side-nav-bar"> reply_all </i>&nbsp;My Participation</a>-->
+            <!--</li>-->
+          </ul>
+
+        </div>
+        <div
+            class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone discussion-container">
+
+          <div style="display: none;" class="common-loader"
+               id="loader-discussions">
+            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+          </div>
+
+          <div id="single-discussions" >
+            <h3 class="discussion-heading" th:text="${response?.title}">Horizontal masonry layout with flexbox CSS only
+              [duplicate]</h3>
+            <div class="user-profile mdl-grid">
+              <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--12-col-phone">
+
+                <img th:src="${response?.avatar+'=w50-h52-cc'}"/>
+              </div>
+              <div class=" mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+                <div class="user-name" th:text="${response?.createdBy}"></div>
+                <div class="last-active" th:text="${#dates.format(response.updatedAt, 'MMMM dd, yyyy HH:mm')}"></div>
+              </div>
+              <div class=" mdl-cell mdl-cell--7-col mdl-cell--3-col-tablet mdl-cell--12-col-phone">
+                <div class="float-right">
+                  <a class="social-icon" th:href="@{'http://www.facebook.com/share.php?u=https://neostencil.com/discussion/' + ${response?.slug}}" target="_blank" aria-label="facebook" rel="nofollow noopener noreferrer"><i class="fa fa-facebook"></i></a>
+                  <a th:href="@{'http://twitter.com/share?url=https://neostencil.com/discussion/'+ ${response?.slug}}" rel="nofollow noopener noreferrer" target="_blank" aria-label="twitter" class="social-icon" ><i class="fa fa-twitter"></i></a>
+                  <a  th:href="@{'https://telegram.me/share/url?url=https://neostencil.com/discussion/' + ${response?.slug} + '&text='+ ${response?.title}}" target="_blank" class="social-icon" aria-label="telegram" rel="nofollow noopener noreferrer" ><i class="fa fa-telegram" aria-hidden="true" style=" font-size: 17px; "></i></a>
+                  <a  th:href="@{'whatsapp://send?text=https://neostencil.com/discussion/' +  ${response?.slug} }" target="_blank" class="social-icon" aria-label="whatsapp" rel="nofollow noopener noreferrer" href="https://wa.me/919599075552"><i class="fa fa-whatsapp"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--11-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+              <p class="comment-text" th:text="${response?.content}"></p>
+            </div>
+            <div class="mdl-grid " style="padding: 0">
+              <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--2-col-phone"style="width: fit-content;width: -moz-fit-content;margin: 0 8px 0 0;">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"onclick="likeDiscussion()" style="position: relative; top: -1px;">
+                  <i class="fa fa-heart like" style=""></i>
+                </button>
+                <!--<div style="cursor: pointer"><i class="fa fa-heart-o like " onclick="likeDiscussion()"></i></div>-->
+                <span><span id="noOfLikes" th:text="${response?.noOfLikes}"></span> likes</span>
+              </div>
+              <div class="mdl-cell mdl-cell--3-col mdl-cell--5-col-tablet mdl-cell--2-col-phone" style="width: fit-content;width: -moz-fit-content; margin: 0 0 0 8px">
+                <!--<div class="report">-->
+                <!--<span class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect">-->
+                <!--<i class="material-icons"> error_outline </i>-->
+                <!--</span>-->
+         <!--<span>Report</span></div>-->
+                <div class="report" >
+                  <div class="postCommentBtn">Comment</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div class="no-of-answers"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <section id="reviews" class="reviews">
+      <div class="container">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"></div>
+          <div
+              class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div
+
+                class="mdl-cell mdl-cell--11-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div
+                  class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="drop-a-comment" style="margin-top: -30px;">
+                    <div class="mdl-grid" style="margin: 0px; padding: 0px">
+                      <div id="comment-box"
+                           class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                           style="margin: 0px">
+                        <label for="commentsBox">Comment*</label><br />
+                        <textarea rows="7" id="commentsBox" name="commentsBox"></textarea>
+
+                        <br /> <input
+                          style="width: auto; height: auto; float: left;" type="file"
+                          id="uploadAttachment" accepts=".pdf" /> <i
+                          class="fa fa-spinner fa-spin" id="attachemtLoader"
+                          style="display: none;"></i>
+                        <i class="material-icons succesfullyUploaded" style="color: #9ece7b; display: none">check_circle</i>
+                      </div>
+                      <button id="post-comment" class="post-comment mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="postCommentOnDiscussion();">
+                        SUBMIT</button>
+                    </div>
+                  <div class="comment_wrapper" style="margin-top: 20px;">
+                    <div class="mdl-spinner mdl-js-spinner is-active" id="loader"></div>
+                  </div>
+                  <p id="alertMessage"></p>
+                </div>
+                <div class="login-to-comment">
+                  <h5>To post a comment, Please Login </h5>
+                  <button class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="btn-login" data-upgraded=",MaterialButton,MaterialRipple" style="width: 200px;margin-top: 0px" onclick="loginToComment();">
+
+                    Log in<span class="mdl-button__ripple-container"><span class="mdl-ripple is-animating" style="width: 609.631px; height:609.631px; transform: translate(-50%, -50%) translate(146px, 22px);"></span></span></button>
+                </div>
+                <br />
+
+
+              </div>
+              <div id="viewAllComments"></div>
+              <br /> <br />
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <input type="hidden" id="checkIsPost" value="isPost">
+
+    </section>
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+  <!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+</div>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<!--<script
+  th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"></script>
+<script
+  th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>-->
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/scorecard.js')}}"></script>
+<!--<script-->
+<!--th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/post.js')}}"></script>-->
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/discussion.js')}}"></script>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var ID = [[${response?.id}]];
+  var discussionId= [[${response?.slug}]];
+   /*]]>*/
+</script>
+<script>
+  $( document ).ready(function() {
+    getComments(0);
+    if (isUserLoggedIn() == false) {
+      $('.login-to-comment').show();
+      $('.drop-a-comment').hide();
+      $('a[href$="pdf"]').click(function (ev) {
+        ev.preventDefault();
+        if ($(window).width() >= 1024) {
+          window.location.href = "/login";
+        }
+        else {
+          window.location.href = "/login";
+        }
+
+      })
+    }
+    else{
+      $('.login-to-comment').hide();
+    }
+  });
+    function likeDiscussion() {
+    $
+    .ajax({
+      url : apiBasePath + "/user/discussions/" + ID +"/like",
+      type : "PUT",
+      success : function(response) {
+        $('#noOfLikes').html(response);
+      },
+
+      error : function(response) {
+
+      }
+    });
+  }
+</script>
+</body>
+</html>
+
+
+
+
+

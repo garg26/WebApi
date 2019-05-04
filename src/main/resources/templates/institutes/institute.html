@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title th:utext="${institute?.titleTag}"></title>
+  <meta th:if="${#strings.toString(institute?.status)} != 'publish'" name="robots"
+        content="nofollow, noindex"/>
+  <meta th:each="metaTag : ${institute?.metaList}"
+        th:if="${metaTag.attributeType} != 'property'"
+        th:attr="name=${metaTag.type},content=${metaTag.content}"/>
+
+  <meta th:each="metaTag : ${institute?.metaList}"
+        th:if="${metaTag.attributeType} == 'property'"
+        th:attr="property=${metaTag.type},content=${metaTag.content}"/>
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+      rel="stylesheet" media="screen"/>
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+      rel="stylesheet" media="screen"/>
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/teachers.css')}}"
+      rel="stylesheet" media="screen"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+
+  <link rel="canonical"
+        th:href="${'https://neostencil.com/institute/'+institute?.instituteSlug}"/>
+
+  <!-- <link
+                  href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+                  rel="stylesheet" media="screen" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+                 -->
+  <style>
+    .slick-next.slick-arrow {
+      right: 47% !important;
+    }
+
+    .slick-prev.slick-arrow {
+      left: 46.5% !important;
+    }
+  </style>
+</head>
+
+<body class="all-teachers-page">
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+  <!-- <div class="mat-drawer mdl-layout__drawer">
+<span class="mdl-layout-title">
+</span>
+
+</div> -->
+
+
+  <div class="mat-content mdl-layout__content">
+    <div class="landing-darken" style="display: none;"></div>
+    <!--/*/ <th:block th:include="common/breadCrumb"></th:block> /*/-->
+
+
+    <section class="teacher-details">
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+            <div class="demo-card-square mdl-card mdl-shadow--2dp">
+              <img th:src="@{${institute?.imageUrl}+'=w300-h300'}"
+                   th:alt="${institute.name}">
+              <div class="teacher-detail-1">
+                <h1 th:text="${institute.name}"></h1>
+                </a> <span class="teacher-institute">by <span
+                  th:text="${institute.ownerName}"></span></a></span><br/> <a
+                  th:attr="data-messageTo=${institute?.emailId}"
+                  style="display: block;" class="send-enquiry mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                  id="sendEnquiryButton">Send Enquiry</a>
+                <hr>
+                <p>
+                  <div class="teacher-grid-icon mdl-grid">
+                    <div
+                        class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                      <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    </div>
+                    <div
+                        class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                <p th:text="${institute?.address}" th:if="${institute?.address != null}"></p>
+              </div>
+            </div>
+            </p>
+            <p>
+              <div class="teacher-grid-icon mdl-grid" th:if="${#strings.toString(institute?.contactNo) !='8826469839,9560928172,9868412447, 45505509' and #strings.toString(institute?.contactNo) !='011-45696019,8506099919' } ">
+                <div
+                    class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <a th:href="@{tel: + ${institute.contactNo}}">
+            <p th:text="${institute.contactNo}"></p>
+            </a>
+          </div>
+        </div>
+        </p>
+
+        <p>
+          <div class="teacher-grid-icon mdl-grid" th:if="${#strings.toString(institute?.emailId) !='mitraphilosophy@gmail.com' and #strings.toString(institute?.emailId) !='lukmanias@gmail.com' } ">
+            <div
+                class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+            </div>
+            <div
+                class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+              <a th:href="@{'mailto:' + ${institute?.emailId}}"
+                 rel="nofollow" target="_top">
+        <p th:text="${institute.emailId}"></p>
+        </a>
+      </div>
+  </div>
+
+  </p>
+  <!--<hr>-->
+  <!--<p>-->
+  <!--<a target="_blank" rel="nofollow"-->
+  <!--th:href="@{${institute?.facebookUrl}}"><i-->
+  <!--class="fa fa-facebook-f" aria-hidden="true"></i></a> &nbsp;<a-->
+  <!--target="_blank" rel="nofollow"-->
+  <!--th:href="@{${institute?.twitterUrl}}"><i-->
+  <!--class="fa fa-twitter" aria-hidden="true"></i></a> &nbsp;<a-->
+  <!--target="_blank" rel="nofollow"-->
+  <!--th:href="@{${institute?.linkedinUrl}}"><i-->
+  <!--class="fa fa-linkedin" aria-hidden="true"></i></a> &nbsp;<a-->
+  <!--target="_blank" rel="nofollow"-->
+  <!--th:href="@{${institute?.googlePlusUrl}}"><i-->
+  <!--class="fa fa-google-plus" aria-hidden="true"></i></a>-->
+
+  <!--</p>-->
+</div>
+</div>
+</div>
+
+<div id="teacher-description-card"
+     class="teacher-description-card mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+  <ul class="teacher-nav">
+    <li class="active"><a href="#teacher-description-card">Biography</a></li>
+    <li><a href="#trending-courses">Courses Offered</a></li>
+    <li><a href="#instructing-faculty">Instructing Faculty</a></li>
+    <li th:if="${reviews}"><a href="#reviews">Testimonials</a></li>
+  </ul>
+  <div class="demo-card-square mdl-card mdl-shadow--2dp">
+    <h3 th:text="@{'About '+${institute.name}}"></h3>
+    <p th:text="${institute.description}">Lukmaan IAS is a young
+      and dynamic organization which has adapted itself to Emerging
+      Testing Standards of the Union Public Service Commission’s
+      (UPSC) Civil Services Examination (CSE).</p>
+    <h4>
+      <span th:text="${institute.name}"></span>’s Achievements
+    </h4>
+    <div class="mdl-grid">
+      <div
+          class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+          th:each="achievements : ${institute?.instituteAchievements}">
+
+        <div class="career-highlight">
+											<span><div class="mdl-grid">
+													<div
+                              class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+														<img th:src="${achievements?.iconUrl}">
+													</div>
+													<div
+                              class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+														<b th:text="${achievements?.description}"></b>
+
+													</div>
+												</div></span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <span th:utext="${institute.otherInformation}"></span>
+    </p>
+
+  </div>
+</div>
+<div
+    class="dots-list mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+  <ol th:if="${institute.instituteHighlights}">
+    <li th:each="highlights : ${institute?.instituteHighlights}"><label
+        th:text="${highlights?.text}"></label><br/> <span
+        th:text="${highlights?.description}"></span></li>
+  </ol>
+  <ol th:if="${institute.instituteRelateds}">
+    <li th:each="relatedInfo : ${institute.instituteRelateds}"><label
+        th:text="${relatedInfo?.text}"></label><br/> <span
+        th:text="${relatedInfo?.description}"></span></li>
+  </ol>
+
+  <a><img th:src="${institute?.bannerImage}"></a>
+</div>
+</div>
+
+</div>
+</section>
+
+<br/> <br/>
+<div id="trending-courses" class="trending-courses skew"
+     style="padding-top: 30px;">
+  <div class="container-header">
+    <div class="logo-font mat-teachers-slogan"
+         th:text="${'Courses Offered by ' + institute.name}"></div>
+    <div class="underline"></div>
+    <section id="single-course-slider-1" class="regular slider"
+             style="margin: 32px 8px 0 8px;">
+      <div th:each="institute : ${institute.courses}">
+        <div class="trending-courses-card mdl-card__media">
+          <!-- <a class="close-ribbon"><span>BEST SELLER</span></a> -->
+          <a th:href="@{'/course/' + ${institute.courseOldSlug}}"> <img
+              th:src="@{${institute.courseImageUrl}+'=w300-h186-s'}"
+              th:alt="${institute.courseTitle}">
+          </a>
+        </div>
+
+        <div class="ns-card">
+
+          <span class="course-rating" th:id="${institute?.courseOldSlug}"></span>
+
+          <script type="text/javascript" th:inline="javascript">
+
+            var ratingHtml = '';
+
+            var j = /*[[${institute?.courseRating}]]*/;
+            var courseId = /*[[${institute?.courseOldSlug}]]*/;
+
+            for (j; j >= 1; j--) {
+              ratingHtml = ratingHtml
+                  + '<i class=\"material-icons\">star_rate</i>';
+            }
+            if (j < 1 && j > 0) {
+              ratingHtml = ratingHtml
+                  + "<i class=\"material-icons\">star_half</i>";
+            }
+            document.getElementById(courseId).innerHTML = ratingHtml;
+          </script>
+
+          <span class="starts-on">Start Date: <span
+              class="starts-on-date" th:text="${institute.startDate}">27-nov-2017</span>
+								</span> <a th:href="@{'/course/' + ${institute.courseOldSlug}}"><h3
+            th:text="${institute.courseTitle}"
+            class="course-title-ellipis">Editorial Discussion Untill
+          Mains Lukmaan Academy</h3></a>
+
+
+          <!--<p class="ns-card-p">
+            <span class="p-grid-1"><i>by</i> <a
+              th:href="@{'/teacher/' + ${institute.instructorSlug}}"> <span
+                class="ns-card-teacher" th:text="${institute.instructorName}"></span></a>
+              <br /> <a style="height: 17px; display: block;"
+              th:href="@{'/institute/' + ${institute.instituteSlug}}"> <span
+                th:text="${institute.instituteName}"></span>
+            </a> </span>
+
+          </p>-->
+          <p class="ns-card-p">
+											<span class="p-grid-1"><i>by</i>
+                        <a th:each="td:${institute.teachersMap}">
+
+												<a th:if="${institute.teachersMap.size()} >= 2"
+                           th:href="@{'/teacher/' + ${td.key}}"> <span
+                            class="ns-card-teacher "
+                            th:text="@{${td.value} + ','}"></span>
+											</a>
+													<a th:unless="${institute.teachersMap.size()}>= 2"
+                             th:href="@{'/teacher/' + ${td.key}}"> <span
+                              class="ns-card-teacher "
+                              th:text="@{${td.value}}"></span>
+											</a>
+                          </a>
+                        </a>
+                        <br/> <a style="height: 17px; display: block;"
+                                 th:href="@{'/institute/' + ${institute.instituteSlug}}"> <span
+                            th:text="${institute.instituteName}">(Pavan Kumar
+														Academy)</span>
+											</a> </span>
+          </p>
+          <div class="">
+
+            <h3 th:if="${institute.price > 0}" class="price">
+              <i class="fa fa-inr">&nbsp;</i><span
+                th:text="${#numbers.formatDecimal(institute.price, 0, 'COMMA', 0, 'POINT')}"></span>
+            </h3>
+            <h3 th:if="${institute.price == 0}" class="price">
+              <span style="color: green;">FREE</span>
+            </h3>
+
+            <span class="number-students float-right"><i
+                class="fa fa-user"></i>&nbsp; <span
+                th:text="${institute.studentsEnrolled + ' Students'}"></span>
+									</span>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+  </div>
+</div>
+<br/>
+<div id="instructing-faculty" class="trending-courses">
+  <div class="container-header">
+    <div class="logo-font mat-teachers-slogan"
+         th:text="${'Instructing faculty in ' + institute.name}"></div>
+    <div class="underline"></div>
+    <section id="single-course-slider-3" class="regular slider"
+             style="margin: 32px 8px 0 8px;">
+
+      <div th:each="teachers : ${institute.teachers}">
+        <div
+            class="all-teachers-card demo-card-square mdl-card mdl-shadow--2dp">
+          <div class="">
+            <a th:href="@{'/teacher/' + ${teachers.slug}}"> <img
+                th:src="@{${teachers.displayPictureUrl}+'=w255-h158-s'}"
+                th:alt="${teachers.teacherName}">
+            </a>
+
+          </div>
+          <a th:href="@{'/teacher/' + ${teachers.slug}}">
+            <h3 th:text="${teachers.teacherName}"></h3>
+          </a>
+          <p></p>
+          <div class="teacher-subjects-ellipsis">
+									<span
+                      th:each="subject:${#strings.arraySplit(teachers.subjects, ',')}">
+										<span class="mdl-chip"> <span class="mdl-chip__text"
+                                                  th:text="${subject}"></span>
+									</span>&nbsp;
+									</span>
+          </div>
+
+
+          <div class="mdl-card__actions">
+            <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;<span
+              th:if="${teachers.courses !=null}"
+              th:text="${#lists.size(teachers.courses) + ' Courses'}"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<section id="reviews" class="reviews" th:if="${reviews}">
+  <div class="container-header">
+    <div class="mdl-grid">
+      <div
+          class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <hr>
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone margin-zero">
+            <div class="logo-font mat-teachers-slogan"
+                 style="margin-left: 0;">Testimonials
+            </div>
+            <br/>
+            <div class="mdl-grid">
+              <div
+                  class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="review" th:each="review,iterator : ${reviews}">
+                  <img th:if="${not #strings.isEmpty(review.avatar)}"
+                       th:src="@{${review.avatar}+'=cc'}" th:alt="${review.name}"
+                       width="64px" class="float-left"> <img
+                    th:unless="${not #strings.isEmpty(review.avatar)}"
+                    src="https://lh3.googleusercontent.com/Z4uHbjIjELCl1WaD_fGK7VnkE9sXzT_b4SLAmmapf7JbmtR9pNF17JW58z3vA7JsRuCGl0BiovQc7zuHiuOp6PZi7Cw=cc"
+                    width="64px" class="float-left">
+                  <div class="user-detail float-left">
+                    <span th:text="${review.name}"></span><br/> <span
+                      th:id="@{'spanRatingReviews'+${iterator?.index}}"></span>
+                    <script type="text/javascript" th:inline="javascript">
+                      var ratingHtml = '';
+                      ratingHtml = ratingHtml + '<span class=\"course-rating\">';
+                      var j = /*[[${review?.reviewRating}]]*/;
+                      var index = /*[[${iterator?.index}]]*/;
+                      for (j; j >= 1; j--) {
+                        ratingHtml = ratingHtml
+                            + '<i class=\"material-icons\">star_rate</i>';
+                      }
+                      if (j < 1 && j > 0) {
+                        ratingHtml = ratingHtml
+                            + "<i class=\"material-icons\">star_half</i>";
+                      }
+                      ratingHtml = ratingHtml + '</span>';
+                      document.getElementById("spanRatingReviews"
+                          + index).innerHTML = ratingHtml;
+
+
+                    </script>
+                    <!--&nbsp;<span class="review-date">&nbsp; |&nbsp; <span-->
+                    <!--th:text="${review?.date}"></span></span>-->
+                  </div>
+                  <p th:text="${review?.text}"></p>
+                  <hr>
+                </div>
+                <!-- <hr> -->
+                <!-- <span class="load-more-reviews">Read All 19 reviews</span>
+    <hr> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--<section id="reviews" class="reviews">
+<div class="container">
+<div class="mdl-grid">
+  <div
+      class="mdl-cell mdl-cell&#45;&#45;8-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+    <hr style="margin-top: 100px;">
+    <div
+        class="mdl-cell mdl-cell&#45;&#45;10-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+      <h3>Reviews</h3>
+      <div class="review">
+        <img src="http://www.pvhc.net/img240/uyttxprhsqycyximpzjb.png"
+             width="64px" class="float-left">
+        <div class="user-detail float-left">
+          <span>Ruchika Katyal</span><br/> <span class="course-rating"><i
+            class="material-icons">star_rate</i> <i
+            class="material-icons">star_rate</i> <i
+            class="material-icons">star_rate</i> <i
+            class="material-icons">star_rate</i></span>&nbsp;<span
+            class="review-date"> | Dec 5, 2017</span>
+        </div>
+        <p>Your mstery in the subject, conceptual clarity & teching
+          styled helped in simplifying the most difficultthongs & gave
+          self-confidence a new meaning. I thnak you for your
+          unparalleled support at all times.</p>
+      </div>
+      <hr>
+      <div class="review">
+        <img src="http://www.pvhc.net/img240/uyttxprhsqycyximpzjb.png"
+             width="64px" class="float-left">
+        <div class="user-detail float-left">
+          <span>Ruchika Katyal</span><br/> <span class="course-rating"><i
+            class="material-icons">star_rate</i> <i
+            class="material-icons">star_rate</i> <i
+            class="material-icons">star_rate</i> <i
+            class="material-icons">star_rate</i></span>&nbsp;<span
+            class="review-date"> | Dec 5, 2017</span>
+        </div>
+        <p>Your mstery in the subject, conceptual clarity & teching
+          styled helped in simplifying the most difficultthongs & gave
+          self-confidence a new meaning. I thnak you for your
+          unparalleled support at all times.</p>
+      </div>
+      <hr>
+      <div class="review">
+        <img src="http://www.pvhc.net/img240/uyttxprhsqycyximpzjb.png"
+             width="64px" class="float-left">
+        <div class="user-detail float-left">
+          <span>Ruchika Katyal</span><br/> <span class="course-rating"><i
+            class="material-icons">star_rate</i> <i
+            class="material-icons">star_rate</i> <i
+            class="material-icons">star_rate</i> <i
+            class="material-icons">star_rate</i></span>&nbsp;<span
+            class="review-date"> | Dec 5, 2017</span>
+        </div>
+        <p>Your mstery in the subject, conceptual clarity & teching
+          styled helped in simplifying the most difficultthongs & gave
+          self-confidence a new meaning. I thnak you for your
+          unparalleled support at all times.</p>
+      </div>
+      <hr>
+      <span class="load-more-reviews">Read All 19 reviews</span>
+      <hr>
+    </div>
+    <p>Your mstery in the subject, conceptual clarity & teching
+      styled helped in simplifying the most difficultthongs & gave
+      self-confidence a new meaning. I thnak you for your
+      unparalleled support at all times.</p>
+  </div>
+  <hr>
+  <span class="load-more-reviews">Read All 19 reviews</span>
+  <hr>
+</div>
+</div>
+</div>
+</div>
+</section>-->
+<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+</div>
+<!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+</div>
+<!-- send enquiry dialog -->
+<dialog id="sendEnquiryDialog" class="mdl-dialog">
+  <div class="mdl-dialog__content">
+    <div class="show-dialog-form">
+      <p>Send new message</p>
+      <textarea placeholder="Write a message.." rows="4"></textarea>
+      <label style="display: none;" class="emptyMessage error">Please
+        enter a message</label>
+      <button type="button"
+              class="close mdl-button mdl-js-button mdl-js-ripple-effect">Close
+      </button>
+      <button onclick="sendNewMessage(this);"
+              class="send-enquiry-common mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        Send
+      </button>
+    </div>
+    <div style="display: none;" class="message-has-been-sent">
+      <p>Your message has been sent and is on its way</p>
+      <button type="button"
+              class="close mdl-button mdl-js-button mdl-js-ripple-effect">Close
+      </button>
+      <a href="/user-dashboard?goto=messages"
+         class="view-sent-messages mat-signup mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sent
+        Messages</a>
+    </div>
+  </div>
+
+</dialog>
+
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>
+
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/teachers.js')}}"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<script>
+  /* send enquiry dialog */
+  (function () {
+    'use strict';
+    var dialogButton = document.querySelector('#sendEnquiryButton');
+    var dialog = document.querySelector('#sendEnquiryDialog');
+    if (!dialog.showModal) {
+      dialogPolyfill.registerDialog(dialog);
+    }
+    dialogButton.addEventListener('click', function () {
+      dialog.showModal();
+      $('.emptyMessage').hide();
+      $('#sendEnquiryDialog').find('textarea').attr("data-id",
+          $('#sendEnquiryButton').attr("data-messageTo"));
+    });
+    dialog.querySelector('.show-dialog-form .close').addEventListener(
+        'click', function () {
+          dialog.close();
+          $('.show-dialog-form').show();
+          $('.message-has-been-sent').hide();
+        });
+    dialog.querySelector('.message-has-been-sent .close')
+    .addEventListener('click', function () {
+      dialog.close();
+      $('.show-dialog-form').show();
+      $('.message-has-been-sent').hide();
+    });
+  }());
+</script>
+</body>
+</html>

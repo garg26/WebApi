@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+<link
+	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css"
+	rel="stylesheet" />
+
+</head>
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Add New Coupon</h1>
+					</div>
+				</div>
+				<form name="coupon-creation" id="coupon-creation">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="form-group">
+								<label>Coupon Code</label> <input type="text" name="code"
+									id="code" class="form-control"
+									placeholder="neopre or jaipur-seminar">
+							</div>
+							<div class="form-group">
+								<label>Description</label> <input type="text" name="description"
+									id="description" class="form-control"
+									placeholder="Coupon Description">
+							</div>
+
+							<h3>General Settings</h3>
+							<div class="form-group">
+								<label>Discount Type</label> <select name="discountType"
+									id="discountType" class="form-control">
+									<option value="0" selected disabled>Select Discount
+										Type</option>
+									<option value="PERCENTAGE_DISCOUNT">Percentage
+										Discount</option>
+									<option value="FIXED_AMOUNT_DISCOUNT">Fixed Amount
+										Discount</option>
+									<option value="AMOUNT_PERCENTAGE_DISCOUNT">Amount Or
+										Percentage Discount</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label>Coupon Amount</label> <input type="number" min="0"
+									class="form-control discount-type-amount" name="amount"
+									id="amount" placeholder="Coupon Amount in Rs. e.g. 2000.00">
+							</div>
+
+							<div class="form-group discount-type-amount">
+								<label>Coupon Discount Percentage</label> <input type="number"
+									min="0" class="form-control" name="discountPercentage"
+									id="discountPercentage"
+									placeholder="Coupon Discount Percentage">
+							</div>
+
+							<div class="form-group">
+								<label>Usage Limit Per Coupon</label> <input type="number"
+									min="0" class="form-control" name="usageLimitPerCoupon"
+									id="usageLimitPerCoupon" placeholder="Usage limit per Coupon">
+							</div>
+
+							<div class="form-group">
+								<label>Usage Limit Per Person</label> <input type="number"
+									min="0" class="form-control" name="usageLimitPerPerson"
+									id="usageLimitPerPerson" placeholder="Usage limit per Person">
+							</div>
+
+							<label>Expiry Date</label>
+							<div class="input-group">
+								<input type="date" class="form-control" name="expiryDate"
+									id="expiryDate" /> <span class="input-group-addon"> <span
+									class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+
+
+							<h3>Usage Restrictions</h3>
+							<div class="form-group">
+								<label>Minimum Spend</label> <input type="number" min="0"
+									class="form-control" name="minimumSpend" id="minimumSpend"
+									placeholder="Minimum Spend in Rs. e.g. 10000.00">
+							</div>
+
+							<div class="form-group">
+								<label>Include LMS Products</label> <select
+									name="includedProducts" multiple id="includedProducts"
+									class="form-control selectpicker" data-live-search="true"
+									title="Select Multiple Product">
+									<option value="0" disabled>Select Multiple Allowed
+										Products</option>
+
+									<option th:each="product : ${products}"
+										th:data-subtext="${product.type}"
+										th:text="${'Id :- ' + product.commodityId + ', Title :- ' + product.productTitle}"
+										th:value="${product.id}"></option>
+
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Exclude LMS Products</label> <select
+									name="excludedProducts" multiple id="excludedProducts"
+									class="form-control selectpicker" data-live-search="true"
+									title="Select Multiple Product">
+									<option value="0" disabled>Select Multiple Disallowed
+										Products</option>
+									<option th:each="product : ${products}"
+										th:data-subtext="${product.type}"
+										th:text="${'Id :- ' + product.commodityId + ', Title :- ' + product.productTitle}"
+										th:value="${product.id}"></option>
+								</select>
+							</div>
+
+							<!--<div class="form-group">-->
+							<!--<label>Allowed Users</label>-->
+							<!--<select class="form-control selectpicker" name="allowedUsers" multiple-->
+							<!--id="allowedUsers" data-live-search="true"-->
+							<!--title="Select Multiple Users By EmailId">-->
+							<!--<option th:each="user : ${users}" th:data-subtext="${user.fullName}"-->
+							<!--th:text="${user.emailId}"-->
+							<!--th:value="${user.userId}"-->
+							<!--&gt;</option>-->
+							<!--</select>-->
+							<!--</div>-->
+
+							<label class="radio-inline" style="margin-top: 10px;"><input
+								type="radio" name="optradio" id="publish" value="publish">Publish</label>
+							<label class="radio-inline" style="margin-top: 10px;"><input
+								type="radio" name="optradio" id="draft" value="draft">Draft</label>
+
+
+							<div class="row" style="margin-top: 10px";>
+								<div class="col-md-9">
+									<button class="submit btn btn-primary" type="submit"
+										value="publish">Submit</button>
+									<i class="fa fa-spinner fa-spin" id="loader"></i> <a
+										href="/admin/ecommerce/coupons" class="btn btn-default"
+										style="margin-left: 60px;">All Coupon</a>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	!--/*/
+	<th:block th:include="admin/footer"></th:block>
+	/*/-->
+
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+	<script>
+
+  $(document).ready(function () {
+    $('#datetimepicker1').datetimepicker();
+  });
+
+  // $("#discountType").change(function (event) {
+  //   es = $(this).val();
+  //
+  //   if ($('.discount-type-amount').length > 0) {
+  //     $('.discount-type-amount').remove();
+  //   }
+  //
+  //   if (es == 'FIXED_AMOUNT_DISCOUNT') {
+  //
+  //     var html = '<div class="form-group">\n'
+  //         + '              <label>Coupon Amount</label>\n'
+  //         + '              <input type="number" min="0" class="form-control discount-type-amount" name="amount"\n'
+  //         + '                     id="amount" placeholder="Coupon Amount in Rs. e.g. 2000.00">\n'
+  //         + '            </div>';
+  //
+  //     $('#amount_wrapper').append(html);
+  //   }
+  //
+  //   else if (es = 'PERCENTAGE_DISCOUNT') {
+  //
+  //     var html = '<div class="form-group discount-type-amount">\n'
+  //         + '              <label>Coupon Discount Percentage</label>\n'
+  //         + '              <input type="number" min="0" class="form-control" name="discountPercentage"\n'
+  //         + '                     id="discountPercentage" placeholder="Coupon Discount Percentage">\n'
+  //         + '            </div>';
+  //     $('#amount_wrapper').append(html);
+  //   }
+  //
+  //   else if (es == 'AMOUNT_PERCENTAGE_DISCOUNT') {
+  //
+  //     var html1 = '<div class="form-group discount-type-amount">\n'
+  //         + '              <label>Coupon Amount</label>\n'
+  //         + '              <input type="number" min="0" class="form-control" name="amount"\n'
+  //         + '                     id="amount" placeholder="Coupon Amount in Rs. e.g. 2000.00">\n'
+  //         + '            </div>';
+  //
+  //     var html2 = '<div class="form-group discount-type-amount">\n'
+  //         + '              <label>Coupon Discount Percentage</label>\n'
+  //         + '              <input type="number" min="0" class="form-control" name="discountPercentage"\n'
+  //         + '                     id="discountPercentage" placeholder="Coupon Discount Percentage">\n'
+  //         + '            </div>';
+  //     $('#amount_wrapper').append(html1);
+  //     $('#amount_wrapper').append(html2);
+  //   }
+  // });
+
+  $('#coupon-creation').validate({
+
+    rules: {
+      code: {
+        required: true
+      },
+      amount: {
+        required: true
+      },
+      discountType: {
+        required: true
+      },
+
+    },
+
+    messages: {
+      code: {
+        required: 'Please Enter Coupon Code'
+      },
+      amount: {
+        required: 'Please Enter Amount'
+      },
+      discountType: {
+        required: 'Please Select Discount Type'
+      },
+
+    },
+
+    submitHandler: function () {
+
+      var input = {
+
+        code: $('#code').val(),
+        description: $('#description').val(),
+        amount: $('#amount').val(),
+        discountType: $("form[name='coupon-creation']").find("#discountType :selected").val(),
+        expiryDate: $('#expiryDate').val(),
+        minimumSpend: $('#minimumSpend').val(),
+        status: getStatus(),
+        includedProducts: getIncludedProduct(),
+        excludedProducts: getExcludedProduct(),
+        discountPercentage: $('#discountPercentage').val(),
+        usageLimitPerCoupon:$('#usageLimitPerCoupon').val(),
+        usageLimitPerPerson:$('#usageLimitPerPerson').val()
+      };
+
+      $.ajax({
+        url: apiBasePath + "/admin_sales/coupons",
+        type: "post",
+        data: JSON.stringify(input),
+        dataType: "json",
+        contentType: "application/json",
+        processData: false,
+        <!--"headers": {-->
+          <!--"authorization": "Bearer " + window.localStorage.getItem('access_token'),-->
+
+        <!--},-->
+
+        success: function (response) {
+          $('#loader').hide();
+          location.reload();
+          alert("Coupon Add successfully");
+        },
+
+        error: function (response) {
+          $('#loader').hide();
+          alert("Coupon add failed");
+
+        }
+      });
+    }
+
+  });
+
+  function getStatus() {
+    var status;
+    if (document.getElementById('publish').checked) {
+      status = document.getElementById('publish').value;
+    }
+    else if (document.getElementById('draft').checked) {
+      status = document.getElementById('draft').value;
+    }
+    else {
+      status = document.getElementById('draft').value;
+    }
+
+    return status;
+  }
+
+  function getIncludedProduct() {
+    list = [];
+
+    $("#includedProducts").val().forEach(function (value, index) {
+      list.push({id: value});
+    });
+
+    return list;
+  }
+
+  function getExcludedProduct() {
+    list = [];
+
+    $("#excludedProducts").val().forEach(function (value, index) {
+      list.push({id: value});
+    });
+
+    return list;
+  }
+
+  // function getAllowedUsers() {
+  //   list = [];
+  //
+  //   $('#allowedUsers  > option:selected').each(function () {
+  //
+  //     list.push({
+  //       userId: $(this).val(),
+  //       emailId: $(this).text(),
+  //       fullName: $(this).attr("data-subtext")
+  //     });
+  //
+  //   });
+  //
+  //   return list;
+  // }
+
+
+</script>
+</body>
+
+</html>

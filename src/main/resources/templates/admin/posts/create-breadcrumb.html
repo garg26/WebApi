@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+</head>
+
+<body>
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">Create BreadCrumb</h1>
+        </div>
+      </div>
+      <form name="create-breadcrumb" id="create-breadcrumb">
+        <div class="col-md-9">
+
+
+          <div class="form-group" style="margin-top: 10px";>
+            <label>Child Text</label> <input type="text" name="childText"
+                                        id="childText" value="" class="form-control"
+                                        placeholder="Child Text" required>
+          </div>
+
+          <div class="form-group" style="margin-top: 10px";>
+            <label>Child Url</label> <input type="text" name="childUrl"
+                                             id="childUrl" value="" class="form-control"
+                                             placeholder="Child Url" required>
+          </div>
+
+          <div class="form-group" style="margin-top: 10px";>
+            <label>Parent Url</label> <input type="text" name="parentUrl"
+                                             id="parentUrl" value="" class="form-control"
+                                             placeholder="Parent Url" required>
+          </div>
+
+
+
+
+          <div class="row">
+            <div class="col-md-9" style="margin-top: 20px;">
+              <button class="submit btn btn-success" type="submit" id="btnSubmit"
+                      value="submit">Submit
+              </button>
+              <i class="fa fa-spinner fa-spin" id="loader"></i>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/admin.js')}}"></script>
+<script>
+  $('#btnSubmit').on('click', function (event) {
+    event.preventDefault();
+    $('#loader').show();
+    submitRequest()
+
+  });
+
+  function submitRequest() {
+
+    var input = {
+      childText:$('#childText').val(),
+      childUrl:$('#childUrl').val(),
+      parentUrl:$('#parentUrl').val()
+    }
+
+    $.ajax({
+      url: apiBasePath + "/admin_writer_editor/breadcrumb",
+      type: "post",
+      data: JSON.stringify(input),
+      contentType: "application/json",
+      processData: false,
+
+      success: function (response) {
+        $('#loader').hide();
+        //location.reload();
+        if(response.errorMessage==null) {
+          alert("Success");
+        }
+        else{
+          alert(response.errorMessage);
+        }
+
+
+      },
+
+      error: function (response) {
+        $('#loader').hide();
+
+        alert("Failed");
+      }
+    });
+
+  }
+</script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,1198 @@
+.teachers-listing-card .mdl-card {
+	min-height: 0 !important;
+	width: 100% ! important;
+	margin: 0 auto;
+}
+
+.teachers-listing-card {
+	margin: 8px 0;
+	padding: 20px 0px 20px 45px;
+}
+
+.teachers-filter-header {
+	/* width: 100%; */
+	height: 72px;
+	border-radius: 2px;
+	background-color: #1e4864;
+	line-height: 72px;
+	font-family: open sans;
+	font-size: 18px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #ffffff;
+	padding: 0 15px;
+}
+
+.teachers-filter-card .mdl-card {
+	min-height: 0 !important;
+	width: 220px !important;
+	margin: 0 auto;
+	padding: 0 0 80px 0;
+}
+
+.course-filters {
+	border-top: none !important;
+}
+
+}
+.teachers-filter-card p {
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.79;
+	letter-spacing: normal;
+	text-align: left;
+	color: #666666;
+	margin: 0;
+}
+
+.teachers-filter-card .filter-label {
+	font-family: open sans;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	cursor: pointer;
+}
+
+.teachers-filter-card .filter-label span {
+	font-weight: normal;
+	color: #666666;
+}
+
+.teachers-filter-card .mdl-checkbox__label {
+	font-family: open sans;
+	font-size: 13px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 2.36;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+}
+
+.teachers-filter-card label {
+	display: inline;
+	margin-left: 10px;
+}
+
+.course-filters .mdl-checkbox__box-outline {
+	border: 1px solid #979797;
+}
+
+.teachers-filter-card .mdl-checkbox__label {
+	top: 2px;
+	left: 5px;
+}
+
+.teachers-filter-card .material-icons {
+	color: #f7b733;
+	font-size: 16px;
+	width: 16px;
+}
+
+.rating-filter .mdl-checkbox__label {
+	top: 5px !important;
+	left: 0 !important;
+}
+
+.teachers-filters .mdl-checkbox__box-outline {
+	border: 1px solid #979797;
+}
+
+option:hover {
+	background: red;
+}
+
+::selection, select:focus::-ms-value {
+	background-color: gray;
+	color: orange;
+}
+
+/*
+Option control color
+*/
+option:hover {
+	background-color: greenyellow;
+	color: greenyellow;
+}
+
+.btn-listing-all-teachers {
+	width: 155px;
+	height: 40px;
+	border-radius: 2px;
+	background-color: #ffffff;
+	border: solid 0.5px #b2b2b2;
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #000000;
+	margin: 0 10px;
+}
+
+.teachers-listing-card select {
+	float: left;
+	border-radius: 2px;
+	background-color: #fff;
+	border: solid 1px #b2b2b2;
+	margin: 0 0 0 10px;
+	padding: 0 10px;
+	font-family: open sans;
+	font-size: 13px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000;
+	height: 39px;
+	width: 120px;
+	background: url(/images/icons/popularsortingICON.png) no-repeat right
+		#fff;
+	-webkit-appearance: none;
+	background-position-x: 96px;
+	outline: 0;
+}
+
+.reset {
+	height: 26px;
+	border-radius: 4px;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 26px;
+	letter-spacing: normal;
+	text-align: center;
+	color: #ffffff !important;
+	padding: 0 8px;
+	box-shadow: none !important;
+	font-size: 12px;
+	background: transparent;
+	background-image: none;
+	position: absolute;
+	top: 24px;
+	right: 12px;
+}
+
+.teachers-filter-dropdowns {
+	margin: 0 auto;
+}
+
+.teachers-listing-card select:focus {
+	border: solid 0.5px #f26722;
+}
+
+.all-teachers-card {
+	width: 100%;
+	height: auto;
+	min-height: 144px;
+	border-radius: 3px;
+	border: none;
+}
+
+.all-teachers-section {
+	padding: 4px 0;
+}
+
+.all-teachers-card .mdl-grid {
+	padding: 0;
+}
+
+.all-teachers-card .mdl-cell {
+	margin: 0;
+}
+
+.course-single-card-list {
+	padding: 40px 20px 20px 20px;
+}
+
+.teachers-single-card-list h3 {
+	font-family: open sans;
+	font-size: 20px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 0;
+}
+
+.teachers-single-card-list a {
+	text-decoration: none;
+}
+
+.teacher-card-icon {
+	font-size: 14px;
+	position: absolute;
+	color: #777;
+}
+
+.no-of-students {
+	margin-left: 8px;
+}
+
+.by-teacher {
+	font-family: open sans;
+	font-size: 14.9px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 0 0 8px 0;
+}
+
+.by-teacher span {
+	color: #666666;
+}
+
+.best-seller {
+	width: 86px;
+	height: 23px;
+	border-radius: 2px;
+	background-color: #feebdc;
+	position: absolute;
+	left: 247px;
+	font-family: Rubik;
+	font-size: 10.5px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 22px;
+	letter-spacing: normal;
+	text-align: center;
+	color: #f26722;
+}
+
+.fav-card .fav, .fav-card .unfav {
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	position: relative !important;
+	color: #b2b2b2 !important;
+	margin-right: -20px;
+	margin-top: 20px;
+}
+
+.fav-card .price {
+	font-family: Rubik;
+	font-size: 20px;
+	font-weight: 600;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: right;
+	color: #000000;
+	float: right;
+	margin-top: 40px;
+	margin-bottom: 4px;
+}
+
+.fav-card .price i {
+	font-size: 17px;
+}
+
+.view-details {
+	margin-top: 0 !important;
+	padding: 0 20px;
+	color: #fff !important;
+	margin-right: -18px;
+	box-shadow: none;
+}
+
+.teachers-card-head {
+	font-family: open sans;
+	font-size: 20px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 10px 0 0 20px;
+}
+
+.teachers-card-head span {
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+}
+
+.all-teachers-page .mat-teachers-slogan {
+	margin: 0 0 0 12px;
+}
+
+.all-teachers-page .mat-free-prep .mat-teachers-slogan {
+	margin: 0 0 10px 0 !important;
+}
+
+.all-teachers-page .underline {
+	margin: 8px 0 8px 16px;
+}
+
+.all-teachers-page .mat-free-prep .box-1-free-demo {
+	width: 200px;
+	height: 210px;
+}
+
+.teachers-listing .mdl-grid {
+	padding: 0;
+}
+
+.all-teachers-card img {
+	height: 140px;
+	width: 140px;
+	border-radius: 50%;
+	margin: 18px auto 0 auto;
+	display: block;
+	border: 1px solid #ddd;
+}
+
+.all-teachers-card h3 {
+	font-family: open sans;
+	font-size: 20px;
+	font-weight: 500;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1;
+	letter-spacing: normal;
+	text-align: center;
+	color: #000000;
+	margin: 11px 0 5px 0;
+}
+
+.all-teachers-card p {
+	font-family: CrimsonText;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: italic;
+	font-stretch: normal;
+	line-height: 1.25;
+	letter-spacing: normal;
+	text-align: center;
+	color: rgba(0, 0, 0, 0.7);
+	margin: 0 0 5px 0;
+}
+
+.all-teachers-card .teachers-rating i {
+	width: 12px;
+	font-size: 16px;
+	color: #f7b733;
+}
+
+.all-teachers-card .mdl-chip__text {
+	font-family: open sans;
+	font-size: 9px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 18px;
+	letter-spacing: 0.4px;
+	text-align: center;
+	color: #666666;
+}
+
+.all-teachers-card .mdl-chip {
+	width: fit-content;
+	width: -moz-fit-content;
+	height: 18px;
+	border-radius: 10px;
+	background-color: #f6f6f6;
+	margin: 2px 4px;
+	line-height: 12px;
+}
+
+.all-teachers-card .mdl-card__actions {
+	background-color: #f2f2f2;
+	padding: 12px;
+	margin-top: 5px;
+}
+
+.all-teachers-card .mdl-card__actions span {
+	font-family: open sans;
+	font-size: 13px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #000000;
+}
+
+.divFilter {
+	border-radius: 16px;
+	border: solid 1px #f26722;
+	width: fit-content;
+	padding: 5px 8px 5px 16px;
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #f26722;
+	display: inline-block;
+	margin: 6px 5px;
+}
+
+.divFilter button {
+	width: 24px;
+	height: 24px;
+	margin: 0 0 0 10px;
+	border: 0;
+	outline: 0;
+	opacity: 0.54;
+	color: #666666;
+	border-radius: 50px;
+	line-height: 20px;
+	cursor: pointer;
+}
+
+.divFilter button i {
+	font-size: 10px;
+	line-height: 10px;
+}
+
+#filtersTab {
+	margin: 30px 30px 0 30px;
+}
+
+div.panel {
+	margin-top: calc(5% - 0px);
+}
+
+details {
+	
+}
+
+details div.content {
+	margin-top: -16px;
+	margin-bottom: 10px;
+}
+
+details[open] summary:after {
+	color: #333333;
+	content: "remove";
+	font-family: 'Material Icons';
+}
+
+details[open] {
+	border: none;
+	border-radius: 2px;
+}
+
+details[open]:first-child {
+	border: none;
+}
+
+details[open]:last-child {
+	border: none;
+}
+
+summary {
+	outline: none;
+	position: relative;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+summary:hover {
+	
+}
+
+details[open] summary:hover {
+	background: none;
+}
+
+summary p {
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 3.29;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 0;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+}
+
+summary::after {
+	content: "add";
+	font-family: 'Material Icons';
+	color: #333333;
+	font-size: 1.5em;
+	padding: 0;
+	text-align: center;
+	margin-top: 0;
+	position: absolute;
+	top: calc(50% - 12px);
+	bottom: 0;
+	right: 15px;
+	width: 6%;
+}
+
+.titleValue {
+	color: #757575;
+}
+
+time {
+	color: #757575;
+	opacity: .75;
+}
+
+.list-unstyled {
+	margin-top: 15px;
+	padding-left: 0;
+	list-style: none;
+}
+
+.list-unstyled li {
+	margin-bottom: 6px;
+}
+
+#filtersTab .material-icons {
+	color: #f7b733;
+	font-size: 16px;
+	width: 16px;
+}
+
+/* single teacher starts here */
+.teacher-details {
+	margin-top: 0;
+}
+
+.teacher-grid-icon {
+	padding: 0;
+}
+
+.teacher-grid-icon .mdl-cell {
+	margin: 8px 0;
+}
+
+.teacher-grid-icon .fa {
+	color: #555;
+	font-size: 14px;
+}
+
+.teacher-detail-1 h3, .teacher-description-card h3, .teacher-detail-1 h1
+	{
+	font-family: open sans;
+	font-size: 28px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 5px 0 !important;
+}
+
+.dots-list {
+	padding: 0 10px;
+}
+
+.dots-list h3 {
+	font-family: open sans;
+	font-size: 24px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin-top: 0;
+}
+
+.teacher-details .teacher-institute {
+	font-family: CrimsonText;
+	font-size: 18px;
+	font-weight: normal;
+	font-style: italic;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #666666;
+}
+
+.teacher-details .mdl-card {
+	width: 100% !important;
+}
+
+.send-enquiry {
+	width: 140px;
+	height: 40px;
+	border-radius: 4px;
+	background-color: #1e4864!important;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+	margin: 15px 0;
+	outline: 0;
+	border: 0;
+	cursor: pointer;
+}
+.teacher-details .teacher-detail-1 {
+	padding: 20px;
+}
+
+.teacher-detail-1 p {
+	font-family: open sans;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.83;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 0;
+}
+
+.teacher-details .fa-facebook-f {
+	width: 28px;
+	height: 28px;
+	background-color: #3b5998;
+	color: #fff;
+	line-height: 28px;
+	text-align: center;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.teacher-details .fa-facebook-f:hover {
+	background-color: #2d4373;
+}
+
+.teacher-details .fa-twitter {
+	width: 28px;
+	height: 28px;
+	background-color: #1583d7;
+	color: #fff;
+	line-height: 28px;
+	text-align: center;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.teacher-details .fa-twitter:hover {
+	background-color: #2795e9;
+}
+
+.teacher-details .fa-linkedin {
+	width: 28px;
+	height: 28px;
+	background-color: #007bb6;
+	color: #fff;
+	line-height: 28px !important;
+	text-align: center;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.teacher-details .fa-linkedin:hover {
+	background-color: #005983;
+}
+
+.teacher-details .fa-google-plus {
+	width: 28px;
+	height: 28px;
+	background-color: #dd4b39;
+	color: #fff;
+	line-height: 28px;
+	text-align: center;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.teacher-details .fa-google-plus:hover {
+	background-color: #c23321;
+}
+
+.teacher-description-card p {
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.6;
+	letter-spacing: normal;
+	text-align: left;
+	color: #333333;
+}
+
+.teacher-description-card h4 {
+	font-family: open sans;
+	font-size: 18px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 16px 0 0px 0;
+}
+
+.career-highlight {
+	padding: 2px 16px;
+	min-height: 87px;
+}
+
+.career-highlight span {
+	font-family: open sans;
+	font-size: 13px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.38;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+}
+
+.career-highlight img {
+	margin-top: 4px;
+}
+
+.teacher-description-card .mdl-card {
+	padding: 16px 20px;
+}
+
+.teacher-description-card .mdl-grid {
+	margin: 10px -10px;
+	padding: 0;
+}
+
+.teacher-description-card .mdl-cell {
+	margin: 8px;
+}
+/*—- DIVI TIMELINE / DOTS LIST —–*/
+.dots-list ol {
+	position: relative;
+	margin-bottom: 20px;
+	list-style: none !important;
+}
+
+.dots-list ol li {
+	position: relative;
+	margin-top: 0em;
+	margin-bottom: 20px;
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+}
+
+.dots-list ol li span {
+	font-family: open sans;
+	font-size: 12px !important;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #666666 !important;
+}
+
+.dots-list ol li .date {
+	position: absolute;
+	left: 0;
+	font-weight: bold;
+	font-size: 1em;
+	top: -2px;
+}
+
+.dots-list ol li:before {
+	content: "";
+	background: #ff7a59; /*edit line colour*/
+	position: absolute;
+	width: 2px;
+	top: 5px;
+	bottom: -25px;
+	left: -33px;
+}
+
+.dots-list ol li:after {
+	content: "";
+	background: #ff7a59; /*edit circle colour*/
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	border-radius: 100%;
+	border: 2px solid #ff7a59; /*edit circle border colour*/
+	top: 5px;
+	left: -40px;
+}
+
+.dots-list ol li:last-child:before {
+	content: "";
+	background: rgba(0, 0, 0, 0);
+}
+
+.reviews h3 {
+	font-family: open sans;
+	font-size: 24px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+}
+
+.review span {
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.25;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+}
+
+.review .user-detail {
+	margin: 12px 0 0 20px;
+}
+
+.review .course-rating i {
+	margin: 0px 7px 0 0px;
+}
+
+.review-date {
+	font-family: open sans !important;
+	font-size: 14px !important;
+	font-weight: normal !important;
+	font-style: normal !important;
+	font-stretch: normal !important;
+	line-height: 1.43 !important;
+	letter-spacing: normal !important;
+	text-align: left !important;
+	color: #000000 !important;
+}
+
+.review p {
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 24px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #333333;
+	display: inline-block;
+	margin-top: 20px;
+	width: 90%;
+}
+
+hr {
+	border-top: 1px solid #dadada;
+}
+
+.load-more-reviews {
+	font-family: open sans;
+	font-size: 18px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #333333;
+}
+
+.teacher-nav {
+	padding: 0;
+	margin: 0 0 30px 0;
+	border-collapse: collapse;
+}
+
+.teacher-nav li {
+	height: 48px;
+	border-radius: 1px;
+	background-color: #ffffff;
+	border: solid 1px #b2b2b2;
+	padding: 0 15px;
+	display: table-cell;
+	cursor: pointer;
+}
+
+.teacher-nav li a {
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 48px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	text-decoration: none;
+}
+
+.teacher-nav li.active {
+	background-color: #f1f1f1;
+}
+
+.teacher-institute span {
+	font-style: normal;
+}
+
+.number-students {
+	font-family: open sans;
+	font-size: 13px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 32px;
+	letter-spacing: normal;
+	text-align: center;
+	color: #000000;
+}
+
+.trending-courses.skew {
+	padding: 32px 0;
+}
+
+.number-students i {
+	opacity: 0.54;
+	color: #666666;
+	font-size: 13px;
+}
+
+.ns-card h3 {
+	font-family: open sans;
+	font-size: 16px !important;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.41;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 8px 0;
+	height: 46px !important;
+	width: 100%;
+}
+
+.ns-card .course-rating i {
+	margin: 0px 7px 0 0;
+	width: 8px;
+	font-size: 18px;
+}
+
+#single-teacher-slider .ns-card {
+	width: calc(100% - 24px);
+}
+
+.ns-card-p {
+	margin: 10px 0 20px 0;
+}
+
+.ns-card {
+	display: table;
+	padding: 8px 12px 0 12px;
+}
+
+.ns-card .price {
+	font-family: open sans !important;
+	font-size: 21.2px !important;
+	font-weight: bold !important;
+	font-style: normal !important;
+	font-stretch: normal !important;
+	line-height: normal !important;
+	letter-spacing: normal !important;
+	text-align: left !important;
+	color: #000000 !important;
+	margin: 0;
+	width: auto;
+}
+
+.filter-sub-heading {
+	font-family: open sans;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 24px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+}
+
+/* #teachersList img {
+	width: 240px;
+	height: 160px;
+}
+ */
+#teachersList img {
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	margin: 16px auto 0 auto;
+	display: block;
+	border: 1.5px solid #ddd;
+}
+
+@media screen and (max-width: 767px) {
+	.teacher-nav {
+		display: grid;
+	}
+	.all-teachers-section {
+		padding: 0px 0 40px 0;
+	}
+	.teachers-listing-card {
+		margin: 8px 0;
+		padding: 20px 20px 20px 20px !important;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.teachers-listing-card {
+		padding: 20px 0px 20px 20px;
+	}
+	.teacher-details .mdl-shadow--2dp>img {
+		max-width: 200px;
+		border-radius: 50%;
+		border: 1px solid #ddd;
+		margin: 8px;
+	}
+}
+
+@media screen and (min-width: 767px) {
+	.dots-list {
+		margin-top: 82px;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.teachers-filter-card .mdl-card {
+		width: 100% !important;
+	}
+	.teachers-filter-card .mdl-card {
+		height: 100%;
+		overflow: auto;
+	}
+	.show-filter-mobile {
+		display: block;
+		height: 40px;
+		line-height: 40px;
+		color: #222;
+		background-color: transparent;
+		border: 1px solid #333;
+		text-align: center;
+		margin: 0 0 20px 0;
+		cursor: pointer;
+	}
+	.teachers-filter-card {
+		position: fixed;
+		display: none;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: transparent;
+		z-index: 2;
+		cursor: pointer;
+		overflow: scroll;
+	}
+	#header {
+		z-index: 1;
+	}
+	.apply-filter-mobile {
+		position: fixed;
+		border: 0;
+		top: auto;
+		bottom: 0;
+		width: 100%;
+		z-index: 2000;
+		margin: 0 -16px 0 -16px;
+		cursor: pointer;
+		color: #fff;
+	}
+	.teacherSortBy {
+		height: 39px;
+		border-radius: 2px;
+		background-color: #ffffff;
+		border: solid 0.5px #f2f2f2;
+		margin: 40px 0 0 0;
+		padding: 0 10px;
+		font-family: open sans;
+		font-size: 14px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		text-align: left;
+		color: #000000;
+		border-bottom: none;
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 0px 0px 0px
+			rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+		border-left: none;
+		border-right: none;
+		display: block;
+	}
+	#teacherSortBy {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.teachers-filter-card {
+		padding: 20px 5px;
+	}
+	.teacherSortBy {
+		display: none;
+	}
+	.apply-filter-mobile, .show-filter-mobile {
+		display: none;
+	}
+}

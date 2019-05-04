@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Add New Course Batch</h1>
+					</div>
+				</div>
+				<form name="newBatch">
+
+					<div class="row">
+						<div class="col-md-9">
+
+							<div class="form-horizontal">
+								<div class="row">
+
+									<div class="">
+										<div class="col-sm-6">
+											<label>Course ID</label> <input type="text"
+												class="form-control" disabled th:value="${course.id}"
+												name="courseId" id="courseId">
+										</div>
+
+										<div class="col-sm-6">
+											<label>Course Title</label> <input type="text"
+												class="form-control" disabled name="courseTitle"
+												id="courseTitle" th:value="${course.courseTitle}">
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+
+									<div class="">
+
+										<div class="col-sm-6">
+											<label>Start Date</label> <input type="date"
+												class="form-control" name="startDate" id="startDate"
+												placeholder="Enter the Course Batch Start Date">
+										</div>
+
+										<div class="col-sm-6">
+											<label>End Date</label> <input type="date"
+												class="form-control" name="endDate" id="endDate"
+												placeholder="Enter the Course Batch End Date">
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+
+							<!-- <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+
+                  <div class="col-sm-6">
+                    <label>Start Time</label>
+                    <input type="time" class="form-control" name="startTime" id="startTime"
+                           placeholder="Enter the Course Batch Start Time">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>End Time</label>
+                    <input type="time" class="form-control" name="endTime" id="endTime"
+                           placeholder="Enter the Course Batch End Time">
+                  </div>
+                </div>
+              </div>
+
+            </div> -->
+
+							<div class="row">
+								<div class="col-sm-6">
+									<label>Batch Name</label> <input type="text"
+										class="form-control" name="batchName" id="batchName"
+										placeholder="Enter the Course Batch Name">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>Class Timing</label> <input type="text"
+									class="form-control" name="classTiming" id="classTiming"
+									placeholder="Enter the Class Timings eg.. Monday to Friday from 10:00 AM to 1:00 PM">
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+
+										<div class="col-sm-6">
+											<label>Regular Price</label> <input type="number" min="0"
+												class="form-control" name="regularPrice" id="regularPrice"
+												placeholder="Enter the Course Batch Regular Price">
+										</div>
+
+										<div class="col-sm-6">
+											<label>Sale Price</label> <input type="number" min="0"
+												class="form-control" name="salePrice" id="salePrice"
+												placeholder="Enter the Course Batch Sale Price">
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+
+										<div class="col-sm-6">
+											<label>Display Size</label> <input type="number" min="0"
+												class="form-control" name="displaySize" id="displaySize"
+												placeholder="Enter the Course Batch Display Size">
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+										<div class="col-sm-6">
+											<label>Validity</label> <input type="number" min="0"
+												class="form-control" name="validity" id="validity"
+												placeholder="Enter the Validity of the Course Batch">
+										</div>
+
+										<div class="col-sm-6">
+											<label>Course Validity For Display</label> <input type="text"
+																										 class="form-control" name="validityDisplay" id="validityDisplay"
+																										 placeholder="Enter the Validity of the Course Batch For display">
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+										<div class="col-sm-6">
+											<label>Duration</label> <input type="number" min="0"
+																										 class="form-control" name="duration" id="duration"
+																										 placeholder="Enter the Course duration">
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+										<div class="col-sm-6">
+											<label>No. Of Available Seats</label> <input type="number"
+												min="0" class="form-control" name="noOfSeats" id="noOfSeats"
+												placeholder="Enter the no. of available seats...">
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+										<div class="col-sm-6">
+											<label>No. Of Session</label> <input type="text" class="form-control" name="noOfSession" id="noOfSession"
+																																	 placeholder="Enter the no. of sessions...">
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+							<div class="row" id="metaPanel"></div>
+
+							<div class="row">
+								<div style="margin-top: 20px;" class="col-md-9">
+									<button type="button" class="btn btn-primary"
+										onclick="showAddMetaPanel();">Add MetaData</button>
+								</div>
+							</div>
+
+
+							<div class="row" id="addMetaPanel">
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Meta Type:</label><select
+										class="form-control selectpicker" id="ddMetaType"
+										data-live-search="true">
+										<option value="Keyword">Keyword</option>
+									</select>
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Meta Content:</label> <input type="text"
+										placeholder="Enter comma separated meta content"
+										id="txtMetaContent" class="form-control">
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<button type="button" class="btn btn-primary"
+										onclick="addMetaInfo();">Save Meta</button>
+								</div>
+							</div>
+
+
+
+							<label class="radio-inline" style="margin-top: 10px;"><input
+								type="radio" name="optradio" id="publish" value="publish">Publish</label>
+							<label class="radio-inline" style="margin-top: 10px;"><input
+								type="radio" name="optradio" id="draft" value="draft">Draft</label>
+
+
+							<div class="row">
+
+								<div class="col-md-12">
+
+									<div class="row">
+										<div style="margin-top: 20px;" class="col-md-9">
+											<button class="submit btn btn-success" type="submit"
+												id="submitBatch" value="submit">Submit</button>
+											<i class="fa fa-spinner fa-spin" id="loader"></i>
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	!--/*/
+	<th:block th:include="admin/footer"></th:block>
+	/*/-->
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script
+			th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/addCourseBatch.js')}}"
+	></script>
+
+</body>
+
+</html>

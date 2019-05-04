@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<body>
+
+<div id="wrapper">
+
+    <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+    <div id="page-wrapper">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Edit Institute</h1>
+                </div>
+            </div>
+
+            <form role="form" name="newInstitute" id="newInstitute">
+                <div class="row">
+                    <div class="col-md-9">
+
+                        <div class="form-group">
+                            <input type="hidden" id="instituteId" th:value="${institute?.id}">
+                            <label>Name</label> <input type="text" name="instituteName"
+                                                       th:value="${institute?.name}"
+                                                       id="instituteName" class="form-control"
+                                                       onload="generateSlug(this.value,'institute');"
+                                                       onkeyup="generateSlug(this.value,'institute');"
+                                                       placeholder="Enter name of the institute..."
+                                                       data-error="Please give a correct website url.">
+                        </div>
+
+                        <!--<div class="slug_wrapper"></div>-->
+
+                        <label>Slug(URL)</label>
+                        <div class="input-group">
+
+                            <span class="input-group-addon" id="slug-name">https://neostencil.com/institute/</span>
+
+                            <input id="slug" type="text" class="form-control" name="slug"
+                                   th:value="${institute?.instituteSlug}" placeholder="slug..."
+                                   onkeypress="slugExistence(event,this.value,'institute')"
+                                   maxlength="255">
+                        </div>
+                        <div id="errMsg"></div>
+
+                        <label>URL</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">https://</span> <input
+                                type="url" name="institute-url" id="instituteUrl"
+                                th:value="${institute?.url}"
+                                class="form-control"
+                                placeholder="Enter URL of the institute...">
+                        </div>
+
+                        <div class="form-group" style="margin-top: 10px;">
+                            <label>Description</label>
+                            <textarea type="text" name="instituteDescription"
+                                      id="instituteDescription" class="form-control" rows="4"
+                                      th:text="${institute?.description}"
+                                      placeholder="Enter description of the institute..."></textarea>
+                        </div>
+
+
+                        <div class="">
+                            <label>Choose Institute Image</label>
+
+                            <div>
+
+                                <label class="custom-file"> <input type="file"
+                                                                   id="file" class="custom-file-input"> <span
+                                        class="custom-file-control"></span>
+                                </label> <input type="button" class="button btn-primary" value="Upload"
+                                                id="but_upload">
+                                <div style="display: none;" id="loaderUpload">
+                                    <img width="30px" height="30px"
+                                         src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                                </div>
+                            </div>
+                            <img th:src="${institute?.imageUrl}"
+                                 id="upload-img-tag" width="100px"/> <a
+                                th:text="${institute?.imageUrl}"></a><br/>
+                            <br/>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Image Alt Text</label> <input type="text" required
+                                                                 name="imageAltText" th:value="${institute?.imageAltText}" class="form-control" id="imageAltText"
+                                                                 placeholder="Enter alt text of the image.....">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label style="margin-top: 5px;">Email</label> <input
+                                type="email" name="input-medium" id="instituteEmail"
+                                th:value="${institute?.emailId}"
+                                class="form-control"
+                                placeholder="Enter email ID of the institute..."
+                                data-error="Please give a correct e-mail address.">
+                        </div>
+                        <div class="form-group">
+                            <label>Owner Name</label> <input type="text"
+                                                             name="instituteOwner" id="instituteOwner"
+                                                             th:value="${institute?.ownerName}" class="form-control"
+                                                             placeholder="Enter owner name of the institute...">
+                        </div>
+
+                        <div class="form-group highlight-wrap">
+                            <label>Institute Highlight</label>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label id="InstituteHighlightId" style="display: none"></label>
+                                    <input type="text" required name="InstituteHighlightText[]"
+                                           id="InstituteHighlightText" class="form-control"
+                                           placeholder="Text">
+                                </div>
+
+                                <div class="col-md-7">
+                                    <input type="text" required
+                                           name="InstituteHighlightDescription[]"
+                                           id="InstituteHighlightDescription" class="form-control"
+                                           placeholder="Description">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <button class="btn btn-success add-more-highlight pull-right"
+                                            type="button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="field_wrapper"></div>
+
+                        </div>
+
+                        <div class="form-group related_wrap">
+                            <label>Institute Related Info</label>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label id="instituteRelatedInfoId" style="display: none"></label>
+                                    <input type="text" required name="InstituteRelatedText[]"
+                                           id="InstituteRelatedText" class="form-control"
+                                           placeholder="Text">
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="text" required
+                                           name="InstituteRelatedDescription[]"
+                                           id="InstituteRelatedDescription" class="form-control"
+                                           placeholder="Description">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <button class="btn btn-success add-more-info pull-right"
+                                            type="button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="field_wrapper1"></div>
+
+                        </div>
+
+                        <div class="form-group achievements_wrap">
+                            <label>Institute Achievements</label>
+                            <div class="institute_row" id="institute_row_id">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label id="InstituteAchievementsId" style="display: none"></label>
+                                        <label class="custom-file"> <input type="file"
+                                                                            name="multipleImageIcon[]"
+                                                                           id="InstituteAchievementIcon" class="custom-file-input">
+                                            <span class="custom-file-control"></span>
+                                        </label>
+
+
+                                    </div>
+
+                                    <div style="position: absolute; left: 300px; display: none;"
+                                         id="loaderIconUpload">
+                                        <img width="30px" height="30px"
+                                             src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                                    </div>
+
+
+                                    <div class="col-md-7">
+                                        <input type="text"
+                                               name="InstituteAchievementDescription[]"
+                                               id="InstituteAchievementDescription" class="form-control"
+                                               placeholder="Description">
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <button
+                                                class="btn btn-success add-more-instituteAchievements pull-right"
+                                                type="button">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <input type="button" class="button btn-primary" value="Upload"
+                                       id="but_icon_upload">
+                                <div class="field_wrapper2"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="row" style="margin-top: 10px;">
+
+                                <div class="">
+
+                                    <div class="col-sm-6">
+                                        <label>Facebook Url</label> <input type="url"
+                                                                           name="institute-facebook" id="instituteFacebook"
+                                                                           th:value="${institute?.facebookUrl}"
+                                                                           class="form-control"
+                                                                           placeholder="Enter institute facebook url....." autofocus>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Twitter Url</label> <input type="url"
+                                                                          name="institute-twitter" id="instituteTwitter"
+                                                                          class="form-control" th:value="${institute?.twitterUrl}"
+                                                                          placeholder="Enter institute twitter url....">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="row" style="margin-top: 10px;">
+
+                                <div class="">
+
+                                    <div class="col-sm-6">
+                                        <label>Linkedin Url</label> <input type="url"
+                                                                           name="institute-linkedin" id="instituteLinkedin"
+                                                                           class="form-control" th:value="${institute?.linkedinUrl}"
+                                                                           placeholder="Enter institute linkedin url....." autofocus>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Google Plus Url</label> <input type="url"
+                                                                              name="institute-google-plus" id="instituteGooglePlus"
+                                                                              class="form-control" th:value="${institute?.googlePlusUrl}"
+                                                                              placeholder="Enter institute google plus url....">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="margin-top: 5px;">Address</label> <input
+                                type="text" name="institute-address" th:value="${institute?.address}" id="instituteAddress"
+                                class="form-control" placeholder="Enter institute address...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contact Numbers</label> <input type="text"
+                                                                  name="institute-contact-numbers" id="instituteContactNumbers"
+                                                                  th:value="${institute?.contactNo}"
+                                                                  class="form-control"
+                                                                  placeholder="Enter contact numbers of the institute">
+                        </div>
+                        <div class="form-group">
+                            <label>Other Info</label> <input type="text"
+                                                             name="institute-other-info" id="instituteOtherInfo"
+                                                             th:value="${institute?.otherInformation}"
+                                                             class="form-control"
+                                                             placeholder="Enter other information of the institute...">
+                        </div>
+
+                        <div class="row" id="metaPanel"></div>
+
+                        <div class="row">
+                            <div style="margin-top: 20px;" class="col-md-9">
+                                <button type="button" class="btn btn-primary"
+                                        onclick="showAddMetaPanel();">Add MetaData</button>
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="row" id="addMetaPanel">
+
+          <div style="margin-top: 20px;" class="col-md-9">
+            <label> Title:</label> <input type="text"
+                                          placeholder="Enter Title"
+                                          id="titleTag" class="form-control">
+          </div>
+
+          <div style="margin-top: 20px;" class="col-md-9">
+            <label> Meta KeyWord:</label><input type="text"
+                                                placeholder="Enter Meta KeyWord"
+                                                id="titleKeyWord" class="form-control">
+            </select>
+          </div>
+
+          <div style="margin-top: 20px;" class="col-md-9">
+            <label> Meta Description:</label> <textarea
+              placeholder="Enter Meta Description"
+              id="txtMetaDescription" class="form-control">
+          </textarea>
+          </div>
+
+        </div> -->
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Meta Information</div>
+                            <div class="panel-body">
+                                <div class="row" id="metaPanel"></div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Meta Title :</label> <input type="text"
+                                                                        placeholder="Enter Meta Title" id="titleTag"
+                                                                        th:value="${institute?.titleTag}"
+                                                                        class="form-control">
+                                </div>
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <h4>Other Meta Info</h4>
+                                </div>
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Meta Type :</label> <input type="text"
+                                                                       value="description" readonly="readonly" id="metaDesc"
+                                                                       class="form-control">
+                                </div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Meta Content:</label> <input type="text"
+                                                                         placeholder="Enter meta description" id="txtMetaDesc"
+                                                                         class="form-control">
+                                </div>
+                                <div style="margin-top: 20px;" class="col-md-9" id="socialImageContainer">
+                                    <label> Social Image:</label> <br /> <label
+                                        class="custom-file"> <input type="file"
+                                                                    id="socialImage" class="custom-file-input"> <span
+                                        class="custom-file-control"></span>
+                                </label> <input type="button" class="btn btn-primary" value="Upload"
+                                                id="but_social_upload">
+
+                                    <div style="display: none;" id="loaderSocialUpload">
+                                        <img width="30px" height="30px"
+                                             src="https://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                                    </div>
+                                    <br/>
+                                    <img src="" id="upload-social-img-tag" width="100px" /><br/>
+                                </div>
+
+                                <div class="row">
+                                    <div style="margin-top: 20px;" class="col-md-9">
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="showAddMetaPanel();">Add More MetaData</button>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" id="addMetaPanel">
+
+                                    <div style="margin-top: 20px;" class="col-md-9">
+                                        <label> Meta Type:</label><select
+                                            class="form-control selectpicker" id="ddMetaType"
+                                            data-live-search="true">
+                                        <option value="twitter:card">twitter:card</option>
+                                        <option value="twitter:description">twitter:description</option>
+                                        <option value="og:locale">og:locale</option>
+                                        <option value="twitter:title">twitter:title</option>
+                                        <option value="twitter:site">twitter:site</option>
+                                        <option value="og:site_name">og:site_name</option>
+                                        <option value="article:section">article:section</option>
+                                        <option value="og:type">og:type</option>
+                                        <option value="og:description">og:description</option>
+                                        <option value="fb:app_id">fb:app_id</option>
+                                        <option value="og:url">og:url</option>
+                                        <option value="article:publisher">article:publisher</option>
+                                        <option value="og:title">og:title</option>
+                                    </select>
+                                    </div>
+
+                                    <div style="margin-top: 20px;" class="col-md-9">
+                                        <label> Meta Content:</label> <input type="text"
+                                                                             placeholder="Enter comma separated meta content"
+                                                                             id="txtMetaContent" class="form-control">
+                                    </div>
+
+                                    <div style="margin-top: 20px;" class="col-md-9">
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="addMetaInfo();">Save Meta</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="panel panel-primary" id="pnlFeaturedImage">
+                            <div class="panel-heading">Featured Image</div>
+                            <div class="panel-body">
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Title:</label> <input type="text"
+                                                                  placeholder="Enter featured image title" id="txtFITitle"
+                                                                  th:value="${institute?.featuredImage?.title}"
+                                                                  class="form-control">
+                                </div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Caption:</label> <input type="text"
+                                                                    placeholder="Enter featured image caption" id="txtFICaption"
+                                                                    th:value="${institute?.featuredImage?.caption}"
+                                                                    class="form-control">
+                                </div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Alt Text:</label> <input type="text"
+                                                                     placeholder="Enter featured image alt text" id="txtFIAltText"
+                                                                     th:value="${institute?.featuredImage?.altText}"
+                                                                     class="form-control">
+                                </div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label> Description:</label> <input type="text"
+                                                                        placeholder="Enter featured image description"
+                                                                        th:value="${institute?.featuredImage?.description}"
+                                                                        id="txtFIDescription" class="form-control">
+                                </div>
+
+                                <div style="margin-top: 20px;" class="col-md-9">
+                                    <label>Upload Image:</label></br> <label class="custom-file">
+                                    <input type="file" id="featureImage"
+                                           class="custom-file-input"> <span
+                                        class="custom-file-control"></span>
+                                </label> <input type="button" class="button btn-primary"
+                                                value="Upload" id="but_feature_upload">
+
+                                    <div style="display: none;" id="loaderFeatureUpload">
+                                        <img width="30px" height="30px"
+                                             src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                                    </div>
+                                    <img th:src="${institute?.featuredImage?.url}" id="upload-feature-img-tag" width="100px" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">BreadCrumbs</div>
+                            <div class="panel-body" id="panel-body">
+
+                                <div class="saved-breadcrumb" id="saved-breadCrumb">
+                                    <div class="form-group">
+                                        <label style="margin-top: 10px";>BreadCrumb Level 1</label> <select
+                                            name="show-breadCrumb" class="form-control show-breadCrumb"
+                                            title="Select BreadCrumb">
+
+                                        <option selected disabled>Select BreadCrumb</option>
+
+                                        <option th:each="breadCrumb : ${breadCrumbs}"
+                                                th:data-subtext="${breadCrumb.link}"
+                                                th:text="${breadCrumb.text}"
+                                                th:value="${breadCrumb.breadcrumbId}"></option>
+
+                                    </select>
+
+
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-default create-breadcrumb"
+                                        style="margin-top: 2px" onclick="createBreadCrumb()">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Create
+                                    BreadCrumb
+                                </button>
+
+                            </div>
+                        </div>
+
+
+                        <br /> <label class="radio-inline" style="margin-top: 10px;"><input
+                            type="radio" name="status" id="publish" value="publish"
+                            th:checked="${#strings.toString(institute?.status)} == 'publish'">Publish</label>
+                        <label class="radio-inline" style="margin-top: 10px;"><input
+                                type="radio" name="status" id="draft" value="draft"
+                                th:checked="${#strings.toString(institute?.status)} == 'draft'">Draft</label>
+
+
+                        <div class="row">
+                            <div style="margin-top: 20px;" class="col-md-9">
+
+                                <button class="submit btn btn-success" type="submit"
+                                        id="submitInstitute" value="submit">Update</button>
+                                <i class="fa fa-spinner fa-spin" id="loader"></i> <a
+                                    href="/admin_lmsadmin/lms/institutes" class="btn btn-default"
+                                    style="margin-left: 60px;">All Institute</a>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-9">
+                                <label class="error-single" id="add-new-post-error"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+!--/*/
+<th:block th:include="admin/footer"></th:block>
+/*/-->
+<script
+        src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script
+        src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<!--<script-->
+<!--th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/institute.js')}}"-->
+<!--&gt;</script>-->
+<script th:inline="javascript">
+  /*<![CDATA[*/
+
+  var instituteID = [[${institute?.id}]];
+  var instituteHighlights = [[${institute?.instituteHighlights}]];
+  var instituteRelateds = [[${institute?.instituteRelateds}]];
+  var instituteAchievements = [[${institute?.instituteAchievements}]];
+
+  /*]]>*/
+</script>
+<script>
+    var instituteImageUrl;
+var instituteFeatureImageUrl;
+var instituteHighlightList = [];
+var metaInfoList = [];
+var postSocialImageUrl;
+
+$(document).ready(function() {
+
+	$('#addMetaPanel').hide();
+	$('#metaPanel').hide();
+});
+
+/**
+ * Upload Institute Image
+ */
+$("#but_upload").click(function() {
+	$('#loaderUpload').show();
+
+	var files = $('#file')[0].files[0];
+	var fd = new FormData();
+	fd.append('file', files);
+	fd.append('type', "institutes");
+	fd.append('contentType', files.type);
+
+	uploadFile(fd, function(response) {
+		if (response != null) {
+			alert("Upload File " + response + " " + "successfully");
+			getImageUrl(response, function(imageUrlResponse) {
+
+				if (imageUrlResponse != null) {
+					$('#loaderUpload').hide();
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#upload-img-tag').attr('src', e.target.result);
+					};
+					reader.readAsDataURL($('#file')[0].files[0]);
+
+					instituteImageUrl = imageUrlResponse;
+				} else {
+					$('#loaderUpload').hide();
+
+				}
+			});
+
+		}
+
+		else {
+			$('#loaderUpload').hide();
+
+		}
+
+	});
+
+});
+
+/**
+ * Upload Mutiple Icons
+ */
+$("#but_icon_upload")
+		.click(
+				function() {
+					$('#but_icon_upload').hide();
+
+					$('#institute_row_id .row')
+							.each(
+									function(index, elm) {
+										$(elm).find('#loaderIconUpload').show();
+										file = $(elm).find(
+												'#InstituteAchievementIcon')[0].files[0];
+										var form = new FormData();
+										form.append("file", file);
+										form.append('type', 'icons');
+										form.append('contentType', file.type);
+
+										uploadFile(
+												form,
+												function(response) {
+													if (response != null) {
+
+														getImageUrl(
+																response,
+																function(
+																		imageUrlResponse) {
+
+																	if (imageUrlResponse != null) {
+																		$(elm)
+																				.find(
+																						'#loaderIconUpload')
+																				.hide();
+																		iconUrl = imageUrlResponse;
+																		iconName = response;
+																		description = $(
+																				elm)
+																				.find(
+																						"#InstituteAchievementDescription")
+																				.val();
+
+																		var input = {
+																				iconUrl : iconUrl,
+																				iconName : iconName,
+																				description : description
+
+																		};
+																		instituteHighlightList
+																				.push(input);
+
+																	} else {
+																		alert("Failed in uploading certificate");
+																		$(elm)
+																				.find(
+																						'#loaderIconUpload')
+																				.hide();
+																	}
+
+																});
+
+													}
+
+													else {
+														alert("Failed in uploading certificate");
+														$(elm)
+																.find(
+																		'#loaderIconUpload')
+																.hide();
+													}
+
+												});
+
+									});
+
+				});
+
+/*
+ * Delete New Row on clicking remove button on institute highlight
+ */
+
+$('.field_wrapper').on('click', '.remove-btn', function() {
+	$(this).parent().parent('div').remove();
+
+});
+
+/*
+ * Add new row on clicking add button on institute highlight
+ */
+$('.add-more-highlight')
+		.click(
+				function() {
+
+					blank = false;
+					$(".highlight-wrap input").each(function(index, elm) {
+						if ($(elm).val() == "") {
+							blank = true;
+						}
+					})
+
+					if (!blank) {
+
+						var fieldHTML = '<div class="row">\n'
+								+ '                                <div class="col-md-4">\n'
+								+ '\n'
+								+ '                                    <input type="text" required name="InstituteHighlightText[]" id="InstituteHighlightText"\n'
+								+ '                                           class="form-control"\n'
+								+ '                                           placeholder="Text">\n'
+								+ '                                </div>\n'
+								+ '\n'
+								+ '                                <div class="col-md-7">\n'
+								+ '                                    <input type="text" required name="InstituteHighlightDescription[]"\n'
+								+ '                                           id="InstituteHighlightDescription" class="form-control"\n'
+								+ '                                           placeholder="Description">\n'
+								+ '                                </div>\n'
+								+ '                                <div class="col-md-1">\n'
+								+ '                                    <button class="btn btn-danger remove-btn pull-right" type="button"><i class="glyphicon glyphicon-remove"></i></button>\n'
+								+ '                                </div>\n'
+								+ '                            </div>';
+
+						$('.field_wrapper').append(fieldHTML);
+					}
+				});
+
+$('.field_wrapper1').on('click', '.remove-related-info', function() {
+	$(this).parent().parent('div').remove();
+
+});
+
+$('.add-more-info')
+		.click(
+				function() {
+
+					blank = false;
+					$(".related_wrap input").each(function(index, elm) {
+						if ($(elm).val() == "") {
+							blank = true;
+						}
+					});
+
+					if (!blank) {
+
+    						var fieldHTML = '<div class="row">\n'
+								+ '                                <div class="col-md-4">\n'
+								+ '\n'
+								+ '                                    <input type="text" required name="InstituteRelatedText[]" id="InstituteRelatedText"\n'
+								+ '                                           class="form-control"\n'
+								+ '                                           placeholder="Text">\n'
+								+ '                                </div>\n'
+								+ '\n'
+								+ '                                <div class="col-md-7">\n'
+								+ '                                    <input type="text" required name="InstituteRelatedDescription[]"\n'
+								+ '                                           id="InstituteRelatedDescription" class="form-control"\n'
+								+ '                                           placeholder="Description">\n'
+								+ '                                </div>\n'
+								+ '                                <div class="col-md-1">\n'
+								+ '                                    <button class="btn btn-danger remove-related-info pull-right" type="button"><i class="glyphicon glyphicon-remove"></i></button>\n'
+								+ '                                </div>\n'
+								+ '                            </div>'
+
+						$('.field_wrapper1').append(fieldHTML);
+					}
+				});
+
+$(document).on('click', '.remove-achievements', function() {
+	$(this).parent().parent('div').remove();
+
+});
+
+$('.add-more-instituteAchievements')
+		.click(
+				function() {
+
+					blank = false;
+					$(".achievements_wrap input").each(function(index, elm) {
+						if ($(elm).val() == "") {
+							blank = true;
+						}
+					});
+
+					if (!blank) {
+						var fieldHTML = '<div class="row">\n'
+								+ '                                <div class="col-md-4">\n'
+								+ '\n'
+								+ '                                    <label class="custom-file">\n'
+								+ '                                        <input type="file" required name="multipleImageIcon[]" id="InstituteAchievementIcon"\n'
+								+ '                                               class="custom-file-input">\n'
+								+ '                                        <span class="custom-file-control"></span>\n'
+								+ '                                    </label>\n'
+								+ '\n'
+								+ '\n'
+								+ '\n'
+								+ '                                </div>\n<div style="position: absolute; left: 300px; display: none;" id="loaderIconUpload"><img width="30px" height="30px"\n'
+								+ '                                                                       src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">\n'
+								+ '                </div>\n'
+								+ '\n'
+								+ '                                <div class="col-md-7">\n'
+								+ '                                    <input type="text" required name="InstituteAchievementDescription[]"\n'
+								+ '                                           id="InstituteAchievementDescription" class="form-control"\n'
+								+ '                                           placeholder="Description">\n'
+								+ '                                </div>\n'
+								+ '\n'
+								+ '                                <div class="col-md-1">\n'
+								+ '                                   <button class="btn btn-danger remove-achievements pull-right" type="button"><i class="glyphicon glyphicon-remove"></i></button>\n'
+								+ '                                </div>\n'
+								+ '                            </div>';
+
+						$('.field_wrapper2').append(fieldHTML);
+					}
+
+				});
+
+$('#newInstitute').validate({
+
+	rules : {
+		instituteName : {
+			required : true
+		},
+		instituteDescription : {
+			required : true
+		},
+		instituteImage : {
+			required : true
+		},
+		instituteOwner : {
+			required : true
+		},
+		instituteSlug : {
+			required : true
+		}
+
+	},
+	messages : {
+
+		instituteName : {
+			required : "Please enter institute name"
+		},
+		instituteDescription : {
+			required : "Please enter institute description"
+		},
+		instituteImage : {
+			required : "Please enter institute image"
+		},
+		instituteOwner : {
+			required : "Please enter institute owner name"
+		},
+		instituteSlug : {
+			required : "Please enter institute slug"
+		}
+
+	},
+	submitHandler : function() {
+		submitRequest();
+		$('#loader').show();
+	}
+
+});
+
+function submitRequest() {
+	var featuredImageReq = {};
+
+	featuredImageReq["url"] = instituteFeatureImageUrl;
+	featuredImageReq["name"] = $('#featureImage')[0].files[0].name;
+	featuredImageReq["title"] = $('#txtFITitle').val();
+	featuredImageReq["caption"] = $('#txtFICaption').val();
+	featuredImageReq["altText"] = $('#txtFIAltText').val();
+	featuredImageReq["description"] = $('#txtFIDescription').val();
+
+	// for adding description
+
+	var metaDesc = {};
+
+	metaDesc["type"] = "description";
+	metaDesc["content"] = $('#txtMetaDesc').val();
+	metaDesc["attributeType"] = "name";
+
+	metaInfoList.push(metaDesc);
+
+	// For adding social image
+
+	var metaImg = {};
+
+	metaImg["type"] = "og:image";
+	metaImg["content"] = postSocialImageUrl;
+	metaImg["attributeType"] = "property";
+
+	metaInfoList.push(metaImg);
+
+	metaImg["type"] = "og:image:secure_url";
+
+	metaInfoList.push(metaImg);
+
+	metaImg["type"] = "twitter:image";
+	metaImg["attributeType"] = "name";
+
+	metaInfoList.push(metaImg);
+
+	var input = {
+        instituteId : $('#instituteId').val(),
+		name : $('#instituteName').val(),
+		url : $('#instituteUrl').val(),
+		description : $('#instituteDescription').val(),
+		image : $('#file')[0].files[0].name,
+		imageUrl : instituteImageUrl,
+		emailId : $('#instituteEmail').val(),
+		ownerName : $('#instituteOwner').val(),
+		address : $('#instituteAddress').val(),
+		contactNo : $('#instituteContactNumbers').val(),
+    highlights : JSON.stringify(getInstituteHighlightsInfo()),
+    achievements : JSON.stringify(instituteHighlightList),
+    relatedInfo : JSON.stringify(getInstituteRelatedInfo()),
+		facebookUrl : $('#instituteFacebook').val(),
+		linkedinUrl : $('#instituteLinkedin').val(),
+		twitterUrl : $('#instituteTwitter').val(),
+		googlePlusUrl : $('#instituteGooglePlus').val(),
+		otherInformation : $('#instituteOtherInfo').val(),
+		instituteSlug : $('#slug').val(),
+		status : getStatus(),
+		metaList : metaInfoList,
+		titleTag : $('#titleTag').val(),
+		featuredImage : featuredImageReq,
+		breadCrumb : {
+			breadcrumbId : breadCrumbParentId
+		},
+		imageAltText : $('#imageAltText').val()
+	};
+
+	$.ajax({
+		url : apiBasePath + "/admin_lmsadmin/institutes/" + instituteID,
+		type : "put",
+		data : JSON.stringify(input),
+		contentType : "application/json",
+		processData : false,
+
+		success : function(response) {
+			$('#loader').hide();
+			location.reload();
+			alert("Institute Updated Successfully");
+		},
+
+		error : function(response) {
+			$('#loader').hide();
+			if (response.status == 403) {
+				window.location.href = "/permission-error";
+			} else {
+				alert("Institute Update Failed");
+			}
+
+		}
+	});
+
+}
+
+function getInstituteHighlightsInfo() {
+	list = [];
+	$(".highlight-wrap .row").each(function(index, elm) {
+		text = $(elm).find("#InstituteHighlightText").val();
+		description = $(elm).find("#InstituteHighlightDescription").val();
+
+		var input = {
+				text : text,
+				description : description
+
+		};
+
+		list.push(input);
+	});
+	return list;
+}
+
+function getInstituteRelatedInfo() {
+	list = [];
+	$(".related_wrap .row").each(function(index, elm) {
+		text = $(elm).find("#InstituteRelatedText").val();
+		description = $(elm).find("#InstituteRelatedDescription").val();
+
+		var input = {
+				text : text,
+				description : description
+		};
+
+		list.push(input);
+	});
+	return list;
+}
+
+function getStatus() {
+	var status;
+	if (document.getElementById('publish').checked) {
+		status = document.getElementById('publish').value;
+	} else if (document.getElementById('draft').checked) {
+		status = document.getElementById('draft').value;
+	} else {
+		status = document.getElementById('draft').value;
+	}
+
+	return status;
+}
+
+$("#but_feature_upload")
+		.click(
+				function() {
+					$('#loaderFeatureUpload').show();
+
+					var files = $('#featureImage')[0].files[0];
+					var fd = new FormData();
+					fd.append('file', files);
+					fd.append('type', "featureImage/institutes");
+					fd.append('contentType', files.type);
+
+					uploadFile(
+							fd,
+							function(response) {
+								if (response != null) {
+									getImageUrl(
+											response,
+											function(imageUrlResponse) {
+
+												if (imageUrlResponse != null) {
+													$('#loaderFeatureUpload')
+															.hide();
+													var reader = new FileReader();
+													reader.onload = function(e) {
+														$(
+																'#upload-feature-img-tag')
+																.attr(
+																		'src',
+																		e.target.result);
+													};
+													reader
+															.readAsDataURL($('#featureImage')[0].files[0]);
+													instituteFeatureImageUrl = imageUrlResponse;
+												} else {
+													$('#loaderFeatureUpload')
+															.hide();
+
+												}
+											});
+
+								}
+
+								else {
+									$('#loaderFeatureUpload').hide();
+
+								}
+
+							});
+
+				});
+
+function showAddMetaPanel() {
+	$('#addMetaPanel').show();
+}
+
+function addMetaInfo() {
+	var meta = {};
+
+	meta["type"] = $('#ddMetaType').val();
+	meta["content"] = $('#txtMetaContent').val();
+	switch ($('#ddMetaType').val()) {
+	case "og:locale":
+	case "og:site_name":
+	case "og:type":
+	case "og:description":
+	case "fb:app_id":
+	case "og:url":
+		meta["attributeType"] = 'property';
+		break;
+	default:
+		meta["attributeType"] = 'name';
+		break;
+	}
+
+	metaInfoList.push(meta);
+
+	$('#ddMetaType').prop('selectedIndex', 0);
+	$('#txtMetaContent').prop('value', '');
+
+	$('#addMetaPanel').hide();
+	showMetaDetails();
+}
+
+function showMetaDetails() {
+	htmlToShow = '';
+	htmlBeg = '<div class="row">';
+	htmlRow = '<div style="margin-top: 20px;" class="col-md-9">	<label id="lblType" style="font-weight:  bold;"> Meta Type:&nbsp;&nbsp;</label ><input type="text" value="#metaType#" readonly="readonly" style="border-bottom:  0; border-top: 0; border-left:  0; border-right:  0;"></div><div style="margin-top: 20px;" class="col-md-9"><label id="lblContent" style="font-weight:  bold;"> Meta Content:&nbsp;&nbsp;</label> <input type="text" value="#metaContent#" readonly="readonly" style="border-bottom:  0; border-top: 0; border-left:  0; border-right:  0;"></div>';
+	htmlEnd = '</div><br/>';
+
+	if (metaInfoList != null && metaInfoList.length > 0) {
+		htmlToShow += htmlBeg;
+
+		$.each(metaInfoList, function(index, element) {
+			htmlToShow += htmlRow;
+
+			htmlToShow = htmlToShow.replace("#metaType#", element.type);
+			htmlToShow = htmlToShow.replace("#metaContent#", element.content);
+		});
+		htmlToShow += htmlEnd;
+
+		$('#metaPanel').html(htmlToShow).show();
+	}
+
+}
+
+$("#but_social_upload")
+		.click(
+				function() {
+					$('#loaderSocialUpload').show();
+					$('#but_social_upload').hide();
+
+					var files = $('#socialImage')[0].files[0];
+					var fd = new FormData();
+					fd.append('file', files);
+					fd.append('type', "socialImage/post");
+					fd.append('contentType', files.type);
+
+					uploadFile(
+							fd,
+							function(response) {
+								if (response != null) {
+									getImageUrl(
+											response,
+											function(imageUrlResponse) {
+
+												if (imageUrlResponse != null) {
+													$('#loaderSocialUpload')
+															.hide();
+													var reader = new FileReader();
+													reader.onload = function(e) {
+														$(
+																'#upload-social-img-tag')
+																.attr(
+																		'src',
+																		e.target.result);
+													};
+													reader
+															.readAsDataURL($('#socialImage')[0].files[0]);
+													postSocialImageUrl = imageUrlResponse;
+													if ($("#upload-social-img-tag").length > 0) {
+
+														var mydiv = document
+																.getElementById("socialImageContainer");
+														var aTag = document
+																.createElement('a');
+														aTag
+																.setAttribute(
+																		'href',
+																		postSocialImageUrl);
+														aTag
+																.setAttribute(
+																		'id',
+																		"social-image-url");
+														aTag.innerHTML = postSocialImageUrl;
+														mydiv.appendChild(aTag);
+
+													} else {
+														var mydiv = document
+																.getElementById("socialImageContainer");
+														var aTag = document
+																.createElement('a');
+														aTag
+																.setAttribute(
+																		'href',
+																		imageUrlResponse);
+														aTag
+																.setAttribute(
+																		'id',
+																		"social-image-url");
+														aTag.innerHTML = imageUrlResponse;
+														mydiv.appendChild(aTag);
+													}
+
+												} else {
+													$('#loaderSocialUpload')
+															.hide();
+													$('#but_social_upload')
+															.show();
+												}
+											});
+
+								}
+
+								else {
+									$('#loaderSocialUpload').hide();
+									$('#but_social_upload').show();
+								}
+
+							});
+
+				});
+
+if(instituteHighlights!=null) {
+  instituteHighlights.forEach(function (element, index) {
+
+    if (index == 0) {
+      $('#InstituteHighlightId').val(element.instituteHighlightId);
+      $('#InstituteHighlightText').val(element.highlights.text);
+      $('#InstituteHighlightDescription').val(element.highlights.description);
+    }
+
+    else {
+      var fieldHTML = '<div class="row">\n'
+          + '                                    <div class="col-md-4">\n'
+          + '\n'
+          + '                                          <label id="InstituteHighlightId" style="display: none">#instituteHighlight#</label><input type="text" required name="InstituteHighlightText[]" id="InstituteHighlightText" value="#InstituteHighlightTextInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Text" maxlength="255" minlength="2">\n'
+          + '                                    </div>\n'
+          + '\n'
+          + '                                    <div class="col-md-7">\n'
+          + '                                       <input type="text" required name="InstituteHighlightDescription[]" id="InstituteHighlightDescription" value="#InstituteHighlightDescriptionInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Description" maxlength="255" minlength="10">\n'
+          + '                                    </div>\n'
+          + '                                    <div class="col-md-1">\n'
+          + '                                        <button class="btn btn-danger remove-btn"  style="width: 100px;padding-left: 2px;padding-right: 100px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;" type="button"><i class="fa fa-times" aria-hidden="true"></i> Remove Field</button>\n'
+          + '                                    </div>\n'
+          + '                                </div>';
+
+      fieldHTML = fieldHTML.replace("#instituteHighlight#", element.instituteHighlightId);
+      fieldHTML = fieldHTML.replace("#InstituteHighlightTextInfo#", element.highlights.text);
+      fieldHTML = fieldHTML.replace("#InstituteHighlightDescriptionInfo#",
+          element.highlights.description);
+
+      $('.field_wrapper').append(fieldHTML);
+    }
+  });
+}
+
+if(instituteRelateds!=null) {
+  instituteRelateds.forEach(function (element, index) {
+
+    if (index == 0) {
+      $('#InstituteRelatedInfoId').val(element.instituteHighlightId);
+      $('#InstituteRelatedText').val(element.highlights.text);
+      $('#InstituteRelatedDescription').val(element.highlights.description);
+    }
+
+    else {
+      var fieldHTML = '<div class="row">\n'
+          + '                                    <div class="col-md-4">\n'
+          + '\n'
+          + '                                          <label id="InstituteRelatedInfoId" style="display: none">#instituteRelateds#</label><input type="text" required name="InstituteRelatedText[]" id="InstituteRelatedText" value="#InstituteRelatedTextInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Text" maxlength="255" minlength="2">\n'
+          + '                                    </div>\n'
+          + '\n'
+          + '                                    <div class="col-md-7">\n'
+          + '                                       <input type="text" required name="InstituteRelatedDescription[]" id="InstituteRelatedDescription" value="#InstituteRelatedDescriptionInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Description" maxlength="255" minlength="10">\n'
+          + '                                    </div>\n'
+          + '                                    <div class="col-md-1">\n'
+          + '                                        <button class="btn btn-danger remove-btn"  style="width: 100px;padding-left: 2px;padding-right: 100px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;" type="button"><i class="fa fa-times" aria-hidden="true"></i> Remove Field</button>\n'
+          + '                                    </div>\n'
+          + '                                </div>';
+
+      fieldHTML = fieldHTML.replace("#instituteRelateds#", element.instituteHighlightId);
+      fieldHTML = fieldHTML.replace("#InstituteRelatedTextInfo#", element.highlights.text);
+      fieldHTML = fieldHTML.replace("#InstituteRelatedDescriptionInfo#",
+          element.highlights.description);
+
+      $('.field_wrapper1').append(fieldHTML);
+    }
+  });
+}
+
+if(instituteAchievements!=null) {
+  instituteAchievements.forEach(function (element, index) {
+
+    if (index == 0) {
+      $('#instituteAchievementsId').val(element.instituteAchievementsId);
+      $('#instituteAchievementsIcon').val(element.achievements.iconUrl);
+      $('#instituteAchievementsDescription').val(element.achievements.description);
+    }
+
+    else {
+      var fieldHTML = '<div class="row">\n'
+          + '                                    <div class="col-md-4">\n'
+          + '\n'
+          + '                                          <label id="instituteAchievementsId" style="display: none">#instituteAchievements#</label><input type="file" name="instituteAchievementsIcon[]" id="instituteAchievementsIcon" class="form-control"\n'
+          +
+          '                                               >\n'
+          + '                                   <img src="#instituteAchievementsIconInfo#" width="30px" height="30px" /><input type="button" class="button btn-primary" value="Upload" id="but_icon_upload"> </div>\n'
+          + '\n'
+          + '                                    <div class="col-md-7">\n'
+          + '                                       <input type="text" required name="instituteAchievementsDescription[]" id="instituteAchievementsDescription" value="#instituteAchievementsDescriptionInfo#" class="form-control"\n'
+          +
+          '                                               placeholder="Description" maxlength="255" minlength="10">\n'
+          + '                                    </div>\n'
+          + '                                    <div class="col-md-1">\n'
+          + '                                        <button class="btn btn-danger remove-btn"  style="width: 100px;padding-left: 2px;padding-right: 100px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;" type="button"><i class="fa fa-times" aria-hidden="true"></i> Remove Field</button>\n'
+          + '                                    </div>\n'
+          + '                                </div>';
+
+      fieldHTML = fieldHTML.replace("#instituteAchievements#", element.instituteAchievementsId);
+      fieldHTML = fieldHTML.replace("#instituteAchievementsIconInfo#",
+          element.achievements.iconUrl);
+      fieldHTML = fieldHTML.replace("#instituteAchievementsDescriptionInfo#",
+          element.achievements.description);
+
+      $('.field_wrapper2').append(fieldHTML);
+    }
+  });
+}
+
+
+</script>
+</body>
+
+</html>

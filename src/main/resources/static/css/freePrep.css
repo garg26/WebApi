@@ -1,0 +1,546 @@
+.book-icon {
+	opacity: 0.84;
+	padding: 15px;
+	border-radius: 50px;
+	color: #fff;
+}
+
+.free-prep-name {
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 24px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+}
+
+.booklet {
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 24px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #4198cb;
+}
+
+.free-prep-tab {
+	height: 48px;
+	background-color: #f2f2f2;
+	margin-bottom: 80px;
+}
+
+.free-prep-tab ul {
+	list-style: none;
+	margin: 0;
+	line-height: 48px;
+	padding: 0;
+}
+
+.free-prep-tab ul li {
+	display: inline-block;
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 0 20px;
+	cursor:pointer;
+}
+.free-Prep-Home-Nav{
+  display: block;
+  float:left;
+}
+.free-Prep-Home-Nav:hover {
+
+    background-color: #1cddec33;
+
+}
+
+.free-Prep-Home-Nav:focus {
+
+    background-color: #1cddec33;
+
+}
+.mat-free-prep-bg {
+	height: auto;
+	background: url(../images/freePrep/multiplebg.png) center no-repeat;
+	background-size: cover;
+	width: 100%;
+}
+
+.mat-free-prep-bg h3 {
+	font-size: 32px;
+	font-weight: bold;
+	line-height: 44px;
+	font-family: open sans;
+	font-style: normal;
+	font-stretch: normal;
+	letter-spacing: normal;
+	text-align: center !important;
+	color: #ffffff;
+	margin-top: 300px;
+}
+
+.mat-free-prep-bg p {
+	font-family: open sans;
+	font-size: 20px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 32px;
+	letter-spacing: normal;
+	text-align: center;
+	color: #ffffff;
+}
+
+.freeprep-category-cards {
+	position: relative;
+	width: 100%;
+	border-right: solid 0.5px #b2b2b2;
+	border-bottom: solid 0.5px #b2b2b2;
+}
+
+.freeprep-overlay-card {
+	display: block;
+	width: 100%;
+	height: 160px;
+	cursor: pointer;
+}
+
+.freeprep-grid .mdl-cell:nth-child(4) .freeprep-category-cards {
+	border-right: 0 !important;
+}
+
+.freeprep-grid:nth-child(3) .freeprep-category-cards {
+	border-bottom: 0 !important;
+}
+
+.freeprep-grid {
+	padding: 0;
+}
+
+.freeprep-grid .mdl-cell {
+	margin: 0;
+}
+
+.freeprep-category-cards .overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .5s ease;
+	background-color: #f4fbfe;
+	border: solid 0.5px #162840;
+}
+
+.freeprep-category-cards:hover .overlay {
+	opacity: 1;
+}
+
+.freeprep-category-cards .text {
+	font-family: open sans;
+      font-size: 16px !important;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 17px;
+      letter-spacing: normal;
+      text-align: center;
+      color: #162840;
+      font-size: 20px;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+      text-transform: uppercase;
+      top: 50%;
+      left: 50%;
+      display: table;
+      padding: 0 20px;
+      width: 100%;
+
+  }
+
+
+  
+
+.freeprep-category-cards .text a {
+	font-family: open sans;
+	font-size: 14px !important;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #162840;
+	text-transform: uppercase;
+}
+
+.freeprep-text {
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 24px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #333333;
+	margin: 40px 0 0 0;
+}
+
+.freeprep-text span {
+	color: #000000;
+	font-weight: bold;
+}
+
+.freeprep-category-cards i {
+	font-size: 36px;
+	color: #6eb9e6;
+	margin: 0 auto 15px auto;
+	display: table;
+	width: 100px;
+	text-align: center;
+	border-bottom: 1px solid #b2b2b2;
+	padding-bottom: 15px;
+	padding-top: 40px;
+}
+
+.freeprep-category-cards p {
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #000000;
+	margin: 0;
+}
+
+.freeprep-grid-section {
+	margin: 80px auto;
+}
+
+.see-all-button {
+	width: 180px;
+	height: 40px;
+	border-radius: 2px;
+	background-image: linear-gradient(103deg, #faa047, #f26722);
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 40px;
+	letter-spacing: normal;
+	text-align: center;
+	color: #ffffff;
+	margin: 60px auto 40px auto;
+	display: block;
+}
+
+.freepreps-slider {
+	height: 500px;
+	background-color: #162840;
+	box-shadow: 0 10px 3px 0 #f6f6f633;
+	padding: 80px 0;
+	margin-top: 60px;
+}
+
+.toppers-talk {
+	font-family: open sans;
+	font-size: 24px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 46px;
+	letter-spacing: normal;
+	text-align: center;
+	color: #ffffff;
+	margin: 0 0 8px 0;
+}
+
+.video-caption {
+	height: 40px;
+	border-radius: 2px;
+	background-color: #ffffff;
+	border: solid 0.5px #979797;
+	padding: 20px;
+}
+
+.video-caption span {
+	font-size: 15px !important;
+	font-weight: normal !important;
+	color: #666666 !important;
+}
+
+#freepreps-slider .slick-arrow {
+	width: 44px;
+	height: 44px;
+	background-color: #ffffff;
+	border: solid 0.3px #dadada;
+	border-radius: 50px;
+	z-index: 1;
+}
+
+.price-and-students {
+	margin: 0 0 40px 0 !important;
+}
+
+.price.free {
+	opacity: 0.95;
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #3fbf53;
+}
+
+.ns-card-p {
+	margin: 8px 0 16px 0 !important;
+	height: 43px !important;
+}
+
+.explore-all-courses {
+	background: #f2f2f2 !important;
+	padding: 100px 0 100px 0 !important;
+	width: 100%;
+	background-size: cover;
+	margin-bottom: 0;
+}
+
+.blogs-slider {
+	background-color: #162840;
+	padding: 56px 96px;
+}
+
+.blogs-slider .slick-slide {
+	background: transparent;
+}
+
+.slick-next:before, .slick-prev:before {
+	opacity: 0.54 !important;
+	color: #999 !important;
+	font-size: 24px;
+}
+
+.blogs-slider .ns-card h3 {
+	margin: 0;
+}
+
+.blogs-slider .ns-card {
+	border: none;
+}
+
+.blog-heading {
+	font-family: open sans;
+	font-size: 24px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 34px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 0 0 0 28px !important;
+	display: inline-block;
+}
+
+.blog-category-heading {
+	font-family: open sans;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #000000;
+	margin: 0 !important;
+	display: inline-block;
+}
+
+.blog-heading ~span {
+	font-family: open sans;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 16px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #333333;
+	margin: -4px 0 0 16px;
+	display: block;
+}
+
+.blogs-slider .ns-card h3 {
+	font-family: open sans;
+	font-size: 24px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 32px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #ffffff !important;
+}
+
+.blogs-slider .ns-card p {
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 24px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #ffffff !important;
+}
+
+.blogs-slider .blog-genre {
+	font-family: open sans;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #f26722 !important;
+}
+
+.date-of-blog-slider {
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #ffffff !important;
+	margin: 8px 0;
+	display: inline-block;
+}
+
+.date-of-blog-slider .month {
+	font-weight: bold !important;
+	color: #ffffff !important;
+}
+
+.minutes-read {
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #ffffff !important;
+}
+
+.minutes-read i {
+	color: #ffffff !important;
+	font-size: 12px !important;
+}
+
+.share-blog {
+	font-family: open sans;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #f26722 !important;
+	cursor: pointer;
+}
+
+.slick-slide img {
+	display: block !important;
+	height: 154px !important;
+	width: -webkit-fill-available;
+	width: -moz-available;
+}
+
+.share-blog i {
+	opacity: 0.6;
+}
+
+.previous-next-post h3 {
+	font-size: 20px;
+	width: 300px;
+}
+
+.previous-next-post {
+	padding: 190px 0px 280px 0px;
+}
+
+.previous {
+	font-family: open sans;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #b2b2b2 !important;
+	margin: -20px 0 4px 16px;
+	display: block;
+}
+
+.blogs-slider .slick-slide {
+	box-shadow: none;
+}
+/*  mobile screens */
+@media screen and (max-width: 767px) {
+	.freeprep-text {
+		text-align: center;
+	}
+	.freeprep-category-cards {
+		position: relative;
+		border-right: none;
+		border-bottom: solid 0.5px #b2b2b2 !important;
+		width: calc(100% + 16px);
+	}
+	.freeprep-grid:nth-child(3) .freeprep-category-cards {
+		border-bottom: solid 0.5px #b2b2b2 !important;
+	}
+	.slick-slide {
+		width: auto;
+	}
+	.blogs-slider {
+		padding: 56px 20px;
+	}
+	.freepreps-slider .slick-next {
+		right: 0;
+	}
+	.freepreps-slider .slick-prev {
+		left: 0;
+	}
+}

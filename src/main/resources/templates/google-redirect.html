@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Google login</title>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function() {
+		if (code && state) {
+			$.ajax({
+				url : "/google/login?code=" + code + "&state=" + state,
+        datatype : "application/json",
+        contentType: "text/plain",
+				success : function(res, status) {
+				  if(res.loginSucces){
+					loginUser(res.accessToken, state);
+          }
+          else{
+            window.location.href = "/";
+          }
+				}
+			});
+		}
+	})
+	var url = window.location.toString();
+	var code = getParameterByName("code", url);
+	var state = getParameterByName("state", url);
+
+	function getParameterByName(name, url) {
+		if (!url)
+			url = window.location.href;
+		name = name.replace(/[\[\]]/g, "\\$&");
+		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex
+				.exec(url);
+		if (!results)
+			return null;
+		if (!results[2])
+			return '';
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+</script>
+
+</head>
+<body>
+
+	Please wait, while you are being logged in
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+</body>
+</html>

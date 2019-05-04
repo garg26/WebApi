@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+
+    <meta property="og:title"
+          content="JEE Coaching Online, Live | NeoStencil"/>
+    <meta name="description"
+          content="JEE Main Exam - Prepare IIT JEE Entrance exam with Kota's Top Institute LIVE Online. Also know more about JEE Exam - Pattern, Syllabus, Exam Dates, Preparation Tips and more.">
+    <meta property="og:image"
+          content="https://lh3.googleusercontent.com/oEeX7Sor2zLTS8MEJmJbNgK7h2rOy1Ajl6j8YCuaqBEx_ls43VzuTw4X-I27cscCzn_8pseVBacgUEgxG4NeZaZtYhs"/>
+    <title>JEE Coaching Online, Live | NeoStencil</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <link rel="stylesheet" media="screen"
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/home.css')}}"/>
+
+    <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.css"
+            rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" media="screen"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+    <link rel="stylesheet" media="screen"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+    <link rel="stylesheet" media="screen"
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+
+    <style>
+        .testimonials {
+            top: 0 !important;
+        }
+
+        .testimonials-name-slick {
+            text-align: left !important;
+        }
+
+        .testimonial-image {
+            height: 70px;
+            border: 1px solid #ddd;
+        }
+
+        #testimonials .mdl-card__supporting-text {
+            height: 164px !important;
+        }
+
+        #testimonials .mdl-card__supporting-text {
+            text-align: left;
+        }
+
+        .testimonials .slick-dots li.slick-active button:before, .testimonials .slick-dots li button::before {
+            height: 0 !important;
+        }
+
+        .testimonials .slick-dots li {
+            margin: 0 8px !important;
+        }
+
+        .mdl-layout__header.is-casting-shadow {
+            background: #fff !important;
+        }
+
+        .swiper-button-prev, .swiper-button-next {
+            background-image: none;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .course-rating i {
+            float: left;
+        }
+
+        /* @media screen and (max-width: 1024px) {
+            .user-icon-mobile {
+                right: 72px !important;
+                position: absolute !important;
+            }
+            form.search-mobile {
+                display: none;
+            }
+        } */
+        .main-home-page-banner-image-small {
+            display: none;
+        }
+
+        .input-call-me {
+            background: #fff;
+            padding: 0 16px 0 56px;
+            height: 56px;
+            color: #000;
+            resize: none;
+            display: block;
+            width: calc(100% - 72px);
+            max-width: 400px;
+            outline: 0;
+            font-size: 18px;
+            margin: 24px 0 0 0;
+            border-radius: 4px;
+            box-shadow: 0 8px 12px 0 #ff8d34, 0 0 12px 0 rgba(0, 0, 0, 0.12);
+            border: none;
+        }
+
+        .video-play-button {
+            z-index: 10;
+            transform: translateX(0%) translateY(0%);
+            box-sizing: content-box;
+            display: block;
+            width: 32px;
+            height: 44px;
+            /* background: #fa183d; */
+            border-radius: 50%;
+            padding: 18px 20px 18px 28px;
+        }
+
+        .video-play-button:before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            display: block;
+            width: 72px;
+            height: 72px;
+            background: #ff6600;
+            border-radius: 50%;
+            /* animation: pulse-border 1500ms ease-out infinite;*/
+        }
+
+        .video-play-button:after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            display: block;
+            width: 56px;
+            height: 56px;
+            background: #ff6600;
+            border-radius: 50%;
+            transition: all 200ms;
+        }
+
+        .video-play-button:hover:after {
+            background-color: darken(#ff6600, 10%);
+        }
+
+        .video-play-button img {
+            position: relative;
+            z-index: 3;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        .video-play-button span {
+            display: block;
+            position: relative;
+            z-index: 3;
+            width: 0;
+            height: 0;
+            border-left: 18px solid #fff;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin: 10px 6px;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .section-play-video-pulse label {
+            font-family: arimo;
+            font-size: 20px;
+            font-weight: 700;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .section-play-video-pulse p {
+            color: #555;
+            font-size: 18px;
+            font-family: arimo;
+            margin: 16px 0 4px 0;
+        }
+
+        .section-play-video-pulse {
+            margin: 8px 0 40px 0;
+        }
+
+        .mat-slogan {
+            font-size: 32px;
+            font-weight: 600;
+            color: #555;
+            margin: 0;
+        }
+
+        .section-call-me > div {
+            width: 100%;
+            max-width: 434px;
+        }
+
+        .btn-call-me {
+            float: right;
+            margin: -49px 6px 0 0;
+            border-radius: 27px;
+            background-color: #615cdf !important;
+            height: 40px;
+            line-height: 40px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        #examSection .exam-details {
+            padding: 0 16px 16px 16px;
+            font-family: arimo;
+        }
+
+        #examSection .view-courses {
+            color: #02b3e4;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 56px 0 8px 0px;
+            display: block;
+            font-family: arimo;
+            cursor: pointer;
+            transition: 200ms;
+        }
+
+        #examSection .view-courses:hover {
+            color: #028bb1;
+        }
+
+        #examSection .mdl-cell {
+            padding: 16px 8px;
+        }
+
+        .counter-code {
+            margin: -57px 0 0 1px;
+            display: block;
+            width: 32px;
+            height: 56px;
+            line-height: 56px;
+            padding: 0 8px;
+            background: #d4e0e9;
+            border-radius: 4px 0px 0px 4px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        #getNumber #mobile-error {
+            position: absolute;
+        }
+
+        .call-shortly {
+            position: absolute;
+            color: green;
+        }
+
+        #loader-getNumber {
+            float: right;
+            margin: -44px 20px 0 0;
+            border-radius: 27px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        #getNumberCheck {
+            float: right;
+            margin: -44px 12px 0 0;
+            border-radius: 27px;
+            height: 32px;
+            line-height: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            background: #00e48d;
+            border-radius: 50%;
+            color: #fff;
+            width: 32px;
+        }
+
+        #getNumberCheck i {
+            text-align: center;
+            display: block;
+            line-height: 32px;
+        }
+
+        .heading-jee {
+            font-size: 32px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            color: #000000;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .paragraph-jee {
+            margin: 0 0 16px;
+            font-family: Montserrat;
+            font-size: 18px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.67;
+            letter-spacing: normal;
+            color: #666666;
+        }
+
+        .underline-jee {
+            border: solid 3px #e5ebef;
+            width: 71px;
+            margin: 24px 0 40px 0;
+        }
+
+        .section-jee {
+            padding: 8px 0;
+        }
+
+        .section-top-jee {
+            position: relative;
+            height: auto;
+            width: 100%;
+            background: #fff;
+            background-size: cover;
+            background: #ffffff url(https://lh3.googleusercontent.com/7Dmo824rp8zvrDnv-CHDW70GlLn_eFmXw5H5jsPnKJIs77h2yCFBVyZEEMsi20GchUBI-FAvlX6HShz-gGWCnMbPEg) no-repeat center;
+            background-size: cover;
+            padding: 170px 0 150px 0 !important;
+        }
+
+        .mat-slogan {
+            font-size: 36px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            color: #ffffff;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .section-play-video-pulse p {
+            color: #fff;
+        }
+
+        .section-play-video-pulse label {
+            color: #fff;
+        }
+
+        .video-play-button:before {
+            background: #ffffff;
+            animation: pulse-border 1500ms ease-out infinite;
+        }
+
+        .video-play-button:after {
+            background: #ffffff;
+        }
+
+        .video-play-button span {
+            border-left: 18px solid #ff842a;
+        }
+
+        .counter-code-jee {
+            margin: -56px 0 0 1px;
+            display: block;
+            width: 32px;
+            height: 56px;
+            line-height: 56px;
+            padding: 0 8px;
+            background: #ffffff;
+            border-radius: 4px 0px 0px 4px;
+            font-weight: 600;
+            font-size: 18px;
+            border-right: 1px solid #ddd;
+        }
+
+        .item:hover .item-overlay.bottom {
+            bottom: 0;
+        }
+
+        .item-overlay.bottom div {
+            padding: 32px 16px;
+        }
+
+        .item:hover .item-overlay.left {
+            left: 0;
+        }
+
+        .item-overlay.jee11 {
+            font-size: 16px;
+            font-weight: 600;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            line-height: 24px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: #4285f4;
+            opacity: 1;
+            color: #fff;
+            overflow: hidden;
+            text-align: center;
+            -moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            -webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        }
+
+        .item-overlay.jee12 {
+            font-size: 16px;
+            font-weight: 600;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            line-height: 24px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: #e3ad17;
+            opacity: 1;
+            color: #fff;
+            overflow: hidden;
+            text-align: center;
+            -moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            -webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        }
+
+        .item-overlay.jee13 {
+            font-size: 16px;
+            font-weight: 600;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            line-height: 24px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: #0f9d58;
+            opacity: 1;
+            color: #fff;
+            overflow: hidden;
+            text-align: center;
+            -moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            -webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+            transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        }
+
+        .view-details-jee {
+            display: block;
+            border: 2px solid #fff;
+            width: 175px;
+            height: 40px;
+            line-height: 40px;
+            margin: 24px auto;
+            border-radius: 4px;
+            transition: 200ms;
+            cursor: pointer;
+        }
+
+        .item-overlay.bottom {
+            bottom: 100%;
+        }
+
+        .testimonials {
+            background: none !important;
+        }
+
+        .testimonials .slick-dots li.slick-active button:before {
+            color: #acacac;
+        }
+
+        .testimonials .slick-dots li button::before {
+            color: #888;
+        }
+
+        .mat-landing-bar {
+            padding: 40px 0 24px 0;
+        }
+
+        .mdl-layout__content {
+            margin-top: 8px !important;
+        }
+
+        .search-container input[type=text] {
+            width: 182px;
+        }
+
+        .paragraph-jee-seo p, .paragraph-jee-seo li {
+            margin: 0 0 16px;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 24px;
+            letter-spacing: normal;
+            color: #666666;
+        }
+
+        .seo-links {
+            list-style: none;
+            margin-top: 32px;
+        }
+
+        .seo-links .active-seo {
+            border-left: 4px solid #ff6600;
+            padding: 0 4px;
+        }
+
+        .seo-links a {
+            margin: 0 0 16px;
+            font-family: Montserrat;
+            font-size: 18px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 32px;
+            letter-spacing: normal;
+            color: #000000;
+        }
+
+        .seo-links li {
+            margin: 16px 0;
+            border-left: 4px solid #ddd;
+            padding: 0 4px;
+        }
+
+        #section-seo td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #section-seo table {
+            border-collapse: collapse;
+        }
+
+        .make-table-responsive {
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        #section-courses .demo-card-square {
+            width: 100%;
+        }
+
+        @media screen and (min-width: 768px) {
+            .landing-darken {
+                margin-top: 8px;
+            }
+
+            .accordian-active ~ .landing-darken {
+                margin-top: 48px;
+            }
+
+            .mat-login {
+                width: auto;
+            }
+
+            .is-casting-shadow .mega-menu nav > ul > li > a {
+                color: #000000 !important;
+            }
+
+            .mdl-layout__header--transparent.mdl-layout__header--transparent {
+                background: transparent !important;
+            }
+
+            .mdl-layout__header--transparent.mdl-layout__header--transparent {
+                border-bottom: none;
+            }
+
+            .mdl-layout__header.is-casting-shadow {
+                background: #fff !important;
+            }
+
+            .mega-menu nav .mdl-navigation__link {
+                font-size: 14px !important;
+                font-weight: 700 !important;
+                color: #fff;
+            }
+
+            a.mat-title.mdl-layout-title {
+                background: #fff;
+                padding: 0 8px;
+            }
+
+            .mat-login {
+                border: solid 1px #ffffff !important;
+                background: transparent !important;
+                color: #ffffff !important;
+                font-weight: 700;
+            }
+
+            .mat-signup {
+                color: rgb(0, 0, 0) !important;
+                background: #ffffff !important;
+                font-weight: 500;
+            }
+
+            .search-container {
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+            .mega-menu nav li:hover .mdl-navigation__link {
+                color: #fff !important;
+            }
+
+            .section-play-video-pulse {
+                margin-left: -16px;
+            }
+
+            .is-casting-shadow .mega-menu nav li:hover .mdl-navigation__link {
+                color: #f26722 !important;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .section-jee img {
+                width: 100%;
+            }
+
+            .demo-video-big-screen {
+                display: none;
+            }
+
+            #demoVideoDialog {
+                position: fixed;
+                margin-top: 56px;
+            }
+
+            .input-call-me {
+                font-size: 12px;
+            }
+
+            .video-play-button {
+                margin: 0 auto;
+            }
+
+            .section-play-video-pulse p {
+                text-align: center;
+            }
+
+            .section-play-video-pulse label {
+                text-align: center;
+                display: block;
+            }
+
+            .main-home-page-banner-image-small {
+                display: block;
+            }
+
+            .main-home-page-banner-image-big {
+                display: none;
+            }
+
+        }
+
+        .videoWrapper .hbspt-form {
+            padding: 24px 32px 80px 32px;
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, .2);
+        }
+
+        .hbspt-form .hs-button {
+            background-color: #ff6000 !important;
+            border: none;
+            height: 48px;
+            width: 100%;
+            color: #fff;
+            float: left;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+        }
+
+        .hbspt-form input {
+            height: 40px;
+            padding: 0 8px;
+            line-height: 40px;
+            width: calc(100% - 16px);
+            background: #eee;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+        }
+
+        .hbspt-form select {
+            height: 40px;
+            line-height: 40px;
+            width: 100%;
+            background: #eee;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+        }
+
+        #startLearningHubSpotDialog .hs_name.hs-name, #startLearningHubSpotDialog .hs_phone.hs-phone, #startLearningHubSpotDialog .hs_email.hs-email, #startLearningHubSpotDialog .hs_class.hs-class {
+            width: calc(52% - 23px);
+            float: left;
+            margin-right: 10px;
+
+        }
+
+        /*#startLearningHubSpotDialog .hs_email.hs-email, #startLearningHubSpotDialog .hs_class.hs-class{*/
+        /*width: calc(40% - 25px);*/
+        /*float: left;*/
+        /*}*/
+        #startLearningHubSpotDialog .hbspt-form {
+            box-shadow: none;
+        }
+
+        #startLearningHubSpotDialog .hbspt-form select {
+            background: #ffffff;
+        }
+
+        #startLearningHubSpotDialog .hbspt-form input {
+            background: #ffffff;
+        }
+
+        #startLearningHubSpotDialog .hs_submit.hs-submit {
+            width: calc(100% - 15px);
+        }
+
+        #startLearningHubSpotDialog {
+            position: fixed;
+        }
+
+        #demoPageDialog {
+            position: fixed;
+        }
+
+        @media screen and (max-width: 1143px) {
+            #startLearningHubSpotDialog img {
+                display: none;
+            }
+
+            #demoPageDialog img {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 478px) {
+            #startLearningHubSpotDialog .hs_name.hs-name, #startLearningHubSpotDialog .hs_phone.hs-phone, #startLearningHubSpotDialog .hs_email.hs-email, #startLearningHubSpotDialog .hs_class.hs-class {
+                width: calc(100% - 23px);
+                float: left;
+                margin-right: 0px;
+
+            }
+
+            #startLearningHubSpotDialog .hbspt-form, #demoPageDialog .hbspt-form {
+                overflow: scroll;
+                height: 300px;
+            }
+        }
+
+        @media screen and (max-width: 672px) {
+            .dialogHeadings {
+                color: #333333 !important;
+                font-size: 20px !important;
+                font-weight: 900 !important;
+                font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+            }
+
+        }
+
+        @media screen and (max-width: 768px) {
+            .img-video {
+                display: none;
+            }
+
+            .section-call-me > div {
+                margin: 0 auto;
+            }
+        }
+
+        @media screen and (min-width: 767px) {
+            #startLearningHubSpotDialog, #demoPageDialog {
+                transform: translate(0, -50%);
+                top: 50%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+    <!--/*/ <th:block th:include="common/headerJee"></th:block> /*/-->
+
+
+    <div class="mat-content mdl-layout__content">
+        <div class="landing-darken" style="display: none;"></div>
+        <div class="section-top-jee">
+            <div class="container">
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <h1 class="logo-font mat-slogan mat-slogan-slider-mobile">
+                            Prepare from India's best Coaching Institutes Live Online
+                        </h1>
+
+                        <br/>
+                        <!-- <div id="homeSearch" class="mat-search-box box">
+                             <div class="container-4">
+                     <span> <u><a href="/upsc-civil-ias/">#IAS</a></u>&nbsp;&nbsp;&nbsp;
+                       <u><a href="/ese-ies-exam/">#IES</a></u>&nbsp;&nbsp;&nbsp; <u><a
+                                 href="/gate-exam">#GATE</a> </u>&nbsp;&nbsp;&nbsp; <u><a
+                                 href="/ssc-cgl-exam/">#SSC CGL</a></u>&nbsp;&nbsp;&nbsp; <u><a
+                                 href="/courses?category=STATE PSC">#STATE PCS</a></u>
+                     </span>
+                             </div>
+                             &lt;!&ndash;  <span class="or-home-search"> or </span> &ndash;&gt;
+                         </div>-->
+                        <div class="section-call-me">
+
+                            <!--<div id="show-dialog" class="section-play-video-pulse">
+                                <div class="mdl-grid">
+                                    <div
+                                            class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                                        <a class="video-play-button" href="#">
+                                            <span></span>
+                                        </a></div>
+                                    <div
+                                            class="mdl-cell mdl-cell&#45;&#45;9-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                                        <p>WATCH</p>
+                                        <label>DEMO VIDEO</label></div>
+                                </div>
+                            </div>-->
+                            <div>
+                                <form id="getNumber">
+                                    <input type="text" name="mobile" class="input-call-me"
+                                           placeholder="Phone Number">
+                                    <p style="display: none;" class="call-shortly">We will call you shortly!</p>
+                                    <div style="display: none;" class="common-loader"
+                                         id="loader-getNumber">
+                                        <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                                    </div>
+                                    <button type="submit"
+                                            class="btn-call-me btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                        Start Learning
+                                    </button>
+                                    <div style="display: none;" id="getNumberCheck"><i class="fa fa-check"></i></div>
+                                </form>
+                                <span class="counter-code-jee">+91</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <a> <img style="max-width: 283px; float: right;" width="100%"
+                                 class="img-video demo-video-big-screen"
+                                 alt="Neostencil Icon"
+                                 src="https://lh3.googleusercontent.com/QmZoVkNNXtQRLRnr4YpLHIdjyyivw33ZYoQFqHdfk8BB3RlU-bnUBMYC0d2bvWslDMeQfiuVJxpF-MDRQJQ88Hu70w">
+
+
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="mat-landing-bar mdl-typography--text-center">
+            <div class="container-header">
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                        <img src="https://lh3.googleusercontent.com/UdMnhXydIg2IlbLwQkqYyq-FxU-pTyKFRo61z-sDYixMIZ-DjBhHXM7x0_NRN4F6qXN_wN0k3FOde8BZoFnOg5pcuuw=w150"
+                             alt="Neostencil Live & Recorded Classes">
+                        <h2>
+                            <b>Live Classes</b><br/>
+                            <h3> 24/7 access
+                                to live lectures</h3>
+                        </h2>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                        <img src="https://lh3.googleusercontent.com/gVX4PvaCnpqwnJI_bHgGKlkTAvjy86jThNGmBzGn-Qwwx4f1twkptWliAaPab2bRg8frxYg6gaew4H5YhNUaQ10oouI=w150"
+                             alt="Neostencil Courses">
+                        <h2>
+                            <b>Parent Dashboard</b><br/>
+                            <h3>Help your child succeed</h3>
+                        </h2>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                        <img src="https://lh3.googleusercontent.com/CobzNDVe4VM2hWeM8fzW3c3czeJdY9RRWr4csYxlrmR8tmZqi9-qorongYuAd7t3gWwrbBW8yLC28bJRAIImZp1jpus=w150"
+                             alt="Neostencil Top Teachers">
+                        <h2>
+                            <b>360 Degree Learning</b><br/>
+                            <h3> Classes, tests and assignments</h3>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-jee">
+            <div class="container">
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+                        <h3 class="heading-jee">
+                            Live classes for you straight from Kota</h3>
+                        <div class="underline-jee"></div>
+                        <p class="paragraph-jee">NeoStencil partners with India's best institutes to help you develop a
+                            strong foundation of concepts and their application. Now crack JEE from the comfort of
+                            your home.</p>
+
+                        <br/> <a id="startLearningBtn"
+                                 class="btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent ">
+                        Start your journey</a>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <img class="demo-video-big-screen"
+                             src="https://lh3.googleusercontent.com/XH7g2Hp5ZkI8GX_7qV6_H7CnuGPnZH8qBOMxauYrTgixLguFX-imK57BRKUj5YpK1nGx4P5bby6Ao8OoLaqT6fKnbrU"
+                             style="display: block;margin: 0 0 0 auto;">
+
+
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-jee">
+            <div class="container">
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <img class="demo-video-big-screen"
+                             src="https://lh3.googleusercontent.com/5leThg7Woysx4QSrIsRB8EiUSeHbx9tMYmuqK8RWLEsZ0Dim7-an4TlSU6UgJfHnCq2jSpU6rUCCWniIOy3r6NuSxgc"
+                             style="display: block;margin: 0;">
+                        <!--<a id="show-dialog">-->
+                        <!--<img class="img-video"-->
+                        <!--src="images/background/Homepage/videoimg4.png">-->
+                        <!--</a>-->
+                        <!--<img-->
+                        <!--src="images/background/Homepage/watchDemoVideo.png"-->
+                        <!--style="margin-left: 60px; width: 180px;">-->
+
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+                        <h3 class="heading-jee">
+                            Get a Free Demo at your home</h3>
+                        <div class="underline-jee"></div>
+                        <p class="paragraph-jee">Live online classes and regular assessments is the way to prepare. To
+                            learn more, schedule a free counselling session at your home.
+
+                        </p>
+
+                        <br/> <a id="demoBtn"
+                                 class="btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                        Book a Slot Now</a>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <img src="https://lh3.googleusercontent.com/bO7HpwjNud9Fwlt2W8P9YwRmnRYCrTb1PEkQxHuGqtW7Ros4Gmct-HMtpmu3KXnGQv6F1ftFNqZtGec-z54DqLeWFjo=w1800"
+             style="
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+">
+        <div class="section-jee" id="section-courses">
+            <div class="container">
+                <h2 class="heading-jee" style="text-align: center;">
+                    Courses for you</h2>
+
+                <div class="underline-jee" style="margin: 24px auto 40px auto;"></div>
+                <div class="mdl-grid">
+
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #4285F4;
+    border-radius: 6px;">
+                            <div class="mdl-card__title mdl-card--expand">
+                                <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Foundation - Class XI JEE
+                                    Main + Advanced
+                                    Course</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                BY Motion Education, KOTA
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <h5><i class="fa fa-inr"></i> 75,000</h5>
+                            </div>
+                            <div class="item-overlay bottom jee11">
+                                <div>Complete package for students preparaing for IIT JEE and moving from class X to XI
+                                    <a href="/course/jee/foundation-class-xi-jee-main-course" class="view-details-jee">View
+                                        Details</a></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #e3ad17;
+    border-radius: 6px;">
+                            <div class="mdl-card__title mdl-card--expand">
+                                <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Fresher - Class XII JEE
+                                    Main + Advanced
+                                    Course</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                BY Motion Education, KOTA
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <h5><i class="fa fa-inr"></i> 80,000</h5>
+                            </div>
+                            <div class="item-overlay bottom jee12">
+                                <div>Complete package for students preparaing for IIT JEE and moving from class XI to
+                                    XII
+                                    <a class="view-details-jee" href="/course/jee/fresher-class-xii-jee-main-course">View
+                                        Details</a></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #0F9D58;
+    border-radius: 6px;">
+                            <div class="mdl-card__title mdl-card--expand">
+                                <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Target - XII Pass JEE Main
+                                    + Advanced
+                                    Course</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                BY Motion Education, KOTA
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <h5><i class="fa fa-inr"></i> 80,000</h5>
+                            </div>
+                            <div class="item-overlay bottom jee13">
+                                <div>Complete package for students preparaing for IIT JEE and who have given class
+                                    XII exams<a class="view-details-jee"
+                                                href="/course/jee/target-xii-pass-jee-main-course">View
+                                        Details</a></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="section-testimonials-lazyload" class="testimonials">
+            <!-- <img class="img-big-only"
+      src="images/background/Homepage/homepagetestimonialbg.png"
+      style="position: absolute; left: 18%; margin-top: -100px;"> -->
+            <div class="container">
+                <h2 class="heading-jee" style="text-align: center;">
+                    Success Stories</h2>
+                <div class="underline-jee" style="margin: 24px auto 40px auto;"></div>
+                <div id="testimonials-lazyload">
+                    <div>
+                        <div class="mdl-shadow--2dp">
+                            <div class="ns-card">
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <br/> <br/> <br/> <br/>
+                                <div class="lazyload-teacher"></div>
+                                <div class="lazyload-price" style="float: left;"></div>
+                                <div class="lazyload-testimonial-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mdl-shadow--2dp">
+                            <div class="ns-card">
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <br/> <br/> <br/> <br/>
+                                <div class="lazyload-teacher"></div>
+                                <div class="lazyload-price" style="float: left;"></div>
+                                <div class="lazyload-testimonial-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mdl-shadow--2dp">
+                            <div class="ns-card">
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <br/> <br/> <br/> <br/>
+                                <div class="lazyload-teacher"></div>
+                                <div class="lazyload-price" style="float: left;"></div>
+                                <div class="lazyload-testimonial-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/reviews-testimonials"
+                   class="btn-all-testimonial btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-View-all-teachers">See
+                    More Testimonials</a>
+            </div>
+        </div>
+        <div style="display: none;" id="section-testimonials"
+             class="testimonials">
+            <!-- <img class="img-big-only"
+      src="images/background/Homepage/homepagetestimonialbg.png"
+      style="position: absolute; left: 18%; margin-top: -100px;"> -->
+            <div class="container">
+                <h2 class="heading-jee" style="text-align: center;">
+                    Success Stories</h2>
+
+                <div class="underline-jee" style="margin: 24px auto 40px auto;"></div>
+                <section id="testimonials" class="regular slider">
+                    <div>
+                        <p class="mdl-card__supporting-text">Motion Faculty helped me in developing a strong foundation
+                            and I made it a
+                            point to solve questions on time. This helped me in developing my concepts
+                            steadily and clearly. </p>
+                        <div class="testimonial-name-and-image">
+                            <div class="mdl-grid">
+                                <div
+                                        class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                                    <span class="testimonials-name-slick">Nishit Agarwal</span>
+                                    <span
+                                            class="testimonials-rank-slick">AIR 6, JEE Advanced</span> <span
+                                        class="testimonials-rank-slick"></span>
+                                </div>
+                                <div
+                                        class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                                    <img
+                                            class="testimonial-image"
+                                            src="https://lh3.googleusercontent.com/Nl-lnNsDlxDvQarysMzE-E3Nx8u5v-PLvRLoL4gmeU_HxPCIE14Jg2Kbxxk67lynBXo_qDsJFCN8q3laqOY0eIE4noU">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="mdl-card__supporting-text">My Motion experience has been truly rewarding. I felt that
+                            it was the best
+                            way to clear up any of my residual doubts in all the subjects. My teachers
+                            were very knowledgeable and extremely patient. Thank you team Motion.</p>
+                        <div class="testimonial-name-and-image">
+                            <div class="mdl-grid">
+                                <div
+                                        class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                                    <span class="testimonials-name-slick">Jashn Singhal</span>
+                                    <span
+                                            class="testimonials-rank-slick">AIR 52, JEE Main</span> <span
+                                        class="testimonials-rank-slick"></span>
+                                </div>
+                                <div
+                                        class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                                    <img
+                                            class="testimonial-image"
+                                            src="https://lh3.googleusercontent.com/2W6pocs9inUKUmGemcPcpRqrI9-H_kF1MBylKN36PTR5pD3KSWzwaKcqM-4lzY9O6CQYQXUsEGnw1u-I5cmMy5DlBQ">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="mdl-card__supporting-text">I would like to give full credit of my success to Motion's
+                            system and faculty
+                            members at Motion, Kota. They have worked hard to see me succeed. They
+                            have become my guides for years to come.</p>
+                        <div class="testimonial-name-and-image">
+                            <div class="mdl-grid">
+                                <div
+                                        class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                                    <span class="testimonials-name-slick">Anmol Garg</span>
+                                    <span
+                                            class="testimonials-rank-slick">AIR 66, JEE Advanced</span> <span
+                                        class="testimonials-rank-slick"></span>
+                                </div>
+                                <div
+                                        class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                                    <img
+                                            class="testimonial-image"
+                                            src="https://lh3.googleusercontent.com/dN7pWEiW6XemTEvNsJEN4xAtMkVc2mFPnTjOQs7yZZElaAiMmSShD11bFL9KVCVhTKDyb1A0f80sAPmTchez-LDt0A">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="mdl-card__supporting-text">Genuinely, I would like to thank Motion for helping me
+                            crack JEE Main
+                            2018. The guidance by all the teachers, the support of office staff and the
+                            study material, everything is just perfect to take you through JEE and other
+                            exams. Thank you Motion for making my career. </p>
+                        <div class="testimonial-name-and-image">
+                            <div class="mdl-grid">
+                                <div
+                                        class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                                    <span class="testimonials-name-slick">Puneet Shyamsukha</span>
+                                    <span
+                                            class="testimonials-rank-slick">AIR 71, JEE Main</span> <span
+                                        class="testimonials-rank-slick"></span>
+                                </div>
+                                <div
+                                        class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                                    <img
+                                            class="testimonial-image"
+                                            src="https://lh3.googleusercontent.com/Y2N5AU_aqe1CRMQ5_blEDx5DsPVOcNQJF8n-g1Pcd0Aq0cId9WhX4jmArAfb2M_QhmCjklRugXDlpQDKyS57SIK-Bw">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--<a href="/reviews-testimonials"
+                   class="btn-all-testimonial btn-cta-secondary mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent btn-View-all-teachers">See
+                    More Testimonials</a>-->
+            </div>
+        </div>
+
+
+        <div class="section-jee" id="section-seo">
+            <div class="container-header">
+                <h2 class="heading-jee" style="text-align: center;">
+                    About IIT-JEE</h2>
+                <div class="underline-jee" style="margin: 24px auto 40px auto;"></div>
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <ul class="seo-links">
+                            <li class="active-seo"><a href="#heading-one">Introduction</a></li>
+                            <li><a href="#heading-two">Syllabus</a></li>
+                            </li>
+                            <li><a href="#heading-three">Important Dates</a></li>
+                            </li>
+                            <li><a href="#heading-four">Exam Pattern</a></li>
+                            </li>
+                            <li><a href="#heading-five">Important Guidelines</a></li>
+                            </li>
+                            <li><a href="#heading-six">FAQs</a></li>
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper paragraph-jee-seo"
+                            id=""><h3 class="heading-jee-seo" id="heading-one">Introduction to JEE Main Examination</h3>
+                        <p>JEE (Joint Entrance Examination) is conducted nationwide, helping students obtain admission
+                            to various engineering colleges in India. Until 2017, the JEE examination was conducted by
+                            the Central Board of Secondary Education, however, in 2018, the Union Minister announced
+                            that from 2018 onwards the newly formed NTA or National Testing Agency will conduct the JEE
+                            examination and it will be held twice a year.
+
+                        </p>
+                        <p>
+                            The Joint Entrance Examination consists of two different examinations - JEE Main and JEE
+                            Advanced. The JEE Main is an undergraduate nationwide engineering entrance examination
+                            conducted for admission to the B.E/B.Tech programs offered by the 31 National Institutes of
+                            Technology, 23 Indian Institutes of Information Technology, and the 23 Centrally Funded
+                            Technical Institutes.
+                        </p>
+                        <p>
+                            JEE Advanced is the entrance examination for obtaining admission into the 23 IITs of India.
+                            However, for appearing in JEE Advanced, a candidate has to qualify for the JEE Main first.
+                            The mode of examination for JEE Main is computer-based, and the examination is held twice a
+                            year. As per the latest regulations, the best score out of the two exams will be used for
+                            ranking of the candidate. The JEE Main examination has two papers; candidates can appear for
+                            either or both the papers. Paper I is for admission into various B.Tech courses, while
+                            Paper-II is for B.Arch admissions. Some states like Orissa and Madhya Pradesh use the JEE
+                            main marks for admission; however, the criteria for admission is different in every state.
+                        </p>
+                        <h3 class="heading-jee-seo" id="heading-two">About JEE Main Syllabus
+                        </h3>
+                        <p>The JEE Main examination is conducted by the National Testing Agency. The test as already
+                            mentioned is divided into two papers, Paper I for B.Tech entrance while paper II is for B.
+                            Arch entrance.The syllabus for JEE Main 2019 has been released by NTA.</p>
+                        <h4>JEE Main 2019 Paper I Syllabus</h4>
+                        <h5>JEE Main 2019 Mathematics Syllabus</h5>
+                        <ul style="text-align: justify;">
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Sets, Relations and functions
+</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Complex number and their quadratic equations</span>
+                            </li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Matrices and Determinants </span></li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Permutation and Combination
+</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Mathematical Inductions</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Binomial Theorem and its simple applications</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Series and sequence</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Limit</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Continuity</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Differentiability</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Integral calculus</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Differential Equations</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Co-ordinate Geometry</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;"> 3 D Geometry</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Vector Algebra</span></li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Statistics and Probabilities</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Trigonometry</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Mathematical reasoning</span>
+                            </li>
+                        </ul>
+                        <h5>JEE Main 2019 Physics Syllabus
+                        </h5>
+                        <ul style="text-align: justify;">
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Physical units and measurements</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Electrostatics</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Laws of motion</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Kinematics</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Rotational Motion</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Properties of Solids</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Gravitation</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Properties of Liquids</span>
+                            </li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Kinetic Theory for gases</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Thermodynamics</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Oscillations and waves</span>
+                            </li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Magnetic effects of current</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Current electricity</span>
+                            </li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Electromagnetic induction</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Magnetism </span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Alternating current</span>
+                            </li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Matter and its dual nature</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Nuclei and Atoms</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Electronic devices</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Optics</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Radiation</span></li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Various experimental skills</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Communication systems</span>
+                            </li>
+                        </ul>
+                        <h5>JEE Main 2019 Chemistry Syllabus</h5>
+                        <ul style="text-align: justify;">
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">States of matter</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Basics of chemistry</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Atomic structure</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Molecular structure</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Chemical bonding</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Solutions</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Chemical thermodynamics</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Redox reactions</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Equilibrium</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Chemical Kinetics</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Surface Chemistry</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Electrochemistry</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Elements: classification and periodicity</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Metallurgy: general properties and various principles of isolations for metals</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Alkali and alkaline earth metals i.e S-block elements</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">P-block elements</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Hydrogen</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">P-block elements with special emphasis on Group 14 elements</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">P-block elements with special emphasis on Group 13 elements</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">P-block elements with special emphasis on Group 16 elements</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">P-block elements with special emphasis on Group 17 elements</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">P-block elements with special emphasis on Group 18 elements</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">P-block elements with special emphasis on Group 15 elements</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Co-ordination compounds</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">D and F block elements</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Organic compounds: purification and characteristics</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Organic Chemistry: Basic principles</span>
+                            </li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Environmental &nbsp;chemistry</span></li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Organic compounds: halogens</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Hydrocarbons</span></li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Organic Compounds with oxygen</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Polymers</span></li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Organic compounds of nitrogen</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Chemistry applied in daily life</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Biomolecules</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Principles of practical chemistry</span>
+                            </li>
+                        </ul>
+                        <h4>JEE Main 2019 Paper II Syllabus</h4>
+                        <p>Mathematics same as above
+                        </p>
+                        <h5>JEE Main 2019 Drawing Syllabus
+                        </h5>
+                        <div class="make-table-responsive">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Unit</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Topics</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Awareness for persons, places, buildings, and materials</span>
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Objects</span></p>
+                                        <p><span style="font-weight: 400;">Texture relating to architecture and build- environment </span>
+                                        </p>
+                                        <p><span
+                                                style="font-weight: 400;">Visualization of 3D objects from 2D diagrams</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">Analytical Reasoning</span></p>
+                                        <p><span style="font-weight: 400;">Mental Ability</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Three Dimensional</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Perception ability</span></p>
+                                        <p><span style="font-weight: 400;">Understanding and appreciating the scale and proportion of objects</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">Building of forms and elements </span></p>
+                                        <p><span style="font-weight: 400;">Colour texture</span></p>
+                                        <p><span style="font-weight: 400;">Colour harmony</span></p>
+                                        <p><span style="font-weight: 400;">Colour contrast</span></p>
+                                        <p><span style="font-weight: 400;">Designing and drawing of geometrical or abstract shapes and patterns by pencil</span>
+                                        </p>
+                                        <p><span
+                                                style="font-weight: 400;">Transformation of forms both 2D and 3D union</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">Subtraction of surfaces and volumes</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">Rotation of surfaces and volumes</span></p>
+                                        <p><span style="font-weight: 400;">Development of surfaces and volumes</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">Generation of plans</span></p>
+                                        <p><span style="font-weight: 400;">Elevation and 3 D views of objects</span></p>
+                                        <p><span style="font-weight: 400;">Creation of 2 D and 3 D compositions with the help of given shapes and forms</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">Sketching of scenes or activities from memory or any given urbanscape</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">Landscapes and rural lives. </span></p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h3 class="heading-jee-seo" id="heading-three">JEE Main 2019 Important Dates</h3>
+                        <div class="make-table-responsive">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <p><strong>Date </strong></p>
+                                    </td>
+                                    <td>
+                                        <p><strong>Schedule</strong></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">February 8</span><span
+                                                style="font-weight: 400;">th</span><span
+                                                style="font-weight: 400;">, 2019 - March 7</span><span
+                                                style="font-weight: 400;">th</span><span
+                                                style="font-weight: 400;"> 2019</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">JEE Main April Application</span></p>
+                                        <p><span style="font-weight: 400;">Mode of application: Online</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">February 8</span><span
+                                                style="font-weight: 400;">th</span><span
+                                                style="font-weight: 400;"> - March 8</span><span
+                                                style="font-weight: 400;">th</span><span
+                                                style="font-weight: 400;"> 2019</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Date for fees submission</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">March 11</span><span
+                                                style="font-weight: 400;">th </span><span style="font-weight: 400;">- March 15</span><span
+                                                style="font-weight: 400;">th</span><span
+                                                style="font-weight: 400;"> 2019</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span
+                                                style="font-weight: 400;">Correction of particulars in application (if any)</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">Mode of correction: Online</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">March 18</span><span
+                                                style="font-weight: 400;">th </span><span style="font-weight: 400;">- March 20</span><span
+                                                style="font-weight: 400;">th</span><span
+                                                style="font-weight: 400;"> 2019</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">JEE Main April Release of Admit Cards</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">Mode of release: Online</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">April 6</span><span
+                                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> 2019 - April 20</span><span
+                                                style="font-weight: 400;">th</span><span
+                                                style="font-weight: 400;"> 2019 </span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">JEE Main examination (April)</span></p>
+                                        <p><span style="font-weight: 400;">Mode of examination: Online</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">April 30</span><span
+                                                style="font-weight: 400;">th</span><span
+                                                style="font-weight: 400;"> 2019</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Declaration of result (Paper 1)</span></p>
+                                        <p><span style="font-weight: 400;">Mode of declaration: Online &nbsp;</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">May 15</span><span
+                                                style="font-weight: 400;">th</span><span
+                                                style="font-weight: 400;"> 2019</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Declaration of results (Paper 2)</span></p>
+                                        <p><span style="font-weight: 400;">Mode of declaration: Online</span></p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h3 class="heading-jee-seo" id="heading-three">JEE Main 2019 Eligibility Criteria</h3>
+                        <p>JEE Main is an undergraduate nationwide entrance test for gaining admission into engineering
+                            and technical colleges of the country. The minimal eligibility criteria for filing
+                            application is as follows:</p>
+                        <div class="make-table-responsive">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Eligibilities </span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Criteria </span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Age</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">According to the rules of NTA there is no age limit for appearing for the examination. However, the candidate must have passed 10+2 in the years of &nbsp;2017/2018 or is appearing in the said exam in 2019, irrespective of his or her date of birth.</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Qualification</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Candidate must have passed 10+2 in the year 2017/2018 or is appearing for the same exam in 2019</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Subjects wise eligibility</span></p>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li style="font-weight: 400;"><span
+                                                    style="font-weight: 400;">Mathematics</span>
+                                            </li>
+                                            <li style="font-weight: 400;"><span style="font-weight: 400;">Physics</span>
+                                            </li>
+                                            <li style="font-weight: 400;"><span style="font-weight: 400;">Chemistry/Biology/Biotechnology/Technical/Vocational subjects/Language/ or any other subject</span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Required qualifying marks for admission to IITs, NITs, IIITs, CFTIs &nbsp;</span>
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Score requirement of minimum 75% marks or in top 20 percentile of their respective boards for General Categories</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">For candidates of reserved categories - SC/ST minimal score requirement is 65% </span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Eligibility for JEE Paper II</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Candidates who are opting for architectural courses must have passed 10+2 &nbsp;or any equivalent examination with minimum of 50% marks in Physics, Chemistry and Mathematics </span><span
+                                                style="font-weight: 400;"><br></span><span style="font-weight: 400;">The candidates must also score 50% marks in aggregate in the qualifying examination.</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">For Paper II, diploma holders will not be eligible </span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><span style="font-weight: 400;">Reservation criteria of seats</span></p>
+                                    </td>
+                                    <td>
+                                        <p><span style="font-weight: 400;">For OBC candidates belonging to NCL (Non-Creamy Layer) – 27%</span>
+                                        </p>
+                                        <p><span style="font-weight: 400;">For SC candidates - 15%</span></p>
+                                        <p><span style="font-weight: 400;">For ST candidates - 7.5%</span></p>
+                                        <p><span style="font-weight: 400;">For PwD (Persons with Disability) candidates with 40% or more disability - 3% horizontal</span><span
+                                                style="font-weight: 400;"><br></span><span style="font-weight: 400;">Note: Reservations in IIITs, NITs, CFTIs will be as per the rules of the central list and not according to their respective state lists.</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 class="heading-jee-seo" id="heading-four">JEE Main 2019 Exam Pattern
+                        </h3>
+                        <p>The JEE Main examination for April will be taken in two parts - Paper 1 and Paper 2. A
+                            candidate can appear in either or both of the papers according to his/her preferences. JEE
+                            main pattern and stages are listed below:
+
+                        </p>
+                        <h4>JEE Main 2019 Paper I
+                        </h4>
+                        <ul style="text-align: justify;">
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">The mode of </span>JEE
+                                Main Exam<span style="font-weight: 400;"> will be completely online. It is a computer-based test</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">The duration for the examination will be 3 hours </span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Number of shifts: For Paper I there will be two shifts per day </span><span
+                                    style="font-weight: 400;"><br></span><span style="font-weight: 400;"> 9:30 A.M to 12:30 P.M, 2:30 P.M to 5:30 P.M</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">There will be three sections in the question paper - Physics, Chemistry, and Mathematics </span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Question types: All Multiple Choice questions</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Number Pattern: &nbsp;There will be 30 questions in each section i.e Physics - 30 questions, Chemistry - 30 questions, Mathematics - 30 questions, each carrying 4 marks</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Negative marking: For each correct answer, four marks will be given while for each wrong answer, 1 mark will be cut.</span>
+                            </li>
+                        </ul>
+                        <h4>JEE Main 2019 Paper II</h4>
+                        <ul style="text-align: justify;">
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">The mode of examination </span>JEE main Paper
+                                II<span style="font-weight: 400;"> for Mathematics and Aptitude test will be Online. It is also a Computer-Based Test. The drawing examination will be held offline on pen paper mode.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Duration of the examination will be 3 hours</span>
+                            </li>
+                            <li style="font-weight: 400;"><span
+                                    style="font-weight: 400;">Number of shifts will be 2</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">There will be three sections in the question paper: &nbsp;Mathematics, General Aptitude and Drawing Skills</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Question Types: &nbsp;For mathematics and general aptitude objective type questions will be given while for the drawing test, drawing and sketching abilities will be judged.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Number of questions: General Aptitude &nbsp;- 50, Mathematics - 30, Drawing skills - 3 </span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Marks division: In case of General Aptitude and Mathematics for each answer that’s correct, 4 marks will be given while for every wrong answer 1 gets deducted. In case of drawing questions, the total marks given will be 70. The individual marks each question carries will be mentioned on the question paper itself.</span>
+                            </li>
+                        </ul>
+                        <h3 class="heading-jee-seo" id="heading-five">Important guidelines for JEE Main exam day</h3>
+                        <p>Here are a few guidelines regarding what to do, what to carry and what not to carry on the
+                            examination day, which the candidates should abide by.</p>
+                        <ul style="text-align: justify;">
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Candidates should reach the exam centre one hour before the scheduled time of examination for the registration process.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">A candidate must carry the admit card for JEE Main examination 2019 provided by NTA to the examination centre. A candidate without the correct admit card will not be allowed in the examination centre under any circumstances.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Candidates should carry a valid ID proof along with the admit card.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Except for the Admit card and valid ID proof, no other form of documents, papers etc. will be allowed inside the examination hall.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Candidates must follow and abide by the rules and instructions given by the invigilators/centre superintendent.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Candidates are advised to take their respective allotted seats immediately. They can log in to their system and read the instructions given.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Pen/pencil, scribble pad /sheet for rough work will be provided by the examination centre. Candidates must write their name and roll number on top of the rough sheet provided. The sheet provided must be returned to the invigilators at the end of the exam.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">For Paper II, candidates must bring their own geometry box, pencils, erasers, scales, colour or crayons if required.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Water colouring or any other form of paint colouring is not allowed on the drawing sheet.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Candidates are required to fill in the required details on the attendance sheet, sign on the designated place, and attach their passport size photograph on the designated area in the sheet.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Candidates are advised to have a clean and smudge free left thumb for left thumb impression.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">For pen and paper-based exams, candidates can bring cardboard or clipboard ensuring that nothing is written on it. They should also bring their own Ballpoint pen (black /blue) of good quality.</span>
+                            </li>
+                        </ul>
+                        <h5>Links to the official website</h5>
+                        <p>The link for the official site of NTA JEE Main: </span><a
+                                href="https://jeemain.nic.in/webinfo/Public/Home.aspx" rel="nofollow"><span
+                                style="font-weight: 400;color: blue;">https://jeemain.nic.in/webinfo/Public/Home.aspx</span></a><span
+                                style="font-weight: 400;">. Students can refer to the site for any official information as well as for other details pertaining to the exam. </span>
+                        </p>
+                        <h3 class="heading-jee-seo" id="heading-six">FAQs</h3>
+                        <p><strong>1. If I fail in one subject in class 12, am I still eligible for JEE Main
+                            2019?</strong></p>
+                        <p style="text-align: justify;"><span
+                                style="font-weight: 400;">A: In case you appeared for 12</span><span
+                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> final in 2016 and failed in one subject and cleared it in 2017 then you are not eligible to apply. However in case you appeared in 2017 and failed and cleared it on 2018, or you appeared in 12</span><span
+                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> in 2018 and failed and are going to reappear in 2019 boards, then in both the cases you are eligible to apply.</span>
+                        </p>
+                        <p><strong>2. If I appear for improvement in 5 subjects, which of the scores will be considered
+                            for JEE Main</strong> <strong>2019?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: The best amongst all scores will be considered.</span>
+                        </p>
+                        <p><strong>3. Can I appear for improvement in one subject in class 12, and apply for JEE Main
+                            2019?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: Yes it is allowed if you are attempting to obtain the required 75% in Class 12 boards. In case you are opting for top 20 percentile criteria you have to reappear in all 5 subjects.</span>
+                        </p>
+                        <p style="text-align: justify;"><strong>4. I am a diploma holder, am I eligible for
+                            applying?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: Technically you can apply in JEE Main. However, you have to qualify for the exam to sit for JEE Advanced. IIIT, NITs or CFTIs don’t allow diploma holders as candidates.</span>
+                        </p>
+                        <p><strong>5. I don’t have 75% in 12</strong><strong>th</strong><strong> boards, can I
+                            apply?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: You can apply and appear for the examination; however if opting for </span><strong>IIT
+                            JEE main</strong><span style="font-weight: 400;"> you might face difficulty as IIITs, NITs, CFTIs will take only candidates having 75% or more score in the 12</span><span
+                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> boards.</span></p>
+                        <p><strong>6. How to know my State eligibility for JEE Main?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: The state from which candidate has given 12</span><span
+                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> board examination is his/her state of eligibility. The respective state code of eligibility will be provided by JEE Main officials, candidates have to fill those codes in their respective application forms.</span>
+                        </p>
+                        <p><strong>7. What will be the state of eligibility for improvement candidates or institutional
+                            abroad candidates or NIOS?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: In case a candidate has passed his/her 12</span><span
+                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> boards from a particular state, but has appeared for subject improvement examination from another state his/her state of eligibility will be the state from where they appeared in the 12</span><span
+                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> boards and not the state of improvement. For Indian nationals who have passed their 12</span><span
+                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> boards from any institution abroad, his/her state of eligibility will be the state of their permanent residence mentioned in the passport. Candidates who have appeared in 12</span><span
+                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> boards from NIOS should select their state of eligibility based on the state in which their study centre is located. The clause for eligibility of state is not applicable for students belonging to Bhutan/ Nepal/</span>
+                            <span style="font-weight: 400;">OCI/PIO/Other foreign countries. &nbsp;</span></p>
+                        <p><strong>8. What are the eligibility criteria for home state quota of NITs?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: For a candidate to be eligible for the home state quota he/she must appear in the 12</span><span
+                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> board examination from that particular state where that respective NIT is located.</span>
+                        </p>
+                        <p><strong>9. After completion of the 12</strong><strong>th</strong><strong> examination, I have
+                            a year gap, am I still eligible?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: Yes, you are eligible. As long as the year of passing is compliant to laws dictated by NTA candidate with gap year/drop year are eligible.</span>
+                        </p>
+                        <p><strong>10. I am dyslexic. Am I eligible for PWD quota? </strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: Dyslexic candidates are eligible for PWD quota. Such candidates need to submit:</span>
+                        </p>
+                        <ul style="text-align: justify;">
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">An application for obtaining disability certificate by Persons with Disability</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">A proper Disability Certificate</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">A category certificate</span>
+                            </li>
+                        </ul>
+                        <p><strong>11. Can I apply for both the papers in JEE Main 2019?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: Yes you can. A candidate can apply for both paper 1 and paper 2 in JEE Main 2019.</span>
+                        </p>
+                        <p><strong>12. I have biology as a subject in 12</strong><strong>th</strong><strong>, along with
+                            physics and chemistry. Am I eligible to apply?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: No. For a candidate to be eligible he/she must have mathematics as one subject in 12</span><span
+                                style="font-weight: 400;">th</span><span style="font-weight: 400;"> boards.</span></p>
+                        <p><strong>13. What is the different quota seats for JEE Main 2019?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: The categories who are eligible for ‘All India quota seats’ in JEE Main 2019 are Women candidates, PWD candidates with 40% or more disability, SC, ST, OBC category candidates, and home state candidate for that particular NIT.</span>
+                        </p>
+                        <p><strong>14. Is there any defence personal quota?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: &nbsp;No. There is no special reservation for the defence category.</span>
+                        </p>
+                        <p><strong>15. Is there a sports quota for NITs, IIITs or CFTIs in JEE Main 2019?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: No. there is no sports quota in JEE Main 2019.</span>
+                        </p>
+                        <p><strong>16. Can I use a calculator during the examination?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: No. Candidates are not allowed to use any calculator or any other form of electronic gadgets during the examination.</span>
+                        </p>
+                        <p><strong>17. Which browsers are to be used while filling up online application for JEE Main
+                            2019?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: Candidates are advised to use Internet Explorer/Mozilla Firefox (above 9.0) while filling up the application form online. In case error or time-out message being displayed continuously, clear all web browser history and cookies.</span>
+                        </p>
+                        <p><strong>18. In case of multiple applications will the applications be rejected?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: Multiple applications from a particular candidate will not be accepted and will be rejected. NTA will accept only one application form and the admit card will be generated based on that application only.</span>
+                        </p>
+                        <p><strong>19. I belong from a place with no access to internet or computer and also have no
+                            prior experience of filling up of online forms. What should I do?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: NTA will give a list of schools, colleges and related institutions with computer and internet facilities which will also work as Test practising centres for permitting free practice sessions.</span>
+                        </p>
+                        <p><strong>20. Are there any changes in the JoSSA counselling process?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: No there will be no changes in the JoSSA counselling process.</span>
+                        </p>
+                        <p><strong>21. How will the normalization score for JEE Main 2019 be decided?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: For understanding the scoring process candidates are requested to download the Normalization Procedure - NTA score from the home page of the official JEE website.</span>
+                        </p>
+                        <p><strong>22. How will I check my JEE Main 2019 examination fee status?</strong></p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: Candidates can check their fee status from the official NTA JEE main website. Candidates are requested to take a printout of the confirmation page once the payment is received by NTA. </span>
+                        </p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">In case the candidate is unable to download the fee confirmation, the following steps can be &nbsp;followed:</span>
+                        </p>
+                        <ul style="text-align: justify;">
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">In case the candidate has paid the fee through generating a fee challan and depositing the same in his/her nearest SBI bank branch, then the candidate should immediately contact the concerned bank authority for updating his/her fee status on the website.</span>
+                            </li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">In case of online credit/debit card, if the payment status is not Ok, then the candidates are advised to wait for at least 48 hours for an auto-update. If it does not get updated even then, that will indicate that the transaction has been cancelled. The amount debited will be automatically refunded back to the concerned credit/debit card holder within 7-10 days of the transaction. However, in such cases, the candidate has to pay his/her fee once again.</span>
+                            </li>
+                        </ul>
+                        <p><strong>23. Is there any date, time, and shift option available in JEE Main 2019?</strong>
+                        </p>
+                        <p style="text-align: justify;"><span style="font-weight: 400;">A: No such provision is available. As per the NTA guidelines, to determine the best score on the basis of two attempts made by an equal number of candidates is mandatory. Hence software-based random allotment for time and shift will occur, and candidates won’t have an option in this regard. </span>
+                        </p>
+                        <p style="text-align: justify;">&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+            <!--demo video dialog-->
+            <dialog tabindex="1" id="demoVideoDialog"
+                    class="mdl-dialog mdl-dialog-video">
+                <div class="mdl-dialog__content">
+                    <iframe id="video" width="100%" height=""
+                            src="https://www.youtube.com/embed/cfhx18lSPiw" allowfullscreen allow="autoplay">
+                    </iframe>
+                    <button
+                            class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+            </dialog>
+            <!--start learning hubspot form dialog-->
+            <dialog tabindex="1" id="startLearningHubSpotDialog" style="position: fixed;"
+                    class="mdl-dialog mdl-dialog-video">
+                <div class="mdl-dialog__content">
+                    <div style="width: fit-content; width: -moz-fit-content; margin: 0 auto; ">
+                        <span class="logo-font mat-slogan mat-slogan-slider-mobile dialogHeadings"
+                              style="color: #333333"> Let us help you</span>
+                        <div class="underline-jee" style="margin: 11px auto; "></div>
+                    </div>
+
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <!--[if lte IE 8]>
+                            <script charset="utf-8" type="text/javascript"
+                                    src="//js.hsforms.net/forms/v2-legacy.js"></script>
+                            <![endif]-->
+                            <script charset="utf-8" type="text/javascript"
+                                    src="//js.hsforms.net/forms/v2.js"></script>
+                            <script>
+                                hbspt.forms.create({
+                                    portalId: "3966107",
+                                    formId: "1e397cce-ef51-4173-9888-da451276ea9e"
+                                });
+                            </script>
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <div style="width: fit-content;width: -moz-fit-content; margin: 0 auto;">
+                                <img src="https://lh3.googleusercontent.com/7N04O7NHFk5KzzCDfRRj1jJ-IYkdMtIWYFWUisDGZ60a9sNjzdoYEhocCBoQdDE3nYqsFusxX-COVWQ4a0TW8h_54r26=w300"
+                                     style="">
+                            </div>
+                        </div>
+
+                    </div>
+                    <button
+                            class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+            </dialog>
+
+            <!--demopage form-->
+            <dialog tabindex="1" id="demoPageDialog" style="position: fixed;"
+                    class="mdl-dialog mdl-dialog-video">
+                <div class="mdl-dialog__content">
+                    <div style="width: fit-content; width: -moz-fit-content; margin: 0 auto; ">
+                        <span class="logo-font mat-slogan mat-slogan-slider-mobile dialogHeadings"
+                              style="color: #333333"> Schedule a Free Demo</span>
+                        <div class="underline-jee" style="margin: 11px auto; "></div>
+                    </div>
+
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <!--[if lte IE 8]>
+                            <script charset="utf-8" type="text/javascript"
+                                    src="//js.hsforms.net/forms/v2-legacy.js"></script>
+                            <![endif]-->
+                            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+                            <script>
+                                hbspt.forms.create({
+                                    portalId: "3966107",
+                                    formId: "89768142-2eb9-43c9-aba1-ed137233ad53"
+                                });
+                            </script>
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <div style="width: fit-content;width: -moz-fit-content; margin: 0 auto;">
+                                <img src="https://lh3.googleusercontent.com/QKAVt-l6GDJnen46Ulk5WFr-BW_MgL4Byh8kf7VSngtzidNrjEMruz0aybW7HP2WzAkeYFcnGwYLnqbf8iwDlCrnuTl9=w450"
+                                     style="">
+                            </div>
+                        </div>
+
+                    </div>
+                    <button
+                            class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+            </dialog>
+        </div>
+        <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+
+    </div>
+    <!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+</div>
+
+<!-- include scripts -->
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script
+        src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>
+<script>
+    var hubSpotDialog = document.querySelector('#startLearningHubSpotDialog');
+    var hubSpotDialogButton = document.querySelector('.startLearningBtn');
+    if (!hubSpotDialog.showModal) {
+        dialogPolyfill.registerDialog(hubSpotDialog);
+    }
+    hubSpotDialogButton.addEventListener('click', function () {
+        hubSpotDialog.showModal();
+    });
+    hubSpotDialog.addEventListener('click', function (event) {
+        var rect = hubSpotDialog.getBoundingClientRect();
+        var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+            && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+        if (!isInDialog) {
+            hubSpotDialog.close();
+        }
+    });
+    hubSpotDialog.querySelector('.close-dialog').addEventListener('click',
+        function () {
+            hubSpotDialog.close();
+        });
+
+    $('#startLearningBtn').on('click', function () {
+        var hubSpotDialog = document.querySelector('#startLearningHubSpotDialog');
+        if (!hubSpotDialog.showModal) {
+            dialogPolyfill.registerDialog(hubSpotDialog);
+        }
+        hubSpotDialog.showModal();
+        hubSpotDialog.addEventListener('click', function (event) {
+            var rect = hubSpotDialog.getBoundingClientRect();
+            var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+                && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+            if (!isInDialog) {
+                hubSpotDialog.close();
+            }
+        });
+        hubSpotDialog.querySelector('.close-dialog').addEventListener('click',
+            function () {
+                hubSpotDialog.close();
+            });
+    });
+    $('#demoBtn').on('click', function () {
+        var demoPageDialog = document.querySelector('#demoPageDialog');
+        if (!demoPageDialog.showModal) {
+            dialogPolyfill.registerDialog(demoPageDialog);
+        }
+        demoPageDialog.showModal();
+        demoPageDialog.addEventListener('click', function (event) {
+            var rect = demoPageDialog.getBoundingClientRect();
+            var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+                && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+            if (!isInDialog) {
+                demoPageDialog.close();
+            }
+        });
+        demoPageDialog.querySelector('.close-dialog').addEventListener('click',
+            function () {
+                demoPageDialog.close();
+            });
+    });
+    $('#getNumber').validate({
+        rules: {
+            mobile: {
+                required: true,
+                maxlength: 10,
+                minlength: 10
+            }
+        },
+        messages: {
+            mobile: {
+                required: "Please enter your number",
+                maxlength: "Please enter a valid number",
+                minlength: "Please enter a valid number"
+            }
+        },
+        submitHandler: function () {
+            $('#loader-getNumber').show();
+            $('.btn-call-me').hide();
+            $
+                .ajax({
+                    url: apiBasePath + "/extrainfo",
+                    type: "post",
+                    data: JSON.stringify({
+                        mobileNumber: "+91" + $("input[name='mobile']").val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        $('#loader-getNumber').hide();
+                        $('.btn-call-me').hide();
+                        $('#getNumberCheck, .call-shortly').show();
+                        $('.input-call-me').attr("disabled", true);
+
+                        var dialog = document.querySelector('#startLearningHubSpotDialog');
+                        if (!dialog.showModal) {
+                            dialogPolyfill.registerDialog(dialog);
+                        }
+                        dialog.showModal();
+                        dialog.addEventListener('click', function (event) {
+                            var rect = dialog.getBoundingClientRect();
+                            var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+                                && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+                            if (!isInDialog) {
+                                dialog.close();
+                            }
+                        });
+                        dialog.querySelector('.close-dialog').addEventListener('click',
+                            function () {
+                                dialog.close();
+                            });
+                    },
+
+                    error: function (response) {
+                        $('#loader-getNumber').hide();
+                        $('.btn-call-me').show();
+                    }
+                });
+        }
+    });
+    $(window).load(function () {
+        $('#section-testimonials').css("display", "block");
+        $('#section-testimonials-lazyload').hide();
+    })
+    $('#scrollToSectionJee a')
+        .click(function () {
+            $('html, body').animate({
+                scrollTop: $($(this).attr('href')).position().top - 100
+            }, 400);
+            return false;
+        });
+    $('.seo-links a')
+        .click(function () {
+            $(".active-seo").removeClass("active-seo");
+            $(this).parent('li').addClass("active-seo");
+            $('html, body').animate({
+                scrollTop: $($(this).attr('href')).position().top - 100
+            }, 400);
+            return false;
+        });
+    $('.jee-nav-mobile a')
+        .click(function () {
+            $('.jee-nav-mobile').removeClass("is-visible");
+            $('html, body').animate({
+                scrollTop: $($(this).attr('href')).position().top - 100
+            }, 400);
+            return false;
+        });
+    $(window).scroll(function () {
+        var y = $(window).width();
+        if (y > 767) {
+            var height = $(window).scrollTop();
+            var heightDiv = $('#section-seo').offset().top;
+            var heightFooter = $('#heading-six').offset().top;
+            if (height > heightDiv && height < heightFooter) {
+
+                $('.seo-links').css({"position": "fixed", "top": "100px"})
+            } else {
+                $('.seo-links').css({"position": "relative", "top": "0"})
+            }
+        }
+    });
+    $('.about-jee, .nav-free-prep').mouseover(function () {
+        $('.landing-darken').show();
+        $('.mdl-layout__header').addClass("is-casting-shadow");
+    });
+    $('.about-jee, .nav-free-prep').mouseleave(function () {
+        $('.landing-darken').hide();
+        if (!$('.mdl-layout__header').hasClass("is-compact")) {
+            $('.mdl-layout__header').removeClass("is-casting-shadow");
+        }
+    });
+
+    $(document).ready(function () {
+        if (window.innerWidth < 1026) {
+            $('#demoPageDialog .mdl-cell--6-col').removeClass("mdl-cell--6-col").addClass('mdl-cell--12-col');
+            $('#startLearningHubSpotDialog .mdl-cell--6-col').removeClass("mdl-cell--6-col").addClass('mdl-cell--12-col');
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+
+  <meta property="og:title"
+        content="Free Demo + Counselling at home - IAS, IES / GATE, PCS" />
+
+  <title>Free Demo + Counselling at home - IAS, IES / GATE, PCS</title>
+    <meta name="description"
+          content="Free Demo plus counselling visits by exam experts at your home. Our Experts will give you dedicated time for your queries and help you in your preparation. Schedule Free visit with our top experts for IAS, IES/GATE and State PCS exams now.">
+    <meta property="og:image" content="https://lh3.googleusercontent.com/qqH0lPFWpWYFL780lgp2CZTgWQAN9qAw4-EWvMREklFP-sB8gte6fHf9Z_36W3_M5leaSTiSwr6DdfJZgVR2mAL0CdEl" />
+    <meta property="og:image:secure_url" content="https://lh3.googleusercontent.com/qqH0lPFWpWYFL780lgp2CZTgWQAN9qAw4-EWvMREklFP-sB8gte6fHf9Z_36W3_M5leaSTiSwr6DdfJZgVR2mAL0CdEl" />
+    <meta property="og:url" content="https://neostencil.com/demo-counselling-at-home" />
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/home.css')}}" />
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+  <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.css"
+          rel="stylesheet" media="screen" />
+  <link rel="stylesheet" media="screen"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+  <link rel="stylesheet" media="screen"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}" />
+
+  <link rel="canonical" href="https://neostencil.com" />
+  <style>
+  .search-container {
+    visibility: hidden;
+}
+        .mdl-layout__header.is-casting-shadow {
+            background: #fff !important;
+        }
+
+        .swiper-button-prev, .swiper-button-next {
+            background-image: none;
+        }
+
+        .ty-msg p {
+	        padding: 5px 5px 5px 5px !important;
+            margin-bottom: 0px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .course-rating i {
+            float: left;
+        }
+
+        .demo-scheduler-con{
+            padding-top: 70px;
+        }
+
+           .demo-scheduler{
+
+               background: url(https://lh3.googleusercontent.com/cGrl_aYcx9k9bUHVLK7BDWBldPba7rHFbbi0Yeg1CsZTtq6_loVmXBXCnFWbQ9zsqp-Qi6jEtGBDGmCLDdkoQsrBRgcT) center no-repeat !important;
+               padding: 0 0 0 0 !important;
+               background-size: cover !important;
+               padding: 96px 0 85px 0 !important;
+
+           }
+        .Line {
+            width: 133px;
+            border: 2px solid #fff;
+            margin-bottom: 8px;
+        }
+
+        .Want-to-join-a-cours {
+            font-family: open sans;
+            font-size: 32px;
+            font-weight: 300;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.31;
+            letter-spacing: normal;
+            color: #ffffff;
+            text-align: left;
+            padding-right: 70px;
+        }
+
+        .Want-to-join-a-cours .text-style-1 {
+            font-size: 45px;
+            font-weight: bold;
+            line-height: 1.11;
+        }
+        .Want-to-join-a-cours .text-style-2 {
+            font-size: 40px;
+            line-height: 1.31;
+        }
+
+
+
+        .What-is-Demo-at-home {
+            font-family: open sans;
+            font-size: 24px;
+            font-weight: 800;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #000000;
+            margin-bottom: 9px;
+        }
+         .what-is-Demo-at-home-margin-top{
+             padding: 38px 56px;
+             text-align: center;
+         }
+
+        .It-is-a-service-whe {
+            font-family: open sans;
+            font-size: 18px;
+            font-weight: 300;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 2;
+            letter-spacing: normal;
+            text-align: center;
+            color: #000000;
+            margin-bottom: 0px;
+        }
+        .It-is-a-service-whe .text-style-1 {
+            font-weight: 600;
+            color: #35bc27;
+            text-transform: uppercase;
+        }
+
+        .Is-Demo-at-home-avai-main{
+            padding-right: 30px;
+        }
+
+        .Is-Demo-at-home-avai {
+            font-family: open sans;
+            font-size: 24px;
+            font-weight: 800;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #000000;
+            text-align: left;
+            margin-bottom: 9px;
+        }
+
+
+        .To-begin-with-we-ha {
+            opacity: 0.7;
+            font-family: open sans;
+            font-size: 18px;
+            font-weight: 300;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 2;
+            letter-spacing: normal;
+            color: #000000;
+            text-align: left;
+        }
+
+         .Is-Demo-at-home-img {
+             text-align: center;
+         }
+
+        .How-to-opt-for-Demo-main{
+            background: url(https://lh3.googleusercontent.com/mbJakPb04dUU1ezlF_Yl5dwXH9Yu-PgIL_enrMr3Th7FkrXqglcRCa680oniab4BsnA_LJJpfKeVaGUqSTeKSaxnSmM) center no-repeat !important;
+            padding: 0 0 0 0 !important;
+            background-size: cover !important;
+            padding: 64px 0 320px 0px !important;
+        }
+
+        .How-to-opt-for-Demo {
+            font-family: open sans;
+            font-size: 64px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #ffffff;
+            text-align: left;
+            margin-bottom: 120px;
+        }
+
+        .Fill-a-form-parent {
+            max-width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 134px;
+        }
+
+        .Fill-a-form {
+            font-family: open sans;
+            font-size: 24px;
+            font-weight: 600;
+            font-style:normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+        .Fill-a-form .text-style-1 {
+            font-weight: normal;
+            text-transform: capitalize;
+            margin-top: 35px;
+        }
+
+
+
+        .How-to-opt-for-Virtu {
+            font-family: open sans;
+            font-size: 64px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: #ffffff;
+            margin-bottom: 60px;
+        }
+
+        .If-you-belong-to-any {
+            font-family: open sans;
+            font-size: 32px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            color: #ffffff;
+            text-align: left;
+            padding-right: 100px;
+        }
+        .If-you-belong-to-any .text-style-1 {
+            font-weight: 600;
+            font-family: open sans;
+            font-size: 32px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            color: #ffffff;
+            text-align: left;
+
+        }
+
+
+
+
+
+
+        .Schedule-a-Free-Demo {
+            font-family: open sans;
+            font-size: 15px;
+            font-weight: 300;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.67;
+            letter-spacing: normal;
+            text-align: center;
+            color: #000000;
+        }
+        .Schedule-a-Free-Demo .text-style-1 {
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+         .form-main{
+             text-align: center;
+             background: #fff;
+             position: relative;
+             top: -130px;
+             box-shadow: 0 2px 8px 0 rgba(153, 153, 153, 0.7);
+             margin: auto;
+             width: 767px;
+             padding: 30px 0px 40px 0px;
+             max-width: 100%;
+         }
+        .form-main input{
+            border-style: none;
+            border: 1px solid #979797;
+            outline: 0;
+        }
+        .form-main select{
+            border-style: none;
+            border: 1px solid #979797;
+            outline: 0;
+        }
+        form#addressCheckout {
+            width: 720px;
+            margin: auto;
+            max-width: 100%;
+        }
+
+         .Demo-at-home-main{
+             text-align: center;
+             position: relative;
+         }
+         #demoAtHomeVirtualDemo-error{
+             position: absolute;
+             top: 23px;
+         }
+        .Demo-at-home{
+            font-family: open sans;
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #000000;
+        }
+        label{
+            opacity: 0.7;
+            font-family: open sans;
+            font-size: 11px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+
+
+        form input:only-of-type{
+            max-width: 100%;
+            width: calc(100% - 10px);
+            <!--height: 40px;-->
+            border-radius: 2px;
+            background-color: #f4f8fa;
+            padding: 10px 5px;
+
+        }
+
+         form select:only-of-type{
+            max-width: 100%;
+            width: calc(100% - 1px);
+            height: 40px;
+            font-size: 14px;
+            border-radius: 2px;
+            background-color: #f4f8fa;
+            padding: 0px 5px;
+
+        }
+         form input::placeholder{
+            width: 53px;
+            height: 13px;
+            opacity: 0.3;
+            font-family: open sans;
+            font-size: 10px;
+            font-weight: 300;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+             padding-left: 10px;
+            color: #000000;
+         }
+         form select::placeholder{
+            width: 53px;
+            height: 13px;
+            opacity: 0.3;
+            font-family: open sans;
+            font-size: 10px;
+            font-weight: 300;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+             padding-left: 10px;
+            color: #000000;
+         }
+        .btn-explore {
+            float: left;
+            border-radius: 4px;
+            background-image: linear-gradient(to bottom,#f7a053,#e24d08);
+            font-size: 16px;
+            font-weight: 500;
+            padding: 0px 30px;
+        }
+
+        .book-button {
+
+            display: inline-block;
+        }
+        .Note-You-can-also-c {
+            font-family: open sans;
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.63;
+            letter-spacing: normal;
+            color: #000000;
+            opacity: 0.7;
+            border-radius: 32px;
+            background-color: #f8f6ea;
+            padding: 20px 20px;
+        }
+        .Note-You-can-also-c .text-style-1 {
+            font-weight: bold;
+        }
+        .schedule-text-left{
+            text-align: left;
+
+        }
+    .avail-virtual{
+
+    }
+
+    input[type="text"], input[type="number"]{
+        font-size:17px;
+    }
+
+   .mdl-grid-cdt-center{
+    justify-content: center;
+   }
+
+        .cont-msg p {
+            padding: 5px 5px 5px 5px !important;
+        }
+
+
+        .text-center {
+            text-align: center;
+        }
+
+    <!--open-->
+      .main-top{
+      position: relative;
+      }
+
+      .main-top .form-main-top{
+      top: 90px;
+
+      text-align: center;
+      background: #fff;
+      box-shadow: 0 2px 8px 0 rgba(153, 153, 153, 0.7);
+      margin: auto;
+      position: absolute;
+      padding: 0px;
+      }
+
+
+      .main-top .form-addressCheckout-top {
+      width: 500px!important;
+      margin: auto;
+      max-width: 100%;
+      }
+
+      .main-top .Schedule-a-Free-Demo-top {
+      line-height: 1;
+      }
+
+      .main-top .hbspt-form {
+      width: 100% !important;
+      margin-left: 0px!important;
+      padding-left: 20px!important;
+      }
+    <!--end-->
+@media screen and (max-width: 1280px){
+.search-mobile {
+    visibility: hidden!important;
+}
+}
+
+
+        @media screen and (max-width: 1024px) {
+            .user-icon-mobile {
+                right: 72px !important;
+                position: absolute !important;
+            }
+            form.search-mobile {
+                display: none;
+            }
+            .btn-explore {
+                width: auto !important;
+              }
+            .mdl-grid-cdt-center{
+                justify-content: left !important;
+            }
+
+        }
+
+
+
+        @media screen and (max-width: 767px) {
+            .demo-scheduler{
+                padding: 50px 0 0px 0 !important;
+            }
+            .Line   {
+            text-align: center;
+                margin-left: 130px;
+        }
+            .How-to-opt-for-Demo {
+                margin-bottom: 20px;
+            }
+            .Fill-a-form-parent {
+                margin-bottom: 20px;
+            }
+            .How-to-opt-for-Virtu {
+                margin-bottom: 20px;
+            }
+
+            .How-to-opt-for-Demo-main{
+                padding: 20px 0 176px 0px !important;
+            }
+            .Is-Demo-at-home-avai-main {
+                padding-right: 0px;
+            }
+            .form-main {
+                top: -95px;
+            }
+            .Want-to-join-a-cours{
+                padding-right: 0px;
+                text-align: center;
+            }
+            .want-to-join-to-top-img{
+                text-align: center;
+            }
+            .Is-Demo-at-home-avai{
+                text-align: center;
+            }
+            .To-begin-with-we-ha{
+                text-align: center;
+            }
+            .How-to-opt-for-Demo{
+                text-align: center;
+            }
+            .How-to-opt-for-Virtu{
+                text-align: center;
+            }
+            .If-you-belong-to-any{
+                text-align: center;
+            }
+            .avail-virtual{
+                text-align: center;
+            }
+            .If-you-belong-to-any{
+                text-align: center;
+                padding-right: 0px;
+            }
+            .If-you-belong-to-any .text-style-1{
+                text-align: center;
+            }
+
+           .what-is-Demo-at-home-margin-top {
+                  padding: 450px 15px 0px 15px;
+              }
+
+
+
+
+
+
+
+            .hbspt-form {
+            margin-left: 25px!important;
+            }
+            .what-is-Demo-at-home-margin-top {
+            padding: 470px 15px 0px 15px;
+            }
+
+            .main-top .form-main-top {
+            top: 350px;
+            left: 140px;
+            }
+            .main-top .form-addressCheckout-top {
+            width: 500px!important;
+            }
+
+
+        }
+
+        @media screen and (max-width: 480px) {
+            .Line   {
+                text-align: center;
+                margin-left: 15px;
+            }
+            .Want-to-join-a-cours .text-style-1 {
+                font-size: 40px;
+                line-height: 1;
+                line-height: 1.10;
+            }
+            .Want-to-join-a-cours .text-style-2 {
+                font-size: 30px;
+            }
+            .How-to-opt-for-Demo {
+                font-size: 40px;
+            }
+            .Fill-a-form {
+                font-size: 18px;}
+
+
+            .How-to-opt-for-Virtu {
+                font-size: 40px;
+            }
+            .If-you-belong-to-any {
+                font-size: 25px;
+            }
+            .If-you-belong-to-any .text-style-1 {
+                font-size: 25px;}
+            .Schedule-a-Free-Demo .text-style-1 {
+                font-size: 27px;
+            }
+
+            .Fill-a-form .text-style-1 {
+                margin-top: 15px;
+            }
+             .demo-scheduler-con{
+                 padding-top: 0px;
+             }
+             .want-to-join-to-top-img img{
+                 width: 100%;
+             }
+             .avail-virtual img{
+                 width: 100%;
+             }
+            .what-is-Demo-at-home-margin-top {
+               padding: 700px 15px 0px 15px;
+                text-align: center;
+            }
+            .Is-Demo-at-home-avai-main {
+                padding: 0px 15px;
+            }
+            .How-to-opt-for-Demo {
+                padding: 0px 15px;
+                margin-bottom: 15px;
+            }
+            .How-to-opt-for-Virtu {
+               margin-bottom: 0px;
+            }
+            .Fill-a-form-parent {
+                margin-bottom: 0px;
+            }
+            .How-to-opt-for-Demo-main{
+                padding: 0px 0 100px 0px !important;
+            }
+            .form-main{
+                top: -50px;
+            }
+            .form-main-top {
+            top: 345px;
+            left: 150px;
+            }
+
+          .main-top .form-main-top {
+          top: 250px;
+          }
+         .main-top .form-main-top {
+          left: 15px;
+          }
+           .main-top .form-addressCheckout-top {
+          width: 450px!important;
+          }
+          .hbspt-form {
+             margin-left: 25px!important;
+           }
+        }
+@media screen and (max-width: 475px) {
+            .main-top .form-addressCheckout-top {
+               width: 440px!important;
+            }
+}
+@media screen and (max-width: 465px) {
+            .main-top .form-addressCheckout-top {
+               width: 435px!important;
+            }
+}
+@media screen and (max-width: 460px) {
+            .main-top .form-addressCheckout-top {
+               width: 430px!important;
+            }
+}
+@media screen and (max-width: 455px) {
+            .main-top .form-addressCheckout-top {
+               width: 425px!important;
+            }
+}
+@media screen and (max-width: 450px) {
+            .main-top .form-addressCheckout-top {
+               width: 420px!important;
+            }
+
+}
+ @media screen and (max-width: 446px) {
+            .main-top .form-addressCheckout-top {
+               width: 412px!important;
+            }
+
+             .main-top .form-main-top {
+    top: 285px;
+}
+}
+
+  @media screen and (max-width: 443px) {
+            .main-top .form-addressCheckout-top {
+               width: 412px!important;
+            }
+
+             .main-top .form-main-top {
+    top: 335px;
+}
+}
+
+      @media screen and (max-width: 436px) {
+            .main-top .form-addressCheckout-top {
+               width: 400px!important;
+            }
+
+            }
+
+@media screen and (max-width: 428px) {
+            .main-top .form-addressCheckout-top {
+               width: 395px!important;
+            }
+
+            }
+
+@media screen and (max-width: 420px) {
+            .main-top .form-addressCheckout-top {
+               width: 390px!important;
+            }
+
+            }
+
+            @media screen and (max-width: 415px) {
+            .main-top .form-addressCheckout-top {
+               width: 385px!important;
+            }
+
+            }
+
+@media screen and (max-width: 410px) {
+            .main-top .form-addressCheckout-top {
+               width: 380px!important;
+            }
+
+            }
+            @media screen and (max-width: 405px) {
+            .main-top .form-addressCheckout-top {
+               width: 375px!important;
+            }
+
+            }
+            @media screen and (max-width: 400px) {
+            .main-top .form-addressCheckout-top {
+               width: 370px!important;
+            }
+
+            }
+
+            @media screen and (max-width: 395px) {
+            .main-top .form-addressCheckout-top {
+               width: 365px!important;
+            }
+
+            }
+
+            @media screen and (max-width: 390px) {
+            .main-top .form-addressCheckout-top {
+               width: 360px!important;
+            margin: auto;
+            max-width: 100%;
+            }
+
+            }
+
+            @media screen and (max-width: 385px) {
+            .main-top .form-addressCheckout-top {
+               width: 355px!important;
+            margin: auto;
+            max-width: 100%;
+            }
+
+            }
+
+            @media screen and (max-width: 380px) {
+            .main-top .form-addressCheckout-top {
+               width: 350px!important;
+            margin: auto;
+            max-width: 100%;
+            }
+
+            }
+
+
+      @media screen and (max-width: 375px) {
+            .main-top .form-addressCheckout-top {
+               width: 340px!important;
+            margin: auto;
+            max-width: 100%;
+            }
+
+             .main-top .form-main-top {
+    top: 335px;
+}
+
+
+
+        }
+
+
+        @media screen and (max-width: 360px) {
+
+            .Line   {
+                margin-left: 10px;
+            }
+            .Want-to-join-a-cours .text-style-1 {
+                font-size: 30px;
+                line-height: 1;
+                margin: 0 0 10px;
+            }
+            .Want-to-join-a-cours .text-style-2 {
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+            .What-is-Demo-at-home {
+                font-size: 22px;
+                margin-bottom: 5px;
+            }
+            .It-is-a-service-whe {
+                font-size: 16px;
+                margin-bottom: 0px;
+                line-height: 1.6;
+            }
+            .what-is-Demo-at-home-margin-top {
+                padding: 0px 15px 0px 15px;
+            }
+            .Is-Demo-at-home-avai {
+                font-size: 22px;
+                margin-bottom: 5px;
+            }
+            .To-begin-with-we-ha {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+            .How-to-opt-for-Demo {
+                font-size: 30px;
+                margin-bottom: 0px;
+            }
+            .Fill-a-form {
+                font-size: 16px;
+            }
+            .How-to-opt-for-Virtu {
+                font-size: 30px;
+            }
+            .If-you-belong-to-any {
+                font-size: 20px;
+            }
+            .If-you-belong-to-any .text-style-1 {
+                font-size: 20px;
+            }
+            .How-to-opt-for-Demo-main {
+                padding: 0px 0 70px 0px !important;
+            }
+            .Schedule-a-Free-Demo .text-style-1 {
+                font-size: 25px;
+            }
+
+            .hbspt-form {
+          padding-left: 13px!important;
+            }
+
+            .main-top .form-main-top {
+            top: 200px;
+            }
+
+            .form-main-top {
+            left: 15px;
+            }
+            .main-top .form-addressCheckout-top {
+            width: 330px!important;
+            }
+            .hbspt-form {
+            margin-left: 25px!important;
+            }
+            .what-is-Demo-at-home-margin-top {
+            padding: 710px 15px 0px 15px;
+            }
+        }
+
+        @media screen and (max-width: 320px) {
+            .Line   {
+                margin-left: 10px;
+            }
+            .Want-to-join-a-cours .text-style-1 {
+                font-size: 26px;
+            }
+            .Want-to-join-a-cours .text-style-2 {
+                font-size: 18px;
+                margin-bottom: 5px;
+            }
+             .Is-Demo-at-home-img img{
+                width: 100%;
+            }
+            .main-top .form-addressCheckout-top {
+            width: 295px!important;
+            }
+
+
+        }
+        @media screen and (max-width: 553px){
+          .hbspt-form{
+            margin-left: 58px;
+          }
+        }
+        @media screen and (max-width: 359px) {
+          .hbspt-form {
+            margin-left: 0px;
+          }
+        }
+        @media screen and (max-width: 414px) and (min-width: 320px) {
+          .hbspt-form {
+            margin-left: 0px !important;
+          }
+        }
+
+        #hbspt-form-1545214032614-4581637724{
+          width: 100%;
+        }
+        .hbspt-form{
+          width: 100% !important;
+          margin-left: 120px;
+        }
+        #hs-form-iframe-0{
+          width: 100% !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+
+  <div class="mat-content mdl-layout__content">
+    <div class="landing-darken" style="display: none;"></div>
+    <!--        <div class="mat-be-together-section mdl-typography&#45;&#45;text-center">-->
+    <!--open-->
+    <div class="demo-scheduler-con">
+
+
+      <div class="demo-scheduler">
+        <div class="container">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+
+              <div class="Want-to-join-a-cours">
+                <div class="Line"></div>
+                <p class="text-style-1"> Want to join a course?</p>
+                <p class="text-style-2">Avail demo at home, a service which is totally free of cost.</p>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone main-top">
+              <!--<div class="want-to-join-to-top-img">
+                <img src="https://lh3.googleusercontent.com/QKAVt-l6GDJnen46Ulk5WFr-BW_MgL4Byh8kf7VSngtzidNrjEMruz0aybW7HP2WzAkeYFcnGwYLnqbf8iwDlCrnuTl9">
+              </div>-->
+
+              <!--open-->
+              <div class="container">
+                <div class="mdl-grid">
+                  <div class="form-main-top">
+                    <form name="demoSchedular" id="addressCheckout" class="demoSchedular form-addressCheckout-top" style=""
+                          novalidate="novalidate">
+                      <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                          <div class="Schedule-a-Free-Demo Schedule-a-Free-Demo-top">
+                            <div class="text-style-1">Schedule a Free Demo</div>
+                            <!-- We&apos;ll set up your demo at home.-->
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="mdl-grid">
+
+                        <!--[if lte IE 8]>
+                        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+                        <![endif]-->
+                        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+                        <script>
+                  hbspt.forms.create({
+                    portalId: "3966107",
+                    formId: "89768142-2eb9-43c9-aba1-ed137233ad53"
+                  });
+                </script>
+                      </div>
+                    </form>
+
+                    <!--&gt;>>>>>> Stashed changes-->
+                   <!-- <div class="mdl-grid">
+                      <div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                        <div class="Note-You-can-also-c">
+                          <span class="text-style-1">Note:</span> You can also choose the virtual demo
+                          option if you belong to Delhi NCR, Jaipur and Hyderabad if you so wish.
+                        </div>
+                      </div>
+
+                    </div>-->
+                  </div>
+                </div>
+              </div>
+              <!--end-->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="container">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+            <div class="what-is-Demo-at-home-margin-top">
+              <div class="What-is-Demo-at-home">What is Demo at home?</div>
+              <div class="It-is-a-service-whe">
+                It is a service, wherein, a counsellor will visit at your doorstep on the date and time of your choice. He/she will provide you with complete guidance on our services - how to avail the lectures/appear for tests, how to access study material, how to track your overall progress and how to purchase a course conveniently. Personalized learning tips will also be offered.
+                <div class="text-style-1">All this comes free of cost!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+            <div class="Is-Demo-at-home-avai-main">
+              <div class="Is-Demo-at-home-avai">Is Demo at home available in all the cities?</div>
+              <div class="To-begin-with-we-ha">To begin with, we have initiated the demo at home service in <b>Delhi NCR, Jaipur</b> and <b>Hyderabad.</b> For other cities, we are offering a <b>virtual demo experience,</b> wherein, a personalized virtual demo will be offered if you so choose.
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+            <div class="Is-Demo-at-home-img">
+              <img src="https://lh3.googleusercontent.com/3DMnO905xhAW56ytbzgc5T11eqMslAGfVeMXY0b1mLPbLHoiKKaOFHDR-FDEZiJlkFWWjRtu9M1tjBIWhPYFnmLs7-e_">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="How-to-opt-for-Demo-main">
+        <div class="container">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--5-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+            </div>
+            <div class="mdl-cell mdl-cell--7-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+              <div class="How-to-opt-for-Demo">How to opt for
+                Demo at Home?</div>
+            </div>
+          </div>
+
+
+          <div class="mdl-grid Fill-a-form-parent">
+
+            <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--6-col-phone">
+              <div class="Fill-a-form">
+                <img src="https://lh3.googleusercontent.com/yfZayuo_TvO5Zegq8PpfZWqYiEp6mnCZv4aMwV3Gka1Y40U8FaZJ6g_4Mj7Dxb2_AoEufQo-XjQFBxYX7WOu02rsfSTd">
+                <div class="text-style-1">Fill</div> a form
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--6-col-phone">
+              <div class="Fill-a-form">
+                <img src="https://lh3.googleusercontent.com/h54k_ojVHM5kLXHn1UpSy2qN9YGm4I3ES_0GFMXkRwu6HkpQyxJ9zIBP-4m0Rq629nXEWuZEgRtNsWROq-2ElQ6iJEc">
+                <div class="text-style-1">Choose the </div>day and time of visit
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--6-col-phone">
+              <div class="Fill-a-form">
+                <img src="https://lh3.googleusercontent.com/J4rrUianEhM2AuBmkD4q5957Fy24kvPOQU_e69eoEw9hbDm1_LG1V4cQUcMmDTFgQclQoAuAQHYzMfZxMNxqkoiAOg">
+                <div class="text-style-1">Submit</div> form
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--6-col-phone">
+              <div class="Fill-a-form">
+                <img src="https://lh3.googleusercontent.com/opsWhamBlhb8o7mS42e9xgPIcxPs0dPSnrrin4O-d3ScbhZ0STN1K4h4rlexzvSzrbNYgxyxJ8Qo53jgfe2lIDJ8f8o">
+                <div class="text-style-1">Wait for</div> confirmation call
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--6-col-phone">
+              <div class="Fill-a-form">
+                <img src="https://lh3.googleusercontent.com/sq0sGuz54NWhdZhhe-OS0UTwC1aFwXd-dAdL5l_PzK_hw5jUOvM_tbThBeHrzmYrjx3qcwP0WtgNTceOApD0zhUfdg">
+                <div class="text-style-1">Visit</div> Scheduled
+              </div>
+            </div>
+          </div>
+
+
+          <div class="mdl-grid">
+
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+
+              <div class="How-to-opt-for-Virtu">How to opt for
+                Virtual Demo?
+              </div>
+              <div class="If-you-belong-to-any">If you belong to any city other than
+                <p class="text-style-1">Delhi NCR, Jaipur and Hyderabad:</p>
+              </div>
+
+            </div>
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+              <div class="avail-virtual">
+                <img src="https://lh3.googleusercontent.com/u7RF5vm5iqsYqRmBmCbxsV-xyKUuuh34aZbkyDg7Di93yeVgpMLt-wgT-vPDNG9jOaiE5c7Xc-D1mNx-evTTDG9xX3w">
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+      <div class="container">
+        <div class="mdl-grid">
+          <div class="form-main">
+<!--<<<<<<< Updated upstream-->
+             <!--<form name="demoSchedular" id="addressCheckout" class="demoSchedular" style="" novalidate="novalidate">-->
+                 <!--<div class="mdl-grid">-->
+                     <!--<div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                         <!--<div class="Schedule-a-Free-Demo">-->
+                             <!--<div class="text-style-1">Schedule a Free Demo</div>-->
+                               <!--&lt;!&ndash; We&apos;ll set up your demo at home.&ndash;&gt;-->
+                         <!--</div>-->
+                     <!--</div>-->
+
+                 <!--</div>-->
+
+                 <!--<div class="mdl-grid">-->
+                     <!--<div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                         <!--<div class="Demo-at-home-main">-->
+                            <!--<input type="hidden" id="" name="undefined" />-->
+                             <!--<input class="checkbox_div"  type="radio" id="demoAtHome" name="demoAtHomeVirtualDemo" value="DemoAtHome"><label class="Demo-at-home" for="demoAtHome">Demo at home</label>-->
+                             <!--<input class="checkbox_div" type="radio" id="virtualDemo" name="demoAtHomeVirtualDemo" value="VirtualDemo"><label class="Demo-at-home" for="virtualDemo">Virtual Demo</label>-->
+                         <!--</div>-->
+                     <!--</div>-->
+                 <!--</div>-->
+
+
+                 <!--<div class="mdl-grid">-->
+                     <!--<div class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;6-col-phone schedule-text-left">-->
+                         <!--<label for="yourName" >Enter your Name</label><br> <input type="text" id="" name="yourName" required="true" placeholder="Your Full Name">-->
+                     <!--</div>-->
+                     <!--<div class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;6-col-phone schedule-text-left">-->
+                         <!--<label for="phoneNumber">Enter Phone Number</label><br> <input type="number" id="" name="phoneNumber" required="true" placeholder="Phone Number">-->
+                     <!--</div>-->
+                     <!--<div class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;6-col-phone schedule-text-left">-->
+                         <!--<label for="yourEmail">Enter your Email</label><br> <input type="text" id="" name="yourEmail" required="true" placeholder="Your Email">-->
+                     <!--</div>-->
+                     <!--<div class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;6-col-phone schedule-text-left">-->
+                         <!--<label for="yourExam">Select your Exam</label><br>-->
+                         <!--<select name="yourExam" required="true">-->
+                             <!--<option value>&#45;&#45; Select Exam &#45;&#45;</option>-->
+                             <!--<option value="IAS">IAS</option>-->
+                             <!--<option value="IES/GATE">IES/GATE</option>-->
+                             <!--<option value="State PSC">State PSC</option>-->
+                             <!--<option value="SSC/Banking">SSC/Banking</option>-->
+                             <!--<option value="Judicial Services">Judicial Services</option>-->
+                         <!--</select>-->
+                         <!--&lt;!&ndash;<input type="text" id="" name="yourExam" placeholder="Enter your Exam">&ndash;&gt;-->
+                     <!--</div>-->
+                 <!--</div>-->
+                 <!--<div class="mdl-grid mdl-grid-cdt-center">-->
+                     <!--<div class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;6-col-phone schedule-text-left">-->
+                         <!--<label for="yourCity">Select your city</label><br>-->
+                         <!--<select id="yourCity" name="yourCity" required="true">-->
+                             <!--<option value>&#45;&#45; Select City &#45;&#45;</option>-->
+                             <!--<option value="Delhi NCR">Delhi NCR</option>-->
+                             <!--<option value="Hyderabad">Hyderabad</option>-->
+                             <!--<option value="Jaipur">Jaipur</option>-->
+                             <!--<option style="display: none;" value="Other">Other</option>-->
+                         <!--</select>-->
+
+                         <!--&lt;!&ndash;<input type="text" id="" name="yourCity" required="true" placeholder="Your City">&ndash;&gt;-->
+                     <!--</div>-->
+                     <!--<div class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;6-col-phone schedule-text-left">-->
+                         <!--<label for="yourDate">Select your Date</label><br> <input type="date" id="" name="yourDate" required="true" placeholder="Select your Date">-->
+                     <!--</div>-->
+                     <!--<div class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;6-col-phone schedule-text-left">-->
+                         <!--<label for="yourTime">Choose your time (9am-6pm)</label><br> <input type="time" id="" name="yourTime" required="true" placeholder="Choose your time">-->
+                     <!--</div>-->
+                     <!--<input type="hidden" id="" name="yourDemo" placeholder="Choose your demo">-->
+<!--=======-->
+            <form name="demoSchedular" id="addressCheckout" class="demoSchedular" style=""
+                  novalidate="novalidate">
+              <div class="mdl-grid">
+                <div
+                    class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                  <div class="Schedule-a-Free-Demo">
+                    <div class="text-style-1">Schedule a Free Demo</div>
+                    <!-- We&apos;ll set up your demo at home.-->
+                  </div>
+                </div>
+
+              </div>
+              <div class="mdl-grid">
+
+                <!--[if lte IE 8]>
+                <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+                <![endif]-->
+                <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+                <script>
+                  hbspt.forms.create({
+                    portalId: "3966107",
+                    formId: "89768142-2eb9-43c9-aba1-ed137233ad53"
+                  });
+                </script>
+              </div>
+            </form>
+
+<!--&gt;>>>>>> Stashed changes-->
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                <div class="Note-You-can-also-c">
+                  <span class="text-style-1">Note:</span> You can also choose the virtual demo
+                  option if you belong to Delhi NCR, Jaipur and Hyderabad if you so wish.
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--close-->
+
+      <!-- <img class="waves-background"
+src="images/background/Homepage/wavesbg2.png" width="100%"
+style="margin-top: -56px;"> -->
+    </div>
+
+
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+    <dialog tabindex="1" id="demoVideoDialog"
+            class="mdl-dialog mdl-dialog-video">
+      <div class="mdl-dialog__content">
+        <iframe id="video" width="100%" height="500px"
+                src="https://www.youtube.com/embed/Wi6DObEp4vU" allowfullscreen>
+        </iframe>
+        <button
+                class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+          <i class="material-icons">close</i>
+        </button>
+      </div>
+    </dialog>
+
+      <!--Thank You Page - Demo Schedular-->
+      <dialog id="thankyou-demoschedular" class="mdl-dialog">
+          <div class="modal thankyou fade" id="thankyou-modal">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                  <button
+                          class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                      <i class="material-icons">close</i>
+                  </button>
+                  <div class="modal-content">
+                      <div class="modal-body text-center">
+                          <div class="success-icon">
+                              <img
+                                      src="https://lh3.googleusercontent.com/vzd2A61ehZSK-tHpL8SHAJ8qaBZJtzMMx6zADU3Z7Y1x3ey2P9p_RY6WIEBBf9RmfkkdbFQbnr5VFTo8TWHP5RlgvFc" />
+                          </div>
+                          <div class="ty-msg">
+                              <p class="ty-msg-ty">
+                                  Thank you for submitting the form.</p>
+                          </div>
+                          <div class="cont-msg">
+                              <p>We will give you a confirmation call shortly!</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </dialog>
+
+    <!--<div class="btn-tutorial-fixed">
+        <a href="/quick-tour?slide=0" target="_blank"
+           class="btn-tutorial mdl-button mdl-js-button mdl-button&#45;&#45;fab mdl-js-ripple-effect mdl-button&#45;&#45;colored">
+            <i class="material-icons">touch_app</i>
+            <p>Tour!</p>
+        </a> <i class="hide-tutorial-button material-icons"> close </i>
+    </div>-->
+  </div>
+  <!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+</div>
+
+<!-- include scripts -->
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script
+        src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        $(".checkbox_div")
+            .change(function(){
+                if( $(this).is(":checked") ){
+                    var rVal = $(this).val();
+                    if(rVal=="VirtualDemo"){
+                        $( "#yourCity option[value=Other]" ).show();
+                    }
+                    if(rVal=="DemoAtHome"){
+                        $( "#yourCity option[value=Other]" ).hide();
+                    }
+                }
+            });
+
+
+
+    });
+
+</script>
+<script>
+
+  $(window).bind("load", function() {
+    $('.hs-form-89768142-2eb9-43c9-aba1-ed137233ad53_fe509ad0-7efe-4032-960a-145aa2511620 fieldset').addClass("formFullWidth");
+  $('.form-columns-3').css("max-width",'none');
+  });
+var dialogDemoSchedular = document.querySelector('#thankyou-demoschedular');
+dialogDemoSchedular.querySelector('.close-dialog').addEventListener('click',
+			function() {
+				dialogDemoSchedular.close();
+				location.reload();
+			});
+$("form[name=demoSchedular]")
+		.validate(
+				{
+
+					rules : {
+						demoAtHomeVirtualDemo : {
+							required : true
+						},
+						yourName : {
+							required : true
+						},
+						phoneNumber : {
+							required : true,
+							minlength: 10
+						},
+						yourEmail : {
+							required : true,
+							email : true
+						},
+						yourExam : {
+							required : true
+						},
+						yourCity : {
+							required : true
+						},
+						yourDate : {
+							required : true
+						},
+						yourTime : {
+							required : true
+						}
+					},
+					messages : {
+						demoAtHomeVirtualDemo : {
+							required : "Please Select One Option"
+						},
+						yourName : {
+							required : "Please Provide Your Full Name"
+						},
+						phoneNumber : {
+							required : "Please Provide Your Mobile Number",
+							minlength: "Please Provide Valid Mobile Number"
+						},
+						yourEmail : {
+							required : "Please Provide Your Email Address",
+							email : "Please Provide a Valid Email Address"
+						},
+						yourExam : {
+							required : "Please Select One Exam"
+						},
+						yourCity : {
+							required : "Please Select Your City"
+						},
+						yourDate : {
+							required : "Please Enter Suitable Date"
+						},
+						yourTime : {
+							required : "Please Enter Suitable Time"
+						}
+					},
+					submitHandler : function(form, e) {
+                    $('#exploreDemoSchedular').hide();
+		            $('#loader-demo-schedular').show();
+                    e.preventDefault();
+                    $
+                        .ajax({
+                            url : 'https://script.google.com/macros/s/AKfycbyWFZeVFRIopd_hLc6ICUcde7E00EyQstsCsb7o6gQOETbM0LOS/exec',
+                            data : JSON.stringify($('.demoSchedular').serialize()),
+                            dataType : 'jsonp',
+                            type : 'GET',
+                            contentType: "application/javascript",
+                            success : function(){
+                                  (function() {
+                                    'use strict';
+
+                                        if (!dialogDemoSchedular.showModal) {
+                                            dialogPolyfill.registerDialog(dialogDemoSchedular);
+                                        }
+                                    dialogDemoSchedular.showModal();
+
+                                      }());
+                                    $('#loader-demo-schedular').hide();
+                            },
+                            error: function(){
+                            (function() {
+                                    'use strict';
+
+                                        if (!dialogDemoSchedular.showModal) {
+                                            dialogPolyfill.registerDialog(dialogDemoSchedular);
+                                        }
+                                    dialogDemoSchedular.showModal();
+
+                                      }());
+                                    $('#loader-demo-schedular').hide();
+                            }
+
+                        });
+
+                   }
+              });
+  $( document ).ready(function() {
+    $("#hsForm_89768142-2eb9-43c9-aba1-ed137233ad53").trigger('reset');
+  });
+
+</script>
+
+
+</body>
+
+</html>

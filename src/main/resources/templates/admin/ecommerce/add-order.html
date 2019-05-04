@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+<head>
+  <link
+      href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" type="text/css">
+</head>
+<style>
+  #lableAmountDiv{
+    display: none;
+    float: left;
+    margin-right: 100px;
+  }
+
+</style>
+
+<body>
+
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">Add Order</h1>
+      </div>
+    </div>
+    <form name="add-new-order" id="add-new-order">
+      <div class="row">
+        <div class="col-md-9">
+          <!-- <div id="customer" class="form-group">
+        <label> Customer: </label>
+        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+          Select Customer <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" th:each="user:${users}">
+          <li th:id="${user?.userId}"><a th:text="${user?.userName}"></a></li>
+        </ul>
+      </div> -->
+
+          <div class="form-group">
+            <label> Customer &nbsp;:&nbsp;</label>
+            <!-- <select
+              class="form-control selectpicker" id="dropUsers"
+               data-live-search="true">
+              <option th:each="user:${users}" th:value="${user?.userId}"
+                th:text="${user?.userName}"></option>
+            </select> -->
+            <input type="text"
+                   placeholder="Enter atleast 3 letters of the username or emailId"
+                   required id="userEmailSearch" onblur="searchEmails(event);">
+            <div id="userList"></div>
+
+          </div>
+          <br>
+          <div id="addressInfo">
+
+            <h4
+                style="font-family: TrebuchetMS, Arial, Helvetica, sans-serif;">Shipping
+              Information</h4>
+            <div id="existingAddressInfo"></div>
+
+
+            <div id="newAddressInfo">
+
+              <div id="name" class="form-group">
+                <label id="lblfname">First Name: </label> <input type="text"
+                                                                 placeholder="Enter First Name"
+                                                                 id="txtfname" required
+                                                                 class="form-control"/> <label
+                  id="lbllname">Last
+                Name: </label> <input type="text" id="txtlname"
+                                      placeholder="Enter Last Name" required class="form-control"/>
+              </div>
+
+
+              <div id="detailsDiv" class="form-group">
+                <label id="lblmob">Mobile Number:</label> <input type="tel"
+                                                                 placeholder="Enter Mobile Number"
+                                                                 pattern="^\d{10}$"
+                                                                 id="txtMob"
+                                                                 data-error-msg="Please enter 10 digit mobile number"
+                                                                 required
+                                                                 class="form-control"> <label
+                  id="lblpin">Pincode:</label>
+                <input type="tel" placeholder="Enter Pincode" id="txtPincode"
+                       pattern="^\d{6}$"
+                       data-error-msg="Please enter 6 digit pincode" required
+                       class="form-control">
+              </div>
+
+
+              <div id="addressDiv" class="form-group">
+                <label id="lblcity">City: </label> <input type="text"
+                                                          placeholder="Enter City" id="txtCity"
+                                                          required
+                                                          class="form-control"> <label
+                  id="lblstate">State:
+              </label> <input type="text" placeholder="Enter State" id="txtState"
+                              required class="form-control"> <label id="lbladd">Address:
+              </label> <input id="txtAdd" type="text" placeholder="Enter Address"
+                              required class="form-control">
+              </div>
+
+              <span><button type="submit" onclick="saveNewAddress();" class="btn btn-primary">Save</button>
+									<button type="button" class="btn btn-primary"
+                          onclick="cancelAddress();">Cancel</button></span>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+
+            <label> Payment Status</label> <select class="form-control"
+                                                   id="dropPayStatus">
+            <option value="PENDING_PAYMENT">Pending</option>
+            <option value="PAYMENT_COMPLETE">Complete</option>
+            <option value="PROCESSED">Processed</option>
+
+          </select>
+          </div>
+
+          <div class="form-group">
+
+            <label> Payment Mode</label> <select class="form-control"
+                                                 id="dropPayMode">
+            <option value="razorpay">RazorPay</option>
+            <option value="BANK_TRANSFER">Bank Transfer</option>
+            <option value="free">free</option>
+
+          </select>
+          </div>
+
+          <div class="form-group">
+            <button type="button" class="submit btn btn-default"
+                    onclick="showProducts();">
+              <i class="fa fa-plus"></i> Add Product
+            </button>
+
+            <div class="dropdown" id="prodTypeDD"
+                 style="float: right; width: calc(86%);">
+              <label> &nbsp;&nbsp;Product Type: &nbsp; </label>
+
+
+              <button class="btn dropdown-toggle" type="button"
+                      data-toggle="dropdown">
+                Select Product Type <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" style="margin-left: 117px !important;">
+                <li><a onclick="showCoursesPanel();">Course</a></li>
+                <li><a onclick="showUnitsPanel();">Unit</a></li>
+
+              </ul>
+            </div>
+          </div>
+          <div id="itemsDiv"></div>
+          <div class="form-group" id = "OrderReasonText" style="display: none;">
+
+            <label> Order Reason</label> <input type="text" id="txtReason"
+                                                placeholder="Enter reason for creating this manual order"
+                                                required="required">
+          </div>
+
+
+          <div id="couponDiv">
+            <select class="form-control selectpicker" id="dropCoupons"
+                    data-live-search="true">
+              <option value="0" selected>Select Coupon</option>
+              <option th:each="coupon:${coupons}" th:value="${coupon?.code}"
+                      th:text="${coupon?.code}"></option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+    <div class="modal fade" id="coursesModal">
+      <div class="modal-dialog">
+        <div class="modal-content" style="position: absolute" important>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true">&times;
+            </button>
+            <h4 class="modal-title">Courses Table</h4>
+          </div>
+          <div class="modal-body">
+            <table id="allCoursesTbl"
+                   class="table table-striped table-bordered" cellspacing="0"
+                   width="100%">
+              <thead>
+              <tr>
+                <th data-field="id">Product ID</th>
+                <th data-field="type">Product Type</th>
+                <th data-field="productTitle">Course Name</th>
+                <th data-field="batchTitle">Batch Name</th>
+                <th data-field="courseName">Course Slug</th>
+                <th data-field="batchId">Batch Id</th>
+                <th data-field="price">Price</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="c:${courses}">
+                <td th:text="${c?.product?.id}" data-field="id"></td>
+                <td th:text="${c?.product?.type}" data-field="type"></td>
+                <td th:text="${c?.product?.productTitle}"
+                    data-field="productTitle"></td>
+                <td th:text="${c?.batchName}"
+                    data-field="batchTitle"></td>
+                <td th:text="${c?.courseName}" data-field="courseName"></td>
+                <td th:text="${c?.product?.commodityId}"
+                    data-field="commodityId"></td>
+                <td th:text="${c?.product?.price}" data-field="price"></td>
+                <td>
+                  <button type="button" class="btn btn-primary"
+                          th:onclick="|addToCart('${c?.product?.id}')|">Add
+                  </button>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default"
+                    data-dismiss="modal">Close
+            </button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="unitsModal">
+      <div class="modal-dialog">
+        <div class="modal-content" style="position: absolute" important>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true">&times;
+            </button>
+            <h4 class="modal-title">Units Table</h4>
+          </div>
+          <div class="modal-body">
+            <table id="allunitsTbl"
+                   class="table table-striped table-bordered" cellspacing="0"
+                   width="100%">
+              <thead>
+              <tr>
+                <th data-field="id">Product ID</th>
+                <th data-field="type">Product Type</th>
+                <th data-field="productTitle">Title</th>
+                <th data-field="courseName">CourseName</th>
+                <th data-field="batchName">BatchName</th>
+                <th data-field="unitType">Unit Type</th>
+                <th data-field="description">Unit Id</th>
+                <th data-field="price">Price</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="u:${units}">
+                <td th:text="${u?.product?.id}" data-field="id"></td>
+                <td th:text="${u?.product?.type}" data-field="type"></td>
+                <td th:text="${u?.product?.productTitle}"
+                    data-field="productTitle"></td>
+                <td th:text="${u?.unit?.courseName}" data-field="courseName"></td>
+                <td th:text="${u?.batchName}" data-field="batchName"></td>
+                <td th:text="${u?.unit?.type}" data-field="unitType"></td>
+                <td th:text="${u?.product?.commodityId}"
+                    data-field="commodityId"></td>
+                <td th:text="${u?.product?.price}" data-field="price"></td>
+                <td>
+                  <button type="button" class="btn btn-primary"
+                          th:onclick="|addToCart('${u?.product?.id}')|">Add
+                  </button>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default"
+                    data-dismiss="modal">Close
+            </button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <br/>
+    <!-- /.modal -->
+    <!-- <div id="divManual" class="row">
+      <button type="button" class="btn btn-primary" id="btnAddAmount"
+        onclick="onClickAddAmount();"></button>
+    </div> -->
+    <div class="form-group">
+      <div id="divAmount" class="form-group">
+        <label class="container" id="lblEMI"><input type="checkbox"
+                                                    name="emi" id="emi"
+                                                    onchange="showInstallmentNumber();">EMI</label>
+        <br/>
+      </div>
+    </div>
+    <div class="form-group">
+        <br/>
+        <div id="lableAmountDiv">
+        <label id="lblAmount">Amount &nbsp; : &nbsp; </label><input type="number"
+                                                     placeholder="Enter amount"
+                                                     id="txtActualAmount"/>
+        </div>
+
+      <div id="divInstallment">
+        <label id="lblInstallment">Installment Number &nbsp;:&nbsp; </label><input
+          type="number" placeholder="Enter Installment Number"
+          id="txtInstallmentNumber"/>
+      </div>
+    </div>
+
+    <div id="submitDiv">
+      <button type="button" id="btnSubmitOrder" class="btn btn-primary"
+              onclick="submitOrder();">Submit Order
+      </button>
+    </div>
+
+  </div>
+
+  <!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+  <script
+      src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script
+      src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+  <script
+      th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/ecommerce.js')}}"></script>
+  <script>
+
+  </script>
+</body>
+
+</html>

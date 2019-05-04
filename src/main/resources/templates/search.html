@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Search Result</title>
+
+
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/courses.css')}}"/>
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/teachers.css')}}"/>
+
+  <!-- <link
+      href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+      rel="stylesheet" media="screen" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+   -->
+  <style>
+    .price ~ .view-details {
+      width: 100%;
+      height: 38px;
+      border-radius: 3px;
+      border: solid 1px #162840;
+      background: transparent !important;
+      color: #162840 !important;
+      font-size: 14px !important;
+      line-height: 40px;
+      padding: 0;
+      box-shadow: none;
+      transition: 0ms;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .price ~ .view-details:hover, .price ~ .view-details:active {
+      background-image: linear-gradient(108deg, #f7a053, #e24d08) !important;
+      border: none;
+      color: #fff !important;
+      box-shadow: none;
+    }
+
+    .course-filter-header, .teachers-filter-header {
+      background-color: transparent !important;
+      font-size: 24px !important;
+      color: #000 !important;
+      height: auto !important;
+    }
+
+    .skew, .skew:after {
+      background: #fff !important;
+      margin: 0 0 0 0;
+    !important;
+    }
+
+    .ns-card {
+      width: auto;
+    }
+
+    #course-listing-card .CategoryHeading, #teacher-listing-card .CategoryHeading, #post-listing-card .CategoryHeading {
+      font-family: open sans;
+      font-size: 28px;
+      font-weight: 800;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.44;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
+      z-index: 2;
+      margin: 10px 0 10px 0;
+    }
+
+    #course-listing-card .mdl-grid, #teacher-listing-card .mdl-grid, #post-listing-card .mdl-grid {
+      min-height: 100px;
+      padding: 20px;
+    }
+
+    /* no results found css starts here*/
+    .noResultsFoundContainer{
+      width: 300px !important;
+      height: 200px;
+      margin: 0 auto;
+      height: auto;
+
+
+    }
+    .noResultsFound{
+      width: 300px;
+      height: 33px;
+      font-family: OpenSans;
+      font-size: 24px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #333333;
+      text-align: center;
+      margin: 18px 0 !important;
+      display: block;
+    }
+    .noMatchKeywords{
+      width: 402px;
+      height: 22px;
+      font-family: OpenSans;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #444444;
+      margin: 0 -37px 18px !important;
+      display: block;
+    }
+    .imagebox{
+      margin: 0 auto;
+      display: block;
+      width: fit-content;
+      width: -moz-fit-content;
+    }
+    .imagebox img{
+      margin-right: 20px;
+
+    }
+    .mat-navigation-container, .search-container, {
+      visibility: visible !important;
+    }
+    .mat-navigation-container, .search-container, #cartDropdown{
+      visibility: visible !important;
+    }
+    /*no results found css ends here*/
+  </style>
+</head>
+
+<body class="all-search-page">
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+  <div class="mat-content mdl-layout__content">
+    <div id = "resultPageFrame">
+    <div class="landing-darken" style="display: none;"></div>
+    <!-- <div class="load-bar">
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+</div> -->
+    <div style="display: none;" id="p2"
+         class="load-courses-progress-bar mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+
+    <section class="course-listing">
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div id="course-listing-card" style="min-height:unset !important;">
+              <h3 class="CategoryHeading">Courses</h3>
+              <div class="underline"></div>
+              <div style="display: block;" class="common-loader"
+                   id="loader-all-courses">
+                <div class="mdl-spinner mdl-js-spinner is-active" style="margin-top: 100px"></div>
+              </div>
+              <div class="mdl-grid">
+                <div class="all-courses-section">
+
+
+                </div>
+              </div>
+              <div id="loadMoreCourses" style="display:none;text-align:center;">
+                <a class="btn-all-courses btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-View-all-teachers ">Load
+                  More Courses</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br/>
+    <section class="teachers-listing">
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div id="teacher-listing-card">
+              <h3 class="CategoryHeading">Teachers</h3>
+              <div class="underline"></div>
+              <div style="display: block;" class="common-loader"
+                   id="loader-all-teachers">
+                <div class="mdl-spinner mdl-js-spinner is-active" style="margin-top: 100px"></div>
+              </div>
+              <div class="mdl-grid">
+                <div class="all-teachers-section">
+
+                </div>
+              </div>
+              <div id="loadMoreTeachers" style="display:none;text-align:center;">
+                <a class="btn-all-courses btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-View-all-teachers ">Load
+                  More Teachers</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br/>
+    <section class="course-listing">
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class=" mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div id="post-listing-card">
+              <h3 class="CategoryHeading">Posts</h3>
+              <div class="underline"></div>
+              <div style="display: block;" class="common-loader"
+                   id="loader-all-posts">
+                <div class="mdl-spinner mdl-js-spinner is-active" style="margin-top: 100px"></div>
+              </div>
+              <div class="mdl-grid">
+                <div class="all-posts-section">
+                  <br/>
+                </div>
+              </div>
+            </div>
+            <div id="loadMorePost" style="display:none;text-align:center;">
+              <a class="btn-all-courses btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-View-all-teachers ">Load
+                More Posts</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </div>
+
+
+
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+
+  </div>
+</div>
+
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!--author :- Satish kumar-->
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('js/teachers.js')}}"
+></script>
+
+
+<script>
+  // $(document).ready(function() {
+  // 	fetchFilters('IAS', 'ALL', 'popular');
+  // });
+
+  $(document).ready(function () {
+    searchPageResult();
+  });
+
+  function searchPageResult() {
+    var search = getParameterByName('search');
+    $
+    .ajax({
+      url: apiBasePath + "/search?search="
+          + search
+          + "&page=1&size=20",
+      type: "GET",
+      success: function (response) {
+        var htmlToShowCourses = '';
+        var htmlToShowTeachers = '';
+        var htmlToShowPosts = '';
+        var searchItemsListCourses = '<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp showCourseCards" style="display:none;"> <div class="trending-courses-card mdl-card__media"> <a href="/course/#courseLink#"> <img src="#courseImage#" alt="#courseTitle#" width="100%"></a> </div> <div class="ns-card"> <span class="course-rating">#courseRating#</span> <span class="starts-on">Start Date <span class="starts-on-date">#courseStartDate#</span> </span> <a href="/course/#courseLink#"> <h3 class="course-heading-grid">#courseTitle#</h3> </a> <p class="ns-card-p"> <span class="p-grid-1"><i>by</i> #multipleTeachers# <br /> <a href="institute/#instructorSlug#">#instituteName#</a> </span> <span class="p-grid-2"><i class="material-icons">person_outline</i> <span class="num-teacher">#noOfStudents#</span> </span> </p> <div class=""> #Price# <a class="mat-link" href="/course/#courseLink#"> View Details <i class="material-icons">chevron_right</i> </a> </div> </div> </div>';
+
+        // !--'<div class="all-courses-card"> <span class="best-seller">#discount# discount</span> <div class="mdl-grid"> <div class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone"> <a href="/course/#courseLink#"> <img src="#courseImage#"></a> </div> <div class="mdl-cell mdl-cell&#45;&#45;7-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone"> <div class="course-single-card-list"> <a href="/course/#courseLink#"> <h3>#courseTitle#</h3> </a> <p class="by-teacher"> <span class=""><i>by</i> </span> <span> <a style="color: #000;" href="/teacher/#teacherSlug#"><span>#teacherName#</span></a> <a href="institute/#instructorSlug#"><i><span style="color: #666;font-family: crimson;">#instituteName#</span></i></a> </span> <br /> </p> <p class="course-rating"> <span>#courseRating#</span> <span>&nbsp;&nbsp;<small style="vertical-align: top;">(#noOfReviewers# Ratings)</small></span> </p> <p class="starts-on"> Starts: <span>#courseStartDate#</span>&nbsp;&nbsp;|&nbsp;&nbsp;Enrolled Students: <span>#noOfStudents#</span>&nbsp;</p> </div> </div> <div class="fav-card mdl-cell mdl-cell&#45;&#45;2-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">   <h3 class="price">#fees# </h3> <br /> <a class="view-details btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent" href="/course/#courseLink#">View Details</a> </div> </div></div>';
+        // -- >
+        var searchItemsListTeachers = '<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone showTeacherCards" style="display:none;"> <div class="all-teachers-card demo-card-square mdl-card mdl-shadow--2dp"> <div class=""> <a href="/teacher/#teacherUrl#"><img src="#displayPicture#=w140-h140" alt="#teacherName#"></a> </div> <h3> <a href="/teacher/#teacherUrl#">#teacherName#</a> </h3> <p> <i><a href="institute/#instituteUrl#">#instituteName#</a></i> </p> <p> <span class="teachers-rating">  </span> </p> '
+            + '<div class="teacher-subjects-ellipsis">#subject#</div>'
+            + '<div class="mdl-card__actions" style="text-align: center;"><a href="/teacher/#teacherUrl#">View Profile</a> </div> </div> </div>';
+        var searchItemsListPosts = '<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp showPostCards" style="display:none;"> <div class="trending-courses-card mdl-card__media"> <a href="/#postLink#"> <img src="#postImage#" width="100%" height="190px" /></a> </div> <div class="ns-card"> <a href="/#postLink#"> <h3 class="course-heading-grid">#postTitle#</h3> </a> <p class="ns-card-p"> </p> <div class="mdl-card__actions" style="height: 40px;padding:0px">#readTime#  </div></div> </div>';
+
+        var noSearchResultCourses = '<div style="margin: 0 auto;margin-top: 30px; "><img src ="images/icons/no-search-seciton .png" />&nbsp;<span style="font-family: OpenSans;font-size: 18px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal;">No Course found! Try with different keyword!</span> </div>';
+        var noSearchResultTeachers = '<div style="margin: 0 auto;margin-top: 30px;"><img src ="images/icons/no-search-seciton .png" />&nbsp;<span style="font-family: OpenSans;font-size: 18px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal;">No Teacher found! Try with different keyword!</span> </div>';
+        var noSearchResultPosts = '<div style="margin: 0 auto;margin-top: 30px;"><img src ="images/icons/no-search-seciton .png" />&nbsp;<span style="font-family: OpenSans;font-size: 18px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal;">No Post found! Try with different keyword!</span> </div>';
+        var noResultsFound = '<div class="container-header" style="margin-top: 148px; margin-bottom: 200px;"><div class="noResultsFoundContainer" id="noResultsFoundContainer" >\n'
+            + '      <div class="imagebox">\n'
+            + '        <img src="images/icons/no-result-search-icon.png"/>\n'
+            + '      </div>\n'
+            + '\n'
+            + '      <span class="noResultsFound">No Result Found!!!</span>\n'
+            + '\n'
+            + '      <span class="noMatchKeywords">We did not found any search related to your Keyword!</span>\n'
+            + '\n'
+            + '      <div  style="display:block;text-align:center;">\n'
+            + '\n'
+            + '          <a   \n'
+            + '             class="showSearchBar " style="width: 269px !important; padding: 10px !important;font-size: 16px;">Search with different keyword!'
+            + '</a>\n'
+            + '\n'
+            + '      </div>\n'
+            + '    </div></div>';
+        var i = 0;
+        var length= (response.courses).length;
+        $
+        .each(
+            response.courses,
+
+            function (index, element) {
+              if (index >= 4) {
+                $('#loadMoreCourses').show();
+              }
+              htmlToShowCourses += searchItemsListCourses;
+              htmlToShowCourses = htmlToShowCourses.replace(/#courseTitle#/g, element[0]);
+              htmlToShowCourses = htmlToShowCourses.replace(/#courseLink#/g, element[1]);
+              // htmlToShowCourses = htmlToShowCourses.replace("#teacherName#",
+              //     element[2]);
+
+              var multipleTeacher = element[2];
+
+              if(multipleTeacher!=null){
+                mTeacherArray = multipleTeacher.split(',');
+              }
+              else{
+                mTeacherArray = null;
+              }
+
+
+              if(mTeacherArray != null && mTeacherArray!= "" && mTeacherArray.length >1) {
+                htmlToShowMultipleTeacher = '';
+                $.each(mTeacherArray, function (index, elm) {
+                  if (mTeacherArray[index].trim() == element[11]) {
+                    htmlToShowMultipleTeacher = htmlToShowMultipleTeacher + "<span class='ns-card-teacher'>"+mTeacherArray[index]+",</span>";
+                    }
+                });
+                  $.each(mTeacherArray, function (index, elm) {
+                  if (mTeacherArray[index].trim() != element[11]) {
+                    htmlToShowMultipleTeacher = htmlToShowMultipleTeacher + "<span class='ns-card-teacher'>&nbsp;"+mTeacherArray[index]+"</span>";
+                  }
+
+                });
+                htmlToShowCourses = htmlToShowCourses.replace('#multipleTeachers#',htmlToShowMultipleTeacher);
+              }
+              else{
+                 htmlToShowCourses = htmlToShowCourses.replace("#multipleTeachers#",  "<span class='ns-card-teacher'>"+element[2]+"</span>");
+              }
+
+              htmlToShowCourses = htmlToShowCourses.replace("#teacherSlug#",
+                  element[3]);
+              if (element[4] == "Neostencil" || element[4] =="" || element[4] == null) {
+                htmlToShowCourses = htmlToShowCourses.replace("#instituteName#",
+                    "<i><span style='height: 17px;'></span></i>");
+              }
+              else {
+                htmlToShowCourses = htmlToShowCourses.replace("#instituteName#",
+                   " (<i><span>"+element[4]+"</span></i>)" );
+              }
+              htmlToShowCourses = htmlToShowCourses.replace("#instructorSlug#",
+                  element[5]);
+              htmlToShowCourses = htmlToShowCourses.replace("#courseStartDate#", element[6]);
+              htmlToShowCourses = htmlToShowCourses.replace("#noOfStudents#",
+                  element[7]);
+              if(element[8] != 0) {
+                htmlToShowCourses = htmlToShowCourses.replace("#Price#","<h3 class='price'><i class='fa fa-inr'></i>"+numberWithCommas(element[8]) + "</h3>");
+
+              }
+              else {
+                htmlToShowCourses = htmlToShowCourses.replace("#Price#", "<h3 class='price'><span class='free' style='cursor: text;'>Free</span></h3>");
+              }
+              if (element[9]== "" || element[9]== null  || element[9]=="OBJECT_NOT_FOUND: ") {
+                htmlToShowCourses = htmlToShowCourses.replace("#courseImage#",
+                    "https://lh3.googleusercontent.com/UQVP9x-aRbA1lrOehA7eqMiOsx4xe9aedMTZeVXyKQBQ-59_Sn2CAhJfXJJzmD3VsiRJErcZBUlHI8G9wH5308zSUCvR=w306-h190-s");
+              }
+              else {
+                htmlToShowCourses = htmlToShowCourses.replace("#courseImage#",
+                    (element[9] + '=w306-h190-s'));
+              }
+
+              var ratingHtml = '';
+              if (element[10] != 0) {
+                var j = element[10];
+
+                for (j; j > 0.5; j--) {
+                  ratingHtml = ratingHtml
+                      + '<i class=\"material-icons\">star_rate</i>';
+                }
+                if (j < 1 && j > 0) {
+                  ratingHtml = ratingHtml
+                      + "<i class=\"material-icons\">star_half</i>";
+                }
+                htmlToShowCourses = htmlToShowCourses.replace(
+                    "#courseRating#", ratingHtml);
+              }
+            }
+        );
+        $
+        .each(
+            response.teachers,
+            function (index, element) {
+              if (index >= 4) {
+                $('#loadMoreTeachers').show();
+              }
+              htmlToShowTeachers += searchItemsListTeachers;
+              htmlToShowTeachers = htmlToShowTeachers.replace("#displayPicture#",
+                  element[2]);
+              htmlToShowTeachers = htmlToShowTeachers.replace(/#teacherName#/g, element[0]);
+              htmlToShowTeachers = htmlToShowTeachers.replace(/#teacherUrl#/g, element[1]);
+              if (element[3] == "Neostencil" || element[3] =="" || element[3] == null){
+                htmlToShowTeachers = htmlToShowTeachers.replace("#instituteName#",
+                    "<p style='height: 10px;'></p>");
+              }
+              else {
+                htmlToShowTeachers = htmlToShowTeachers.replace("#instituteName#",
+                    element[3]);
+              }
+              htmlToShowTeachers = htmlToShowTeachers.replace("#instituteUrl#",
+                  element[4]);
+
+              var subjectList = [];
+              if (element[5] != null
+                  && element[5].length > 0) {
+                subjectList = element[5].split(',');
+              }
+              if (subjectList != null && subjectList.length > 0) {
+                var subjects = '';
+                $
+                .each(
+                    subjectList,
+                    function(i) {
+                      subjects = subjects
+                          + '<span class="mdl-chip"><span class="mdl-chip__text">'
+                          + subjectList[i]
+                          + '</span> </span>';
+
+                    });
+
+                htmlToShowTeachers = htmlToShowTeachers.replace("#subject#",
+                    subjects);
+              } else {
+                htmlToShowTeachers = htmlToShowTeachers
+                .replace("#subject#", "");
+              }
+
+            }
+        );
+
+        $
+        .each(
+            response.posts,
+            function (index, element) {
+              if (index >= 4) {
+                $('#loadMorePost').show();
+              }
+              htmlToShowPosts += searchItemsListPosts;
+              if (element[2]== "" || element[2]== null  || element[2]=="OBJECT_NOT_FOUND: "){
+                htmlToShowPosts = htmlToShowPosts.replace("#postImage#", "https://lh3.googleusercontent.com/UQVP9x-aRbA1lrOehA7eqMiOsx4xe9aedMTZeVXyKQBQ-59_Sn2CAhJfXJJzmD3VsiRJErcZBUlHI8G9wH5308zSUCvR=w306-h190-s");
+              }
+              else{
+                htmlToShowPosts = htmlToShowPosts.replace("#postImage#", element[2]+'=w306-h190-s');
+
+              }
+              htmlToShowPosts = htmlToShowPosts.replace("#postTitle#", element[1]);
+              htmlToShowPosts = htmlToShowPosts.replace("#postDescription#", element[3]);
+              if( element[4] == "" || element[4] == null) {
+
+                htmlToShowPosts = htmlToShowPosts.replace("#readTime#", "<span class='float-left'>Read Time: 8 minutes </span>");
+              }
+              else{
+                htmlToShowPosts = htmlToShowPosts.replace("#readTime#", "<span class='float-left'> Read Time: "+element[4]+" minutes</span>");
+              }
+              htmlToShowPosts = htmlToShowPosts.replace(/#postLink#/g, element[0]);
+              htmlToShowPosts = htmlToShowPosts.replace("#noOfViews#", element[5]);
+            }
+        );
+        if (response.courses == "" && response.teachers == ""  && response.posts == ""){
+          $('#resultPageFrame').replaceWith(noResultsFound);
+        }
+        else {
+          if (response.courses != "") {
+            $('.all-courses-section').replaceWith(htmlToShowCourses);
+          } else {
+            $('.all-courses-section').replaceWith(noSearchResultCourses);
+          }
+
+          if (response.teachers != "") {
+            $('.all-teachers-section').replaceWith(htmlToShowTeachers);
+          } else {
+            $('.all-teachers-section').replaceWith(noSearchResultTeachers);
+          }
+
+          if (response.posts != "") {
+            $('.all-posts-section').replaceWith(htmlToShowPosts);
+          } else {
+            $('.all-posts-section').replaceWith(noSearchResultPosts);
+          }
+        }
+
+
+        $(".showCourseCards:lt(4)").css("display", "block");
+        $("#loader-all-courses").hide();
+        var courseIteration = 2;
+        $("#loadMoreCourses").click(function () {
+          var coursesToDisplay = courseIteration * 4;
+          $(".showCourseCards:lt(" + coursesToDisplay + ")").css("display", "block");
+          courseIteration++;
+          if (length > coursesToDisplay){
+            $("#loadMoreCourses").show();
+          }
+          else{
+            $("#loadMoreCourses").hide();
+          }
+        });
+
+        $(".showTeacherCards:lt(4)").css("display", "block");
+        $("#loader-all-teachers").hide();
+        var teacherIteration = 2;
+        $("#loadMoreTeachers").click(function () {
+          var teachersToDisplay = teacherIteration * 4;
+          $(".showTeacherCards:lt(" + teachersToDisplay + ")").css("display", "block");
+          teacherIteration++;
+          if (length > teachersToDisplay){
+            $("#loadMoreTeachers").show();
+          }
+          else{
+            $("#loadMoreTeachers").hide();
+          }
+        });
+
+        $(".showPostCards:lt(4)").css("display", "block");
+        $("#loader-all-posts").hide();
+        var postIteration = 2;
+        $("#loadMorePost").click(function () {
+          var postsToDisplay = postIteration * 4;
+          $(".showPostCards:lt(" + postsToDisplay + ")").css("display", "block");
+          postIteration++;
+          if (length > postsToDisplay){
+            $("#loadMorePost").show();
+          }
+          else{
+            $("#loadMorePost").hide();
+          }
+        });
+      },
+
+      error: function (response) {
+        alert('Click OK or Press Enter');      }
+    });
+  }
+
+</script>
+</body>
+</html>

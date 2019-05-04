@@ -1,0 +1,3117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+
+    <meta property="og:title"
+          content="NEET Coaching Online, Live | NeoStencil"/>
+    <meta name="description"
+          content="NEET Exam - Prepare NEET Entrance exam with Kota's Top Institute LIVE Online. Also know more about NEET Exam - Pattern, Syllabus, Exam Dates, Preparation Tips and more.">
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    <title>NEET Coaching Online, Live | NeoStencil</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <link rel="stylesheet" media="screen"
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/home.css')}}"/>
+
+    <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.css"
+            rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" media="screen"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+    <link rel="stylesheet" media="screen"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+    <link rel="stylesheet" media="screen"
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+    <link rel="canonical" href="https://neostencil.com"/>
+    <style>
+        .testimonials {
+            top: 0 !important;
+        }
+
+        .testimonials-name-slick {
+            text-align: left !important;
+        }
+
+        .testimonial-image {
+            height: 70px;
+            border: 1px solid #ddd;
+        }
+
+        #testimonials .mdl-card__supporting-text {
+            height: 164px !important;
+        }
+
+        #testimonials .mdl-card__supporting-text {
+            text-align: left;
+        }
+
+        .testimonials .slick-dots li.slick-active button:before, .testimonials .slick-dots li button::before {
+            height: 0 !important;
+        }
+
+        .testimonials .slick-dots li {
+            margin: 0 8px !important;
+        }
+
+        /*.mdl-layout__header.is-casting-shadow {*/
+      /*background: #fff !important;*/
+    /*}*/
+
+    /*.swiper-button-prev, .swiper-button-next {*/
+      /*background-image: none;*/
+    /*}*/
+
+    /*.swiper-slide {*/
+      /*text-align: center;*/
+      /*font-size: 18px;*/
+      /*display: -webkit-box;*/
+      /*display: -ms-flexbox;*/
+      /*display: -webkit-flex;*/
+      /*display: flex;*/
+      /*-webkit-box-pack: center;*/
+      /*-ms-flex-pack: center;*/
+      /*-webkit-justify-content: center;*/
+      /*justify-content: center;*/
+      /*-webkit-box-align: center;*/
+      /*-ms-flex-align: center;*/
+      /*-webkit-align-items: center;*/
+      /*align-items: center;*/
+    /*}*/
+
+    /*.course-rating i {*/
+      /*float: left;*/
+    /*}*/
+
+    /*!* @media screen and (max-width: 1024px) {*/
+        /*.user-icon-mobile {*/
+            /*right: 72px !important;*/
+            /*position: absolute !important;*/
+        /*}*/
+        /*form.search-mobile {*/
+            /*display: none;*/
+        /*}*/
+    /*} *!*/
+    /*.main-home-page-banner-image-small {*/
+      /*display: none;*/
+    /*}*/
+
+    /*.input-call-me {*/
+      /*background: #fff;*/
+      /*padding: 0 16px 0 56px;*/
+      /*height: 56px;*/
+      /*color: #000;*/
+      /*resize: none;*/
+      /*display: block;*/
+      /*width: calc(100% - 72px);*/
+      /*max-width: 400px;*/
+      /*outline: 0;*/
+      /*font-size: 18px;*/
+      /*margin: 24px 0 0 0;*/
+      /*border-radius: 4px;*/
+      /*box-shadow: 0 8px 12px 0 #ff8d34, 0 0 12px 0 rgba(0, 0, 0, 0.12);*/
+      /*border: none;*/
+    /*}*/
+
+    /*.video-play-button {*/
+      /*z-index: 10;*/
+      /*transform: translateX(0%) translateY(0%);*/
+      /*box-sizing: content-box;*/
+      /*display: block;*/
+      /*width: 32px;*/
+      /*height: 44px;*/
+      /*!* background: #fa183d; *!*/
+      /*border-radius: 50%;*/
+      /*padding: 18px 20px 18px 28px;*/
+    /*}*/
+
+    /*.video-play-button:before {*/
+      /*content: "";*/
+      /*position: absolute;*/
+      /*z-index: 0;*/
+      /*left: 50%;*/
+      /*top: 50%;*/
+      /*transform: translateX(-50%) translateY(-50%);*/
+      /*display: block;*/
+      /*width: 72px;*/
+      /*height: 72px;*/
+      /*background: #ff6600;*/
+      /*border-radius: 50%;*/
+      /*!* animation: pulse-border 1500ms ease-out infinite;*!*/
+    /*}*/
+
+    /*.video-play-button:after {*/
+      /*content: "";*/
+      /*position: absolute;*/
+      /*z-index: 1;*/
+      /*left: 50%;*/
+      /*top: 50%;*/
+      /*transform: translateX(-50%) translateY(-50%);*/
+      /*display: block;*/
+      /*width: 56px;*/
+      /*height: 56px;*/
+      /*background: #ff6600;*/
+      /*border-radius: 50%;*/
+      /*transition: all 200ms;*/
+    /*}*/
+
+    /*.video-play-button:hover:after {*/
+      /*background-color: darken(#ff6600, 10%);*/
+    /*}*/
+
+    /*.video-play-button img {*/
+      /*position: relative;*/
+      /*z-index: 3;*/
+      /*max-width: 100%;*/
+      /*width: auto;*/
+      /*height: auto;*/
+    /*}*/
+
+    /*.video-play-button span {*/
+      /*display: block;*/
+      /*position: relative;*/
+      /*z-index: 3;*/
+      /*width: 0;*/
+      /*height: 0;*/
+      /*border-left: 18px solid #fff;*/
+      /*border-top: 12px solid transparent;*/
+      /*border-bottom: 12px solid transparent;*/
+      /*margin: 10px 6px;*/
+    /*}*/
+
+    /*@keyframes pulse-border {*/
+      /*0% {*/
+        /*transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);*/
+        /*opacity: 1;*/
+      /*}*/
+      /*100% {*/
+        /*transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);*/
+        /*opacity: 0;*/
+      /*}*/
+    /*}*/
+
+    /*.section-play-video-pulse label {*/
+      /*font-family: arimo;*/
+      /*font-size: 20px;*/
+      /*font-weight: 700;*/
+      /*color: #555;*/
+      /*cursor: pointer;*/
+    /*}*/
+
+    /*.section-play-video-pulse p {*/
+      /*color: #555;*/
+      /*font-size: 18px;*/
+      /*font-family: arimo;*/
+      /*margin: 16px 0 4px 0;*/
+    /*}*/
+
+    /*.section-play-video-pulse {*/
+      /*margin: 8px 0 40px 0;*/
+    /*}*/
+
+    /*.mat-slogan {*/
+      /*font-size: 32px;*/
+      /*font-weight: 600;*/
+      /*color: #555;*/
+      /*margin: 0;*/
+    /*}*/
+
+    /*.section-call-me > div {*/
+      /*width: 100%;*/
+      /*max-width: 434px;*/
+    /*}*/
+
+    /*.btn-call-me {*/
+      /*float: right;*/
+      /*margin: -49px 6px 0 0;*/
+      /*border-radius: 27px;*/
+      /*background-color: #615cdf !important;*/
+      /*height: 40px;*/
+      /*line-height: 40px;*/
+      /*font-size: 13px;*/
+      /*font-weight: 600;*/
+    /*}*/
+
+    /*#examSection .exam-details {*/
+      /*padding: 0 16px 16px 16px;*/
+      /*font-family: arimo;*/
+    /*}*/
+
+    /*#examSection .view-courses {*/
+      /*color: #02b3e4;*/
+      /*font-size: 14px;*/
+      /*font-weight: 600;*/
+      /*margin: 56px 0 8px 0px;*/
+      /*display: block;*/
+      /*font-family: arimo;*/
+      /*cursor: pointer;*/
+      /*transition: 200ms;*/
+    /*}*/
+
+    /*#examSection .view-courses:hover {*/
+      /*color: #028bb1;*/
+    /*}*/
+
+    /*#examSection .mdl-cell {*/
+      /*padding: 16px 8px;*/
+    /*}*/
+
+    /*.counter-code {*/
+      /*margin: -57px 0 0 1px;*/
+      /*display: block;*/
+      /*width: 32px;*/
+      /*height: 56px;*/
+      /*line-height: 56px;*/
+      /*padding: 0 8px;*/
+      /*background: #d4e0e9;*/
+      /*border-radius: 4px 0px 0px 4px;*/
+      /*font-weight: 600;*/
+      /*font-size: 18px;*/
+    /*}*/
+
+    /*#getNumber #mobile-error {*/
+      /*position: absolute;*/
+    /*}*/
+
+    /*.call-shortly {*/
+      /*position: absolute;*/
+      /*color: green;*/
+    /*}*/
+
+    /*#loader-getNumber {*/
+      /*float: right;*/
+      /*margin: -44px 20px 0 0;*/
+      /*border-radius: 27px;*/
+      /*height: 40px;*/
+      /*line-height: 40px;*/
+      /*font-size: 16px;*/
+      /*font-weight: 600;*/
+    /*}*/
+
+    /*#getNumberCheck {*/
+      /*float: right;*/
+      /*margin: -44px 12px 0 0;*/
+      /*border-radius: 27px;*/
+      /*height: 32px;*/
+      /*line-height: 40px;*/
+      /*font-size: 16px;*/
+      /*font-weight: 600;*/
+      /*background: #00e48d;*/
+      /*border-radius: 50%;*/
+      /*color: #fff;*/
+      /*width: 32px;*/
+    /*}*/
+
+    /*#getNumberCheck i {*/
+      /*text-align: center;*/
+      /*display: block;*/
+      /*line-height: 32px;*/
+    /*}*/
+
+    /*.heading-jee {*/
+      /*font-size: 32px;*/
+      /*font-weight: 500;*/
+      /*font-style: normal;*/
+      /*font-stretch: normal;*/
+      /*line-height: 1.44;*/
+      /*letter-spacing: normal;*/
+      /*color: #000000;*/
+      /*font-family: Futura, "Trebuchet MS", Arial, sans-serif;*/
+    /*}*/
+
+    /*.paragraph-jee {*/
+      /*margin: 0 0 16px;*/
+      /*font-family: Montserrat;*/
+      /*font-size: 18px;*/
+      /*font-weight: normal;*/
+      /*font-style: normal;*/
+      /*font-stretch: normal;*/
+      /*line-height: 1.67;*/
+      /*letter-spacing: normal;*/
+      /*color: #666666;*/
+    /*}*/
+
+    /*.underline-jee {*/
+      /*border: solid 3px #e5ebef;*/
+      /*width: 71px;*/
+      /*margin: 24px 0 40px 0;*/
+    /*}*/
+
+    /*.section-jee {*/
+      /*padding: 8px 0;*/
+    /*}*/
+
+    /*.section-top-jee {*/
+      /*position: relative;*/
+      /*height: auto;*/
+      /*width: 100%;*/
+      /*background: #fff;*/
+      /*background-size: cover;*/
+      /*background: #ffffff url(https://lh3.googleusercontent.com/7Dmo824rp8zvrDnv-CHDW70GlLn_eFmXw5H5jsPnKJIs77h2yCFBVyZEEMsi20GchUBI-FAvlX6HShz-gGWCnMbPEg) no-repeat center;*/
+      /*background-size: cover;*/
+      /*padding: 128px 0 80px 0 !important;*/
+    /*}*/
+
+    /*.mat-slogan {*/
+      /*font-size: 36px;*/
+      /*font-weight: 600;*/
+      /*font-style: normal;*/
+      /*font-stretch: normal;*/
+      /*line-height: 1.44;*/
+      /*letter-spacing: normal;*/
+      /*color: #ffffff;*/
+      /*font-family: Futura, "Trebuchet MS", Arial, sans-serif;*/
+    /*}*/
+
+    /*.section-play-video-pulse p {*/
+      /*color: #fff;*/
+    /*}*/
+
+    /*.section-play-video-pulse label {*/
+      /*color: #fff;*/
+    /*}*/
+
+    /*.video-play-button:before {*/
+      /*background: #ffffff;*/
+      /*animation: pulse-border 1500ms ease-out infinite;*/
+    /*}*/
+
+    /*.video-play-button:after {*/
+      /*background: #ffffff;*/
+    /*}*/
+
+    /*.video-play-button span {*/
+      /*border-left: 18px solid #ff842a;*/
+    /*}*/
+
+    /*.counter-code-jee {*/
+      /*margin: -56px 0 0 1px;*/
+      /*display: block;*/
+      /*width: 32px;*/
+      /*height: 56px;*/
+      /*line-height: 56px;*/
+      /*padding: 0 8px;*/
+      /*background: #ffffff;*/
+      /*border-radius: 4px 0px 0px 4px;*/
+      /*font-weight: 600;*/
+      /*font-size: 18px;*/
+      /*border-right: 1px solid #ddd;*/
+    /*}*/
+
+    /*.item:hover .item-overlay.bottom {*/
+      /*bottom: 0;*/
+    /*}*/
+
+    /*.item-overlay.bottom div {*/
+      /*padding: 32px 16px;*/
+    /*}*/
+
+    /*.item:hover .item-overlay.left {*/
+      /*left: 0;*/
+    /*}*/
+
+    /*.item-overlay.jee11 {*/
+      /*font-size: 16px;*/
+      /*font-weight: 600;*/
+      /*font-family: Futura, "Trebuchet MS", Arial, sans-serif;*/
+      /*line-height: 24px;*/
+      /*position: absolute;*/
+      /*top: 0;*/
+      /*right: 0;*/
+      /*bottom: 0;*/
+      /*left: 0;*/
+      /*background: #4285f4;*/
+      /*opacity: 1;*/
+      /*color: #fff;*/
+      /*overflow: hidden;*/
+      /*text-align: center;*/
+      /*-moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;*/
+      /*-webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;*/
+      /*transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;*/
+    /*}*/
+
+    /*.item-overlay.jee12 {*/
+      /*font-size: 16px;*/
+      /*font-weight: 600;*/
+      /*font-family: Futura, "Trebuchet MS", Arial, sans-serif;*/
+      /*line-height: 24px;*/
+      /*position: absolute;*/
+      /*top: 0;*/
+      /*right: 0;*/
+      /*bottom: 0;*/
+      /*left: 0;*/
+      /*background: #e3ad17;*/
+      /*opacity: 1;*/
+      /*color: #fff;*/
+      /*overflow: hidden;*/
+      /*text-align: center;*/
+      /*-moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;*/
+      /*-webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;*/
+      /*transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;*/
+    /*}*/
+
+    /*.item-overlay.jee13 {*/
+      /*font-size: 16px;*/
+      /*font-weight: 600;*/
+      /*font-family: Futura, "Trebuchet MS", Arial, sans-serif;*/
+      /*line-height: 24px;*/
+      /*position: absolute;*/
+      /*top: 0;*/
+      /*right: 0;*/
+      /*bottom: 0;*/
+      /*left: 0;*/
+      /*background: #0f9d58;*/
+      /*opacity: 1;*/
+      /*color: #fff;*/
+      /*overflow: hidden;*/
+      /*text-align: center;*/
+      /*-moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;*/
+      /*-webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;*/
+      /*transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;*/
+    /*}*/
+
+    /*.view-details-jee {*/
+      /*display: block;*/
+      /*border: 2px solid #fff;*/
+      /*width: 175px;*/
+      /*height: 40px;*/
+      /*line-height: 40px;*/
+      /*margin: 24px auto;*/
+      /*border-radius: 4px;*/
+      /*transition: 200ms;*/
+      /*cursor: pointer;*/
+    /*}*/
+
+    /*.item-overlay.bottom {*/
+      /*bottom: 100%;*/
+    /*}*/
+
+    /*.testimonials {*/
+      /*background: none !important;*/
+    /*}*/
+
+    /*.testimonials .slick-dots li.slick-active button:before {*/
+      /*color: #acacac;*/
+    /*}*/
+
+    /*.testimonials .slick-dots li button::before {*/
+      /*color: #888;*/
+    /*}*/
+
+    /*.mat-landing-bar {*/
+      /*padding: 40px 0 24px 0;*/
+    /*}*/
+
+    /*.mdl-layout__content {*/
+      /*margin-top: 8px !important;*/
+    /*}*/
+
+    /*.search-container input[type=text] {*/
+      /*width: 182px;*/
+    /*}*/
+
+    /*.paragraph-jee-seo p, .paragraph-jee-seo li {*/
+      /*margin: 0 0 16px;*/
+      /*font-family: Futura, "Trebuchet MS", Arial, sans-serif;*/
+      /*font-size: 16px;*/
+      /*font-weight: normal;*/
+      /*font-style: normal;*/
+      /*font-stretch: normal;*/
+      /*line-height: 24px;*/
+      /*letter-spacing: normal;*/
+      /*color: #666666;*/
+    /*}*/
+
+    /*.seo-links {*/
+      /*list-style: none;*/
+      /*margin-top: 32px;*/
+    /*}*/
+
+    /*.seo-links .active-seo {*/
+      /*border-left: 4px solid #ff6600;*/
+      /*padding: 0 4px;*/
+    /*}*/
+
+    /*.seo-links a {*/
+      /*margin: 0 0 16px;*/
+      /*font-family: Montserrat;*/
+      /*font-size: 18px;*/
+      /*font-weight: 500;*/
+      /*font-style: normal;*/
+      /*font-stretch: normal;*/
+      /*line-height: 32px;*/
+      /*letter-spacing: normal;*/
+      /*color: #000000;*/
+    /*}*/
+
+    /*.seo-links li {*/
+      /*margin: 16px 0;*/
+      /*border-left: 4px solid #ddd;*/
+      /*padding: 0 4px;*/
+    /*}*/
+
+    /*#section-seo td {*/
+      /*border: 1px solid #ddd;*/
+      /*padding: 8px;*/
+    /*}*/
+
+    /*#section-seo table {*/
+      /*border-collapse: collapse;*/
+    /*}*/
+
+    /*.make-table-responsive {*/
+      /*overflow-x: auto;*/
+      /*margin-bottom: 16px;*/
+    /*}*/
+
+    /*#section-courses .demo-card-square {*/
+      /*width: 100%;*/
+    /*}*/
+
+   /*.hs-fieldtype-text.field.hs-form-field {*/
+    /*width: calc(100%) !important;*/
+    /*float: left !important;*/
+/*}*/
+  /*@media screen and (max-width: 1366px){*/
+/*.hbspt-form input, .hbspt-form select {*/
+    /*max-width: 100% !important;*/
+/*}*/
+/*}*/
+
+    /*@media screen and (min-width: 768px) {*/
+      /*.landing-darken {*/
+        /*margin-top: 8px;*/
+      /*}*/
+
+      /*.accordian-active ~ .landing-darken {*/
+        /*margin-top: 48px;*/
+      /*}*/
+
+      /*.mat-login {*/
+        /*width: auto;*/
+      /*}*/
+
+      /*.is-casting-shadow .mega-menu nav > ul > li > a {*/
+        /*color: #000000 !important;*/
+      /*}*/
+
+      /*.mdl-layout__header--transparent.mdl-layout__header--transparent {*/
+        /*background: transparent !important;*/
+      /*}*/
+
+      /*.mdl-layout__header--transparent.mdl-layout__header--transparent {*/
+        /*border-bottom: none;*/
+      /*}*/
+
+      /*.mdl-layout__header.is-casting-shadow {*/
+        /*background: #fff !important;*/
+      /*}*/
+
+      /*.mega-menu nav .mdl-navigation__link {*/
+        /*font-size: 14px !important;*/
+        /*font-weight: 700 !important;*/
+        /*color: #fff;*/
+      /*}*/
+
+      /*a.mat-title.mdl-layout-title {*/
+        /*background: #fff;*/
+        /*padding: 0 8px;*/
+      /*}*/
+
+      /*.mat-login {*/
+        /*border: solid 1px #ffffff !important;*/
+        /*background: transparent !important;*/
+        /*color: #ffffff !important;*/
+        /*font-weight: 700;*/
+      /*}*/
+
+      /*.mat-signup {*/
+        /*color: rgb(0, 0, 0) !important;*/
+        /*background: #ffffff !important;*/
+        /*font-weight: 500;*/
+      /*}*/
+
+      /*.search-container {*/
+        /*visibility: hidden;*/
+        /*pointer-events: none;*/
+      /*}*/
+
+      /*.mega-menu nav li:hover .mdl-navigation__link {*/
+        /*color: #fff !important;*/
+      /*}*/
+
+      /*.section-play-video-pulse {*/
+        /*margin-left: -16px;*/
+      /*}*/
+
+      /*.is-casting-shadow .mega-menu nav li:hover .mdl-navigation__link {*/
+        /*color: #f26722 !important;*/
+      /*}*/
+    /*}*/
+
+    /*@media screen and (max-width: 767px) {*/
+      /*.section-jee img {*/
+        /*width: 100%;*/
+      /*}*/
+
+      /*.demo-video-big-screen {*/
+        /*display: none;*/
+      /*}*/
+
+      /*#demoVideoDialog {*/
+        /*position: fixed;*/
+        /*margin-top: 56px;*/
+      /*}*/
+
+      /*.input-call-me {*/
+        /*font-size: 12px;*/
+      /*}*/
+
+      /*.video-play-button {*/
+        /*margin: 0 auto;*/
+      /*}*/
+
+      /*.section-play-video-pulse p {*/
+        /*text-align: center;*/
+      /*}*/
+
+      /*.section-play-video-pulse label {*/
+        /*text-align: center;*/
+        /*display: block;*/
+      /*}*/
+
+      /*.main-home-page-banner-image-small {*/
+        /*display: block;*/
+      /*}*/
+
+      /*.main-home-page-banner-image-big {*/
+        /*display: none;*/
+      /*}*/
+
+      /*#startLearningHubSpotDialog img {*/
+        /*width: inherit;*/
+        /*margin-left: 0px;*/
+      /*}*/
+
+    /*}*/
+    /*#startLearningHubSpotDialog, #demoPageDialog{*/
+      /*position: fixed;*/
+    /*}*/
+
+    /*.hbspt-form {*/
+      /*padding: 24px 32px 80px 32px;*/
+      /*background: #fff;*/
+      /*border-radius: 6px;*/
+      /*!*box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, .2);*!*/
+    /*}*/
+
+    /*.hbspt-form .hs-button {*/
+      /*background-color: #ff6000 !important;*/
+      /*border: none;*/
+      /*height: 48px;*/
+      /*width: calc(100%);*/
+      /*color: #fff;*/
+      /*float: left;*/
+      /*border-radius: 4px;*/
+      /*font-size: 16px;*/
+      /*font-weight: 500;*/
+      /*box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);*/
+      /*max-width: 538px;*/
+    /*}*/
+
+    /*.hbspt-form input {*/
+      /*height: 40px;*/
+      /*padding: 0 8px;*/
+      /*line-height: 40px;*/
+      /*width: calc(100% - 18px);*/
+      /*!*background: #eee;*!*/
+      /*background-color: #FFFFFF;*/
+      /*margin: 8px 0;*/
+      /*border: 1px solid #ddd;*/
+      /*max-width: 263px;*/
+    /*}*/
+
+    /*.hbspt-form select {*/
+      /*height: 40px;*/
+      /*line-height: 40px;*/
+      /*width: 100%;*/
+      /*!*background: #eee;*!*/
+      /*background-color: #FFFFFF;*/
+      /*margin: 8px 0;*/
+      /*border: 1px solid #ddd;*/
+      /*max-width: 263px;*/
+    /*}*/
+
+
+
+    /*!*   #startLearningHubSpotDialog{*/
+           /*width: fit-content;*/
+           /*width: -moz-fit-content;*/
+       /*}*!*/
+    /*#startLearningHubSpotDialog img, #demoPageDialog img {*/
+      /*width: 100%;*/
+    /*}*/
+
+    /*.mat-landing-bar img {*/
+      /*margin: 0;*/
+    /*}*/
+
+    /*.slick-slide img {*/
+      /*display: block;*/
+      /*height: 70px;*/
+    /*}*/
+
+    /*.mega-menu .change-navigation-items {*/
+      /*min-height: 200px;*/
+    /*}*/
+
+
+
+      /*!*.hbspt-form .hs-button {*!*/
+        /*!*max-width: 337px !important;*!*/
+      /*!*}*!*/
+    }
+
+    /*@media screen and (max-width: 822px) {*/
+      /*#startLearningHubSpotDialog, #demoPageDialog {*/
+        /*width: 70%;*/
+      /*}*/
+
+      /*#startLearningHubSpotDialog img, #demoPageDialog img {*/
+        /*display: none !important;*/
+      /*}*/
+    /*}*/
+
+    /*@media screen and (max-width: 672px) {*/
+      /*#startLearningHubSpotDialog .mdl-dialog__content {*/
+        /*width: auto !important;*/
+      /*}*/
+      /*.dialogHeadings {*/
+        /*color: #333333 !important;*/
+        /*font-size: 20px !important;*/
+        /*font-weight: 900 !important;*/
+        /*font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;*/
+      /*}*/
+
+      /*.hbspt-form input, .hbspt-form select {*/
+        /*max-width: 100% !important;*/
+        /*width: -webkit-fill-available;*/
+        /*width: -moz-available;*/
+      /*}*/
+
+
+
+      /*.hs-fieldtype-text.field.hs-form-field {*/
+        /*width: 100% !important;*/
+        /*float: none !important;*/
+      /*}*/
+
+
+      /*.hbspt-form input.hs-button.primary.large{*/
+        /*width: -webkit-fill-available !important;*/
+        /*width: -moz-available !important;*/
+      /*}*/
+
+
+    /*}*/
+    /*@media screen and (max-width: 1024px) and (min-width: 360px){*/
+      /*#demoPageDialog img, #startLearningHubSpotDialog img {*/
+        /*width: inherit !important;*/
+        /*display: none !important;*/
+      /*}*/
+    /*}*/
+
+    /*@media screen and (max-width: 672px) and (min-width: 360px){*/
+      /*#demoPageDialog .mdl-cell--12-col-phone{*/
+        /*overflow: scroll;*/
+        /*max-height: 400px;*/
+      /*}*/
+      /*#startLearningHubSpotDialog .mdl-cell--12-col-phone{*/
+        /*overflow: scroll;*/
+        /*max-height: 400px;*/
+      /*}*/
+    /*}*/
+
+
+
+
+
+
+
+
+.testimonial-name-and-image{
+
+    background: #f8f8f8;
+}
+
+.testimonial-image-parent {
+    padding: 0;
+    text-align: center;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+.testimonial-image-jee {
+    border-radius: 50%;
+    width: 50% !important;
+    /* float: right; */
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+
+.underline-jee-u{
+    border: solid 3px #e5ebef;
+    width: 71px;
+    margin: 24px 0 20px 26px;
+}
+
+element.style {
+}
+.testimonial-img-content-teacher {
+    width: 230px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    text-align: left;
+    color: #666666;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    margin: 0 auto;
+    text-align: center;
+}
+.heading-jee-t {
+    font-size: 32px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.44;
+    letter-spacing: normal;
+    color: #000000;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+
+
+     .testimonials-name-con {
+    font-family: open sans;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    text-align: left;
+    color: #666666;
+    font-family: Montserrat;
+}
+.testimonial-name-and-image-t {
+    padding: 0px 12px;
+}
+..testimonial-name-and-image{
+
+    background: #f8f8f8;
+}
+
+.testimonial-image-parent {
+    padding: 0;
+    text-align: center;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+.testimonial-image-jee {
+    border-radius: 50%;
+    width: 50% !important;
+    /* float: right; */
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+.testimonial-img-content {
+    clear: both;
+    text-align: center !important;
+    color: #000000;
+    font-size: 22px;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    margin: 8px 0 4px 0;
+        line-height: 2;
+}
+
+element.style {
+}
+.heading-jee-t {
+    padding: 0 0 0 24px;
+    color: #000000;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    font-size: 32px;
+}
+
+
+
+    .mdl-layout__header.is-casting-shadow {
+        background: #fff !important;
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        background-image: none;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .course-rating i {
+        float: left;
+    }
+
+
+.testimonials-bg-t {
+    background-size: cover !important;
+    padding: 80px 0 40px 0 !important;
+    min-height: 400px;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+
+    /* @media screen and (max-width: 1024px) {
+        .user-icon-mobile {
+            right: 72px !important;
+            position: absolute !important;
+        }
+        form.search-mobile {
+            display: none;
+        }
+    } */
+    .main-home-page-banner-image-small {
+        display: none;
+    }
+
+    .input-call-me {
+        background: #fff;
+        padding: 0 16px 0 56px;
+        height: 56px;
+        color: #000;
+        resize: none;
+        display: block;
+        width: calc(100% - 72px);
+        max-width: 400px;
+        outline: 0;
+        font-size: 18px;
+        margin: 24px 0 0 0;
+        border-radius: 4px;
+        box-shadow: 0 8px 12px 0 #ff8d34, 0 0 12px 0 rgba(0, 0, 0, 0.12);
+        border: none;
+    }
+
+    .video-play-button {
+        z-index: 10;
+        transform: translateX(0%) translateY(0%);
+        box-sizing: content-box;
+        display: block;
+        width: 32px;
+        height: 44px;
+        /* background: #fa183d; */
+        border-radius: 50%;
+        padding: 18px 20px 18px 28px;
+    }
+
+    .video-play-button:before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        display: block;
+        width: 72px;
+        height: 72px;
+        background: #ff6600;
+        border-radius: 50%;
+        /* animation: pulse-border 1500ms ease-out infinite;*/
+    }
+
+    .video-play-button:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        display: block;
+        width: 56px;
+        height: 56px;
+        background: #ff6600;
+        border-radius: 50%;
+        transition: all 200ms;
+    }
+
+    .video-play-button:hover:after {
+        background-color: darken(#ff6600, 10%);
+    }
+
+    .video-play-button img {
+        position: relative;
+        z-index: 3;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+    }
+
+    .video-play-button span {
+        display: block;
+        position: relative;
+        z-index: 3;
+        width: 0;
+        height: 0;
+        border-left: 18px solid #fff;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        margin: 10px 6px;
+    }
+
+    @keyframes pulse-border {
+        0% {
+            transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+            opacity: 0;
+        }
+    }
+
+    .section-play-video-pulse label {
+        font-family: arimo;
+        font-size: 20px;
+        font-weight: 700;
+        color: #555;
+        cursor: pointer;
+    }
+
+    .section-play-video-pulse p {
+        color: #555;
+        font-size: 18px;
+        font-family: arimo;
+        margin: 16px 0 4px 0;
+    }
+
+    .section-play-video-pulse {
+        margin: 8px 0 40px 0;
+    }
+
+    .mat-slogan {
+        font-size: 32px;
+        font-weight: 600;
+        color: #555;
+        margin: 0;
+    }
+
+    .section-call-me > div {
+        width: 100%;
+        max-width: 434px;
+    }
+
+    .btn-call-me {
+        float: right;
+        margin: -49px 6px 0 0;
+        border-radius: 27px;
+        background-color: #615cdf !important;
+        height: 40px;
+        line-height: 40px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    #examSection .exam-details {
+        padding: 0 16px 16px 16px;
+        font-family: arimo;
+    }
+
+    #examSection .view-courses {
+        color: #02b3e4;
+        font-size: 14px;
+        font-weight: 600;
+        margin: 56px 0 8px 0px;
+        display: block;
+        font-family: arimo;
+        cursor: pointer;
+        transition: 200ms;
+    }
+
+    #examSection .view-courses:hover {
+        color: #028bb1;
+    }
+
+    #examSection .mdl-cell {
+        padding: 16px 8px;
+    }
+
+    .counter-code {
+        margin: -57px 0 0 1px;
+        display: block;
+        width: 32px;
+        height: 56px;
+        line-height: 56px;
+        padding: 0 8px;
+        background: #d4e0e9;
+        border-radius: 4px 0px 0px 4px;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    #getNumber #mobile-error {
+        position: absolute;
+    }
+
+    .call-shortly {
+        position: absolute;
+        color: green;
+    }
+
+    #loader-getNumber {
+        float: right;
+        margin: -44px 20px 0 0;
+        border-radius: 27px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    #getNumberCheck {
+        float: right;
+        margin: -44px 12px 0 0;
+        border-radius: 27px;
+        height: 32px;
+        line-height: 40px;
+        font-size: 16px;
+        font-weight: 600;
+        background: #00e48d;
+        border-radius: 50%;
+        color: #fff;
+        width: 32px;
+    }
+
+    #getNumberCheck i {
+        text-align: center;
+        display: block;
+        line-height: 32px;
+    }
+
+    .heading-jee {
+        font-size: 32px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.44;
+        letter-spacing: normal;
+        color: #000000;
+        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    }
+
+    .paragraph-jee {
+        margin: 0 0 16px;
+        font-family: Montserrat;
+        font-size: 18px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.67;
+        letter-spacing: normal;
+        color: #666666;
+    }
+
+    .underline-jee {
+        border: solid 3px #e5ebef;
+        width: 71px;
+        margin: 24px 0 40px 0;
+    }
+
+    .section-jee {
+        padding: 40px 0;
+    }
+
+    .section-top-jee {
+        position: relative;
+        height: auto;
+        width: 100%;
+        background: #fff;
+        background-size: cover;
+        background: #ffffff url(https://lh3.googleusercontent.com/7Dmo824rp8zvrDnv-CHDW70GlLn_eFmXw5H5jsPnKJIs77h2yCFBVyZEEMsi20GchUBI-FAvlX6HShz-gGWCnMbPEg) no-repeat center;
+        background-size: cover;
+        padding: 170px 0 80px 0 !important;
+    }
+
+    .mat-slogan {
+        font-size: 36px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.44;
+        letter-spacing: normal;
+        color: #ffffff;
+        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    }
+
+    .section-play-video-pulse p {
+        color: #fff;
+    }
+
+    .section-play-video-pulse label {
+        color: #fff;
+    }
+
+    .video-play-button:before {
+        background: #ffffff;
+        animation: pulse-border 1500ms ease-out infinite;
+    }
+
+    .video-play-button:after {
+        background: #ffffff;
+    }
+
+    .video-play-button span {
+        border-left: 18px solid #ff842a;
+    }
+
+    .counter-code-jee {
+        margin: -56px 0 0 1px;
+        display: block;
+        width: 32px;
+        height: 56px;
+        line-height: 56px;
+        padding: 0 8px;
+        background: #ffffff;
+        border-radius: 4px 0px 0px 4px;
+        font-weight: 600;
+        font-size: 18px;
+        border-right: 1px solid #ddd;
+    }
+
+    .item:hover .item-overlay.bottom {
+        bottom: 0;
+    }
+
+    .item-overlay.bottom div {
+        padding: 32px 16px;
+    }
+
+    .item:hover .item-overlay.left {
+        left: 0;
+    }
+
+    .item-overlay.jee11 {
+        font-size: 16px;
+        font-weight: 600;
+        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        line-height: 24px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: #4285f4;
+        opacity: 1;
+        color: #fff;
+        overflow: hidden;
+        text-align: center;
+        -moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        -webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+    }
+
+    .item-overlay.jee12 {
+        font-size: 16px;
+        font-weight: 600;
+        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        line-height: 24px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: #e3ad17;
+        opacity: 1;
+        color: #fff;
+        overflow: hidden;
+        text-align: center;
+        -moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        -webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+    }
+
+    .item-overlay.jee13 {
+        font-size: 16px;
+        font-weight: 600;
+        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        line-height: 24px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: #0f9d58;
+        opacity: 1;
+        color: #fff;
+        overflow: hidden;
+        text-align: center;
+        -moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        -webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+        transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s;
+    }
+
+    .view-details-jee {
+        display: block;
+        border: 2px solid #fff;
+        width: 175px;
+        height: 40px;
+        line-height: 40px;
+        margin: 24px auto;
+        border-radius: 4px;
+        transition: 200ms;
+        cursor: pointer;
+    }
+
+    .item-overlay.bottom {
+        bottom: 100%;
+    }
+
+    .testimonials {
+        background: none !important;
+    }
+
+    .testimonials .slick-dots li.slick-active button:before {
+        color: #acacac;
+    }
+
+    .testimonials .slick-dots li button::before {
+        color: #888;
+    }
+
+    .mat-landing-bar {
+        padding: 40px 0 24px 0;
+    }
+
+    .mdl-layout__content {
+        margin-top: 8px !important;
+    }
+
+    .search-container input[type=text] {
+        width: 182px;
+    }
+
+    .paragraph-jee-seo p, .paragraph-jee-seo li {
+        margin: 0 0 16px;
+        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        font-size: 16px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 24px;
+        letter-spacing: normal;
+        color: #666666;
+    }
+
+    .seo-links {
+        list-style: none;
+        margin-top: 32px;
+    }
+
+    .seo-links .active-seo {
+        border-left: 4px solid #ff6600;
+        padding: 0 4px;
+    }
+
+    .seo-links a {
+        margin: 0 0 16px;
+        font-family: Montserrat;
+        font-size: 18px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 32px;
+        letter-spacing: normal;
+        color: #000000;
+    }
+
+    .seo-links li {
+        margin: 16px 0;
+        border-left: 4px solid #ddd;
+        padding: 0 4px;
+    }
+
+    #section-seo td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #section-seo table {
+        border-collapse: collapse;
+    }
+
+    .make-table-responsive {
+        overflow-x: auto;
+        margin-bottom: 16px;
+    }
+
+    #section-courses .demo-card-square {
+        width: 100%;
+    }
+
+    @media screen and (min-width: 768px) {
+        .landing-darken {
+            margin-top: 8px;
+        }
+
+        .accordian-active ~ .landing-darken {
+            margin-top: 48px;
+        }
+
+        .mat-login {
+            width: auto;
+        }
+
+        .is-casting-shadow .mega-menu nav > ul > li > a {
+            color: #000000 !important;
+        }
+
+        .mdl-layout__header--transparent.mdl-layout__header--transparent {
+            background: transparent !important;
+        }
+
+        .mdl-layout__header--transparent.mdl-layout__header--transparent {
+            border-bottom: none;
+        }
+
+        .mdl-layout__header.is-casting-shadow {
+            background: #fff !important;
+        }
+
+        .mega-menu nav .mdl-navigation__link {
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            color: #fff;
+        }
+
+        a.mat-title.mdl-layout-title {
+            background: #fff;
+            padding: 0 8px;
+        }
+
+        .mat-login {
+            border: solid 1px #ffffff !important;
+            background: transparent !important;
+            color: #ffffff !important;
+            font-weight: 700;
+        }
+
+        .mat-signup {
+            color: rgb(0, 0, 0) !important;
+            background: #ffffff !important;
+            font-weight: 500;
+        }
+
+        .search-container {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .mega-menu nav li:hover .mdl-navigation__link {
+            color: #fff !important;
+        }
+
+        .section-play-video-pulse {
+            margin-left: -16px;
+        }
+
+        .is-casting-shadow .mega-menu nav li:hover .mdl-navigation__link {
+            color: #f26722 !important;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .section-jee img {
+            width: 100%;
+        }
+
+        .demo-video-big-screen {
+            display: none;
+        }
+
+        #demoVideoDialog {
+            position: fixed;
+            margin-top: 56px;
+        }
+
+        .input-call-me {
+            font-size: 12px;
+        }
+
+        .video-play-button {
+            margin: 0 auto;
+        }
+
+        .section-play-video-pulse p {
+            text-align: center;
+        }
+
+        .section-play-video-pulse label {
+            text-align: center;
+            display: block;
+        }
+
+        .main-home-page-banner-image-small {
+            display: block;
+        }
+
+        .main-home-page-banner-image-big {
+            display: none;
+        }
+
+    }
+
+    .videoWrapper .hbspt-form {
+        padding: 24px 32px 80px 32px;
+        background: #fff;
+        border-radius: 6px;
+        box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, .2);
+    }
+
+    .hbspt-form .hs-button {
+        background-color: #ff6000 !important;
+        border: none;
+        height: 48px;
+        width: 100%;
+        color: #fff;
+        float: left;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    }
+
+    .hbspt-form input {
+        height: 40px;
+        padding: 0 8px;
+        line-height: 40px;
+        width: calc(100% - 16px);
+        background: #eee;
+        margin: 8px 0;
+        border: 1px solid #ddd;
+    }
+
+    .hbspt-form select {
+        height: 40px;
+        line-height: 40px;
+        width: 100%;
+        background: #eee;
+        margin: 8px 0;
+        border: 1px solid #ddd;
+    }
+    #startLearningHubSpotDialog .hs_name.hs-name,  #startLearningHubSpotDialog .hs_phone.hs-phone,#startLearningHubSpotDialog .hs_email.hs-email, #startLearningHubSpotDialog .hs_class.hs-class{
+        width: calc(52% - 23px);
+        float: left;
+        margin-right: 10px;
+
+    }
+    /*#startLearningHubSpotDialog .hs_email.hs-email, #startLearningHubSpotDialog .hs_class.hs-class{*/
+    /*width: calc(40% - 25px);*/
+    /*float: left;*/
+    /*}*/
+    #startLearningHubSpotDialog .hbspt-form{
+        box-shadow: none;
+    }
+    #startLearningHubSpotDialog .hbspt-form select{
+        background: #ffffff;
+    }
+    #startLearningHubSpotDialog .hbspt-form input{
+        background: #ffffff;
+    }
+    #startLearningHubSpotDialog .hs_submit.hs-submit{
+        width: calc(100% - 15px);
+    }
+    #startLearningHubSpotDialog{
+        position: fixed;
+    }
+    #demoPageDialog{
+        position: fixed;
+    }
+    @media screen and (max-width: 1143px) {
+        #startLearningHubSpotDialog img{
+            display: none;
+        }
+        #demoPageDialog img{
+            display: none;
+        }
+    }
+    @media screen and (max-width: 478px) {
+        #startLearningHubSpotDialog .hs_name.hs-name,  #startLearningHubSpotDialog .hs_phone.hs-phone,#startLearningHubSpotDialog .hs_email.hs-email, #startLearningHubSpotDialog .hs_class.hs-class{
+            width: calc(100% - 23px);
+            float: left;
+            margin-right: 0px;
+
+        }
+        #startLearningHubSpotDialog .hbspt-form , #demoPageDialog .hbspt-form{
+            overflow: scroll;
+            height: 300px;
+        }
+    }
+    @media screen and (max-width: 672px){
+        .dialogHeadings {
+            color: #333333 !important;
+            font-size: 20px !important;
+            font-weight: 900 !important;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+        }
+
+    }
+
+    @media screen and (max-width: 768px) {
+      .img-video {
+        display: none;
+      }
+    }
+    @media screen and (min-width: 767px) {
+        #startLearningHubSpotDialog, #demoPageDialog{
+            transform: translate(0, -50%);
+            top: 50%;
+        }
+    }
+  </style>
+
+</head>
+
+<body>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+    <!--/*/ <th:block th:include="common/headerNeet"></th:block> /*/-->
+
+
+    <div class="mat-content mdl-layout__content">
+        <div class="landing-darken" style="display: none;"></div>
+        <div class="section-top-jee">
+            <div class="container">
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <h1 class="logo-font mat-slogan mat-slogan-slider-mobile">
+                            Crack NEET from home
+                            with Kota's Best Coaching Institutes
+                            Live Online
+                        </h1>
+                        <br/>
+                        <img width="300px"
+                             class="img-video demo-video-big-screen"
+                             alt="Neostencil Icon"
+                             src="https://lh3.googleusercontent.com/QmZoVkNNXtQRLRnr4YpLHIdjyyivw33ZYoQFqHdfk8BB3RlU-bnUBMYC0d2bvWslDMeQfiuVJxpF-MDRQJQ88Hu70w"
+                             style="margin-top: 40px;">
+
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <!--[if lte IE 8]>
+                        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+                        <![endif]-->
+                        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+                        <script>
+                          hbspt.forms.create({
+                            portalId: "3966107",
+                            formId: "c0f6b106-6889-4e6e-b70f-3b10987c4c65"
+                          });
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <img
+                src="https://lh3.googleusercontent.com/bO7HpwjNud9Fwlt2W8P9YwRmnRYCrTb1PEkQxHuGqtW7Ros4Gmct-HMtpmu3KXnGQv6F1ftFNqZtGec-z54DqLeWFjo=w1800"
+                style="
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+">
+        <div class="section-jee" id="section-courses">
+            <div class="container">
+                <h2 class="heading-jee" style="text-align: center;">
+                    Courses for you</h2>
+
+                <div class="underline-jee" style="margin: 24px auto 40px auto;"></div>
+                <div class="mdl-grid">
+
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #4285F4;
+    border-radius: 6px;">
+                            <div class="mdl-card__title mdl-card--expand">
+                                <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Foundation - Class XI NEET
+                                    Course</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                BY Motion Education, KOTA
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <h5><i class="fa fa-inr"></i> 65,000</h5>
+                            </div>
+                            <div class="item-overlay bottom jee11">
+                                <div>Complete package for students preparaing for NEET and moving from class X to XI
+                                    <a href="/course/neet/foundation-class-xi-neet-course" class="view-details-jee">View
+                                        Details</a></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #e3ad17;
+    border-radius: 6px;">
+                            <div class="mdl-card__title mdl-card--expand">
+                                <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Fresher - Class XII NEET
+                                    Course</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                BY Motion Education, KOTA
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <h5><i class="fa fa-inr"></i> 70,000</h5>
+                            </div>
+                            <div class="item-overlay bottom jee12">
+                                <div>Complete package for students preparaing for NEET and moving from class XI to
+                                    XII
+                                    <a class="view-details-jee" href="/course/neet/fresher-class-xii-neet-course">View
+                                        Details</a></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <div class="demo-card-square mdl-card mdl-shadow--2dp item" style="border-top: 8px solid #0F9D58;
+    border-radius: 6px;">
+                            <div class="mdl-card__title mdl-card--expand">
+                                <h2 class="mdl-card__title-text" style="margin: 24px 0 0 0;">Target - XII Pass NEET
+                                    Course</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                BY Motion Education, KOTA
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <h5><i class="fa fa-inr"></i> 65,000</h5>
+                            </div>
+                            <div class="item-overlay bottom jee13">
+                                <div>Complete package for students preparaing for NEET and who have given class
+                                    XII exams<a class="view-details-jee"
+                                                href="/course/neet/target-xii-pass-neet-course">View
+                                        Details</a></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--teacher -start-->
+        <div  class="testimonials-bg-t">
+            <div class="container">
+                <h2 class="heading-jee-t text-center">
+                    Teacher
+                </h2>
+                <div class="underline-jee-u"></div>
+                <div class="testimonial-name-and-image-t">
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+
+                                        <span class="testimonials-name-con">He has 15 years of experience as a Physics faculty. His innovative teaching methodology
+has set new trends in the way Physics is taught for
+competitive exams. Over the years, he has established himself as a well renowned and highly respected educator, steering Motion to inch closer to the vision that started the journey itself. Under his visionary leadership and backed by a competent management, Motion has achieved tremendous growth over the years, spreading it’s wings across 35 loactions pan India.</span>
+                            <span
+                                    class="testimonials-rank-slick"></span>
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                            <div class="testimonial-image-parent">
+                                <img class="testimonial-image-jee"
+                                     src="https://lh3.googleusercontent.com/8a8kjcicf8bncF3kuevc_ihQnf6iQYbw9jkVL_xDe3c-l3YRTnlb7_IFB5mwgUYJJKcSnMdqpO0fkqVpRQoJhEPtSbjV">
+                                <h2 class="testimonial-img-content">Nitin Vijay (NV Sir)</h2>
+
+                                <div class="testimonial-img-content-teacher">MD, Motion Education<br/>Physics
+                                    Faculty
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--teacher -end-->
+
+
+        <div class="mat-landing-bar mdl-typography--text-center">
+            <div class="container-header">
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                        <img src="https://lh3.googleusercontent.com/UdMnhXydIg2IlbLwQkqYyq-FxU-pTyKFRo61z-sDYixMIZ-DjBhHXM7x0_NRN4F6qXN_wN0k3FOde8BZoFnOg5pcuuw=w150"
+                             alt="Neostencil Live & Recorded Classes">
+                        <h2>
+                            <b>Live Classes</b><br/>
+                            <h3> 24/7 access
+                                to live lectures</h3>
+                        </h2>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                        <img src="https://lh3.googleusercontent.com/gVX4PvaCnpqwnJI_bHgGKlkTAvjy86jThNGmBzGn-Qwwx4f1twkptWliAaPab2bRg8frxYg6gaew4H5YhNUaQ10oouI=w150"
+                             alt="Neostencil Courses">
+                        <h2>
+                            <b>Parent Dashboard</b><br/>
+                            <h3>Help your child succeed</h3>
+                        </h2>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone center_padding">
+                        <img src="https://lh3.googleusercontent.com/CobzNDVe4VM2hWeM8fzW3c3czeJdY9RRWr4csYxlrmR8tmZqi9-qorongYuAd7t3gWwrbBW8yLC28bJRAIImZp1jpus=w150"
+                             alt="Neostencil Top Teachers">
+                        <h2>
+                            <b>Comprehensive Learning</b><br/>
+                            <h3> Classes, tests and assignments</h3>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-jee">
+            <div class="container">
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+                        <h3 class="heading-jee">
+                            Live classes for you straight from Kota</h3>
+                        <div class="underline-jee"></div>
+                        <p class="paragraph-jee">NeoStencil partners with India's best institutes to help you develop a
+                            strong foundation of concepts and their implementation. Now crack NEET from the comfort of
+                            your home.</p>
+
+                        <br/> <a id="startLearningBtn"
+                                 class="btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent ">
+                        Start your journey</a>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                            id="">
+                        <img class="demo-video-big-screen"
+                             src="https://lh3.googleusercontent.com/cc8NJV_Jlg1UQ9QUY19dY5ffesMhpP3DwVZVafb7a3_2k2819OWyWiboL1_9HzRJNiS-bgHq1XNEpqVgVfffRX38Pgc"
+                             style="display: block;margin: 0 0 0 auto;">
+
+
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="section-jee">
+    <div class="container">
+        <div class="mdl-grid">
+            <div
+                    class="mdl-cell mdl-cell&#45;&#45;6-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone videoWrapper"
+                    id="">
+                <img class="demo-video-big-screen"
+                     src="https://lh3.googleusercontent.com/5leThg7Woysx4QSrIsRB8EiUSeHbx9tMYmuqK8RWLEsZ0Dim7-an4TlSU6UgJfHnCq2jSpU6rUCCWniIOy3r6NuSxgc"
+                     style="display: block;margin: 0;">
+                &lt;!&ndash;<a id="show-dialog">&ndash;&gt;
+                &lt;!&ndash;<img class="img-video"&ndash;&gt;
+                &lt;!&ndash;src="images/background/Homepage/videoimg4.png">&ndash;&gt;
+                &lt;!&ndash;</a>&ndash;&gt;
+                &lt;!&ndash;<img&ndash;&gt;
+                &lt;!&ndash;src="images/background/Homepage/watchDemoVideo.png"&ndash;&gt;
+                &lt;!&ndash;style="margin-left: 60px; width: 180px;">&ndash;&gt;
+
+            </div>
+            <div
+                    class="mdl-cell mdl-cell&#45;&#45;6-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+
+                <h3 class="heading-jee">
+                    Get a Free Demo at your home</h3>
+                <div class="underline-jee"></div>
+                <p class="paragraph-jee">Live online classes and regular assessments is the way to
+                    prepare. To
+                    learn more, schedule a free counselling session at your home.
+
+                </p>
+
+                <br/> <a id="demoBtn"
+                         class="btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent">
+                Book a Slot Now</a>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>-->
+
+<div id="section-testimonials-lazyload" class="testimonials">
+    <!-- <img class="img-big-only"
+src="images/background/Homepage/homepagetestimonialbg.png"
+style="position: absolute; left: 18%; margin-top: -100px;"> -->
+    <div class="container">
+        <h2 class="heading-jee" style="text-align: center;">
+            Success Stories</h2>
+        <div class="underline-jee" style="margin: 24px auto 40px auto;"></div>
+        <div id="testimonials-lazyload">
+            <div>
+                <div class="mdl-shadow--2dp">
+                    <div class="ns-card">
+                        <div class="lazyload-heading"></div>
+                        <div class="lazyload-heading"></div>
+                        <div class="lazyload-heading"></div>
+                        <div class="lazyload-heading"></div>
+                        <br/> <br/> <br/> <br/>
+                        <div class="lazyload-teacher"></div>
+                        <div class="lazyload-price" style="float: left;"></div>
+                        <div class="lazyload-testimonial-image"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="mdl-shadow--2dp">
+                    <div class="ns-card">
+                        <div class="lazyload-heading"></div>
+                        <div class="lazyload-heading"></div>
+                        <div class="lazyload-heading"></div>
+                        <div class="lazyload-heading"></div>
+                        <br/> <br/> <br/> <br/>
+                        <div class="lazyload-teacher"></div>
+                        <div class="lazyload-price" style="float: left;"></div>
+                        <div class="lazyload-testimonial-image"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="mdl-shadow--2dp">
+                    <div class="ns-card">
+                        <div class="lazyload-heading"></div>
+                        <div class="lazyload-heading"></div>
+                        <div class="lazyload-heading"></div>
+                        <div class="lazyload-heading"></div>
+                        <br/> <br/> <br/> <br/>
+                        <div class="lazyload-teacher"></div>
+                        <div class="lazyload-price" style="float: left;"></div>
+                        <div class="lazyload-testimonial-image"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="/reviews-testimonials"
+           class="btn-all-testimonial btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-View-all-teachers">See
+            More Testimonials</a>
+    </div>
+</div>
+<div style="display: none;" id="section-testimonials"
+     class="testimonials">
+    <!-- <img class="img-big-only"
+src="images/background/Homepage/homepagetestimonialbg.png"
+style="position: absolute; left: 18%; margin-top: -100px;"> -->
+    <div class="container">
+        <h2 class="heading-jee" style="text-align: center;">
+            Success Stories</h2>
+
+        <div class="underline-jee" style="margin: 24px auto 40px auto;"></div>
+        <section id="testimonials" class="regular slider">
+
+
+            <div>
+                <p class="mdl-card__supporting-text">I have been a regular classroom student of Motion.
+                    The teachers not only
+                    helped me in identifying my weakness but also helped me to converting it into
+                    the strengths The best guidance, study material & examination strategy
+                    provided by Motion helped me fulfill my dreams</p>
+                <div class="testimonial-name-and-image">
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                            <span class="testimonials-name-slick">Vikas Kumar</span>
+                            <span
+                                    class="testimonials-rank-slick">AIR 52, NEET</span> <span
+                                class="testimonials-rank-slick"></span>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                            <img
+                                    class="testimonial-image"
+                                    src="https://lh3.googleusercontent.com/db4XGeJWtM96ccZJN2S_HYNmRpYQUlJsJiuXr7YJp_cgmEiF-LCQ0IMevHJXXTjNMfGxpSv1MaUEqi6h2id-3ez6ze5W">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="mdl-card__supporting-text">Motion helped a lot in my journey in terms of
+                    motivating, helping,
+                    supporting and teaching. Regular classes by expert and experienced
+                    faculties helped a lot in strengthening my concepts. </p>
+                <div class="testimonial-name-and-image">
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                            <span class="testimonials-name-slick">Jitendra Yadav</span>
+                            <span
+                                    class="testimonials-rank-slick">AIR 96, NEET</span> <span
+                                class="testimonials-rank-slick"></span>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                            <img
+                                    class="testimonial-image"
+                                    src="https://lh3.googleusercontent.com/fnfWTUpVWYYMGpU5_pbVz504TOS1fO1XTxfwPAoZ1sK43LwR3VF7WVA8y3nSdObMz0ibtzL58FUDVvqnLrxNFj66D5if">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="mdl-card__supporting-text">Thank you Motion for clearing all my doubts, for
+                    being helpful, supportive,
+                    for giving positive attitude, for providing strategy to prepare for NEET, for
+                    telling my weak and strength points, for helping me to be interactive with the
+                    teachers. Thank you for helping me to prepare for NEET.</p>
+                <div class="testimonial-name-and-image">
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                            <span class="testimonials-name-slick">Bharat Meena</span>
+                            <span
+                                    class="testimonials-rank-slick">AIR 64, AIIMS</span> <span
+                                class="testimonials-rank-slick"></span>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                            <img
+                                    class="testimonial-image"
+                                    src="https://lh3.googleusercontent.com/ODhmbc6EzfuZFjH9n4EsaiBk9eIOr2UaUJIcZMXZTfAs5IEex5NkYG4Av5OCwzrRrEsOcy2B7ROgG3sqiIUK8biDpww">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="mdl-card__supporting-text">Being in Motion helped to develop thinking and
+                    logical skills .
+                    Interacting with peers also helped me to view problems from
+                    different prospective. </p>
+                <div class="testimonial-name-and-image">
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                            <span class="testimonials-name-slick">Jitendra Yadav</span>
+                            <span
+                                    class="testimonials-rank-slick">AIR 52, AIIMS</span> <span
+                                class="testimonials-rank-slick"></span>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                            <img
+                                    class="testimonial-image"
+                                    src="https://lh3.googleusercontent.com/fnfWTUpVWYYMGpU5_pbVz504TOS1fO1XTxfwPAoZ1sK43LwR3VF7WVA8y3nSdObMz0ibtzL58FUDVvqnLrxNFj66D5if">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--<a href="/reviews-testimonials"
+           class="btn-all-testimonial btn-cta-secondary mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent btn-View-all-teachers">See
+            More Testimonials</a>-->
+    </div>
+</div>
+
+
+<!--<div class="section-jee" id="section-seo">
+    <div class="container-header">
+        <h2 class="heading-jee" style="text-align: center;">
+            About NEET</h2>
+        <div class="underline-jee" style="margin: 24px auto 40px auto;"></div>
+        <div class="mdl-grid">
+            <div
+                    class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone videoWrapper"
+                    id="">
+                <ul class="seo-links">
+                    <li class="active-seo"><a href="#heading-one">Introduction</a></li>
+                    <li><a href="#heading-two">Syllabus</a></li>
+
+                    <li class=""><a href="#heading-three">Important Dates</a></li>
+
+                    <li class=""><a href="#heading-four">Exam Pattern</a></li>
+
+                    <li class=""><a href="#heading-five">Application Form</a></li>
+
+                    <li class=""><a href="#heading-six">FAQs</a></li>
+
+                </ul>
+            </div>
+            <div
+                    class="mdl-cell mdl-cell&#45;&#45;9-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone videoWrapper paragraph-jee-seo"
+                    id=""><h3 class="heading-jee-seo" id="heading-one">Introduction to NEET
+                Examination</h3>
+                <p>National Testing Agency (NTA) conducts NEET exam (formerly known as AIPMT) for
+                    admission in MBBS and BDS seats in various medical and dental colleges in India except
+                    in AIIMS and JIPMER. Also, admissions in AYUSH courses, B.Sc. and AH medical courses
+                    are made on the basis of NEET score. Candidates can take admission in about 93,919
+                    seats. Before AIPMT, the exam was known as PMT. The exam is held in 154 cities across
+                    the country.
+                </p>
+                <h3 class="heading-jee-seo" id="heading-two">About the NEET 2020 Syllabus</h3>
+                <p>The syllabus for NEET 2020 is mentioned below for all three subjects namely physics,
+                    chemistry and biology. Candidates should go through the syllabus thoroughly before
+                    starting their preparation.</p>
+                <h5>NEET 2020 Physics Syllabus </h5>
+                <p>The various topics of physics from class 11 and 12 include - Physical World and
+                    Measurement, Law of Motion, Gravitation, Properties of Bulk Matter, Oscillations and
+                    Waves, Thermodynamics, Behaviour of Perfect Gas and Kinetic Theory, Motion of system
+                    of Particles of Rigid Body, Work Power Energy, Kinematics, Electrostatics,
+                    Electromagnetic Waves, Optics, Magnetic effects of Current and Magnetism, Atoms and
+                    Nuclei, Electronic Devices, Current Electricity and Electromagnetic Induction, Dual
+                    Nature of Matter and Radiation and Alternating Currents.</p>
+                <h5>NEET 2020 Chemistry Syllabus</h5>
+                <p>The topics of chemistry from class 11 and 12 include - Some basic concepts of
+                    Chemistry, Chemical Bonding and Molecular Structure, Thermodynamics, Environmental
+                    Chemistry, Hydrocarbons, s-Block elements (Alkali and Alkali Earth Metals), Organic
+                    Chemistry-Some Basic Principles and Techniques, Redox Reaction, States of Matter:
+                    Gases and Liquids, Structure of Atom, Classification of Elements and Periodicity in
+                    Properties, Some p-block elements, Hydrogen, Equilibrium, Solid State, Chemical
+                    Kinetic, d and f-block elements, Aldehydes, Haloalkanes and Haloarenes, Ketones and
+                    Carboxylic Acid, Chemistry in Everyday Life, Biomolecules, Alcohols, Polymers, Phenols
+                    and Ether, Organic Compounds containing Nitrogen, Coordination Compounds, General
+                    principles and Processes of Isolation of Elements, Electrochemistry and Solutions.
+
+                </p>
+                <h5>NEET 2020 Biology Syllabus</h5>
+                <p>The various topics from which questions can be asked include - Diversity in the
+                    Living world, Plant Physiology, Structural Organization in Animals and Plants, Human
+                    Physiology, Cell Structure and Function, Genetics and Evolution, Biology and Human
+                    Welfare, Ecology and Environment, Biotechnology and its applications and Reproduction.
+
+                    Candidates should make sure to go through the whole syllabus as all topics are
+                    important.
+
+                </p>
+
+                <h3 class="heading-jee-seo" id="heading-three">NEET Exam 2020 Important Dates</h3>
+                <p>The tentative schedule of NEET registration 2020 and other dates for February session
+                    is given below. The NEET 2020 exam date will be in the month of February. Students
+                    seeking admission in various medical and BDS courses can start their preparation
+                    accordingly.</p>
+                <div class="make-table-responsive">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <p><strong>Events</strong></p>
+                            </td>
+                            <td>
+                                <p><strong>Dates</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Availability of Application Form</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">1</span><span
+                                        style="font-weight: 400;">st</span><span style="font-weight: 400;"> week of November 2019</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span
+                                        style="font-weight: 400;">Last date for submission of Application form</span>
+                                </p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Last week of November 2019</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Release of Admit Card</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">January 2020</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Date of Exam</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Expected date is between 1</span><span
+                                        style="font-weight: 400;">st</span><span style="font-weight: 400;"> week of February 2020 to 3</span><span
+                                        style="font-weight: 400;">rd</span><span style="font-weight: 400;"> week of February 2020</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Announcement of Result</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">In the 1</span><span
+                                        style="font-weight: 400;">st</span><span style="font-weight: 400;"> week of March 2020</span>
+                                </p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>NEET 2020 Eligibility Criteria</h4>
+                <p>As per the latest update, candidates above the age of 25 years can also apply for the
+                    NEET 2020 examination. Aspirants seeking admission in NEET 2020 should go through the
+                    following eligibility criteria before applying. The various guidelines and criteria
+                    mentioned below are specified by NTA and are based on the Regulations on Graduate
+                    Medical Education, 1997. The eligibility criteria include academic qualification,
+                    nationality, age limit etc. The candidates who do not meet any of the following
+                    criteria will not be eligible to give NEET exam. The following is a summary of the
+                    eligibility criteria:</p>
+                <ul style="text-align: justify;">
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The upper age limit has been removed by the Supreme Court. Candidates who are above the age of 25 years can also apply.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Those candidates who are citizens of India, NRIs, PIOs, OCIs and foreign nationals can apply for NEET 2020.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The minimum age for appearing in NEET 2020 is 17 years as on December 31, 2020. </span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Candidates having Physics, Chemistry, Biology/Biotechnology and English as main subjects at 10+2 level are eligible to apply for NEET 2020.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Qualifying marks for the General Category are 50 %. Also, the qualifying marks for OBC/SC/ST are 40 %, and for PWD it is 45 %.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">There is no limit on the number of attempts.</span>
+                    </li>
+                </ul>
+                <h3 class="heading-jee-seo" id="heading-four">NEET Exam Pattern 2020</h3>
+                <p>The NEET exam details and NEET exam notification is being released by NTA. The exam
+                    pattern gives an idea about the mode, language, marks and types of questions asked
+                    related to a particular examination. The exam pattern helps candidates in their
+                    preparation process. The following points will give you a fair idea about the pattern
+                    of examination:
+
+                </p>
+                <ul style="text-align: justify;">
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The exam date will be between 1</span><span
+                            style="font-weight: 400;">st</span><span style="font-weight: 400;"> week of February to 3</span><span
+                            style="font-weight: 400;">rd</span><span style="font-weight: 400;"> week of February.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The mode of examination will be offline (pen and paper).</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The duration of the examination is 3 hours.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The languages included for the medium of examination are English, Hindi, Assamese, Bengali, Gujarati, Marathi, Tamil, Telugu, Oriya, Kannada and Urdu.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The types of questions asked will be objective type multiple answer questions.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Four options will be given for each question out of which one will be correct.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The three sections include Physics, Chemistry and Biology.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Total number of questions is 180.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The physics and chemistry section will have 45 questions each whereas the Biology section will have 90 questions.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">For each correct answer, the candidate will be rewarded 4 marks.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">One mark will be deducted for each wrong answer.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The candidates selecting any of the above mentioned regional languages will get the question paper in 3 languages namely Hindi, English and the selected regional language. </span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Candidates selecting Hindi as their language will receive the paper in both Hindi and English while the candidates selecting their language to be English will receive the paper in just English.</span>
+                    </li>
+                </ul>
+                <h4>Qualifying Examination Codes for NEET 2020</h4>
+                <p>The candidates are supposed to fill their qualifying code in the application form.
+                    The various codes are mentioned along with their details:</p>
+                <ul style="text-align: justify;">
+                    <li style="font-weight: 400;"><strong>Code 1:</strong><span style="font-weight: 400;"> The candidates appearing for Class 12 board exams in 2020 have to submit this code. Still, they are supposed to pass their class 12 exams to get admission in medical and dental courses. </span>
+                    </li>
+                    <li style="font-weight: 400;"><strong>Code 2:</strong><span style="font-weight: 400;"> Have passed a senior secondary examination or Indian School Certificate Examination which is equivalent to 10+2 level. The last two years must include Physics, Chemistry, Biology/Biotechnology and Mathematics with English as a core subject as per National Council of Education Research and Training (NCERT). The code is applicable for candidates who have passed class 12 in the year 2019 and have not taken admission in any other course.</span>
+                    </li>
+                    <li style="font-weight: 400;"><strong>Code 3:</strong><span style="font-weight: 400;"> This code can be used by candidates who have passed Intermediate/Pre-degree Examination in Science of any Indian University or Board with Physics, Chemistry, Biology/Biotechnology and English as a core subject. </span>
+                    </li>
+                    <li style="font-weight: 400;"><strong>Code 4:</strong><span style="font-weight: 400;"> This code is applicable for candidates who have passed Pre-professional and Pre-medical examination after class 12 or equivalent examination with Physics, Chemistry, Biology/Biotechnology and English as a core subject. </span>
+                    </li>
+                    <li style="font-weight: 400;"><strong>Code 5:</strong><span style="font-weight: 400;"> This code is applicable for those candidates who are pursuing a three-year degree course and have qualified the first-year examination with Physics, Chemistry and Biology/Biotechnology including practical tests. The candidates should have also passed the 10+2 or equivalent examination. </span>
+                    </li>
+                    <li style="font-weight: 400;"><strong>Code 6:</strong><span style="font-weight: 400;"> This code is applicable for candidates who have qualified three-year undergraduate examination from an Indian university with any two subjects from Physics, Chemistry, Biology/Biotechnology and also has passed 10+2 or equivalent examination with Physics, Chemistry, Biology/Biotechnology and English as main subjects.</span>
+                    </li>
+                    <li style="font-weight: 400;"><strong>Code 7:</strong><span style="font-weight: 400;"> This code is applicable for candidates who have passed any other examination which is in scope and standard of Intermediate Science examination of any recognised university including Physics, Chemistry, Biology/Biotechnology and English as core subjects. The criteria for being equivalent to class 12 examinations have been given by the Association of Indian Universities (AIU).</span>
+                    </li>
+                </ul>
+                <h4>Qualifying Marks required for NEET 2020</h4>
+                <ul style="text-align: justify;">
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The candidates should have passed in Physics, Chemistry, Biology/Biotechnology and English individually.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The General Category candidates must score at least 50 % marks to be eligible for this examination.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Candidates belonging to SC/ST/OBCs should score at least 40 % marks in the qualifying examination.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Candidates belonging to PWD category should score at least 45 % marks in the qualifying examination.</span>
+                    </li>
+                </ul>
+                <H4>NEET Exam Centres</H4>
+                <div class="make-table-responsive">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <p><strong>States</strong></p>
+                            </td>
+                            <td>
+                                <p><strong>Corresponding Cities</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Andhra Pradesh</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Guntur, Nellore, Vijayawada, Kurnool, Tirupathi, Visakhapatnam</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Assam</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Dibrugarh, Silchar, Guwahati, Tezpur</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Chandigarh</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Chandigarh</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Dadra and Nagar Haveli</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Dadra and Nagar Haveli</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Delhi</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Delhi (central), Delhi (East), Delhi (South), Delhi (North), Delhi (West)</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Gujarat</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Ahmedabad, Bhavnagar, Godhra, Rajkot, Vadodara, Valsad, Surat, Patan, Gandhinagar, Anand </span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Himachal Pradesh</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Shimla, Hamirpur</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Jharkhand</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Jamshedpur, Bokaro, Ranchi</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Kerala</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Alappuzha, Ernakulam, Kasaragod, Kottayam, Malappuram, Thrissur, Trivandrum, Palakkad, Kozhikode, Kollam, Kannur, Angamaly </span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Madhya Pradesh</span></p>
+                            </td>
+                            <td>
+                                <p><span
+                                        style="font-weight: 400;">Bhopal, Indore, Ujjain, Gwalior, Jabalpur</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Manipur</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Imphal</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Mizoram</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Aizawl</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Odisha</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Angul, Cuttack, Bhubaneshwar, Sambalpur, Rourkela, Behrampur, Balasore</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Punjab</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Bhatinda, Jalandhar, Amritsar</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Sikkim</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Gangtok</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Telangana</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Hyderabad, Ranga Reddy, Karimnagar, Warangal, Khammam</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Uttarakhand</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Roorkee, Dehradun, Haldwani</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">West Bengal</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Durgapur, Howrah, Kolkata, 24 Pargana, Siliguri, Khargpur, Hoogli, </span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Uttar Pradesh</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Allahabad, Ghaziabad, Jhansi, Lucknow, Noida, Varanasi, Meerut, Kanpur, Gorakhpur, Bareilly</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Tripura</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Agartala</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Tamil Nadu</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Chennai, Cuddalore, Karur, Namakkal, Nagercoil, Thiruvallur, Tirunelveli, Vellore, Tiruchirapalli, Salem, Thanjavur, Madurai, Kancheepuram, Coimbatore</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Rajasthan</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Ajmer, Jaipur, Kota, Udaipur, Jodhpur, Bikaner</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Puducherry</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Puducherry</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Nagaland</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Kohima, Dimapur</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Meghalaya</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Shillong</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Maharashtra</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Ahmednagar, Amravathi, Beed, Jalgaon, Latur, Mumbai Surburban, Mumbai, Nanded, Navi Mumbai, Satara, Thane, Solapur, Pune, Nasik, Nagpur, Kolhapur, Buldana, Aurangabad, Akola</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Lakshadweep</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Kavaratti</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Karnataka</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Bangalore, Davangere, Gulbarga, Mangalore, Udupi, Mysore, Hubli, Dharwad, Belgaum, </span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Jammu and Kashmir</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Jammu, Srinagar</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Haryana</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Gurgaon, Faridabad</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Goa</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Panaji</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Daman and Diu</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Daman</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Chattisgarh</span></p>
+                            </td>
+                            <td>
+                                <p><span
+                                        style="font-weight: 400;">Bilaspur, Bhilai/Durg/Bhilai Nagar, Raipur</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Andaman and Nicobar</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Port Blair</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Arunachal Pradesh</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Itanagar</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><span style="font-weight: 400;">Bihar</span></p>
+                            </td>
+                            <td>
+                                <p><span style="font-weight: 400;">Gaya, Patna</span></p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3 class="heading-jee-seo" id="heading-five">NEET 2020 Application Form</h3>
+                <p>Application forms for NEET 2020 to be held in February will be available in the first
+                    week of November 2019. The last date for filling the application form will be in the
+                    last week of November 2019. The candidates are supposed to fill all the details
+                    correctly after checking the eligibility criteria. Following are some important points
+                    associated with the application form candidate should keep in mind:</p>
+                <h4>1. Information and Required Documents</h4>
+                <p>Here are a few things that the candidates must know before starting the registration
+                    process:</p>
+                <ul style="text-align: justify;">
+                    <li style="font-weight: 400;"><span
+                            style="font-weight: 400;">Valid Mobile Number</span></li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Email Address</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Details of class 10 and 12</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Anyone of the identity proofs - Aadhaar Card, Ration Card, Passport, bank account or any other valid government ID proof.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Scanned images of photographs, documents and signature.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Details of credit/debit card or Net Banking for those filling form in the online mode.</span>
+                    </li>
+                </ul>
+                <h4>2. Steps to fill Application Form</h4>
+                <p>The following steps should be followed for filling of application form:</p>
+                <h5>Registration</h5>
+                <p>The registration process involves entering of details including candidate’s name,
+                    mother’s name, father’s name, date of birth, gender, nationality, eligibility code,
+                    category, mobile number, email ID etc. The candidates are then supposed to choose
+                    their password. The provisional application number thus displayed on the screen is the
+                    user ID and has to be used for further proceedings.</p>
+                <h5>Filling of Application Form</h5>
+                <p>Correct details as per class 10 certificate should be filled by the candidate. The
+                    various details include personal details, place of birth, choice of medium of question
+                    paper, choice of examination centre, academic details of class 10, 11 and 12,
+                    permanent address, correspondent address and details of parents/guardians.
+
+                </p>
+                <h5>Uploading of Scanned Documents
+                </h5>
+                <p>Candidates are required to upload scanned copies of photograph and signature.
+                </p>
+                <h5>Payment of Fee
+                </h5>
+                <p>Candidates can pay the fees through online mode as well as offline mode. The online
+                    mode includes credit/debit card or net banking, and the offline mode includes SBI
+                    E-challan.
+
+                </p>
+
+
+                <h5>Print-out of Acknowledgement Receipt
+                </h5>
+                <p>The candidate will be sent a confirmation message to a mobile number and email ID.
+                    Also, a confirmation page will be displayed on the screen for taking printout.
+
+                </p>
+                <h5>Documents to be Retained
+                </h5>
+                <p>Following documents are important, and candidates are supposed to retain them till
+                    the admission process:</p><br/>
+                <p>Application trends in the last 5 years:</p>
+                <ul style="text-align: justify;">
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">The applicants have gradually increased since 2014.</span>
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">While the number of candidates who applied in the year 2014 was </span>5,
+                        79,707, it increased to 13, 26,725 in the year 2018.
+                    </li>
+                    <li style="font-weight: 400;"><span style="font-weight: 400;">Also, the number of female candidates applying for this examination has increased over the years.</span>
+                    </li>
+                </ul>
+                <h3 class="heading-jee-seo" id="heading-six">NEET 2020 FAQs</h3>
+                <p>Candidates can refer to the below-mentioned FAQs in order to get all the basic
+                    information needed to prepare and clear NEET exam 2020.</p>
+                <p><strong>Ques. What are the NEET exam timings?</strong></p>
+                <p style="text-align: justify;"><span
+                        style="font-weight: 400;">Ans. The exam timings are from 2:00 pm to 5:00 pm. The duration of the exam is 3 hours and candidates are supposed to enter half an hour prior to the exam timing.</span>
+                </p>
+                <p><strong>Ques. How many times a candidate can appear for the NEET exam?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. The candidates can attempt the paper any number of times as there is no cap on the number of attempts by a particular candidate.</span>
+                </p>
+                <p><strong>Ques. When will be the NEET Online Registration 2020 start?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. The NEET exam forms will be available in the first week of November 2019. Last date to fill the application form will be in the last week of November 2019.
+            </span></p>
+                <p style="text-align: justify;"><strong>Ques. What is the exam pattern of NEET
+                    2020?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. The examination will consist of 180 objective type questions. The subjects will include Physics, Chemistry and Biology. 45 marks are allotted for chemistry and physics while 90 marks are for biology. The candidates are supposed to finish the paper within 3 hours. Four options will be given for each question out of which one will be correct. Also, four marks will be allotted for each correct answer, and one mark will be deducted for each wrong answer.
+            </span></p>
+                <p><strong>Ques. What the candidate should wear on the NEET exam day?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans.  The male candidates are supposed to wear half sleeved T-shirts and Trousers. No full sleeves shirts, T-shirts or Kurta Pyjamas are allowed. Candidates are also not allowed to wear shoes. Instead, they can wear slippers or sandals.
+            <br>
+            The female candidates can wear half sleeved clothes with no fancy embroidery or brooches. They are not allowed to wear shoes; instead, they can wear slippers or sandals. Also, they are not supposed to wear any kind of Jewellery.</span>
+                </p>
+                <p><strong>Ques. What is the difference between the unofficial and official answer key
+                    of NEET 2020?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. The unofficial key released by various top coaching institutes might be wrong. The official answer key is released by NTA, and the exam papers are checked on the basis of official answer key.</span>
+                </p>
+                <p><strong>Ques. What steps should be followed for the effective preparation of NEET
+                    2020?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. The candidates should go through the syllabus before starting their preparation. Next, they should be well aware of the exam pattern. The number of questions asked, marks of questions, marking scheme etc. are included in the exam pattern. Candidates should do a thorough preparation of each and every topic of all subjects. Sample papers and previous years question papers should also be solved by candidates to check their progress.</span>
+                </p>
+                <p><strong>Ques. When the result will be declared for the February session of NEET
+                    2020?</strong>
+                </p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. The result will be declared in the first week of March 2020 along with cut offs for various categories and registration details for counselling.</span>
+                </p>
+                <p><strong>Ques. What should be done a few days before the exam?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. Candidates should relax and not panic days before the exam. Candidates should not touch any new topics a few days before the exam. The main focus should be on solving previous year question papers and sample papers and checking your progress. The candidates should also take at least 7-8 hours sleep one-day prior examination so that they can attempt the exam with a fresh mind.</span>
+                </p>
+                <p><strong>Ques. What all languages other than Hindi and English are offered as a medium
+                    of examination?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. Apart from English and Hindi, various other regional languages include Assamese, Bengali, Gujarati, Marathi, Tamil, Telugu, Oriya, Kannada and Urdu. The candidates opting from any of the above languages will be offered exam paper in Hindi, English and the regional language opted.</span>
+                </p>
+
+                <p><strong>Ques. Can the candidate make any corrections or changes in the registration
+                    details after filling out and submitting the form?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. Yes, the correction window facility is offered after the application process is over for candidates who wish to make any changes in the details entered.</span>
+                </p>
+                <p><strong>Ques. Is the syllabus of NEET and CBSE same?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. Yes, the syllabus is similar to the class 11 and class 12 syllabi of the subjects physics, chemistry and biology. Candidates can start their preparation in class 12 itself by making all the concepts clear.</span>
+                </p>
+                <p><strong>Ques. What is the main problem faced by candidates appearing for NEET
+                    exam?</strong></p>
+                <p style="text-align: justify;"><span style="font-weight: 400;">Ans. The main problem faced by candidates is that they are unable to complete their paper on time. A total of 180 questions have to be answered in just 3 hours. Candidates should practice sample papers in a given time frame to check their progress.</span>
+                </p>
+            </div>
+        </div>
+    </div></div>-->
+<!--demo video dialog-->
+<dialog tabindex="1" id="demoVideoDialog"
+        class="mdl-dialog mdl-dialog-video">
+    <div class="mdl-dialog__content">
+        <iframe id="video" width="100%" height=""
+                src="https://www.youtube.com/embed/cfhx18lSPiw" allowfullscreen allow="autoplay">
+        </iframe>
+        <button
+                class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+</dialog>
+<!--start learning hubspot form dialog-->
+<dialog tabindex="1" id="startLearningHubSpotDialog"
+        class="mdl-dialog mdl-dialog-video">
+    <div class="mdl-dialog__content" >
+        <div style="width: fit-content; width: -moz-fit-content; margin: 0 auto; ">
+                        <span class="logo-font mat-slogan mat-slogan-slider-mobile dialogHeadings"
+                              style="color: #333333"> Let us help you</span>
+            <div class="underline-jee" style="margin: 11px auto; "></div>
+        </div>
+
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                <!--[if lte IE 8]>
+                <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+                <![endif]-->
+                <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+                <script>
+                  hbspt.forms.create({
+                    portalId: "3966107",
+                    formId: "c0f6b106-6889-4e6e-b70f-3b10987c4c65"
+                  });
+                </script>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                <div style="width: fit-content;width: -moz-fit-content; margin: 0 auto;">
+                    <img
+                            src="https://lh3.googleusercontent.com/7N04O7NHFk5KzzCDfRRj1jJ-IYkdMtIWYFWUisDGZ60a9sNjzdoYEhocCBoQdDE3nYqsFusxX-COVWQ4a0TW8h_54r26=w300"
+                            style="">
+                </div>
+            </div>
+
+        </div>
+        <button
+                class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+</dialog>
+
+<!--demopage form-->
+<dialog tabindex="1" id="demoPageDialog"
+        class="mdl-dialog mdl-dialog-video">
+    <div class="mdl-dialog__content" >
+        <div style="width: fit-content; width: -moz-fit-content; margin: 0 auto; ">
+                        <span class="logo-font mat-slogan mat-slogan-slider-mobile dialogHeadings"
+                              style="color: #333333"> Schedule a Free Demo</span>
+            <div class="underline-jee" style="margin: 11px auto; "></div>
+        </div>
+
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                <!--[if lte IE 8]>
+                <script charset="utf-8" type="text/javascript"
+                        src="//js.hsforms.net/forms/v2-legacy.js"></script>
+                <![endif]-->
+                <script charset="utf-8" type="text/javascript"
+                        src="//js.hsforms.net/forms/v2.js"></script>
+                <script>
+                hbspt.forms.create({
+                  portalId: "3966107",
+                  formId: "89768142-2eb9-43c9-aba1-ed137233ad53"
+                });
+              </script>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                <div style="width: fit-content;width: -moz-fit-content; margin: 0 auto;">
+                    <img
+                            src="https://lh3.googleusercontent.com/QKAVt-l6GDJnen46Ulk5WFr-BW_MgL4Byh8kf7VSngtzidNrjEMruz0aybW7HP2WzAkeYFcnGwYLnqbf8iwDlCrnuTl9=w450"
+                            style="">
+                </div>
+            </div>
+
+        </div>
+        <button
+                class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+</dialog>
+<!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+</div>
+
+<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+
+</div>
+</div>
+
+<!-- include scripts -->
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script
+        src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>
+<script>
+  var hubSpotDialog = document.querySelector('#startLearningHubSpotDialog');
+  var hubSpotDialogButton = document.querySelector('.startLearningBtn');
+  if (!hubSpotDialog.showModal) {
+    dialogPolyfill.registerDialog(hubSpotDialog);
+  }
+  hubSpotDialogButton.addEventListener('click', function () {
+    hubSpotDialog.showModal();
+  });
+  hubSpotDialog.addEventListener('click', function (event) {
+    var rect = hubSpotDialog.getBoundingClientRect();
+    var isInDialog=(rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+        && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+    if (!isInDialog) {
+      hubSpotDialog.close();
+    }
+  });
+  hubSpotDialog.querySelector('.close-dialog').addEventListener('click',
+      function () {
+        hubSpotDialog.close();
+      });
+
+  $('#startLearningBtn').on('click', function () {
+    var hubSpotDialog = document.querySelector('#startLearningHubSpotDialog');
+    if (!hubSpotDialog.showModal) {
+      dialogPolyfill.registerDialog(hubSpotDialog);
+    }
+    hubSpotDialog.showModal();
+    hubSpotDialog.addEventListener('click', function (event) {
+      var rect = hubSpotDialog.getBoundingClientRect();
+      var isInDialog=(rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+          && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+      if (!isInDialog) {
+        hubSpotDialog.close();
+      }
+    });
+    hubSpotDialog.querySelector('.close-dialog').addEventListener('click',
+        function () {
+          hubSpotDialog.close();
+        });
+  });
+  $('#demoBtn').on('click', function () {
+    var demoPageDialog = document.querySelector('#demoPageDialog');
+    if (!demoPageDialog.showModal) {
+      dialogPolyfill.registerDialog(demoPageDialog);
+    }
+    demoPageDialog.showModal();
+    demoPageDialog.addEventListener('click', function (event) {
+      var rect = demoPageDialog.getBoundingClientRect();
+      var isInDialog=(rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+          && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+      if (!isInDialog) {
+        demoPageDialog.close();
+      }
+    });
+    demoPageDialog.querySelector('.close-dialog').addEventListener('click',
+        function () {
+          demoPageDialog.close();
+        });
+  });
+  $('#getNumber').validate({
+    rules: {
+      mobile: {
+        required: true,
+        maxlength: 10,
+        minlength: 10
+      }
+    },
+    messages: {
+      mobile: {
+        required: "Please enter your number",
+        maxlength: "Please enter a valid number",
+        minlength: "Please enter a valid number"
+      }
+    },
+    submitHandler: function () {
+      $('#loader-getNumber').show();
+      $('.btn-call-me').hide();
+      $
+      .ajax({
+        url: apiBasePath + "/extrainfo",
+        type: "post",
+        data: JSON.stringify({
+          mobileNumber: "+91" + $("input[name='mobile']").val()
+        }),
+        dataType: "json",
+        contentType: "application/json",
+
+        success: function (response) {
+          $('#loader-getNumber').hide();
+          $('.btn-call-me').hide();
+          $('#getNumberCheck, .call-shortly').show();
+          $('.input-call-me').attr("disabled", true);
+
+          var dialog = document.querySelector('#startLearningHubSpotDialog');
+          if (!dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
+          }
+          dialog.showModal();
+          dialog.addEventListener('click', function (event) {
+            var rect = dialog.getBoundingClientRect();
+            var isInDialog=(rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+                && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+            if (!isInDialog) {
+              dialog.close();
+            }
+          });
+          dialog.querySelector('.close-dialog').addEventListener('click',
+              function () {
+                dialog.close();
+              });
+        },
+
+        error: function (response) {
+          $('#loader-getNumber').hide();
+          $('.btn-call-me').show();
+        }
+      });
+    }
+  });
+  $(window).load(function () {
+    $('#section-testimonials').css("display", "block");
+    $('#section-testimonials-lazyload').hide();
+  })
+  $('#scrollToSectionJee a')
+  .click(function () {
+    $('html, body').animate({
+      scrollTop: $($(this).attr('href')).position().top - 100
+    }, 400);
+    return false;
+  });
+  $('.seo-links a')
+  .click(function () {
+    $(".active-seo").removeClass("active-seo");
+    $(this).parent('li').addClass("active-seo");
+    $('html, body').animate({
+      scrollTop: $($(this).attr('href')).position().top - 100
+    }, 400);
+    return false;
+  });
+  $('.jee-nav-mobile a')
+  .click(function () {
+    $('.jee-nav-mobile').removeClass("is-visible");
+    $('html, body').animate({
+      scrollTop: $($(this).attr('href')).position().top - 100
+    }, 400);
+    return false;
+  });
+  $(window).scroll(function () {
+    var y = $(window).width();
+    if (y > 767) {
+      var height = $(window).scrollTop();
+      var heightDiv = $('#section-seo').offset().top;
+      var heightFooter = $('#heading-six').offset().top;
+      if (height > heightDiv && height < heightFooter) {
+
+        $('.seo-links').css({"position": "fixed", "top": "100px"})
+      } else {
+        $('.seo-links').css({"position": "relative", "top": "0"})
+      }
+    }
+  });
+  $('.about-jee, .nav-free-prep').mouseover(function () {
+    $('.landing-darken').show();
+    $('.mdl-layout__header').addClass("is-casting-shadow");
+  });
+  $('.about-jee, .nav-free-prep').mouseleave(function () {
+    $('.landing-darken').hide();
+    if (!$('.mdl-layout__header').hasClass("is-compact")) {
+      $('.mdl-layout__header').removeClass("is-casting-shadow");
+    }
+  });
+
+  $( document ).ready(function() {
+    if(window.innerWidth<1026){
+      $('#demoPageDialog .mdl-cell--6-col').removeClass("mdl-cell--6-col").addClass('mdl-cell--12-col');
+      $('#startLearningHubSpotDialog .mdl-cell--6-col').removeClass("mdl-cell--6-col").addClass('mdl-cell--12-col');
+    }
+  });
+
+</script>
+</body>
+</html>

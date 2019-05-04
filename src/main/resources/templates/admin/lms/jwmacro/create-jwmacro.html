@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+
+<body>
+
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">Add New JWMacro</h1>
+        </div>
+      </div>
+      <form name="jwmacro-form">
+
+        <div class="row">
+          <div class="col-md-9">
+
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="name" id="macroName"
+                           placeholder="Enter the Macro Name....">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Macro Description</label>
+                    <input type="text" class="form-control" name="description" id="description"
+                           placeholder="Enter the Macro Description">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="form-horizontal" style="margin-top:  10px;">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>About Text</label>
+                    <input type="text" class="form-control" name="abouttext" id="abouttext"
+                           placeholder="Enter the About Text">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>About Link</label>
+                    <input type="text" class="form-control" name="aboutlink" id="aboutlink"
+                           placeholder="Enter the About Link">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="form-horizontal" style="margin-top:  10px;">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Logo File</label>
+                    <input type="text" class="form-control" name="logoFile" id="logoFile"
+                           placeholder="Enter the Logo File">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Logo Position</label>
+                    <input type="text" class="form-control" name="logoPosition" id="logoPosition"
+                           placeholder="Enter the Logo Position">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="form-group" style="margin-top:  10px;">
+              <label>Playback Rate Controls</label>
+              <input type="number" min="0" class="form-control" name="playbackRates"
+                     id="playbackRates"
+                     placeholder="Enter the Playback Rate Controls...">
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-inline"><input type="checkbox" name="hlshtml" id="hlshtml">hls
+                html</label>
+              <label class="checkbox-inline"><input type="checkbox" name="autoStart" id="autoStart">Auto
+                Start</label>
+              <label class="checkbox-inline"><input type="checkbox" name="playbackRateControls"  id="playbackRateControls">Playback Rate Controls</label>
+              <label class="checkbox-inline"><input type="checkbox" name="isDrmEnabled" id="isDrmEnabled">Is DRM Enabled</label>
+              <label class="checkbox-inline"><input type="checkbox" name="isWowzaHashEnabled" id="isWowzaHashEnabled">Is Wowza Hash Enabled</label>
+              <label class="checkbox-inline"><input type="checkbox" name="isWrenchEnabled" id="isWrenchEnabled">Is Wrench Enabled</label>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-12">
+
+                <div class="row">
+                  <div style="margin-top:  20px;" class="col-md-9">
+                    <button class="submit btn btn-success" id="submitJWMacro"
+                    >Submit
+                    </button>
+                    <i class="fa fa-spinner fa-spin" id="loader"></i>
+
+                    <a href="/admin_techops_lmsadmin/lms/jwmacro" class="btn btn-default"
+                       style="margin-left:  60px;">All
+                      JWMacro</a>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+!--/*/
+<th:block th:include="admin/footer"></th:block>
+/*/-->
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+
+<script>
+  $('form[name=jwmacro-form]').validate({
+
+    submitHandler: function () {
+      submitRequest();
+      $('#loader').show();
+    }
+
+  });
+
+  function submitRequest() {
+    if (document.getElementById('hlshtml').checked) {
+      $('#hlshtml').attr('checked', true);
+      $('input[name="hlshtml"]').val(true);
+    }
+    else {
+      $('#hlshtml').attr('checked', false);
+      $('input[name="hlshtml"]').val(false);
+    }
+
+    if (document.getElementById('autoStart').checked) {
+      $('#autoStart').attr('checked', true);
+      $('input[name="autoStart"]').val(true);
+
+    }
+    else {
+      $('#autoStart').attr('checked', true);
+      $('input[name="autoStart"]').val(false);
+    }
+    if (document.getElementById('playbackRateControls').checked) {
+      $('#playbackRateControls').attr('checked', true);
+      $('input[name="playbackRateControls"]').val(true);
+    }
+    else {
+      $('#playbackRateControls').attr('checked', true);
+      $('input[name="playbackRateControls"]').val(false);
+    }
+
+    if (document.getElementById('isDrmEnabled').checked) {
+      $('#isDrmEnabled').attr('checked', true);
+      $('input[name="isDrmEnabled"]').val(true);
+    }
+    else {
+      $('#isDrmEnabled').attr('checked', true);
+      $('input[name="isDrmEnabled"]').val(false);
+    }
+    if (document.getElementById('isWrenchEnabled').checked) {
+      $('#isWrenchEnabled').attr('checked', true);
+      $('input[name="isWrenchEnabled"]').val(true);
+    }
+    else {
+      $('#isWrenchEnabled').attr('checked', true);
+      $('input[name="isWrenchEnabled"]').val(false);
+    }
+
+
+if (document.getElementById('isWowzaHashEnabled').checked) {
+      $('#isWowzaHashEnabled').attr('checked', true);
+      $('input[name="isWowzaHashEnabled"]').val(true);
+    }
+    else {
+      $('#isWowzaHashEnabled').attr('checked', true);
+      $('input[name="isWowzaHashEnabled"]').val(false);
+    }
+
+    var input = {
+      name: $('#macroName').val(),
+      description: $('#description').val(),
+      hlshtml: $('#hlshtml').val(),
+      autoStart: $('#autoStart').val(),
+      playbackRateControls: $('#playbackRateControls').val(),
+      playbackRates: $('#playbackRates').val(),
+      abouttext: $('#abouttext').val(),
+      aboutlink: $('#aboutlink').val(),
+      logoFile: $('#logoFile').val(),
+      logoPosition: $('#logoPosition').val()
+      isDrmEnabled: $('#isDrmEnabled').val(),
+      isWrenchEnabled: $('#isWrenchEnabled').val(),
+      isWowzaHashEnabled: $('#isWowzaHashEnabled').val(),
+    };
+
+    var rolename = parseJwt(getAuthCookie()).role
+    $.ajax({
+      url: apiBasePath + "/admin/jwmacros",
+      type: "post",
+      data: JSON.stringify(input),
+      contentType: "application/json",
+      processData: false,
+      <!--"headers": {-->
+        <!--"authorization": "Bearer " + window.localStorage.getItem('access_token'),-->
+
+      <!--},-->
+      success: function (response) {
+        $('#loader').hide();
+        location.reload();
+        alert("Successfully create jwmacro");
+
+      },
+      error: function (response) {
+        $('#loader').hide();
+        alert("Failed in creating jwmacro");
+
+      }
+    });
+  }
+</script>
+</body>
+
+</html>

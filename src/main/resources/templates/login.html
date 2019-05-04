@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title>Neostencil</title>
+
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+
+<link rel="stylesheet" media="screen"
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/courses.css')}}" />
+<link rel="stylesheet" media="screen"
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/thankyou.css')}}" />
+
+
+
+
+
+<!-- <link
+      href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+      rel="stylesheet" media="screen" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+   -->
+<style>
+#signupMenuLogin, #signupMenuSocial, #signupMenuForm, #resetPasswordForm,
+	#emailSentForm {
+	margin: 0px auto 40px;
+	width: 100%;
+}
+</style>
+</head>
+
+<body class="all-teachers-page">
+
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+		<th:block th:include="common/headerLogin"></th:block>
+		<div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+			<div class="mdl-snackbar__text"></div>
+			<button class="mdl-snackbar__action" type="button"></button>
+		</div>
+
+
+
+
+		<!-- <div class="mat-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title">
+  </span>
+
+</div> -->
+
+
+		<div class="mat-content mdl-layout__content">
+			<div class="landing-darken" style="display: none;"></div>
+			<!-- <div class="load-bar">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div> -->
+
+
+			<section class="" style="margin-top: 50px;">
+				<div class="container">
+					<section class="menu">
+						<div class="demo-card-wide mdl-card mdl-shadow--2dp"
+							id="signupMenuLogin">
+							<a class="mat-close" style="display: none;"><i
+								class="material-icons" style="color: #fff;">close</i></a>
+							<div class="mdl-card__title">
+								<h2 class="mdl-card__title-text form-heading">Login</h2>
+							</div>
+							<a
+								class="loginUsingFacebook waves-effect waves-light btn-large social facebook">
+								<i class="fa fa-facebook"></i> <span>Connect with
+									Facebook</span>
+							</a> <a
+								class="loginUsingGoogle waves-effect waves-light btn-large social google">
+								<i class="fa fa-google"></i> <span>Connect with Google</span>
+							</a> <br />
+							<form name="login">
+								<br /> <label class="error-single" id="errorLogin"></label><br />
+								<label for="username_login">Email</label><br /> <input
+									type="email" id="username_login" name="username_login">
+								<label for="password_login">Password</label> <a
+									class="show-password"><i class="text-right material-icons">remove_red_eye</i>
+									Show</a> <br /> <input type="password" id="password_login"
+									name="password"> <br /> <label
+									class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+									for="checkbox-2"> <input type="checkbox"
+									id="checkbox-2" class="mdl-checkbox__input"> <span
+									class="mdl-checkbox__label remember-me">Remember me</span>
+								</label> <span id="forgotPassword"
+									class="mdl-checkbox__label remember-me forgot-password">Forgot
+									Password?</span>
+								<div style="display: none;" class="common-loader"
+									id="loader-login">
+									<div class="mdl-spinner mdl-js-spinner is-active"></div>
+								</div>
+								<button id="btn-login"
+									class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+
+									Log in</button>
+								<div class="mdl-card__supporting-text create-account">
+									Don't have an account? <a id="createNow">Create now ></a>
+								</div>
+								<div class="mdl-card__supporting-text create-account tos">
+									By logging in, you agree to our <a href="terms">Terms of
+										Service</a> and <a href="privacy">Privacy Policy</a>
+								</div>
+							</form>
+						</div>
+						<div style="display: none;"
+							class="demo-card-wide mdl-card mdl-shadow--2dp"
+							id="signupMenuSocial">
+							<a class="mat-close" style="display: none;"><i
+								class="material-icons" style="color: #fff;">close</i></a>
+							<div class="mdl-card__title">
+								<h2 class="mdl-card__title-text form-heading">Signup</h2>
+							</div>
+							<a
+								class="loginUsingFacebook waves-effect waves-light btn-large social facebook">
+								<i class="fa fa-facebook"></i> <span>Connect with
+									Facebook</span>
+							</a> <a
+								class="loginUsingGoogle waves-effect waves-light btn-large social google">
+								<i class="fa fa-google"></i> <span>Connect with Google</span>
+							</a>
+							<div class="mdl-card__supporting-text create-account signup-or">
+								OR</div>
+							<form>
+								<button
+									class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+									id="continueWithEmail">Continue with email</button>
+								<div class="mdl-card__supporting-text create-account">
+									Already have an account? <a class="loginNow">Login now ></a>
+								</div>
+								<div class="mdl-card__supporting-text create-account tos">
+									By logging in, you agree to our <a href="terms">Terms of
+										Service</a> and <a href="privacy">Privacy Policy</a>
+								</div>
+							</form>
+						</div>
+						<div style="display: none;"
+							class="demo-card-wide mdl-card mdl-shadow--2dp"
+							id="signupMenuForm">
+							<a class="mat-close" style="display: none;"><i
+								class="material-icons" style="color: #fff;">close</i></a>
+							<div class="mdl-card__title">
+								<h2 class="mdl-card__title-text form-heading">Signup</h2>
+							</div>
+							<form name="signup">
+								<label class="error-single" id="errorSignup"></label><br /> <label
+									for="name">Name</label><br /> <input type="text" id="name"
+									name="name"> <label for="email">Email</label><br /> <input
+									type="email" id="email" name="email"> <label
+									for="password">Password</label> <a class="show-password"><i
+									class="text-right material-icons">remove_red_eye</i> Show</a><br />
+								<input type="password" id="password" name="password">
+								<div style="display: none;" class="common-loader"
+									id="loader-signup">
+									<div class="mdl-spinner mdl-js-spinner is-active"></div>
+								</div>
+								<button id="btn-signup"
+									class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+
+									Sign up</button>
+								<div class="mdl-card__supporting-text create-account">
+									Already have an account? <a class="loginNow">Login now ></a>
+								</div>
+								<div class="mdl-card__supporting-text create-account tos">
+									By logging in, you agree to our <a href="terms">Terms of
+										Service</a> and <a href="privacy">Privacy Policy</a>
+								</div>
+							</form>
+						</div>
+						<div style="display: none;"
+							class="demo-card-wide mdl-card mdl-shadow--2dp"
+							id="resetPasswordForm">
+							<a class="mat-close" style="display: none;"><i
+								class="material-icons" style="color: #fff;">close</i></a>
+							<div class="mdl-card__title">
+								<h2 class="mdl-card__title-text form-heading">Reset
+									Password</h2>
+								<br />
+							</div>
+							<div class="mdl-card__supporting-text reset-password">Enter
+								the email address associated with your account, and we will
+								email you a link to reset your password.</div>
+							<!-- <hr class="border-margin"> -->
+							<form name="resetPassword">
+								<label class="error-single" id="errorPassword"></label><br /> <label
+									for="email">Email</label><br /> <input type="text"
+									id="email-id" name="email">
+								<div style="display: none;" class="" id="loader-reset-password">
+									<div class="mdl-spinner mdl-js-spinner is-active"></div>
+								</div>
+								<button id="sendResetLink"
+									class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+									Send reset link</button>
+								<div class="mdl-card__supporting-text create-account">
+									<a class="loginNow">< Back to Login </a>
+								</div>
+								<div class="mdl-card__supporting-text create-account tos">
+									By logging in, you agree to our <a href="terms">Terms of
+										Service</a> and <a href="privacy">Privacy Policy</a>
+								</div>
+							</form>
+						</div>
+						<div style="display: none;"
+							class="demo-card-wide mdl-card mdl-shadow--2dp"
+							id="emailSentForm">
+							<a class="mat-close" style="display: none;"><i
+								class="material-icons" style="color: #fff;">close</i></a>
+							<div class="mdl-card__title">
+								<h2 class="mdl-card__title-text form-heading">Link Sent</h2>
+								<br />
+							</div>
+							<div class="mdl-card__supporting-text reset-password">
+								<!-- <img src="images/icons/link%20sent.svg"> -->
+								<p class="text-success">
+									A link to reset your password has been sent to <span
+										id="reset-password-email"></span>.
+								</p>
+							</div>
+							<!-- <hr class="border-margin"> -->
+							<form name="resetPassword">
+								<input type="text" id="email-id-reset" name="email">
+								<button
+									class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+									Send reset link</button>
+								<div class="mdl-card__supporting-text create-account">
+									<a class="loginNow">< Back to Login </a>
+								</div>
+								<div class="mdl-card__supporting-text create-account tos">
+									By logging in, you agree to our <a href="terms">Terms of
+										Service</a> and <a href="privacy">Privacy Policy</a>
+								</div>
+							</form>
+						</div>
+					</section>
+					<!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+				</div>
+			</section>
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+	</div>
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+	<script>
+		$(document).ready(function() {
+			if (window.location.href.indexOf("signup") != -1) {
+				$('#createNow').trigger("click");
+			}
+		})
+	</script>
+</body>
+</html>

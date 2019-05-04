@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title th:utext="${post?.titleTag}"></title>
+<meta th:if="${#strings.toString(post?.status)} != 'publish'"
+	name="robots" content="nofollow, noindex" />
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+
+
+<meta th:each="metaTag : ${post?.metaList}"
+	th:if="${metaTag.metaInformation.attributeType} != 'property'"
+	th:attr="name=${metaTag.metaInformation.type},content=${metaTag.metaInformation.content}" />
+
+<meta th:each="metaTag : ${post?.metaList}"
+	th:if="${metaTag.metaInformation.attributeType} == 'property'"
+	th:attr="property=${metaTag.metaInformation.type},content=${metaTag.metaInformation.content}" />
+
+
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+
+<!--<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.css')}}"
+	rel="stylesheet" media="screen" />-->
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/answerkey.css')}}"
+	rel="stylesheet" media="screen" />
+	<link rel="stylesheet" media="screen"
+				th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+<!--<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick-theme.css')}}"
+	rel="stylesheet" media="screen" />-->
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/blogs.css')}}"
+	rel="stylesheet" media="screen" />
+
+<link rel="canonical"
+	th:href="${'https://neostencil.com/'+post?.postSlug}" />
+<style>
+#hbspt-form-1547713179775-243319059 {
+	position: absolute;
+}
+</style>
+</head>
+<body class="">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+		<div class="mat-content mdl-layout__content" id="mat-content">
+			<div class="demo-ribbon"></div>
+			<div class="blog container">
+				<div class="content">
+					<!--/*/ <th:block th:include="common/breadCrumb"></th:block> /*/-->
+					<div class="mdl-grid">
+						<div
+							class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<h1 class="blog-heading" th:text="${post?.title}"></h1>
+						</div>
+					</div>
+					<div class="mdl-grid">
+						<div
+							class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<ul class="blog-share">
+
+								<a
+									th:href="@{'http://www.facebook.com/share.php?u=https://neostencil.com/' + ${post.postSlug}}"
+									rel="nofollow" data-placement="top" title="Share on Facebook"
+									target="_blank" style="text-decoration: none;">
+									<li class="facebook-share"><i class="fa fa-facebook-f"></i>&nbsp;&nbsp;
+								</li>
+								</a>
+
+
+								<a
+									th:href="@{'http://twitter.com/share?url=https://neostencil.com/'+ ${post.postSlug}}"
+									rel="nofollow" data-placement="top" title="Share on Twitter"
+									target="_blank" style="text-decoration: none;">
+									<li class="twitter-share"><i class="fa fa-twitter"></i>&nbsp;&nbsp;
+								</li>
+								</a>
+
+								<a
+									th:href="@{'https://plus.google.com/share?url=https://neostencil.com/' +  ${post.postSlug} }"
+									rel="nofollow" data-placement="top"
+									title="Share on Google plus" target="_blank"
+									style="text-decoration: none;">
+									<li class="google-plus-share"><i class="fa fa-google-plus"></i></li>
+								</a>
+								<a
+									th:href="@{'whatsapp://send?text=https://neostencil.com/' +  ${post.postSlug} }"
+									rel="nofollow" data-placement="top" title="Share on Whats App"
+									target="_blank" style="text-decoration: none;">
+									<li class="whatsapp-share"><i style="font-weight: 600;"
+										class="fa fa-whatsapp"></i></li>
+								</a>
+
+
+							</ul>
+						</div>
+						<div
+							class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+							th:utext="${post.text}"></div>
+					</div>
+				</div>
+			</div>
+			<!-- </div> -->
+			<section id="reviews" class="reviews">
+				<div class="container">
+					<div class="mdl-grid">
+						<div
+							class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"></div>
+						<div
+							class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<div
+								class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+								<div
+									class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+									<br />
+									<div class="logo-font mat-teachers-slogan comment-count"
+										id="total-comments">
+										<span class="comment-count-value"
+											style="font-size: 32px; font-weight: 800; color: #000000">0</span>
+										Comments
+									</div>
+
+
+									<div class="drop-a-comment">
+										<h5>
+											Post your Comment! Note: Your Email address will not be disclosed.</h5>
+										<form name="create-comment" id="create-comment">
+											<div class="mdl-grid" style="margin: 0px; padding: 0px">
+												<div id="comment-box"
+													 class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+													 style="margin: 0px">
+													<label for="username_login">Comment*</label><br />
+													<textarea rows="7" id="commentsBox" name="commentsBox"></textarea>
+
+													<br /> <input
+														style="width: auto; height: auto; float: left;" type="file"
+														id="uploadAttachment" accepts=".pdf" /> <i
+														class="fa fa-spinner fa-spin" id="attachemtLoader"
+														style="display: none;"></i><br />
+												</div>
+
+
+
+												<br />
+												<button id="post-comment" class="post-comment">POST
+													COMMENT</button>
+											</div>
+										</form>
+										<div class="comment_wrapper">
+											<div class="mdl-spinner mdl-js-spinner is-active" id="loader"></div>
+										</div>
+									</div>
+									<div class="login-to-comment">
+										<h5>To post a comment, Please Login </h5>
+										<button class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="btn-login" data-upgraded=",MaterialButton,MaterialRipple" style="width: 200px;margin-top: 0px" onclick="loginToComment();">
+
+											Log in<span class="mdl-button__ripple-container"><span class="mdl-ripple is-animating" style="width: 609.631px; height:609.631px; transform: translate(-50%, -50%) translate(146px, 22px);"></span></span></button>
+									</div>
+									<br />
+
+
+								</div>
+								<div id="viewAllComments"></div>
+								<br /> <br />
+								<hr>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<input type="hidden" id="checkIsPost" value="isPost">
+
+			</section>
+
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+		<!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+	</div>
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+	<script
+			th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+	<!--<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"></script>
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>-->
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/scorecard.js')}}"></script>
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/post.js')}}"></script>
+
+
+	<script>
+
+  $(document).ready(function() {
+
+    if(window.localStorage.getItem('comment-height')==null){
+      window.scrollTo(0,0);
+      window.localStorage.setItem('comment-height', null);
+		}
+		else{
+      window.scrollTo(0,window.localStorage.getItem('comment-height')-100);
+      window.localStorage.setItem('comment-height',null);
+    }
+
+    if (isUserLoggedIn() == false) {
+			$('.login-to-comment').show();
+			$('.drop-a-comment').hide();
+      $('a[href$="pdf"]').click(function (ev) {
+        ev.preventDefault();
+        if ($(window).width() >= 1024) {
+          window.location.href = "/login";
+        }
+        else {
+          window.location.href = "/login";
+        }
+
+      })
+		}
+		else{
+      $('.login-to-comment').hide();
+		}
+  })
+	
+	function loginToComment() {
+
+
+    window.localStorage.setItem('comment-height',$('.drop-a-comment').offset().top);
+
+    if ($(window).width() > 1024) {
+      matLoginClick();
+    }else{
+      window.location.href="/login";
+    }
+
+  }
+  <!--Author by Kartikeya Garg-->
+
+
+</script>
+
+	<script charset="utf-8" type="text/javascript"
+		src="//js.hsforms.net/forms/v2.js"></script>
+	<script>
+	var totalMarksObtained_hubspot = 0;
+	if ($("ol")
+			.hasClass(
+					"ns-question-list")) {
+  hbspt.forms.create({
+	portalId: "3966107",
+	formId: "bcd0de48-792a-47fb-bb85-0bd3503542c7"
+});
+  $(window).load(function(){
+	  $('.hbspt-form').css({"position": "absolute", "visibility": "hidden","top":"0"});
+
+  })
+	}
+</script>
+
+	<script th:inline="javascript">
+  /*<![CDATA[*/
+
+  var postId = [[${post.postSlug}]];
+
+  /*]]>*/
+
+</script>
+</body>
+</html>
+
+
+
+
+

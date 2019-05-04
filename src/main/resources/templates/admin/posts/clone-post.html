@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+</head>
+
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header" th:text="${post?.postId}"></h1>
+					</div>
+				</div>
+				<form name="add-new-post" id="add-new-post">
+					<div class="col-md-9">
+
+						<label>URL(Slug)</label>
+						<div class="input-group">
+							<span class="input-group-addon">http://neostencil.com/</span> <input
+								type="text" name="post-slug" id="post-slug"
+								th:value="${post?.postSlug}" class="form-control"
+								placeholder="Post URL e.g. upsc-prelims-philosophy" required>
+						</div>
+
+						<div class="form-group" style="margin-top: 10px";>
+							<label>Title</label> <input type="text" name="post-title"
+								id="post-title" th:value="${post?.title}" class="form-control"
+								placeholder="Title of the post" required>
+						</div>
+						<div class="form-group">
+							<label>Text</label>
+							<textarea id="summernote" name="summernote"></textarea>
+						</div>
+
+
+						<label class="container"><input type="checkbox"
+							name="featured" id="featured" th:checked="${post?.featured}">Featured</label>
+						<label class="container"><input type="checkbox"
+							name="popular" id="popular" th:checked="${post?.popular}">Popular</label>
+
+
+						<div class="form-group">
+							<label>ReadTime</label><input type="text" name="readTime"
+								id="readTime" th:value="${post?.readTime}" class="form-control"
+								placeholder="Read Time e.g 5 min read">
+						</div>
+						<div class="form-group">
+							<label>No. of Views</label><input type="number" min="0"
+								class="form-control" name="noofviews"
+								th:value="${post?.noOfViews}" id="noofviews"
+								placeholder="No. of Views (Temporarily)">
+						</div>
+
+						<div class="form-group">
+							<label>Brief</label><input type="text" class="form-control"
+								name="brief" id="brief"
+								placeholder="Add a small brief of the post"
+								th:value="${post?.brief}">
+						</div>
+
+						<div class="form-group tag_wrap" style="margin-top: 10px;">
+							<label>Tag</label>
+							<div class="input-group control-group add-tag">
+								<div class="row">
+									<div class="col-md-10">
+										<input type="text" name="tags[]" id="tags"
+											class="form-control" placeholder="Tag name...."
+											th:value="${post?.tags}">
+									</div>
+
+									<div class="col-md-2">
+										<button class="btn btn-success add-more-tag pull-right"
+											type="button">
+											<i class="fa fa-plus" aria-hidden="true"></i>
+										</button>
+									</div>
+								</div>
+
+
+							</div>
+							<div class="field_wrapper1"></div>
+						</div>
+
+						<br />
+						<div class="form-group" style="margin-top: 10px;">
+							<label>Post ExamSegment</label> <select name="postExamSegment"
+								required id="postExamSegment" class="form-control">
+							</select>
+						</div>
+
+						<div class="panel panel-primary" id="erMetaPanel">
+							<div class="panel-heading">Meta Information</div>
+							<div class="panel-body">
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label>SEO Title:</label> <input type="text"
+										placeholder="Enter Title" th:value="${post?.titleTag}"
+										id="titleTag" class="form-control" required="required">
+								</div>
+
+								<div class="row"></div>
+
+
+								<div class="col-md-9" id="social-image"
+									style="margin-top: 20px; width: 100%; margin-bottom: 20px;">
+									<label>Social Image:</label>
+									<div>
+
+										<label class="custom-file"> <input type="file"
+											id="socialImage" class="custom-file-input"> <span
+											class="custom-file-control"></span>
+										</label> <input type="button" class="button btn-primary"
+											value="Upload" id="but_social_upload">
+										<div style="display: none;" id="loaderSocialUpload">
+											<img width="30px" height="30px"
+												src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+										</div>
+
+									</div>
+									<img src="" id="upload-social-img-tag" width="100px" /> <br>
+								</div>
+
+								<br /> <br />
+								<div class="metaPanel" style="margin-top: 10px"></div>
+
+								<div class="row" id="metaPanel"></div>
+								<div class="row">
+									<div style="margin-top: 20px;" class="col-md-9">
+										<button type="button" class="btn btn-primary"
+											onclick="showAddMetaPanel();">Add More MetaData</button>
+									</div>
+								</div>
+
+								<div id="addMetaPanel">
+									<div style="margin-top: 20px;" class="col-md-11">
+										<label style="font-weight: bold;"> Meta Type:</label><select
+											class="form-control selectpicker" id="ddMetaType"
+											data-live-search="true">
+											<option value="twitter:card">twitter:card</option>
+											<option value="twitter:description">twitter:description</option>
+											<option value="og:locale">og:locale</option>
+											<option value="twitter:title">twitter:title</option>
+											<option value="twitter:site">twitter:site</option>
+											<option value="og:site_name">og:site_name</option>
+											<option value="article:section">article:section</option>
+											<option value="og:type">og:type</option>
+											<option value="og:description">og:description</option>
+											<option value="fb:app_id">fb:app_id</option>
+											<option value="og:url">og:url</option>
+											<option value="article:publisher">article:publisher</option>
+											<option value="og:title">og:title</option>
+											<option value="og:image">og:image</option>
+											<option value="og:image:secure_url">og:image:secure_url</option>
+											<option value="twitter:image">twitter:image</option>
+										</select>
+									</div>
+
+									<div style="margin-top: 20px;" class="col-md-11">
+										<label style="font-weight: bold;"> Meta Content:</label> <input
+											type="text" placeholder="Enter comma separated meta content"
+											id="txtMetaContent" class="form-control">
+									</div>
+
+									<div style="margin-top: 20px;" class="col-md-9">
+										<button type="button" class="btn btn-primary"
+											onclick="addMetaInfo();">Save Meta</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<br />
+						<div class="panel panel-primary" id="pnlFeaturedImage">
+							<div class="panel-heading">Featured Image</div>
+							<div class="panel-body">
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Title:</label> <input type="text"
+										placeholder="Enter featured image title" id="txtFITitle"
+										th:value="${post?.featuredImage?.title}" class="form-control">
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Caption:</label> <input type="text"
+										placeholder="Enter featured image caption" id="txtFICaption"
+										th:value="${post?.featuredImage?.caption}"
+										class="form-control">
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Alt Text:</label> <input type="text"
+										placeholder="Enter featured image alt text" id="txtFIAltText"
+										th:value="${post?.featuredImage?.altText}"
+										class="form-control">
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Description:</label> <input type="text"
+										placeholder="Enter featured image description"
+										th:value="${post?.featuredImage?.description}"
+										id="txtFIDescription" class="form-control">
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label>Upload Image:</label></br> <label class="custom-file">
+										<input type="file" id="featureImage" class="custom-file-input">
+										<span class="custom-file-control"></span>
+									</label> <input type="button" class="button btn-primary" value="Upload"
+										id="but_feature_upload">
+
+									<div style="display: none;" id="loaderFeatureUpload">
+										<img width="30px" height="30px"
+											src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+									</div>
+									<img th:src="${post?.featuredImage?.url}" name="thumbnail"
+										id="upload-feature-img-tag" width="100px" />
+								</div>
+
+
+							</div>
+						</div>
+
+						<br />
+
+
+						<div class="form-group">
+							<label class="error-single" id="add-new-post-text-error"></label>
+						</div>
+
+						<div th:if="${enablePublishButton}">
+							<label class="radio-inline" style="margin-top: 10px;"><input
+								type="radio" value="publish"
+								th:checked="${#strings.toString(post?.status)} == 'publish'"
+								name="status" checked>Publish</label> <label
+								class="radio-inline" style="margin-top: 10px;"><input
+								type="radio" value="draft"
+								th:checked="${#strings.toString(post?.status)} == 'draft'"
+								name="status">Draft</label>
+						</div>
+
+						<div class="row" style="margin-top: 10px";>
+							<div class="col-md-9">
+								<button type="submit" class="submit btn btn-primary" id="Submit">Submit</button>
+								<i class="fa fa-spinner fa-spin" id="loader"></i> <a
+									href="/admin_writer_editor/posts" class="btn btn-default"
+									style="margin-left: 60px;">All Post</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-9">
+								<label class="error-single" id="add-new-post-error"></label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+	<!-- Tiny MCE  -->
+	<script
+		src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=1c5byrbl6om87u10sdtie0pqvjd0tts4q2yw2psypsgwtyn2'></script>
+
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/admin.js')}}"></script>
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/post.js')}}"></script>
+	<script th:inline="javascript">
+  /*<![CDATA[*/
+
+  var postText = [[${post?.text}]];
+
+  /*]]>*/
+</script>
+	<script>
+	$('#summernote').val(postText);
+	tinymce.init({
+	    selector: '#summernote',
+	    theme: 'modern',
+	    plugins: [
+	      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+	      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+	      'save table contextmenu directionality emoticons template paste textcolor'
+	    ],
+	    content_css: 'css/content.css',
+    	valid_elements: '*[*]',
+	    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+	    	
+	  });
+</script>
+</body>
+
+</html>
+

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Spin and Win </title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/style.css')}}"/>
+
+  <link rel="canonical" href="https://neostencil.com/courses"/>
+  <meta name="description"
+        content="Up-to 25% Discount on UPSC courses ">
+  <meta name="title"
+        content="Spin and Win ">
+
+  <style>
+    .hbspt-form input {
+      width: -webkit-fill-available;
+      width: -moz-available;
+      height: 44px;
+      border-radius: 2px;
+      background-color: #fff;
+      border: 1px solid #979797;
+      outline: 0;
+      padding: 0 10px;
+      margin: 0 0 15px 0;
+    }
+    body {
+      font-family: arimo;
+    }
+    #hbsptFormContainer{
+      padding: 20px;
+    }
+    .hbspt-form input.hs-button.primary.large {
+      height: 48px;
+      border-radius: 2px;
+      background-color: #f60 !important;
+      background: #f60;
+      box-shadow: 0 3px 15px 1px rgba(0,0,0,0.1);
+      font-family: open sans;
+      font-size: 18px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #fff;
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+      margin-bottom: 8px;
+      width: 100% !important;
+      line-height: 47px;
+    }
+    /* Sets the background image for the wheel */
+    .the_wheel {
+      /*background-image: url(https://lh3.googleusercontent.com/vs-suM1Tn-9Ndf5snVcV9HyTEBwSBjq0jG6QK3CjTKBkXfdxxhiUTR61E-_p4NT7Wz4W52kcBwbArdarh6Bt8-1f9OUd);*/
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      z-index: 1000;
+      width: -moz-fit-content;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    /* Do some css reset on selected elements */
+    h1, p {
+      margin: 0;
+    }
+
+    div.power_controls {
+      margin-right: 70px;
+      min-height: 46px;
+    }
+
+    div.html5_logo {
+      margin-left: 70px;
+    }
+
+    /* Styles for the power selection controls */
+    table.power {
+      background-color: #cccccc;
+      cursor: pointer;
+      border: 1px solid #333333;
+    }
+
+    table.power th {
+      background-color: white;
+      cursor: default;
+    }
+
+    td.pw1 {
+      background-color: #6fe8f0;
+    }
+
+    td.pw2 {
+      background-color: #86ef6f;
+    }
+
+    td.pw3 {
+      background-color: #ef6f6f;
+    }
+
+    /* Style applied to the spin button once a power has been selected */
+    .clickable {
+      cursor: pointer;
+    }
+
+    /* Other misc styles */
+    .margin_bottom {
+      margin-bottom: 5px;
+    }
+
+    canvas {
+      width: 100%;
+    }
+     #prizeWon{
+       font-size: 17px;
+       color: #61cf1c;
+       animation: blinker 2s linear infinite;
+       font-weight: 900;
+    }
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }
+    #spin_button{
+      background-image: linear-gradient(to bottom, #f7a053, #e24d08);
+      width: 140px;
+      color: #ffffff;
+      font-weight: bold;
+      height: 50px;
+      border-radius: 25px;
+    }
+    #the_wheel{
+      width: 100%;
+      /*-webkit-transition: width 2s;*/
+      /*transition: width 2s;*/
+      transition-delay: 250ms;
+      transition-property: margin-right;
+    }
+  </style>
+
+
+</head>
+
+<body class="all-courses-page">
+
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+  <div class="mat-content mdl-layout__content">
+    <div class="container" >
+      <div class="mdl-grid" style="padding: 40px 0;">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="margin: 30px 0">
+          <div style="width: fit-content;width: -moz-fit-content; margin: 0 auto;    padding-left: 17px;">
+            <h1 style="font-size: 30px; font-weight: bold;">Spin 'N Win</h1>
+            <div class="underline" style="margin: 4px auto 0 auto;"></div>
+          </div>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="the_wheel" >
+          <div class="the_wheel">
+            <canvas id="canvas" width="434" height="434">
+              <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas.
+                Please try another.</p>
+            </canvas>
+            <div class="power_controls" style="width: fit-content;width: -moz-fit-content; margin: 0 auto; padding: 10px 0 0 0">
+              <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="spin_button"
+                      onClick="startSpin();">Spin to Win
+              </button>
+              <div id="prizeWon"></div>
+              <!--<a class="mdl-button mdl-js-button mdl-js-ripple-effect" href="#"-->
+                 <!--onClick="resetWheel(); return false;">Play Again</a><br/>-->
+            </div>
+          </div>
+
+        </div>
+        <div class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" ></div>
+        <div class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <div class="common-loader" id="loader-submit" style="display: none">
+            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+          </div>
+          <div id="hbsptFormContainer" style="display: none;">
+            <div id="submissionMessage" style="display: none;width: fit-content;width: -moz-fit-content; margin: 0 auto;">
+              <i class="material-icons" style=" font-size: 76px; color: #6ee46e; "> check_circle_outline </i>
+            </div>
+            <div id="beforeSubmission">
+              <div style="width: fit-content;width: -moz-fit-content; margin: 0 auto;"><h1 style="font-size: 19px;font-weight: bold;margin-top: 0px">Enter Your Details to Redeem </h1></div>
+              <div class="underline" style="margin: 4px auto 0 auto;"></div>
+            </div>
+
+            <!--[if lte IE 8]>
+            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+            <![endif]-->
+            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+            <script>
+              hbspt.forms.create({
+                portalId: "3966107",
+                formId: "4f54633b-14ab-41db-95bb-192da8f2827e"
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+</div>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/Winwheel.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+
+<!--author :- Satish kumar-->
+<script>
+  var prize;
+  $(document).ready(function () {
+
+    $('#clickToRedeem').on('click',function () {
+       $('#displayPriceContainer').hide();
+       $('#hbsptFormContainer').show();
+    });
+  });
+  $(window).bind("load", function() {
+    $('.hs_prize').hide();
+    $('.hs-button').on("click",function () {
+      // pushSpinWheelDataToHubspot(prize)
+      $('input[name="prize"]').val(prize).change();
+
+    });
+  });
+  // Create new wheel object specifying the parameters at creation time.
+  let theWheel = new Winwheel({
+    'numSegments': 5,   // Specify number of segments.
+    'outerRadius': 210,  // Set radius to so wheel fits the background.
+    'innerRadius': 10,  // Set inner radius to make wheel hollow.
+    'textFontSize': 20,   // Set font size accordingly.
+    'textMargin': 2,    // Take out default margin.
+    'textFillStyle'   : 'black',
+    'lineWidth'   : 5,
+    // 'pointerAngle'   : 90,
+    // 'textOrientation'   : 'curved',     // Note use of curved text.
+    // 'textDirection'     : '',   // Set other text options as desired.
+    // 'textAlignment'     : 'center',
+
+    'segments':       // Define segments including colour and text.
+        [
+          {'fillStyle': '#ff9866','strokeStyle' : '#ffffff',   'text': ' Try your luck \nnext time'},
+          {'fillStyle': '#d2e4d3','strokeStyle' : '#ffffff',   'text': ' 1000 NeoCash'},
+          {'fillStyle': '#fff2cc', 'strokeStyle' : '#ffffff',  'text': '2000 NeoCash'},
+          {'fillStyle': '#fbcf97', 'strokeStyle' : '#ffffff',  'text': '3000 NeoCash '},
+          {'fillStyle': '#adaead', 'strokeStyle' : '#ffffff',  'text': '500 NeoCash '}
+
+        ],
+    'animation':           // Define spin to stop animation.
+        {
+          'type': 'spinToStop',
+          'duration': 5,
+          'spins': 15,
+          'callbackAfter' : 'drawTriangle()',
+          'callbackFinished' : alertPrize
+        }
+  });
+  function calculatePrize()
+  {
+    // This formula always makes the wheel stop somewhere inside prize 3 at least
+    // 1 degree away from the start and end edges of the segment.
+    var  probability = Math.random() * 100;
+    if (probability > 80) {
+      var stopAt = 160;
+          //(180 + Math.floor((Math.random() * 13))); // 0-79
+    }
+    else if (probability < 80 && probability > 40){
+      var stopAt = 80; // 80-84
+    }
+    else {
+      var stopAt = 20; // 85-99
+    }
+    // Important thing is to set the stopAngle of the animation before stating the spin.
+    theWheel.animation.stopAngle = stopAt;
+
+    // May as well start the spin from here.
+    theWheel.startAnimation();
+  }
+  drawTriangle();
+  function drawTriangle()
+  {
+    // Get the canvas context the wheel uses.
+    let ctx = theWheel.ctx;
+
+    ctx.strokeStyle = '#1d4864';     // Set line colour.
+    ctx.fillStyle   = '#f6f6f6';     // Set fill colour.
+    ctx.lineWidth   = 2;
+    ctx.beginPath();              // Begin path.
+    ctx.moveTo(194, 6);           // Move to initial position.
+    ctx.lineTo(240, 5);           // Draw lines to make the shape.
+    ctx.lineTo(217, 70);
+    ctx.lineTo(195, 5);
+    ctx.stroke();                 // Complete the path by stroking (draw lines).
+    ctx.fill();                   // Then fill.
+  }
+
+  var wheelPower = 0;
+  var wheelSpinning = false;
+
+  function startSpin() {
+    $('#displayPriceContainer').show();
+    $('#hbsptFormContainer').hide();
+    $('#spin_button').attr("disabled","disbaled");
+    $('#spin_button').css("opacity","0.5");
+    wheelPower = 1;
+
+    if (wheelSpinning == false) {
+      if (wheelPower == 1) {
+        theWheel.animation.spins = 3;
+      } else if (wheelPower == 2) {
+        theWheel.animation.spins = 8;
+      } else if (wheelPower == 3) {
+        theWheel.animation.spins = 15;
+      }
+      theWheel.startAnimation(calculatePrize());
+      wheelSpinning = true;
+    }
+  }
+  function alertPrize(indicatedSegment) {
+    $('#the_wheel').css({
+      "width":"fit-content"
+    });
+    // redeemPriceDialog();
+    $('#spin_button').hide();
+    $('#hbsptFormContainer').show(600);
+    $('#prize-4f54633b-14ab-41db-95bb-192da8f2827e').val(indicatedSegment.text);
+    // $('#prize-4f54633b-14ab-41db-95bb-192da8f2827e').attr({"readonly":"readonly"});
+    $('#prize-4f54633b-14ab-41db-95bb-192da8f2827e').css("background","#f6f6f6");
+    prize=indicatedSegment.text;
+    if(prize.indexOf("luck") != -1){
+      $('#prizeWon').html(indicatedSegment.text);
+      $('#prizeWon').css("color","red");
+      $('#hbsptFormContainer').hide();
+      $('#the_wheel').css("width", "100%")
+    }
+    else {
+      $('#prizeWon').html("Congrats! You've won "+indicatedSegment.text);
+    }
+
+
+  }
+  $(document).on('click','.hs-button',function(){
+    $('#hbsptFormContainer').hide();
+    $('#loader-submit').show();
+    $('#beforeSubmission').hide();
+    setTimeout(function () {
+      $('.submitted-message').css({
+        "width": "fit-content",
+        "margin": "0 auto",
+        "font-size" : "20px"
+      });
+      if ($(window).width() > '767') {
+        $('#hbsptFormContainer').css({
+          "padding": "20px",
+          "top" : "34%",
+          "position": "relative"
+        });
+      }
+      $('#submissionMessage').show();
+      $('#loader-submit').hide();
+      $('#hbsptFormContainer').show();
+    },5000);
+
+  });
+</script>
+
+</body>
+</html>

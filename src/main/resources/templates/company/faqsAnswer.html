@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <title>Neostencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+  <!-- <link
+    href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+    rel="stylesheet" media="screen" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+   -->
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/contact.css')}}"
+          rel="stylesheet" media="screen" />
+</head>
+
+<body class="contact-us">
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+  <!-- <div class="mat-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title">
+  </span>
+
+</div> -->
+
+
+  <div class="mat-content mdl-layout__content">
+    <div class="landing-darken" style="display: none;"></div>
+    <div class="container">
+      <h3 class="faq-heading">FAQ</h3>
+      <div class="underline"></div>
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"></div>
+        <div
+            class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <input class="search-faqs"
+                 placeholder="Step1: Enter a question or topic">
+          <p class="faq-breadcrumb">
+            <a>Support Home</a> › <a>Security</a>
+          </p>
+          <hr>
+        </div>
+      </div>
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"></div>
+        <div
+            class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <h3 class="faqs-h3">NeoStencil safety and security?</h3><br/>
+          <p class="faqs-answer-text">NeoStencil takes the security of
+            your company data very seriously. We use the best engineering
+            practices available to make sure that NeoStencil is secure. All
+            user and chat data is stored redundantly.</p>
+          <p class="faqs-answer-text">Nobody can access your company
+            data unless you specifically invite them and give them
+            permission.</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"></div>
+        <div
+            class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+          <hr>
+          <div class="mdl-grid">
+            <div
+                class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <h3 class="faqs-h3">Related Questions</h3>
+              <a class="faqs-section-link"><i class="fa fa-play"></i>How
+                do I login on NeoStencil?</a> <a class="faqs-section-link"><i
+                class="fa fa-play"></i>How do I login on NeoStencil?</a> <a
+                class="faqs-section-link"><i class="fa fa-play"></i>How do
+              I login on NeoStencil?</a> <a class="see-more">See more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <br/>
+      <hr>
+      <p class="faqs-p">Haven't found the answer you're looking for?</p>
+      <a
+          class="contact-submit  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        Contact Support </a>
+      <hr>
+    </div>
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+</div>
+
+
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"
+></script>
+
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/custom.js')}}"
+></script>
+<script>
+		$(function() {
+			$("#accordion").accordion();
+		});
+
+
+
+</script>
+</body>
+</html>

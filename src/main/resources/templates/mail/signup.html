@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:mc="http://www.w3.org/1999/xhtml" lang="en"
+			xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Welcome/Signup</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=Fdevice-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		p {
+    		21margin: 0 0 10px;		}
+	</style>
+</head>
+<body style="background: #ffff;">
+<table align="center" style=" margin-top: 35px;margin-bottom: 35px;border:solid 0.7px #999999;max-width: 600px;">
+	<thead>
+	<tr><td colspan="3" style="border-bottom:solid 0.7px #999999; display: block;"><center><img src="https://lh3.googleusercontent.com/5CAgFZ2_TQ3CPX42dMMhGi8nx2GwfkuSCUx4oWmpMUSKYbIvTqo7OuTyl1WXr2iHUKUFiSL7CiXrvN5SOBxmMByUAA" style="margin-bottom: 30px;margin-top: 30px;"></img></center></td></tr>
+	<tr>
+		<td colspan="3" style="display: block;position: relative;">
+			<div style="background-image: url('https://lh3.googleusercontent.com/rWcLzTNrU8zK1G_79BIFM6LFtHrDjomDfrkiPpg1OtRzhlyG26U4JTQIVQcQoNwTqqVKHGtmwGEn9yZMvwxZYFr5iEXk');height: 180px;background-repeat: no-repeat;width: 100%;background-size: contain;"><span style="
+				font-family: Arial;	font-style: normal;	font-stretch: normal;letter-spacing: normal;color: #ffffff;	font-size: 32px;font-weight: bold;	line-height: 0.88;	margin: 38px 28px;	display: inline-block;">Welcome to NeoStencil! <br><span style="font-family: Arial; font-size: 22px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.27; letter-spacing: normal; color: #ffffff;">India’s #1 LIVE Online platform</span></span></div>
+		</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr style="background: white;margin: auto;margin-top: 18px;display: block;padding: 10px 30px 0px 30px;">
+		<td colspan="3" ><p style="font-family: Arial; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.64; letter-spacing: normal; color: #444444;margin-bottom: 29px;"><span style="font-size: 20px; font-weight: bold; line-height: 1.15;">Welcome <span th:text="${fullName}"></span>!</span><br>
+			We can’t stop beaming! Welcome, and thank you for joining our growing family at NeoStencil.<br>
+			NeoStencil partners with India’s top teachers, and enables them to stream their classes online, Live! We are India’s top online platform for <b>IAS,IES/GATE</b> and PCS exam preparation. We also cater to school students preparing for <b> IIT-JEE </b> and <b>NEET</b>
+		</p>
+		</td>
+	</tr>
+
+	<tr style="background: white;margin: auto;display: block;padding: 0px 30px;">
+		<td><a href="https://neostencil.com/courses/" style="font-family: Arial; font-size: 16px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #ffffff;background: orange; padding: 8px 47px; display: inline-block;border: 2.8px solid orange;margin-bottom:27px;">Explore Courses</a></td>
+	</tr>
+
+	<tr style="background: white;margin: auto;display: block;    padding: 37px 30px 29px 30px; background-color: #f1f1f1;font-family: Arial; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.64; letter-spacing: normal; ">
+		<td>
+			<table>
+				<tr>
+					<td colspan="2"><p style=" font-size: 20px; font-weight: bold;color: #000000;margin-bottom:21px;">Started with NeoStencil</p>
+					</td>
+				</tr>
+				<tr style="display: flex;margin-bottom: 15px;">
+					<td style="padding:5px 35px 0px 0px;">
+						<img src="https://lh3.googleusercontent.com/R4P1OGee9h4qWHH6l3RS4OB1628kcRgQsFgJ8aGuHMgHZfeJJpyThQqsdUvDYgX0a-yepHlIqqPI5HQtzpISazM5oP0">
+					</td>
+					<td><b>Study LIVE &amp; Never miss a class again</b><br>
+						Classes are streamed LIVE and you can view your sessions any time, and as many times as you like throughout the course validity.
+					</td>
+				</tr>
+
+				<tr style="display: flex;margin-bottom: 15px;">
+					<td style="padding:5px 35px 0px 0px;">
+						<img src="https://lh3.googleusercontent.com/orrt0ic6C7FZUSdjSkot4OBDyCoOn0oDE8SJBE954R9t8Qts7e64dWJrbj2IG2BX7V4hlRKoALnsjmAlKV-ungjHMw">
+					</td>
+					<td><b>Enhance the classroom experience</b><br>
+						Get your study material directly from the institute. Regular assignments and test series are evaluated by faculty with personal feedback.
+					</td>
+				</tr>
+
+				<tr style="display: flex;margin-bottom: 15px;">
+					<td style="padding:5px 35px 0px 0px;">
+						<img src="https://lh3.googleusercontent.com/1YLM1-AXEZEDje-cPq9liXWnyd9QEYp0dXI1GcPNXOGZfsLnGOO0ggd_LnYNo2iQUcI7x_t-DxD1cOa1Vt4FftGDLPM">
+					</td>
+					<td><b>Simple to use</b><br>
+						All you need is an internet connection, and a laptop or a mobile device and you can access our live classrooms right away.
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+	<tr style="background: white;margin: auto;display: block;padding: 0px 30px 0px 30px;">
+		<td style="font-family: Arial; font-size: 20px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #000000; text-align: center;
+    display: block;margin-top: 42px;">Why NeoStencil?</td>
+	</tr>
+
+	<tr style="background: white;margin: auto;display: block;padding: 27px 30px 0px 30px;">
+		<td>
+			<table>
+				<tr style="display: flex;margin-bottom: 42px; justify-content: space-between;">
+					<td style="max-width:10%;width:100%;padding:5px 35px 0px 0px;">
+						<img src="https://lh3.googleusercontent.com/TXGrB5hhA1KV4BH1LJVMpxwIaJ8LcU_8FJ29TeiCssIbskCjklr927n9HPirE0TdYbmxy44zBuyP5XD5dRXopzWliw">
+					</td>
+					<td style="padding-left: 20px;max-width:40%;width:100%;"><b>Live Online</b><br>
+						<span style="font-size:12px;">Live and recorded  classes</span>
+					</td>
+
+					<td style="max-width:10%;width:100%;padding:5px 35px 0px 0px;">
+						<img src="https://lh3.googleusercontent.com/TuOrJp9FyDZ1goIP2swsPp6EqN_GLuM5LXDyiBrfZyj1WvyHpvDWLliUcy01c1wgV09EwyRCuMFm2mv0KH-CqGHcm4Q">
+					</td>
+					<td style="padding-left: 20px;max-width:40%;width:100%;"><b>India's Top Teachers</b><br>
+						<span style="font-size:12px;max-width:25%;width:100%;">Learn from the india’s best teacher</span>
+					</td>
+				</tr>
+				<tr style="display: flex;margin-bottom: 42px;justify-content: space-between;">
+					<td style="max-width:10%;width:100%;padding:5px 35px 0px 0px;">
+						<img src="https://lh3.googleusercontent.com/Y3zz-2D2CfPxQE8-kGDKl0FoQ4oQ852jfFNaLdnn9ExbjyEuWHnM0-oVmCEYOh8Hpc8C0XsrhFUPRoC6kxgMgR7yB8Q">
+					</td>
+					<td style="padding-left: 20px;max-width:40%;width:100%;"><b>500+ Courses</b><br>
+						<span style="font-size:12px;">Explore the courses</span>
+					</td>
+					<td style="max-width:10%;width:100%;padding:5px 35px 0px 0px;">
+						<img src="https://lh3.googleusercontent.com/dTH8MBLJKtMI8Prm7WBDeHHekjN5bzRBcfPetuiZoiHrF9TpJrTRX2e6M2EgVRbWkW7dUc8lD3eniXaeiE_TSqE6jSA">
+					</td>
+					<td style="padding-left: 20px;max-width:40%;width:100%;"><b>Study Material</b><br>
+						<span style="font-size:12px;">Get the study material of <br> your course</span>
+					</td>
+				</tr>
+				<tr style="display: flex;margin-bottom: 42px;justify-content: space-between;">
+
+
+					<td style="max-width:10%;width:100%;padding:5px 35px 0px 0px;">
+						<img src="https://lh3.googleusercontent.com/K1iECdCMPYUz-pnodl8MsaB-EDZ5Kj5ZJUYwX04bbR-B54lUlolaYEoustbLy6Sgq3cY_pIq2FoekhMYutsRBYWG1ik">
+					</td>
+					<td style="padding-left: 20px;max-width:40%;width:100%;"><b>Assignment & tests</b><br>
+						<span style="font-size:12px;">Multiple assignments & tests</span>
+					</td>
+					<td style="max-width:10%;width:100%;">
+						<img src="https://lh3.googleusercontent.com/I1zhjd-whPH6uY8GkfrQM0Q2_cW4T08dnKHOM1ZKOZXrDUAVqmXCAJNIVPcp6R5k3temWZeEVLW3O_o6VHwNMYoYtA=w60-h70">
+					</td>
+					<td style="padding-left: 20px;max-width:40%;width:100%;"><b>NeoCash</b><br>
+						<span style="font-size:12px;">Save and Earn while you study.</span>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+	<tr style="background: white;margin: auto;display: block;padding: 0px 30px;">
+		<td style="text-align: center; display: block;"><a href="https://neostencil.com/courses/" style="font-family: Arial; font-size: 16px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #ffffff;background: orange; padding: 8px 47px; display: inline-block;border: 2.8px solid orange;margin-bottom:42px;">Explore Courses</a></td>
+	</tr>
+
+	<tr style="background: white;margin: auto;display: block;padding: 0px 30px;">
+		<td><p style="font-family: Arial; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.43; letter-spacing: normal; color: #444444;margin-bottom: 20px;">Go ahead and visit <a href="#" style="color: #2e91e9;">www.neostencil.com</a> to check out all our courses.
+			Looking forward to you being the next topper!</p></td>
+	</tr>
+
+	<tr style="background: white;margin: auto;display: block;padding: 10px 30px 0px 30px;">
+		<td colspan="3"><p style="font-family: HelveticaNeue; font-size: 14px; font-weight: 700; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #000000;margin-bottom: 0px; line-height: 1.43;">Happy Learning,</p></td>
+	</tr>
+
+	<tr style="background: white;margin: auto;display: block;padding: 10px 30px 0px 30px;">
+		<td colspan="3"><p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #333333;">The NeoStencil team</p></td>
+	</tr>
+	</tbody>
+	<tfoot align="center" style="border-top:solid 0.7px #999999;display: block;    padding: 20px 20px 37px 20px;">
+
+	<tr>
+		<td colspan="3"> <center><img src="https://lh3.googleusercontent.com/yp2UqdV5HbaPBrqtPvJh0QPykqn8X6pqp3IpfwpfuLcw9f8Pz1dHB4OcNHDpBeJVUg7FPEQFS-UZPte7VLEaQ_qsyXQ" style="margin-bottom: 7px;"></img></center></td>
+	</tr>
+
+
+	<tr>
+		<td colspan="3"> <p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.67; letter-spacing: normal; text-align: center; color: #666666;line-height: 1.83;margin-bottom: 0px;">© 2014-2018. All rights reserved.</p></td>
+	</tr>
+
+
+	<tr>
+		<td colspan="3"><p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.67; letter-spacing: normal; text-align: center; color: #666666;line-height: 1.83;margin-bottom: 0px;">#337, Udyog Vihar Phase II, Sector 20, Gurgaon | contact@neostencil.com | +91 9599075552/3  </p></td>
+	</tr>
+
+	<tr>
+		<td colspan="3"><p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.67; letter-spacing: normal; text-align: center; color: #666666;margin-bottom: 0px;">Not interested in e-mail updates? <a href="#" style="color: #0077e2;">Unsubscribe from this list.</a></p></td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="text-align: center; margin-bottom: 18px;">
+			<p style=" font-size: 12px;line-height: 18px;color: black;text-align: center;margin-top: 7px;margin-bottom: 0px;">
+				<a style="margin:6px;" href="https://www.facebook.com/NeoStencil" target="_blank"><img src="https://lh3.googleusercontent.com/ddiziJcZi1WokLGFfBT2bvWyncLnJ2s9lpeJOjKHgBTXusxeDu_Etkj4kzfIMZaPKSHHXopdogMIP72PzxIFUhsIKzAE"></img></a>
+				<a style="margin:6px;" href="https://twitter.com/NeoStencil" target="_blank"><img src="https://lh3.googleusercontent.com/SMmwZnsdoF8nsXobPm0CxitWKGtYzZTfG8__-C0fSV0l_9lh2chNIUpwS5XxzKU1gYnxOYwJhVx_L23n2puDAvWqb_xw"></img></a>
+				<a style="margin:6px;" href="https://www.linkedin.com/company/neostencil-inc-/" target="_blank"><img src="https://lh3.googleusercontent.com/aaOEZItJUcrcBBPRVUikuaAGK_Ypjtg3kd3rKUAXE77GB_hdkdEukxYB1xk9fJd2nQLV7VmQrsjtJewlmXcUDdPH0Fc"></img></a>
+				<a style="margin:6px;" href="https://plus.google.com/+Neostencil" target="_blank"><img src="https://lh3.googleusercontent.com/1jDuugHH_o1dKPpu5tMP0_IyFNNLzkIfMy46XFlK8c7t2Uv7ygq4C-28pExEetHhnFI2uyQSf9vGrx-sPuPahosWLw"></img></a></p>
+		</td>
+	</tr>
+	</tfoot>
+</table>
+</body>
+</html>

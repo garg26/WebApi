@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Neostencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/courses.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/assignments.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick-theme.css')}}"
+          rel="stylesheet" media="screen" />
+  <!-- <link
+    href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+    rel="stylesheet" media="screen" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+   -->
+  <style>
+.course-details ul {
+	padding: 0 !important;
+	margin: 0;
+}
+
+.send-enquiry {
+	margin-top: 20px !important;
+}
+
+
+
+
+
+  </style>
+</head>
+
+<body class="all-teachers-page">
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+  <!-- <div class="mat-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title">
+  </span>
+
+</div> -->
+
+
+  <div class="mat-content mdl-layout__content">
+    <div class="landing-darken" style="display: none;"></div>
+    <!-- <div class="load-bar">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div> -->
+
+
+    <section class="course-details">
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <h3>Essay Test Series</h3>
+            <ul class="course-details-border">
+              <li><img
+                  src="http://www.pvhc.net/img240/uyttxprhsqycyximpzjb.png"
+                  width="68px"></li>
+              <li><label>Instructor:</label> <span>by Salamuddin
+										Ansari </span> <span style="color: #666666;"> Lukmaan
+										IAS </span></li>
+              <li><label>Number of Sessions:</label> <span>200+ </span></li>
+              <li><label>Course Validity:</label> <span><span>20</span>
+										days </span></li>
+              <li><label>Students Enrolled:</label> <span>150 </span></li>
+              <li><label>Rating:</label> <span><span
+                  class="course-rating"><i class="material-icons">star_rate</i>
+											<i class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i></span> </span></li>
+            </ul>
+
+            <div style="margin-top: 20px;">
+              <ul class="course-nav">
+                <li class="active"><a href="#teacher-description-card"><i
+                    class="fa fa-file-text-o" aria-hidden="true"></i>
+                  &nbsp;&nbsp;Description</a></li>
+                <li><a href="#trending-courses"><i class="fa fa-list"
+                                                   aria-hidden="true"></i> &nbsp;&nbsp;Session</a>
+                </li>
+                <li><a href="#reviews"><i class="fa fa-comment-o"
+                                          aria-hidden="true"></i> &nbsp;&nbsp;News</a></li>
+                <li><a href="#reviews"><i class="fa fa-star-o"
+                                          aria-hidden="true"></i> &nbsp;&nbsp;Reviews</a></li>
+              </ul>
+              <button class="send-enquiry">Send Enquiry</button>
+            </div>
+
+            <div id="" class="about-this-course">
+              <div>
+                <div class="logo-font mat-teachers-slogan">Essay Test
+                  Series for UPSC Mains 2018
+                </div>
+                <div class="underline" style="margin: 10px 0;"></div>
+
+                <ol>
+                  <li>Essay paper plays an important role in the UPSC Mains
+                    examination and it is also one of determining factor in Mains
+                    exam.
+                  </li>
+
+                  <li>Essay Test Series includes 8 Essay tests on different
+                    topics relevant for USPC Mains exam preparation.
+                  </li>
+
+                  <li>Essay Test copies are evaluated by S. Ansari and
+                    Prof. Mujtaba Hussain.
+                  </li>
+
+                  <li>They provide their valuable feedback for improvement
+                    in Essay Writing.
+                  </li>
+
+                </ol>
+                <p>The course will cover various types of Essay topics such
+                  as related to Polity & governance, Indian Society, Economics,
+                  Science and Tech etc. It will help in developing the structure
+                  and flow in Essay writing and will allow practice different
+                  dimensions of Essay Topic.</p>
+                <div class="batches">
+                  <p>Suitable for: 2018 and 2019 aspirants. All the
+                    aspirants – Beginners and also for reattempt candidates. ..</p>
+                </div>
+                <hr>
+                <br/> <br/>
+                <div class="logo-font mat-teachers-slogan">About the
+                  instructor
+                </div>
+                <p class="text-course">Lukmaan IAS has a very dynamic and
+                  hardworking team which consists of permanent and visiting
+                  faculties. All the teachers have wide-range of UPSC
+                  experiences as they have appeared in its examination and
+                  therefore, they understand the UPSC trend for better guidance
+                  to students. Salahuddin Ansari is the founder of Lukmaan IAS.
+                  He is a multi-talented teacher and teaches Polity and
+                  Governance, Ethics and Aptitude and Internal security. Prof.
+                  (Retd.) Mujtaba Hussain is an Ex-JNU faculty who is guiding
+                  the candidates in Social Issues of the General Studies, Art &
+                  Culture and Essay writing</p>
+              </div>
+            </div>
+
+          </div>
+          <div
+              class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="course-title-price">
+                <label><i class="fa fa-inr"></i>&nbsp;<label>20,000</label><br/>
+                  <span>2 days left at this price!</span></label>
+              </div>
+              <button class="add-to-cart">
+                <svg xmlns="http://www.w3.org/2000/svg"
+										version="1.1"
+										id="Capa_1" x="0px" y="0px" viewBox="0 0 459.529 459.529"
+										style="enable-background: new 0 0 459.529 459.529;"
+										xml:space="preserve">
+<g>
+	<g>
+		<path
+											d="M17,55.231h48.733l69.417,251.033c1.983,7.367,8.783,12.467,16.433,12.467h213.35c6.8,0,12.75-3.967,15.583-10.2    l77.633-178.5c2.267-5.383,1.7-11.333-1.417-16.15c-3.117-4.817-8.5-7.65-14.167-7.65H206.833c-9.35,0-17,7.65-17,17    s7.65,17,17,17H416.5l-62.9,144.5H164.333L94.917,33.698c-1.983-7.367-8.783-12.467-16.433-12.467H17c-9.35,0-17,7.65-17,17    S7.65,55.231,17,55.231z" />
+		<path
+											d="M135.433,438.298c21.25,0,38.533-17.283,38.533-38.533s-17.283-38.533-38.533-38.533S96.9,378.514,96.9,399.764    S114.183,438.298,135.433,438.298z" />
+		<path
+											d="M376.267,438.298c0.85,0,1.983,0,2.833,0c10.2-0.85,19.55-5.383,26.35-13.317c6.8-7.65,9.917-17.567,9.35-28.05    c-1.417-20.967-19.833-37.117-41.083-35.7c-21.25,1.417-37.117,20.117-35.7,41.083    C339.433,422.431,356.15,438.298,376.267,438.298z" />
+	</g>
+</g>
+</svg>
+                &nbsp;&nbsp;ADD TO CART
+              </button>
+              <button class="buy-course">BUY NOW</button>
+            </div>
+            <div class="share-with-friends">
+              <hr class="hr1">
+              <span>Share with your friend &nbsp;&nbsp;<i
+                  class="fa fa-facebook"></i>&nbsp;&nbsp;<i class="fa fa-twitter"></i>&nbsp;&nbsp;<i
+                  class="fa fa-linkedin"></i>&nbsp;&nbsp;<i
+                  class="fa fa-google-plus"></i></span>
+              <hr class="hr2">
+            </div>
+
+            <div
+                class="refer-a-friend demo-card-wide mdl-card mdl-shadow--2dp">
+              <h3>Extra 5% OFF on Refer a Friend</h3>
+              <p>Refer a friends mail ID, after registeration you will get
+                5% discount.</p>
+              <a href="terms">Term and Conditions*</a>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <div class="container-header">
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <div id="" class="about-this-course">
+            <div>
+              <div class="logo-font mat-teachers-slogan">What you will
+                get
+              </div>
+              <p class="text-course">Learn Pub. Ad with the best faculty
+                for the subject. This course helps in the conceptual
+                understanding of the subject and answer writing improvement for
+                Mains exam.</p>
+              <div class="mdl-grid">
+                <div
+                    class="what-will-you-learn mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                  <div class="mdl-grid">
+                    <div
+                        class="mdl-cell mdl-cell--2-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div
+                        class="what-will-you-learn mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                      <div class="">
+                        <label><b>Rewarding Optional</b></label><br/> <span>Public
+														Study material will be despatched after 3 days and you
+														will receive in 7 to 10 working days in your registered
+														address.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                    class="what-will-you-learn mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                  <div class="mdl-grid">
+                    <div
+                        class="mdl-cell mdl-cell--2-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div
+                        class="what-will-you-learn mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                      <div class="">
+                        <label><b>Rewarding Optional</b></label><br/> <span>Public
+														Students can interact with our teachers using the chat and
+														email option.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                    class="what-will-you-learn mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                  <div class="mdl-grid">
+                    <div
+                        class="mdl-cell mdl-cell--2-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div
+                        class="what-will-you-learn mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                      <div class="">
+                        <label><b>Rewarding Optional</b></label><br/> <span>Public
+														Students can interact with our teachers using the chat and
+														email option.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                    class="what-will-you-learn mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                  <div class="mdl-grid">
+                    <div
+                        class="mdl-cell mdl-cell--2-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div
+                        class="what-will-you-learn mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                      <div class="">
+                        <label><b>Rewarding Optional</b></label><br/> <span>Public
+														Study material will be despatched after 3 days and you
+														will receive in 7 to 10 working days in your registered
+														address.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-header">
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <div class="logo-font mat-teachers-slogan">Course Details:
+            Sociology Optional for IAS
+          </div>
+          <div class="underline" style="margin: 8px 0 32px 0;"></div>
+          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+            <tr>
+              <th>Start Sate</th>
+              <th>No of Sessions</th>
+              <th>Test Timings</th>
+              <th>Coursse Validity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>24th November 2017</td>
+              <td>8</td>
+              <td>Test: Every Sunday, 02:00 pm to 05:00 pm <br/>
+                Discussion: Every Sunday, 05:30 pm to 08:30 pm
+              </td>
+              <td>70 + 15 days for revision (Course validity starts from
+                the day you register for the course)
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <br/> <br/>
+    <div class="container-header">
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <div class="logo-font mat-teachers-slogan">Essay Test Series
+            Schedule
+          </div>
+          <div class="underline" style="margin: 8px 0 32px 0;"></div>
+          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+            <tr>
+              <th>T.N</th>
+              <th>Test</th>
+              <th>Date</th>
+              <th>Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>1</td>
+              <td>STRATEGY SESSION BY S. ANSARI & MUJTABA HUSSAIN</td>
+              <td>24 Nov. 2017</td>
+              <td>4:00pm to 6:00pm</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Test-I SECTION A - POLITY, ADMINISTRATION & GOVERNANCE
+                SECTION B - INTERNATIONAL ISSUES
+              </td>
+              <td>24 Nov. 2017</td>
+              <td>4:00pm to 6:00pm</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>STRATEGY SESSION BY S. ANSARI & MUJTABA HUSSAIN</td>
+              <td>24 Nov. 2017</td>
+              <td>4:00pm to 6:00pm</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Test-I SECTION A - POLITY, ADMINISTRATION & GOVERNANCE
+                SECTION B - INTERNATIONAL ISSUES
+              </td>
+              <td>24 Nov. 2017</td>
+              <td>4:00pm to 6:00pm</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>STRATEGY SESSION BY S. ANSARI & MUJTABA HUSSAIN</td>
+              <td>24 Nov. 2017</td>
+              <td>4:00pm to 6:00pm</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <br/> <br/>
+    <section id="reviews" class="reviews">
+      <div class="container">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div id="accordion">
+              <h3>UNIT 1</h3>
+              <div>
+                <div class="dots-list">
+                  <ol>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+
+                  </ol>
+                </div>
+              </div>
+              <h3>UNIT 2</h3>
+              <div>
+                <div class="dots-list">
+                  <ol>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+
+                  </ol>
+                </div>
+              </div>
+              <h3>UNIT 3</h3>
+              <div>
+                <div class="dots-list">
+                  <ol>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+
+                  </ol>
+                </div>
+              </div>
+              <h3>UNIT 4</h3>
+              <div>
+                <div class="dots-list">
+                  <ol>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+                    <li>Public Administration Optional - SESSION 02</li>
+
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <br/> <br/>
+
+
+    <hr style="margin-top: 122px; width: 65%; margin: 100px auto 0;">
+    <div class="">
+      <div class="container-header">
+        <div class="logo-font mat-teachers-slogan">Related Courses
+          for IAS mains
+        </div>
+        <div class="underline" style="margin: 10px 0;"></div>
+        <section id="single-course-slider-3" class="regular slider">
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <!-- <i class="fav material-icons">favorite_border</i> <i
+                style="display: none;" class="unfav material-icons">favorite</i> -->
+              <img src="images/courses/course-img.png">
+              <!-- <div class="courses-label">IAS Essay</div> -->
+
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html">
+              <h3>Editorial Discussion Untill Mains Lukmaan Academy</h3>
+            </a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div class="">
+                <h3 class="price">
+                  <i class="fa fa-inr">&nbsp;</i>14,880
+                </h3>
+                <span class="number-students float-right"><i
+                    class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <!-- <i class="fav material-icons">favorite_border</i> <i
+                style="display: none;" class="unfav material-icons">favorite</i> -->
+              <img src="images/courses/course-img.png">
+              <!-- <div class="courses-label">IAS Essay</div> -->
+
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html">
+              <h3>Editorial Discussion Untill Mains Lukmaan Academy</h3>
+            </a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div class="">
+                <h3 class="price">
+                  <i class="fa fa-inr">&nbsp;</i>14,880
+                </h3>
+                <span class="number-students float-right"><i
+                    class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <!-- <i class="fav material-icons">favorite_border</i> <i
+                style="display: none;" class="unfav material-icons">favorite</i> -->
+              <img src="images/courses/course-img.png">
+              <!-- <div class="courses-label">IAS Essay</div> -->
+
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html">
+              <h3>Editorial Discussion Untill Mains Lukmaan Academy</h3>
+            </a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div class="">
+                <h3 class="price">
+                  <i class="fa fa-inr">&nbsp;</i>14,880
+                </h3>
+                <span class="number-students float-right"><i
+                    class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <!-- <i class="fav material-icons">favorite_border</i> <i
+                style="display: none;" class="unfav material-icons">favorite</i> -->
+              <img src="images/courses/course-img.png">
+              <!-- <div class="courses-label">IAS Essay</div> -->
+
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html">
+              <h3>Editorial Discussion Untill Mains Lukmaan Academy</h3>
+            </a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div class="">
+                <h3 class="price">
+                  <i class="fa fa-inr">&nbsp;</i>14,880
+                </h3>
+                <span class="number-students float-right"><i
+                    class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <!-- <i class="fav material-icons">favorite_border</i> <i
+                style="display: none;" class="unfav material-icons">favorite</i> -->
+              <img src="images/courses/course-img.png">
+              <!-- <div class="courses-label">IAS Essay</div> -->
+
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html">
+              <h3>Editorial Discussion Untill Mains Lukmaan Academy</h3>
+            </a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div class="">
+                <h3 class="price">
+                  <i class="fa fa-inr">&nbsp;</i>14,880
+                </h3>
+                <span class="number-students float-right"><i
+                    class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <!-- <i class="fav material-icons">favorite_border</i> <i
+                style="display: none;" class="unfav material-icons">favorite</i> -->
+              <img src="images/courses/course-img.png">
+              <!-- <div class="courses-label">IAS Essay</div> -->
+
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html">
+              <h3>Editorial Discussion Untill Mains Lukmaan Academy</h3>
+            </a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div class="">
+                <h3 class="price">
+                  <i class="fa fa-inr">&nbsp;</i>14,880
+                </h3>
+                <span class="number-students float-right"><i
+                    class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="trending-courses-card mdl-card__media">
+              <!-- <i class="fav material-icons">favorite_border</i> <i
+                style="display: none;" class="unfav material-icons">favorite</i> -->
+              <img src="images/courses/course-img.png">
+              <!-- <div class="courses-label">IAS Essay</div> -->
+
+            </div>
+            <div class="ns-card">
+								<span class="course-rating"><i class="material-icons">star_rate</i>
+									<i class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i> <i
+                      class="material-icons">star_rate</i></span>
+              <span class="starts-on">Starts on <span
+                  class="starts-on-date">27-nov-2017</span>
+								</span> <a href="comingsoon.html">
+              <h3>Editorial Discussion Untill Mains Lukmaan Academy</h3>
+            </a>
+              <p class="ns-card-p">
+									<span class="p-grid-1"><i>by</i> <span
+                      class="ns-card-teacher">Pawan Kumar</span><br/>(Pavan Kumar
+										Academy)</span>
+              </p>
+              <div class="">
+                <h3 class="price">
+                  <i class="fa fa-inr">&nbsp;</i>14,880
+                </h3>
+                <span class="number-students float-right"><i
+                    class="fa fa-user"></i>&nbsp;1332 Students </span>
+              </div>
+            </div>
+          </div>
+
+        </section>
+      </div>
+    </div>
+
+    <section id="reviews" class="reviews">
+      <div class="container">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <hr style="margin-top: 100px;">
+            <div
+                class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <br/>
+              <div class="logo-font mat-teachers-slogan">Reviews</div>
+              <br/>
+
+              <div class="mdl-grid">
+                <div
+                    class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                    style="margin: 0;">
+                  <div class="rating-box">
+                    <h2>5</h2>
+                    <span class="course-rating"><i class="material-icons">star_rate</i>
+												<i class="material-icons">star_rate</i> <i
+                          class="material-icons">star_rate</i> <i
+                          class="material-icons">star_rate</i></span>
+                    <p>27 Ratings</p>
+                  </div>
+                </div>
+                <div
+                    class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                    style="margin: 0;">
+                  <div class="rating-stars">
+                    <div class="mdl-grid">
+                      <div
+                          class="rating-margin mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i><i
+                              class="material-icons">star_rate</i></span>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="rating-bar" style="width: 100%;"></div>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="number-of-ratings-given">21</div>
+                      </div>
+                    </div>
+                    <div class="mdl-grid">
+                      <div
+                          class="rating-margin mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i></span>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="rating-bar" style="width: 40%;"></div>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="number-of-ratings-given">17</div>
+                      </div>
+                    </div>
+                    <div class="mdl-grid">
+                      <div
+                          class="rating-margin mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i></span>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="rating-bar" style="width: 70%;"></div>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="number-of-ratings-given">4</div>
+                      </div>
+                    </div>
+                    <div class="mdl-grid">
+                      <div
+                          class="rating-margin mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i> <i
+                              class="material-icons">star_rate</i></span>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="rating-bar"
+                             style="width: 100%; background: #f2f2f2;"></div>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="number-of-ratings-given">0</div>
+                      </div>
+                    </div>
+                    <div class="mdl-grid">
+                      <div
+                          class="rating-margin mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+													<span class="course-rating"><i
+                              class="material-icons">star_rate</i></span>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="rating-bar"
+                             style="width: 100%; background: #f2f2f2;"></div>
+                      </div>
+                      <div
+                          class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <div class="number-of-ratings-given">0</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <br/> <br/>
+            <div
+                class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+              <div class="review">
+                <img src="http://www.pvhc.net/img240/uyttxprhsqycyximpzjb.png"
+                     width="64px" class="float-left">
+                <div class="user-detail float-left">
+                  <span>Ruchika Katyal</span><br/> <span class="course-rating"><i
+                    class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i></span>&nbsp;<span
+                    class="review-date"> | Dec 5, 2017</span>
+                </div>
+                <p>Your mstery in the subject, conceptual clarity & teching
+                  styled helped in simplifying the most difficultthongs & gave
+                  self-confidence a new meaning. I thnak you for your
+                  unparalleled support at all times.</p>
+              </div>
+              <hr>
+              <div class="review">
+                <img src="http://www.pvhc.net/img240/uyttxprhsqycyximpzjb.png"
+                     width="64px" class="float-left">
+                <div class="user-detail float-left">
+                  <span>Ruchika Katyal</span><br/> <span class="course-rating"><i
+                    class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i></span>&nbsp;<span
+                    class="review-date"> | Dec 5, 2017</span>
+                </div>
+                <p>Your mstery in the subject, conceptual clarity & teching
+                  styled helped in simplifying the most difficultthongs & gave
+                  self-confidence a new meaning. I thnak you for your
+                  unparalleled support at all times.</p>
+              </div>
+              <hr>
+              <div class="review">
+                <img src="http://www.pvhc.net/img240/uyttxprhsqycyximpzjb.png"
+                     width="64px" class="float-left">
+                <div class="user-detail float-left">
+                  <span>Ruchika Katyal</span><br/> <span class="course-rating"><i
+                    class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i> <i
+                    class="material-icons">star_rate</i></span>&nbsp;<span
+                    class="review-date"> | Dec 5, 2017</span>
+                </div>
+                <p>Your mstery in the subject, conceptual clarity & teching
+                  styled helped in simplifying the most difficultthongs & gave
+                  self-confidence a new meaning. I thnak you for your
+                  unparalleled support at all times.</p>
+              </div>
+              <hr>
+              <span class="load-more-reviews">Read All 19 reviews</span>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+</div>
+
+
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"
+></script>
+
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/custom.js')}}"
+></script>
+<script>
+		$(function() {
+			$("#accordion").accordion();
+		});
+
+
+
+</script>
+</body>
+</html>

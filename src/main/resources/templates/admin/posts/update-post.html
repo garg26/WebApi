@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header" th:text="${post?.title}"></h1>
+        </div>
+      </div>
+      <form name="update-post" id="update-post">
+        <div class="col-md-9">
+
+          <label>ID</label>
+          <div class="input-group">
+            <input type="text" name="post-id" disabled id="post-id"
+                   th:value="${post?.postId}" class="form-control"
+                   placeholder="Post ID e.g. upsc-prelims-philosophy" required>
+          </div>
+          <br/> <label>URL(Slug)</label>
+          <div class="input-group">
+            <span class="input-group-addon">http://neostencil.com/</span> <input
+              type="text" name="post-slug" id="post-slug"
+              th:value="${post?.postSlug}" class="form-control"
+              placeholder="Post Slug e.g. upsc-prelims-philosophy">
+          </div>
+
+          <div class="form-group" style="margin-top: 10px" ;>
+            <label>Title</label> <input type="text" name="post-title"
+                                        id="post-title" th:value="${post?.title}"
+                                        class="form-control"
+                                        placeholder="Title of the post" required>
+          </div>
+          <div class="form-group" id="tinymceTextarea">
+            <label>Text</label>
+            <textarea id="summernote" name="summernote"></textarea>
+          </div>
+
+
+          <label class="container"><input type="checkbox"
+                                          name="featured" id="featured"
+                                          th:checked="${post?.featured}">Featured</label>
+          <label class="container"><input type="checkbox"
+                                          name="popular" id="popular" th:checked="${post?.popular}">Popular</label>
+
+
+          <div class="form-group">
+            <label>ReadTime</label><input type="text" name="readTime"
+                                          id="readTime" th:value="${post?.readTime}"
+                                          class="form-control"
+                                          placeholder="Read Time e.g 5 min read">
+          </div>
+          <div class="form-group">
+            <label>No. of Views</label><input type="number" min="0"
+                                              class="form-control" name="noofviews"
+                                              th:value="${post?.noOfViews}" id="noofviews"
+                                              placeholder="No. of Views (Temporarily)">
+          </div>
+
+          <div class="form-group">
+            <label>Brief</label><input type="text" class="form-control"
+                                       name="brief" id="brief"
+                                       placeholder="Add a small brief of the post"
+                                       th:value="${post?.brief}">
+          </div>
+
+
+          <div class="form-group tag_wrap" style="margin-top: 10px;">
+            <label>Tag</label>
+            <div class="input-group control-group add-tag">
+              <div class="row">
+                <div class="col-md-10">
+                  <input type="text" name="tags[]" id="tags"
+                         class="form-control" placeholder="Tag name...."
+                         th:value="${post?.tags}">
+                </div>
+
+                <div class="col-md-2">
+                  <button class="btn btn-success add-more-tag pull-right"
+                          type="button">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="field_wrapper1"></div>
+          </div>
+
+          <br/>
+
+          <div class="panel panel-primary" id="erMetaPanel">
+            <div class="panel-heading">Meta Information</div>
+            <div class="panel-body">
+              <div style="margin-top: 20px;" class="col-md-9">
+                <label>SEO Title:</label> <input type="text"
+                                                 placeholder="Enter Title"
+                                                 th:value="${post?.titleTag}"
+                                                 id="titleTag" class="form-control"
+                                                 required="required">
+              </div>
+
+              <div class="row"></div>
+
+
+              <div class="col-md-9" id="social-image"
+                   style="margin-top: 20px; width: 100%; margin-bottom: 20px;">
+                <label>Social Image:</label>
+                <div>
+
+                  <label class="custom-file"> <input type="file"
+                                                     id="socialImage" class="custom-file-input">
+                    <span
+                        class="custom-file-control"></span>
+                  </label> <input type="button" class="button btn-primary"
+                                  value="Upload" id="but_social_upload">
+                  <div style="display: none;" id="loaderSocialUpload">
+                    <img width="30px" height="30px"
+                         src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                  </div>
+
+                </div>
+                <img src="" id="upload-social-img-tag" width="100px"/> <br>
+              </div>
+
+              <br/> <br/>
+              <div class="existingMetaPanel" style="margin-top: 10px">
+                <div class="row" id="existingMetaPanel"
+                     style="margin-left: 15px; margin-top: 13px;"
+                     th:each="meta:${post.metaList}">
+                  <div class="col-md-4">
+                    <label style="font-weight: bold;">Meta Type:</label> <input
+                      type="text" readonly="readonly" id="metaType"
+                      th:value="${meta?.metaInformation?.type}">
+                  </div>
+                  <div class="col-md-8">
+                    <label style="font-weight: bold;">Meta Content:</label> <input
+                      style="width: 70%;" type="text"
+                      th:value="${meta?.metaInformation?.content}"
+                      id="metaContent">
+                  </div>
+                </div>
+
+
+                <!-- <div th:if="${#strings.toString(meta?.type)} == 'og:image'"
+                style="margin-top: 20px;" class="col-md-4">
+                <label>Social Image:</label><br /> <label class="custom-file">
+                  <input type="file" id="socialImage" class="custom-file-input">
+                  <span class="custom-file-control"></span>
+                </label> <input type="button" class="btn btn-primary" value="Upload"
+                  id="but_social_upload">
+
+                <div style="display: none;" id="loaderSocialUpload">
+                  <img width="30px" height="30px"
+                    src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                </div>
+
+                <img th:src="${meta?.content}" name="thumbnail"
+                  id="upload-social-img-tag" width="100px" />
+
+              </div> -->
+
+              </div>
+              <div class="row" id="metaPanel"></div>
+              <div class="row">
+                <div style="margin-top: 20px;" class="col-md-9">
+                  <button type="button" class="btn btn-primary"
+                          onclick="showAddMetaPanel();">Add More MetaData
+                  </button>
+                </div>
+              </div>
+
+              <div id="addMetaPanel">
+                <div style="margin-top: 20px;" class="col-md-11">
+                  <label style="font-weight: bold;"> Meta Type:</label><select
+                    class="form-control selectpicker" id="ddMetaType"
+                    data-live-search="true">
+                  <option value="twitter:card">twitter:card</option>
+                  <option value="twitter:description">twitter:description</option>
+                  <option value="og:locale">og:locale</option>
+                  <option value="twitter:title">twitter:title</option>
+                  <option value="twitter:site">twitter:site</option>
+                  <option value="og:site_name">og:site_name</option>
+                  <option value="article:section">article:section</option>
+                  <option value="og:type">og:type</option>
+                  <option value="og:description">og:description</option>
+                  <option value="fb:app_id">fb:app_id</option>
+                  <option value="og:url">og:url</option>
+                  <option value="article:publisher">article:publisher</option>
+                  <option value="og:title">og:title</option>
+                  <option value="og:image">og:image</option>
+                  <option value="og:image:secure_url">og:image:secure_url</option>
+                  <option value="twitter:image">twitter:image</option>
+                </select>
+                </div>
+
+                <div style="margin-top: 20px;" class="col-md-11">
+                  <label style="font-weight: bold;"> Meta Content:</label> <input
+                    type="text" placeholder="Enter comma separated meta content"
+                    id="txtMetaContent" class="form-control">
+                </div>
+
+                <div style="margin-top: 20px;" class="col-md-9">
+                  <button type="button" class="btn btn-primary"
+                          onclick="addMetaInfo();">Save Meta
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <br/>
+          <div class="panel panel-primary" id="pnlFeaturedImage">
+            <div class="panel-heading">Featured Image</div>
+            <div class="panel-body">
+
+              <div style="margin-top: 20px;" class="col-md-9">
+                <label> Title:</label> <input type="text"
+                                              placeholder="Enter featured image title"
+                                              id="txtFITitle"
+                                              th:value="${post?.featuredImage?.title}"
+                                              class="form-control">
+              </div>
+
+              <div style="margin-top: 20px;" class="col-md-9">
+                <label> Caption:</label> <input type="text"
+                                                placeholder="Enter featured image caption"
+                                                id="txtFICaption"
+                                                th:value="${post?.featuredImage?.caption}"
+                                                class="form-control">
+              </div>
+
+              <div style="margin-top: 20px;" class="col-md-9">
+                <label> Alt Text:</label> <input type="text"
+                                                 placeholder="Enter featured image alt text"
+                                                 id="txtFIAltText"
+                                                 th:value="${post?.featuredImage?.altText}"
+                                                 class="form-control">
+              </div>
+
+              <div style="margin-top: 20px;" class="col-md-9">
+                <label> Description:</label> <input type="text"
+                                                    placeholder="Enter featured image description"
+                                                    th:value="${post?.featuredImage?.description}"
+                                                    id="txtFIDescription" class="form-control">
+              </div>
+
+              <div style="margin-top: 20px;" class="col-md-9">
+                <label>Upload Image:</label></br> <label class="custom-file">
+                <input type="file" id="featureImage" class="custom-file-input">
+                <span class="custom-file-control"></span>
+              </label> <input type="button" class="button btn-primary" value="Upload"
+                              id="but_feature_upload">
+
+                <div style="display: none;" id="loaderFeatureUpload">
+                  <img width="30px" height="30px"
+                       src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                </div>
+                <img th:src="${post?.featuredImage?.url}" name="thumbnail"
+                     id="upload-feature-img-tag" width="100px"/>
+              </div>
+
+
+            </div>
+          </div>
+
+          <br/>
+
+
+          <div class="form-group">
+            <label class="error-single" id="add-new-post-text-error"></label>
+          </div>
+
+          <div th:if="${enablePublishButton}">
+            <label class="radio-inline" style="margin-top: 10px;"><input
+                type="radio" value="publish"
+                th:checked="${#strings.toString(post?.status)} == 'publish'"
+                name="status" checked>Publish</label> <label
+              class="radio-inline" style="margin-top: 10px;"><input
+              type="radio" value="draft"
+              th:checked="${#strings.toString(post?.status)} == 'draft'"
+              name="status">Draft</label>
+          </div>
+
+          <div class="row" style="margin-top: 10px" ;>
+            <div class="col-md-9">
+              <button type="submit" class="submit btn btn-primary" id="Submit">Submit</button>
+              <i class="fa fa-spinner fa-spin" id="loader"></i> <a
+                href="/admin_writer_editor/posts" class="btn btn-default"
+                style="margin-left: 60px;">All Post</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9">
+              <label class="error-single" id="add-new-post-error"></label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
+<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+<!-- Tiny MCE  -->
+<script
+    src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=1c5byrbl6om87u10sdtie0pqvjd0tts4q2yw2psypsgwtyn2'></script>
+
+<script th:inline="javascript">
+  /*<![CDATA[*/
+
+  var postText = [[${post?.text}]];
+  var postId = [[${post?.postId}]];
+  var postSlug = [[${post?.postSlug}]];
+  var featureImageId = [[${post?.featuredImage?.id}]];
+  var postFeatureImageUrl = [[${post?.featuredImage?.url}]];
+  var postFeatureImageName = [[${post?.featuredImage?.name}]];
+  var breadCrumb = [[${post?.breadCrumb}]];
+  var tags = [[${post?.tags}]];
+  var metaList = [[${post?.metaList}]];
+
+  /*]]>*/
+</script>
+<script>
+  var metaInfoList = metaList;
+  var postSocialImageUrl;
+  $(document).ready(function () {
+
+    var lockRequest = {};
+    lockRequest["entityId"] = postId;
+    lockRequest["entityType"] = 'POST';
+
+    $.ajax({
+      url: apiBasePath + "/acquire-lock",
+      type: "POST",
+      dataType: "json",
+      data: JSON.stringify(lockRequest),
+      contentType: "application/json",
+      processData: false,
+
+      success: function (response) {
+
+        if (response.success == true) {
+          //window.location.href = '/admin_writer/posts/'+ postId + '/update/';
+        }
+        else {
+          alert("Entity is being edited by " + response.acquiredBy);
+          alertOnEditPost(postId);
+        }
+
+      },
+
+      error: function (response) {
+
+        $('#loader').hide();
+        alert("Some error occured");
+      }
+    });
+
+    /* if (metaList != null && metaList.length > 0) {
+
+      $.each(metaList, function (index, element) {
+
+        if(element.type=='keyword'){
+          $('#titleKeyword').val(element.content);
+        }
+        else if(element.type=='description'){
+          $('#txtMetaDescription').val(element.content)
+        }
+      });
+    } */
+    $('#summernote').val(postText);
+
+    tinymce.init({
+      selector: '#summernote',
+      theme: 'modern',
+      plugins: [
+        'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+        'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+        'save table contextmenu directionality emoticons template paste textcolor'
+      ],
+      forced_root_block : false,
+      content_css: 'css/content.css',
+      valid_elements: '*[*]',
+      toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+
+    });
+
+    $('#addMetaPanel').hide();
+
+    tags.forEach(function (element, index) {
+
+      if (index == 0) {
+        $('#tags').val(element);
+      }
+
+      else {
+        var fieldHTML = '<div class="input-group control-group add-tag">\n'
+            + '                         <div class="row">\n'
+            + '                           <div class="col-md-10">\n'
+            + '                              <input type="text" required name="tags[]"\n'
+            + '                                     id="tags" class="form-control"\n'
+            + '                                   placeholder="Tag name...." value = "#tag#">\n'
+            + '                           </div>\n'
+            + '                            <div class="col-md-2">\n'
+            + '                              <button class="btn btn-danger remove-tag-btn pull-right"\n'
+            + '                                     type="button">\n'
+            + '                                <i class="fa fa-times" aria-hidden="true"></i>\n'
+            + '                           </button></div>\n'
+            + '            </div></div>';
+
+        fieldHTML = fieldHTML.replace("#tag#", element);
+        $('.field_wrapper1').append(fieldHTML);
+      }
+    });
+
+  });
+
+  $(document).on('submit', "#update-post", function (event) {
+    event.preventDefault();
+    $('#loader').show();
+    if (document.getElementById('featured').checked) {
+      $('#free').attr('checked', true);
+      $('input[name="featured"]').val(true);
+    } else {
+      $('#free').attr('checked', false);
+      $('input[name="featured"]').val(false);
+    }
+
+    if (document.getElementById('popular').checked) {
+      $('#free').attr('checked', true);
+      $('input[name="popular"]').val(true);
+    } else {
+      $('#free').attr('checked', false);
+      $('input[name="popular"]').val(false);
+    }
+
+    var featuredImageReq = {};
+
+    featuredImageReq["id"] = featureImageId;
+    featuredImageReq["url"] = postFeatureImageUrl;
+    featuredImageReq["name"] = postFeatureImageName;
+    featuredImageReq["title"] = $('#txtFITitle').val();
+    featuredImageReq["caption"] = $('#txtFICaption').val();
+    featuredImageReq["altText"] = $('#txtFIAltText').val();
+    featuredImageReq["description"] = $('#txtFIDescription').val();
+
+    if (metaInfoList != null && metaInfoList.length > 0) {
+      var found = false;
+      $.each(metaInfoList, function (index, element) {
+        if (element != null && (element.type == "og:image" || element.type == "og:image:secure_url"
+            || element.type == "twitter:image")) {
+          element.content = postSocialImageUrl;
+          found = true;
+
+        }
+      });
+      if (!found) {
+        var metaImg = {};
+
+        metaImg["type"] = "og:image";
+        metaImg["content"] = postSocialImageUrl;
+        metaImg["attributeType"] = "property";
+
+        metaInfoList.push(metaImg);
+
+        metaImg["type"] = "og:image:secure_url";
+
+        metaInfoList.push(metaImg);
+
+        metaImg["type"] = "twitter:image";
+        metaImg["attributeType"] = "name";
+
+        metaInfoList.push(metaImg);
+      }
+    }
+
+    if (breadCrumbParentId == null && breadCrumb != null) {
+      breadCrumbParentId = breadCrumb.breadcrumbId;
+    }
+
+    var postPayload = {
+      "postId": postId,
+      "postSlug": $("#post-slug").val(),
+      "title": $("#post-title").val(),
+      "text": tinyMCE.activeEditor.getContent(),
+      "status": $('input[name=status]:checked', '#update-post').val() == undefined ? 'draft' : $(
+          'input[name=status]:checked', '#update-post').val(),
+      featured: $('#featured').val(),
+      popular: $('#popular').val(),
+      readTime: $('#readTime').val(),
+      brief: $('#brief').val(),
+      noOfViews: $('#noofviews').val(),
+      // previousPost: {
+      //   slug: $('#previousPost').val() != '' ? $(
+      //       '#previousPost').val() : 'dummyPrev'
+      // },
+      // nextPost: {
+      //   slug: $('#nextPost').val() != '' ? $('#nextPost')
+      //   .val() : 'dummyNext'
+      // },
+      tags: getTags(),
+      featuredImage: featuredImageReq,
+      breadCrumb: {
+        breadcrumbId: breadCrumbParentId
+      },
+      metaList: getUpdatedMetaList(),
+      titleTag: $('#titleTag').val(),
+    };
+
+    $.ajax({
+      url: apiBasePath + "/admin_writer/posts/" + postId,
+      type: "put",
+      data: JSON.stringify(postPayload),
+      dataType: "json",
+      contentType: "application/json",
+      processData: false,
+      <!--"headers": {-->
+      <!--"authorization": "Bearer " + window.localStorage.getItem('access_token'),-->
+
+      <!--},-->
+
+      success: function (response) {
+        $('#loader').hide();
+
+        var lockRequest = {};
+        lockRequest["entityId"] = postId;
+        lockRequest["entityType"] = 'POST';
+
+        $.ajax({
+          url: apiBasePath + "/release-lock",
+          type: "DELETE",
+          dataType: "json",
+          data: JSON.stringify(lockRequest),
+          contentType: "application/json",
+          processData: false,
+
+          success: function (response) {
+
+          },
+
+          error: function (response) {
+
+            $('#loader').hide();
+            alert("Some error occured");
+          }
+        });
+
+      },
+
+      error: function (response) {
+        $('#loader').hide();
+        alert("Post Update Failed");
+      }
+    });
+
+  });
+
+  $("#but_feature_upload").click(function () {
+    $('#loaderFeatureUpload').show();
+    $('#but_feature_upload').hide();
+
+    var files = $('#featureImage')[0].files[0];
+    var fd = new FormData();
+    fd.append('file', files);
+    fd.append('type', "featureImage/post");
+    fd.append('contentType', files.type);
+
+    uploadFile(fd, function (response) {
+      if (response != null) {
+        getImageUrl(response, function (imageUrlResponse) {
+
+          if (imageUrlResponse != null) {
+            $('#loaderFeatureUpload').hide();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              $('#upload-feature-img-tag').attr('src', e.target.result);
+            };
+            postFeatureImageName = $('#featureImage')[0].files[0].name;
+            reader.readAsDataURL($('#featureImage')[0].files[0]);
+            postFeatureImageUrl = imageUrlResponse;
+          }
+          else {
+            $('#loaderFeatureUpload').hide();
+            $('#but_feature_upload').show();
+          }
+        });
+
+      }
+
+      else {
+        $('#loaderFeatureUpload').hide();
+        $('#but_feature_upload').show();
+      }
+
+    });
+
+  });
+
+  $("#but_social_upload").click(function () {
+    $('#loaderSocialUpload').show();
+
+    var files = $('#socialImage')[0].files[0];
+    var fd = new FormData();
+    fd.append('file', files);
+    fd.append('type', "socialImage/post");
+    fd.append('contentType', files.type);
+
+    uploadFile(fd, function (response) {
+      if (response != null) {
+        getImageUrl(response, function (imageUrlResponse) {
+
+          if (imageUrlResponse != null) {
+            $('#loaderSocialUpload').hide();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              $('#upload-social-img-tag').attr('src', e.target.result);
+            };
+            //postFeaturImageName = $('#socialImage')[0].files[0].name;
+            reader.readAsDataURL($('#socialImage')[0].files[0]);
+            postSocialImageUrl = imageUrlResponse;
+
+            if ($("#social-image-url").length > 0) {
+
+              $('#social-image-url').remove();
+              var mydiv = document.getElementById("social-image");
+              var aTag = document.createElement('a');
+              aTag.setAttribute('href', imageUrlResponse);
+              aTag.setAttribute('id', "social-image-url");
+              aTag.innerHTML = imageUrlResponse;
+              mydiv.appendChild(aTag);
+
+            }
+            else {
+              var mydiv = document.getElementById("social-image");
+              var aTag = document.createElement('a');
+              aTag.setAttribute('href', imageUrlResponse);
+              aTag.setAttribute('id', "social-image-url");
+              aTag.innerHTML = imageUrlResponse;
+              mydiv.appendChild(aTag);
+            }
+          }
+          else {
+            $('#loaderSocialUpload').hide();
+          }
+        });
+
+      }
+
+      else {
+        $('#loaderSocialUpload').hide();
+      }
+
+    });
+
+  });
+
+  $('.add-more-tag')
+  .click(
+      function () {
+        blank = false;
+        $(".tag_wrap input").each(
+            function (index, elm) {
+              if ($(elm).val() == "") {
+                blank = true;
+              }
+            })
+        if (!blank) {
+          var fieldHTML = '<div class="input-group control-group add-tag">\n'
+              + '              <div class="row">\n'
+              + '                <div class="col-md-10">\n'
+              + '                  <input type="text" required name="tags[]"\n'
+              + '                         id="tags" class="form-control"\n'
+              + '                         placeholder="Tag name....">\n'
+              + '                </div>\n'
+              + '\n'
+              + '                <div class="col-md-2">\n'
+              + '                  <button class="btn btn-danger remove-tag-btn pull-right"\n'
+              + '                          type="button">\n'
+              + '                    <i class="fa fa-times" aria-hidden="true"></i>\n'
+              + '                  </button>\n'
+              + '                </div>\n'
+              + '              </div>\n'
+              + '\n'
+              + '\n'
+              + '            </div>';
+          $('.field_wrapper1').append(fieldHTML);
+        }
+
+      });
+
+  $('.field_wrapper1').on('click', '.remove-tag-btn', function () {
+    $(this).parent().parent('div').remove();
+
+  });
+
+  function getTags() {
+    var stringTag = "";
+    $(".tag_wrap input").each(function (index, elm) {
+      if (index == 0) {
+        stringTag += $(elm).val();
+      } else {
+        stringTag += "," + $(elm).val();
+      }
+    });
+    return stringTag;
+  }
+
+  function showAddMetaPanel() {
+    $('#addMetaPanel').show();
+  }
+
+  function addMetaInfo() {
+
+    var htmlToShow = '<div class="row" id="existingMetaPanel" style="margin-left: 15px; margin-top: 13px;">\n'
+        + '                  <div class="col-md-4">\n'
+        + '                    <label style="font-weight: bold;">Meta Type:</label> <input type="text" readonly="readonly" id="metaType" value="#type#">\n'
+        + '                  </div>\n'
+        + '                  <div class="col-md-8">\n'
+        + '                    <label style="font-weight: bold;">Meta Content:</label> <input style="width: 70%;" type="text" value="#content#" id="metaContent">\n'
+        + '                  </div>\n'
+        + '                </div>';
+
+    htmlToShow = htmlToShow.replace("#type#", $('#ddMetaType').val());
+    htmlToShow = htmlToShow.replace("#content#", $('#txtMetaContent').val());
+
+    $('.existingMetaPanel').append(htmlToShow);
+    $('#addMetaPanel').hide();
+
+    $('#ddMetaType').prop('selectedIndex', 0);
+    $('#txtMetaContent').prop('value', '');
+  }
+
+  function showMetaDetails() {
+    htmlToShow = '';
+    htmlBeg = '<div class="row">';
+    htmlRow = '<div style="margin-top: 20px;" class="col-md-9">	<label id="lblType" style="font-weight:  bold;"> Meta Type:&nbsp;&nbsp;</label ><input type="text" value="#metaType#" readonly="readonly" style="border-bottom:  0; border-top: 0; border-left:  0; border-right:  0;"></div><div style="margin-top: 20px;" class="col-md-9"><label id="lblContent" style="font-weight:  bold;"> Meta Content:&nbsp;&nbsp;</label> <input type="text" value="#metaContent#" readonly="readonly" style="border-bottom:  0; border-top: 0; border-left:  0; border-right:  0;"></div>';
+    htmlEnd = '</div><br/>';
+
+    if (metaInfoList != null && metaInfoList.length > 0) {
+      htmlToShow += htmlBeg;
+
+      $.each(metaInfoList, function (index, element) {
+        htmlToShow += htmlRow;
+
+        htmlToShow = htmlToShow.replace("#metaType#", element.type);
+        htmlToShow = htmlToShow.replace("#metaContent#", element.content);
+      });
+      htmlToShow += htmlEnd;
+
+      $('#metaPanel').html(htmlToShow).show();
+    }
+
+  }
+
+  function getUpdatedMetaList() {
+    list = [];
+    $(".existingMetaPanel .row").each(function (index, elm) {
+
+      metaType = $(elm).find("#metaType").val();
+      metaContent = $(elm).find("#metaContent").val();
+
+      if (metaType.includes("og")) {
+        attributeType = 'property';
+      }
+      else {
+        attributeType = 'name';
+      }
+
+      var input = {
+
+        metaInformation: {
+          type: metaType,
+          content: metaContent,
+          attributeType: attributeType
+        }
+      };
+
+      list.push(input);
+    });
+
+    return list;
+  }
+
+  function alertOnEditPost(postId) {
+    var x = Math.floor((Math.random() * 10) + 1);
+    var y = Math.floor((Math.random() * 10) + 1);
+    var text = prompt("Want to Force Update? Enter the value: " + x + " * " + y);
+    if ((text != (x * y)) || text == null) {
+      $("input").attr("disabled", "disabled");
+      $("#Submit").attr("disabled", "disabled");
+      $("#tinymceTextarea").css("pointer-events", "none");
+    }
+    else {
+      $("#tinymceTextarea").css("pointer-events", "initial");
+      var lockRequest = {};
+      lockRequest["entityId"] = postId;
+      lockRequest["entityType"] = 'POST';
+
+      $.ajax({
+        url: apiBasePath + "/release-lock",
+        type: "DELETE",
+        dataType: "json",
+        data: JSON.stringify(lockRequest),
+        contentType: "application/json",
+        processData: false,
+
+        success: function (response) {
+
+          window.location.href = '/admin_writer/posts/' + postId + '/update/';
+          var lockRequest = {};
+          lockRequest["entityId"] = postId;
+          lockRequest["entityType"] = 'POST';
+
+          $.ajax({
+            url: apiBasePath + "/acquire-lock",
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify(lockRequest),
+            contentType: "application/json",
+            processData: false,
+
+            success: function (response) {
+
+              if (response.success == true) {
+                window.location.href = '/admin_writer/posts/' + postId + '/update/';
+              }
+              else {
+                alert("Entity is being edited by " + response.acquiredBy);
+                alertOnEditPost(postId);
+              }
+
+            },
+
+            error: function (response) {
+
+              $('#loader').hide();
+              alert("Some error occured");
+            }
+          });
+
+        },
+
+        error: function (response) {
+
+          $('#loader').hide();
+          alert("Some error occured");
+        }
+      });
+    }
+  }
+</script>
+</body>
+
+</html>
+

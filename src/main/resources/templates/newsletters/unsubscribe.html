@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Neostencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+  <div class="mat-content mdl-layout__content">
+    <div class="landing-darken" style="display: none;">
+    </div>
+
+    <div class="unsubscribe-page" style="height:600px;">
+      <form name="unsubscribe">
+        <p>Changing newsletter preferences for <span th:text="${subscriber.emailAddress}"></span>
+        </p>
+        <br/>
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-unsubscribe"
+               th:each="listItem: ${subscriber.subscriberList}">
+          <input type="checkbox" id="checkbox-unsubscribe" class="mdl-checkbox__input"
+                 th:checked="${listItem.isSubscribe}">
+          <span class="mdl-checkbox__label" th:text="${listItem.name}"></span>
+        </label>
+        <br/>
+        <button class="btn-unsubscribe">Submit</button>
+      </form>
+    </div>
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+</div>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+</body>
+</html>

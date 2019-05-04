@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title>Free IAS Preparation | NeoStencil</title>
+
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+	<meta property="og:title"
+		  content="Free IAS Preparation | NeoStencil" />
+	<meta name="description"
+		  content="Get free study material, current affairs, toppers' testimonials, toppers' strategies & much more for your UPSC / IAS Preparation. Get free ebooks on 'How to prepare for IAS Mains', 'Optional Strategy', 'How to choose your optional subject' & more">
+
+	<link
+			th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/freePrep.css')}}"
+			rel="stylesheet" media="screen" />
+<!-- <link
+    href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+    rel="stylesheet" media="screen" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+   -->
+
+</head>
+
+<body class="all-courses-page">
+
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+		<!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+		<!-- <div class="mat-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title">
+  </span>
+
+</div> -->
+
+
+		<div class="mat-content mdl-layout__content">
+			<div class="landing-darken" style="display: none;"></div>
+			<div class=" mat-free-prep-bg mdl-typography--text-center">
+				<div class="container">
+					<div class="mdl-grid">
+						<div
+							class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<h3>Toppers Answer Booklet</h3>
+							<p>
+								IAS Topper’s Answer Booklet for the benefit of aspirants<br />
+								preparing and aiming to clear UPSC/IAS exam.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="free-prep-tab">
+				<div class="container-header">
+					<ul class="switchTabsFreePrep">
+						<li id="PRELIMS">Prelims</li>
+						<li id="MAINS">Mains</li>
+						<li id="INTERVIEW">Interview</li>
+						<li id="PRE_CUM_MAINS">Pre cum Mains</li>
+					</ul>
+				</div>
+			</div>
+			<div class="show-tabs-free-prep container-header" id="showBooklets">
+			</div>
+
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+
+	</div>
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+	<script>
+		$('document').ready(function() {
+			showBookletData("PRELIMS")
+			/*  $("#header-menu nav > ul > li:nth-child(3) > a").addClass("active");
+			fetchAllTeachers();*/
+		})
+
+		$('.switchTabsFreePrep li').click(
+				function() {
+					var id = $(this).attr("id");
+					$('div[data-id="' + id + '"]').show().siblings(
+							'.show-tabs-free-prep').hide();
+					showBookletData(id);
+				})
+
+		function showBookletData(category) {
+
+			$
+					.ajax({
+						url : apiBasePath + '/freeprep/answersheets/'
+								+ category,
+						type : "GET",
+						dataType : "json",
+						contentType : "application/json; charset=utf-8",
+						success : function(response) {
+							var htmlToShow = '';
+							var bookletToShow = '<div class="mdl-grid"> <div class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"> <span class="book-icon" style="background-color: #iconColor#;"> <i class="fa fa-book"></i> </span> </div> <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"> <p class="free-prep-name">#freePrepTitle#</p> </div> <div class="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"> <div class="mdl-grid" style="padding: 0;">#booklet# </div> </div> </div><hr>';
+							if (response != '') {
+								$
+										.each(
+												response,
+												function(index, element) {
+													htmlToShow = htmlToShow
+															+ bookletToShow;
+													htmlToShow = htmlToShow
+															.replace(
+																	'#freePrepTitle#',
+																	element.title);
+													var i = index;
+													if (i > 4) {
+														i = 0 + i % 4;
+													}
+													if (i == 0) {
+														htmlToShow = htmlToShow
+																.replace(
+																		'#iconColor#',
+																		"#6eb9e6");
+													} else if (i == 1) {
+														htmlToShow = htmlToShow
+																.replace(
+																		'#iconColor#',
+																		"#ba417a");
+													} else if (i == 2) {
+														htmlToShow = htmlToShow
+																.replace(
+																		'#iconColor#',
+																		"#3fbf53");
+													} else if (i == 3) {
+														htmlToShow = htmlToShow
+																.replace(
+																		'#iconColor#',
+																		"#d88737");
+													} else {
+														htmlToShow = htmlToShow
+																.replace(
+																		'#iconColor#',
+																		"#5d6492");
+													}
+													var booklets = '';
+													$
+															.each(
+																	element.booklets,
+																	function(
+																			index,
+																			value) {
+																		booklets += '<div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="margin: 0;"> <a href="'+value.contentUrl+'" target="_blank" class="booklet">'
+																				+ value.bookletTitle
+																				+ '</a> </div>';
+																	})
+													htmlToShow = htmlToShow
+															.replace(
+																	'#booklet#',
+																	booklets);
+												})
+							} else {
+								htmlToShow = "<p>No Free Prep Material in this category</p>";
+							}
+							$('#showBooklets').html(htmlToShow);
+						}
+					})
+
+		}
+	</script>
+</body>
+</html>
+

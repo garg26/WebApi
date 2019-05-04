@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height="960px" version="1.1" viewBox="0 0 1440 960" width="1440px"
+  xmlns="http://www.w3.org/2000/svg">
+  <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+  <title>Mask</title>
+  <desc>Created with Sketch.</desc>
+  <defs></defs>
+  <g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1">
+    <g fill="#F4FBFE" id="All-Courses" transform="translate(0.000000, -71.000000)">
+      <path
+        d="M0.0344618384,71 L1440,71 L1440,893.270315 L223.514183,1030.62378 L223.514183,1030.62378 C204.369937,1032.78536 185.352181,1025.62239 172.39082,1011.36835 L0,821.784399 L0.0344618384,71 Z"
+        id="Mask"></path>
+    </g>
+  </g>
+</svg>

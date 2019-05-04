@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
+      rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">Update Lecture</h1>
+
+        </div>
+      </div>
+
+      <form role="form" name="quizForm" id="quizForm">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 style="font-size: 24px;">Course Info</h1>
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Course ID</label> <input type="text"
+                                                    class="form-control" disabled
+                                                    th:value="${course?.id}"
+                                                    name="courseId" id="courseId">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Course Title</label> <input type="text"
+                                                       class="form-control" disabled
+                                                       th:value="${course?.courseTitle}"
+                                                       name="courseTitle"
+                                                       id="courseTitle">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <h1 style="font-size: 24px;">Course Batch Info</h1>
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Course Batch ID</label> <input type="text"
+                                                          class="form-control" disabled
+                                                          th:value="${batch?.id}"
+                                                          name="courseBatchId" id="courseBatchId">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Course Batch Name</label> <input type="text"
+                                                            class="form-control" disabled
+                                                            th:value="${batch?.batchName}"
+                                                            name="courseBatchName"
+                                                            id="courseBatchName">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="form-group" style="margin-top: 10px">
+              <label>Course Batch</label> <select name="getBatchData" required
+                                                  id="courseBatch" class="form-control">
+              <option selected th:value="${batch.id}"
+                      th:data-subtext="${batch.startDate + ' to ' + batch.endDate}"
+                      th:text="${batch.batchName}"></option>
+
+            </select>
+            </div>
+
+            <h1 style="font-size: 24px;">Unit Info</h1>
+
+            <div class="form-group" style="margin-top: 10px">
+              <label>Unit ID</label> <input type="text" class="form-control"
+                                            disabled th:value="${unit?.unitId}" name="unitId"
+                                            id="unitId">
+            </div>
+            <div class="form-group">
+              <label>Unit Title</label> <input class="form-control"
+                                               type="text" id="txtTitle" th:value="${unit?.title}"
+                                               placeholder="Enter Unit Title">
+            </div>
+
+
+            <div class="form-horizontal" style="margin-top: 10px">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Unit Topic</label> <select name="unitTopic"
+                                                      id="unitTopic" class="form-control">
+                    <option value="0" selected>Select Unit Topic</option>
+
+                    <option th:each="topic : ${topics}" th:value="${topic}"
+                            th:text="${topic}" th:selected="${unit?.topic == topic}"></option>
+                  </select> <a id="addTopic" onclick="addTopic();"><i
+                      class="glyphicon glyphicon-plus"></i></a> <input type="text"
+                                                                       id="txtTopic"/>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Unit Position</label> <input type="number" min="0"
+                                                        class="form-control"
+                                                        th:value="${unit?.position}"
+                                                        name="unitPosition" id="unitPosition">
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="container"><input type="checkbox"
+                                              name="free" id="free" th:checked="${unit?.free}">is
+                Free</label>
+            </div>
+
+            <div class="form-group">
+              <label class="container"><input type="checkbox"
+                                              name="product" id="product"
+                                              th:checked="${unit?.product}"
+                                              onchange="showPrice();">Product</label> <label
+                id="lblPrice">Price</label>
+              <input type="number" min="0" class="form-control" name="price"
+                     id="price" th:value="${unit?.price}"
+                     placeholder="Enter the unit's Price">
+            </div>
+
+
+            <h1 style="font-size: 24px;">Quiz Info</h1>
+            <div class="form-horizontal" style="margin-top: 10px">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Quiz Id</label> <input type="text" disabled
+                                                     class="form-control" name="quizId"
+                                                     id="quizId"
+                                                     th:value="${quiz?.quizId}">
+                  </div>
+                  <div class="col-sm-6">
+                    <label>Title</label> <input type="text" class="form-control"
+                                               name="name" id="quizTitle" th:value="${quiz?.title}"
+                                               placeholder="Enter the Name of the lecture">
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="form-group">
+              <label>Instructions</label> <textarea id="description" name="description"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="container"><input type="checkbox"
+                                              name="quiz-topic-wise-question" id="quiz-topic-wise-question" th:checked="${quiz?.topicWiseQuestion}">
+                Show Topic Wise Question </label>
+            </div>
+
+
+            <div class="form-group">
+              <label>Quiz Time Limit(in mins)</label><input class="form-control" name="quiz-time-limit" required
+                                                            type="number" id="quiz-time-limit" placeholder="Enter a quiz time limit in mins" th:value="${quiz?.timeLimit}">
+
+            </div>
+
+
+
+            <label class="radio-inline" style="margin-top: 10px;"><input
+                type="radio" value="publish"
+                th:checked="${#strings.toString(unit?.status)} == 'publish'"
+                name="status" checked>Publish</label> <label
+              class="radio-inline" style="margin-top: 10px;"><input
+              type="radio" value="draft"
+              th:checked="${#strings.toString(unit?.status)} == 'draft'"
+              name="status">Draft</label>
+
+
+            <div class="row">
+              <div style="margin-top: 20px;" class="col-md-9">
+                <button class="submit btn btn-success" type="submit"
+                        id="btnSubmit" value="submit">Update
+                </button>
+                <i class="fa fa-spinner fa-spin" id="loader"></i>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+!--/*/
+<th:block th:include="admin/footer"></th:block>
+/*/-->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+
+  var quiz = [[${quiz}]];
+  var type = [[${unit.type}]];
+
+  /*]]>*/
+</script>
+<script>
+
+  $(document).ready(function () {
+
+    $('#description').summernote('code', quiz.description);
+
+
+    $('#txtTopic').hide();
+
+    if (document.getElementById('product').checked) {
+      $('#price').show();
+      $('#lblPrice').show();
+      $('#price').val(price);
+    } else {
+      $('#price').hide();
+      $('#lblPrice').hide();
+    }
+
+  });
+
+  $('#btnSubmit').on('click', function (event) {
+    event.preventDefault();
+    $('#loader').show();
+
+    updateQuiz(function (updatedQuiz) {
+
+      if (updatedQuiz != null) {
+        updateUnit(updatedQuiz, function (updatedUnit) {
+
+          if (updatedUnit != null) {
+            $('#loader').hide();
+            alert("Successfully update unit");
+            location.reload();
+          }
+
+          else {
+            $('#loader').hide();
+            alert("Failed in updating unit");
+          }
+
+        });
+      }
+      else {
+        $('#loader').hide();
+        alert("Failed in updating unit");
+      }
+
+    });
+  });
+
+  function updateQuiz(callBack) {
+
+    if (document.getElementById('quiz-topic-wise-question').checked) {
+      $('#quiz-topic-wise-question').attr('checked', true);
+      $('input[name="quiz-topic-wise-question"]').val(true);
+    } else {
+      $('#quiz-topic-wise-question').attr('checked', false);
+      $('input[name="quiz-topic-wise-question"]').val(false);
+    }
+
+    var quizInput = {
+      title: $('#quizTitle').val(),
+      description: $('#description').summernote('code'),
+      topicWiseQuestion: $('#quiz-topic-wise-question').val(),
+      quizType: quiz.quizType,
+      publishStatus: quiz.publishStatus,
+      timeLimit:$('#quiz-time-limit').val(),
+      totalNoOfQuestion:quiz.totalNoOfQuestion,
+      totalMarks:quiz.totalMarks,
+      positiveMarkPerQuestion:quiz.positiveMarkPerQuestion,
+      negativeMarkPerQuestion: quiz.positiveMarkPerQuestion
+    };
+
+    $.ajax({
+      async: true,
+      url: apiBasePath + "/admin_techops_lmsadmin_writer_editor/updatequiz/" + $('#quizId').val(),
+      type: "PATCH",
+      data: JSON.stringify(quizInput),
+      contentType: "application/json",
+      processData: false,
+
+      success: function (response) {
+        if (callBack) {
+          return callBack(response);
+        }
+
+      },
+      error: function (response) {
+        if (callBack) {
+          return callBack(null);
+        }
+      }
+
+    });
+
+  }
+
+  function updateUnit(updatedQuiz, callBack) {
+
+    if (document.getElementById('product').checked) {
+      $('#product').attr('checked', true);
+      $('input[name="product"]').val(true);
+    }
+    else {
+      $('#product').attr('checked', false);
+      $('input[name="product"]').val(false);
+    }
+
+    if (document.getElementById('free').checked) {
+      $('#free').attr('checked', true);
+      $('input[name="free"]').val(true);
+    } else {
+      $('#free').attr('checked', false);
+      $('input[name="free"]').val(false);
+    }
+
+
+
+    var input = {
+      type: type,
+      title: $('#txtTitle').val(),
+      typeId: updatedQuiz.quizId,
+      product: $('#product').val(),
+      position: $('#unitPosition').val(),
+      free: $('#free').val(),
+      status: $('input[name=status]:checked', '#quizForm').val()
+
+    };
+    if ($('#unitTopic').val() != 0) {
+      input["topic"] = $('#unitTopic').val();
+    } else {
+      input["topic"] = $('#txtTopic').val();
+    }
+
+    if ($('#product').val() == 'true') {
+      input["price"] = $('#price').val();
+    }
+    else {
+      input["price"] = 0;
+    }
+
+    $.ajax({
+      async: true,
+      url: apiBasePath + "/admin_techops_lmsadmin/units/" + $('#unitId').val(),
+      type: "PUT",
+      data: JSON.stringify(input),
+      dataType: "json",
+      contentType: "application/json",
+      processData: false,
+
+      success: function (response) {
+        if (callBack) {
+          return callBack(response);
+        }
+
+      },
+      error: function (response) {
+        if (callBack) {
+          return callBack(null);
+        }
+      }
+
+    });
+
+  }
+
+
+  function addTopic() {
+    $('#txtTopic').show();
+  }
+
+  function showPrice() {
+    if (document.getElementById('product').checked) {
+      $('#price').show();
+      $('#lblPrice').show();
+      $('#price').val(price);
+    } else {
+      $('#price').hide();
+      $('#lblPrice').hide();
+    }
+  }
+
+
+</script>
+
+</body>
+</html>

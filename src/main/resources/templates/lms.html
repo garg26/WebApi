@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Neostencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dashboard.css')}}"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/jwPlayer.css')}}"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.css')}}"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick-theme.css')}}"/>
+  <link rel="stylesheet" media="screen"
+        href="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.10/dialog-polyfill.css"/>
+
+
+  <style>
+    #loading-units {
+      color: #777;
+      margin: 8px 16px;
+    }
+
+    .mat-drawer {
+      display: none;
+    }
+
+    .mdl-layout__drawer > * {
+      height: 70px;
+      background: #fff;
+    }
+
+    .mdl-color--blue-grey-900 {
+      background-color: #ffffff !important;
+    }
+
+    .mdl-color--blue-grey-800 {
+      background-color: #ffffff !important;
+    }
+
+    .box-1-free-demo, .box-2-free-demo, .box-3-free-demo, .box-4-free-demo {
+      margin: 0;
+      padding: 30px 30px 0 30px;
+    }
+
+    .box-heading {
+      font-size: 50px !important;
+    }
+
+    #OTPDialog {
+      left: 20%;
+    }
+
+    .mdl-layout__drawer {
+      width: 280px;
+    }
+
+    .accordian-active ~ .mdl-layout__drawer {
+      display: block;
+    }
+
+    .accordian-active {
+      width: 88%;
+      margin-left: 12%;
+    }
+
+    @media screen and (min-width: 1025px) {
+      .lms-continue {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 840px) {
+      #OTPDialog {
+        left: 0%;
+      }
+
+      .section__play-btn {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 390px) {
+      #otpDialogContent {
+        overflow: scroll;
+        height: 300px;
+      }
+    }
+
+    /*.blinking{*/
+    /*font-size: 20px;*/
+    /*color: #61cf1c;*/
+    /*animation: blinker 2s linear infinite;*/
+    /*font-weight: 900;*/
+    /*}*/
+    /*@keyframes blinker {*/
+    /*50% {*/
+    /*opacity: 0;*/
+    /*}*/
+    /*}*/
+    .closeBtn {
+      position: relative;
+      top: -10px;
+      left: 10px;
+    }
+
+    @media only screen and (min-width: 1024px) {
+      .accordian-active ~ .mdl-layout__drawer {
+        margin-top: 0 !important;
+      }
+    }
+
+    @media only screen and (max-width: 1024px) {
+      .accordian-active {
+        width: 100%;
+        margin-left: 0%;
+      }
+    }
+
+    .accordian-active ~ .mdl-layout__content {
+      margin-top: 120px;
+    }
+
+    .progress {
+      height: 6px;
+      border-radius: 95px;
+      width: calc(89% - 20px);
+      float: left;
+      background: #ece4e4;
+    }
+
+    .mdl-navigation__link:hover .progress{
+      background: #ffffff;
+    }
+    .progress-bar {
+      width: 0%;
+      background:linear-gradient(to bottom, #f7e242, #e24d08);
+      height: 100%;
+      border-radius: 35px;
+    }
+    .watch-status{
+      float: left;
+      position: relative;
+      top: -9px;
+      left: 9px;
+      font-size: 10px;
+    }
+    #courseCurriculum a{
+      padding-bottom: 23px;
+    }
+    /* width */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px white;
+      border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background:linear-gradient(to right, #ff6600, #e20e08);
+      padding: 10px;
+    }
+
+    /*.graphs{*/
+      /*display: none;*/
+    /*}*/
+    /* Handle on hover */
+    /*::-webkit-scrollbar-thumb:hover {*/
+    /*}*/
+  </style>
+</head>
+<body class="dashboard" oncontextmenu="return false;">
+<div
+    class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  <div id="" class="accordian-active">
+    <div id="accordion-announcements" class="">
+      <div id="headerText"></div>
+    </div>
+  </div>
+  <!--/*/ <th:block th:include="common/headerDashboard"></th:block> /*/-->
+
+  <div id="unit-drawer"
+       class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+    <header class="demo-drawer-header">
+      <div class="demo-avatar-dropdown">
+        <a href="/" class="mat-title mdl-layout-title"> <img
+            class="mat-logo-image" th:src="@{/images/logo/neostencilLogo.png}">
+        </a>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+    </header>
+    <nav id="dashboard-sidenav-links"
+         class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+      <h5 id="loading-units">Loading Curriculum.....</h5>
+      <div class="panel" id="courseCurriculum"
+           style="display: none; padding-bottom: 100px"></div>
+    </nav>
+  </div>
+  <div style="display: none;" class="common-loader" id="loader-lms">
+    <div class="mdl-spinner mdl-js-spinner is-active"></div>
+  </div>
+  <main class="mdl-layout__content mdl-color--grey-100" id="unitPlay">
+    <!--<h1 style="text-align: center;">Let's Get Started</h1>-->
+    <div class="mdl-grid" style="width: fit-content;width: -moz-fit-content; margin: 0 auto;">
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%;min-height: auto">
+          <div class="mdl-card__title">
+            <div style="width: fit-content;width: -moz-fit-content; margin: 0 auto">
+              <h2 class="mdl-card__title-text ">Important Notice</h2>
+              <div class="underline" style="margin: 4px auto 0 auto;"></div>
+            </div>
+          </div>
+          <div class="mdl-card__supporting-text"
+               style="width: -moz-available;width: -webkit-fill-available; padding-top: 0px;">
+            <center>
+              You will need to verify your Identity using OTP on your registered mobile number if
+              you change your device/browser. Kindly make sure to update yur registered mobile
+              number in
+              case you have not done so far.
+            </center>
+          </div>
+          <div class="mdl-card__menu">
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect closeBtn">
+              <i class="material-icons">close</i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="loader-graphs">
+        <div  class="common-loader" >
+          <div class="mdl-spinner mdl-js-spinner is-active"></div>
+        </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone graphs">
+        <div class="mdl-shadow--2dp" id="chart_div"
+             style="min-height: 400px ;background: #ffffff;"></div>
+
+      </div>
+      <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone graphs">
+        <div class="mdl-shadow--2dp" id="barchart_div"
+             style="min-height: 400px;background: #ffffff;"></div>
+      </div>
+    </div>
+    <a
+        class="lms-continue btn-all-courses btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-View-all-teachers "
+        onclick="$('.mdl-layout__drawer').addClass('is-visible');">Click
+      here to continue</a></main>
+
+
+  <dialog id="OTPDialog"
+          class="mdl-dialog">
+    <div id="otpDialogContent">
+      <div class="mdl-dialog__content OTPDialogContent" style="padding: 0px;">
+        <div class="mdl-card__supporting-text text-left">
+          <h4>Verify your Device</h4>
+          <br>Please enter the OTP you received on
+          your registered mobile number <span id="userPhoneNumber"
+                                              style="color: #ff6600; font-weight: 900;"></span>
+          <br/>
+        </div>
+        <div class="mdl-card__supporting-text text-left mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="password" name="otp"
+                   pattern="-?[0-9]*(\.[0-9]+)?" id="txtOTP"
+                   style="width: -moz-fit-content; width: fit-content;"
+                   placeholder="Enter your OTP here" maxlength="6">
+            <label class="mdl-textfield__label" for="txtOTP">
+              OTP...</label>
+            <span class="mdl-textfield__error">Number required!</span>
+          </div>
+          <div class="countdown"></div>
+          <br/>
+        </div>
+        <div class="mdl-card__supporting-text text-left">
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect"
+                  id="btnSubmitOTP"
+                  style="margin-top: 10px !important; background-color: #ff6600;color: #FFFFFF;font-weight: 900;">
+            SUBMIT
+          </button>
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="resendOTP" disabled
+                  onclick="regenerateOTP();"
+                  style="margin-top: 10px !important; margin-left: 10px; font-weight: 900;color: #00000054;">
+            RESEND OTP
+          </button>
+        </div>
+        <div class="mdl-card__actions mdl-card--border text-left">
+          <p>
+            <i>Haven't received an OTP
+              yet? <a href="tel:+91 959-907-5552" style="cursor: pointer; color: #ff6600;">Contact
+                us</a> </i>
+            <i> or go to <a href="/profile"
+                            style="color:#fa6838; text-decoration: underline">profile</a> page to
+              change your number</i>
+          </p>
+        </div>
+      </div>
+      <button
+          class="close-dialog mat-fab mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-button&#45;&#45;fab mdl-js-ripple-effect">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+  </dialog>
+
+  <dialog id="sendEnquiryDialog" class="mdl-dialog">
+    <div class="mdl-dialog__content" style="padding: 20px 20px 0px 20px">
+      <div class="show-dialog-form" id="show-dialog-form">
+        <p>Send new message</p>
+        <textarea placeholder="Write a message..." rows="4" id="queryText"></textarea>
+        <label style="display: none;" class="emptyMessage error">Please
+          enter a message</label>
+        <button type="button"
+                class="close mdl-button mdl-js-button mdl-js-ripple-effect">Close
+        </button>
+
+        <button onclick="sendQuery();"
+                id="send-enquiry-common"
+                class="send-enquiry-common mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+          Send
+        </button>
+      </div>
+      <div class="mdl-spinner mdl-js-spinner " id="enquiryLoader" style="margin-left: 10px;"></div>
+
+      <div style="display: none;text-align: center" class="message-has-been-sent">
+        <i class="material-icons" style="font-size: 65px;" id="enquiryResponseIcon">check_circle_outline</i>
+        <p>Your message has been sent and is on its way</p>
+      </div>
+    </div>
+
+
+  </dialog>
+</div>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+     style="position: fixed; left: -1000px; height: -1000px;">
+  <defs>
+    <mask id="piemask" maskContentUnits="objectBoundingBox">
+      <circle cx=0.5 cy=0.5 r=0.49 fill="white"/>
+      <circle cx=0.5 cy=0.5 r=0.40 fill="black"/>
+    </mask>
+    <g id="piechart">
+      <circle cx=0.5 cy=0.5 r=0.5/>
+        <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z"
+              stroke="none" fill="rgba(255, 255, 255, 0.75)"/>
+    </g>
+  </defs>
+</svg>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 250"
+     style="position: fixed; left: -1000px; height: -1000px;">
+  <defs>
+    <g id="chart">
+      <g id="Gridlines">
+        <line fill="#888888" stroke="#888888"
+              stroke-miterlimit="10" x1="0" y1="27.3" x2="468.3" y2="27.3"/>
+        <line fill="#888888" stroke="#888888"
+              stroke-miterlimit="10" x1="0" y1="66.7" x2="468.3" y2="66.7"/>
+        <line fill="#888888" stroke="#888888"
+              stroke-miterlimit="10" x1="0" y1="105.3" x2="468.3" y2="105.3"/>
+        <line fill="#888888" stroke="#888888"
+              stroke-miterlimit="10" x1="0" y1="144.7" x2="468.3" y2="144.7"/>
+        <line fill="#888888" stroke="#888888"
+              stroke-miterlimit="10" x1="0" y1="184.3" x2="468.3" y2="184.3"/>
+      </g>
+      <g id="Numbers">
+        <text transform="matrix(1 0 0 1 485 29.3333)"
+              fill="#888888" font-family="'Roboto'" font-size="9">500
+        </text>
+        <text transform="matrix(1 0 0 1 485 69)" fill="#888888"
+              font-family="'Roboto'" font-size="9">400
+        </text>
+        <text transform="matrix(1 0 0 1 485 109.3333)"
+              fill="#888888" font-family="'Roboto'" font-size="9">300
+        </text>
+        <text transform="matrix(1 0 0 1 485 149)" fill="#888888"
+              font-family="'Roboto'" font-size="9">200
+        </text>
+        <text transform="matrix(1 0 0 1 485 188.3333)"
+              fill="#888888" font-family="'Roboto'" font-size="9">100
+        </text>
+        <text transform="matrix(1 0 0 1 0 249.0003)"
+              fill="#888888" font-family="'Roboto'" font-size="9">1
+        </text>
+        <text transform="matrix(1 0 0 1 78 249.0003)"
+              fill="#888888" font-family="'Roboto'" font-size="9">2
+        </text>
+        <text transform="matrix(1 0 0 1 154.6667 249.0003)"
+              fill="#888888" font-family="'Roboto'" font-size="9">3
+        </text>
+        <text transform="matrix(1 0 0 1 232.1667 249.0003)"
+              fill="#888888" font-family="'Roboto'" font-size="9">4
+        </text>
+        <text transform="matrix(1 0 0 1 309 249.0003)"
+              fill="#888888" font-family="'Roboto'" font-size="9">5
+        </text>
+        <text transform="matrix(1 0 0 1 386.6667 249.0003)"
+              fill="#888888" font-family="'Roboto'" font-size="9">6
+        </text>
+        <text transform="matrix(1 0 0 1 464.3333 249.0003)"
+              fill="#888888" font-family="'Roboto'" font-size="9">7
+        </text>
+      </g>
+      <g id="Layer_5">
+        <polygon opacity="0.36" stroke-miterlimit="10"
+                 points="0,223.3 48,138.5 154.7,169 211,88.5
+              294.5,80.5 380,165.2 437,75.5 469.5,223.3 	"/>
+      </g>
+      <g id="Layer_4">
+        <polygon stroke-miterlimit="10"
+                 points="469.3,222.7 1,222.7 48.7,166.7 155.7,188.3 212,132.7
+              296.7,128 380.7,184.3 436.7,125 	"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script type="text/javascript">
+  function setCookie(c_name, value, expiredays) {
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + expiredays);
+    document.cookie = c_name
+        + "="
+        + escape(value)
+        + ((expiredays == null) ? "" : ";expires="
+            + exdate.toUTCString());
+  }
+
+
+</script>
+<script src="https://content.jwplatform.com/libraries/5GazV5WI.js"></script>
+<script
+    src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.10/dialog-polyfill.js"></script>
+
+<script>
+  function myOtpTimer() {
+    var timer2 = "0:31";
+    var interval = setInterval(function () {
+
+      var timer = timer2.split(':');
+      //by parsing integer, I avoid all extra string processing
+      var minutes = parseInt(timer[0], 10);
+      var seconds = parseInt(timer[1], 10);
+      --seconds;
+      minutes = (seconds < 0) ? --minutes : minutes;
+      seconds = (seconds < 0) ? 59 : seconds;
+      seconds = (seconds < 10) ? '0' + seconds : seconds;
+      //minutes = (minutes < 10) ?  minutes : minutes;
+      $('.countdown').html(minutes + ':' + seconds);
+      if (minutes < 0) {
+        clearInterval(interval);
+      }
+      //check if both minutes and seconds are 0
+      if ((seconds <= 0) && (minutes <= 0)) {
+        clearInterval(interval);
+      }
+      timer2 = minutes + ':' + seconds;
+      if (timer2 == '0:00') {
+        document.getElementById("resendOTP").disabled = false;
+        $('#resendOTP').css("color", "#000000");
+      }
+    }, 1000);
+  }
+</script>
+<script>
+  $(document).bind("contextmenu", function (e) {
+    e.preventDefault();
+  });
+  document.onkeydown = function (e) {
+    if (event.keyCode == 123) {
+      return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+      return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+      return false;
+    }
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+      return false;
+    }
+  }
+</script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dashboard.js')}}"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--
+<script th:src="@{/js/fingerprintjs2/fingerprint2.min.js}"></script>-->
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/fingerprintjs2/fingerprint2.min.js')}}"></script>
+<script type='text/javascript'>
+  var s_ajaxListener = new Object();
+  var count = 0;
+  s_ajaxListener.tempOpen = XMLHttpRequest.prototype.open;
+  s_ajaxListener.callback = function () {
+    count = count + 1;
+  }
+
+  XMLHttpRequest.prototype.open = function (a, b) {
+    if (!a) {
+      var a = '';
+    }
+    if (!b) {
+      var b = '';
+    }
+    s_ajaxListener.tempOpen.apply(this, arguments);
+    s_ajaxListener.method = a;
+    s_ajaxListener.url = b;
+    if (a.toLowerCase() == 'get' && b.includes("classes2.neostencil.com")) {
+      s_ajaxListener.data = b.split('?');
+      s_ajaxListener.data = s_ajaxListener.data[1];
+      s_ajaxListener.callback();
+    }
+  }
+
+  // Load the Visualization API and the corechart package.
+  google.charts.load('current', {'packages': ['corechart', 'bar']});
+
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
+
+  // Callback that creates and populates a data table,
+  // instantiates the pie chart, passes in the data and
+  // draws it.
+  function drawChart() {
+
+    // Create the data table.
+    // var data = new google.visualization.DataTable();
+    // data.addColumn('string', 'Type');
+    // data.addColumn('number', 'Count');
+    // data.addRows([
+    //   ['lectures', 50],
+    //   ['Assignments', 10],
+    //   ['Notes', 25]
+    // ]);
+
+    var data = google.visualization.arrayToDataTable([
+      ['Element', 'count', {role: 'style'}],
+      ['Not Started', parseInt(notStarted), '#dc3c30'],            // RGB value
+      ['Watched ',parseInt(watchedPercent), 'green'],            // English color name
+      ['In Progress', parseInt(inProgress), '#fe9a3b']
+    ]);
+
+    // Set chart options
+    var options = {
+      'legend': 'bottom',
+      'title': 'Course Watch status',
+      'is3D': true,
+      'width': '100%',
+      'height': '100%',
+      'colors' : ['#dc3c30', 'green', '#fe9a3b']
+    };
+    var barchart_options = {
+      title: 'Course Watch status',
+      bar: {groupWidth: "55%"},
+      width: '100%',
+      height: '100%',
+      axes: {
+        x: {
+          0: {side: 'top', label: 'White to move'} // Top x-axis.
+        }
+      },
+      legend: 'none'
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var piechart_options = new google.visualization.PieChart(document.getElementById('chart_div'));
+    piechart_options.draw(data, options);
+
+    var barchart = new google.visualization.ColumnChart(document.getElementById('barchart_div'));
+    barchart.draw(data, barchart_options);
+  }
+  // if(watchedPercent == 0){
+  //   watchedPercent++;
+  // }
+
+  $(document).ready(function () {
+    $('.closeBtn').on('click', function () {
+      $('.demo-card-wide').hide(500);
+    })
+  })
+</script>
+
+</body>
+</html>

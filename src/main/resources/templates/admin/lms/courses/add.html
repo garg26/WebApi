@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
+      rel="stylesheet">
+</head>
+
+<body>
+
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+
+  <div id="page-wrapper">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-255">
+          <h1 th:inline="text" class="page-header">[[${title}]]</h1>
+        </div>
+      </div>
+      <form role="form" name="coursecreation" id="coursecreation">
+        <div class="row">
+          <div class="col-md-6">
+
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+
+                  <div class="col-sm-12">
+                    <label>Title</label> <input type="text" name="courseTitle"
+                                                id="courseTitle" class="form-control"
+                                                placeholder="course title eg Pub AD.." autofocus
+                                                required
+                                                maxlength="255">
+                  </div>
+
+                 <!-- <div class="col-sm-6">
+                    <label>Name</label> <input type="text" name="courseName"
+                                               id="courseName" class="form-control"
+                                               onkeyup="generateSlug(this.value,'course');"
+                                               placeholder="course Name eg Geography optional.."
+                                               maxlength="255">
+                  </div>-->
+                </div>
+              </div>
+            </div>
+
+          <!--  <div class="slug_wrapper"></div>-->
+
+
+
+            <label style="margin-top: 20px">Slug(URL)</label>
+            <div class="input-group">
+
+              <span class="input-group-addon" id="slug-name">https://neostencil.com/course/</span>
+
+              <input id="slug" type="text" class="form-control" name="slug"
+                      placeholder="slug..."
+                     onkeypress="slugExistence(event,this.value,'course')"
+                     maxlength="255">
+            </div>
+            <div id="errMsg"></div>
+
+
+            <div class="form-group">
+              <label style="margin-top: 10px" ;>Institute</label> <select
+                name="teacherInstitute" required id="teacherInstitute"
+                class="form-control selectpicker" data-live-search="true"
+                title="Select Institute">
+
+              <option th:each="institute : ${institutes}"
+                      th:data-subtext="${institute.id}" th:text="${institute.name}"
+                      th:value="${institute.id}"></option>
+
+            </select>
+            </div>
+
+            <div class="form-group">
+              <label>Teacher(s)</label> <select name="courseInstructorId"
+                                                required multiple id="courseInstructorId"
+                                                class="form-control selectpicker"
+                                                data-live-search="true"
+                                                title="Select Multiple Teacher">
+            </select>
+            </div>
+
+            <div class="form-group">
+              <label>Teacher Name</label> <input type="text"
+                                                 name="instructorName" required class="form-control"
+                                                 id="instructorName" maxlength="255"
+                                                 placeholder="Enter Course teacher name which is display on home page on a card..">
+
+            </div>
+
+
+            <div class="form-group">
+              <label>Course Type</label> <select name="courseType" required
+                                                 id="courseType" class="form-control">
+              <option value="0" disabled selected>Select Course Type</option>
+              <option value="LECTURES_ONLY">Lecture Only</option>
+              <option value="TEST_SERIES_ONLY">Test Series Only</option>
+              <option value="LECTURES_TESTSERIES">Lecture TestSeries</option>
+              <option value="INTERVIEW">Interview</option>
+              <option value="ESSAY">Essay</option>
+              <option value="ALL_INLCUSIVE">All Inclusive</option>
+            </select>
+            </div>
+
+
+            <div class="form-group">
+              <label>Course Description</label> <input type="text" disabled
+                                                       name="courseDescription" class="form-control"
+                                                       id="courseDescription"
+                                                       placeholder="description of the Course..">
+
+            </div>
+
+            <div class="form-group">
+              <label>Course About</label>
+              <textarea class="form-control" name="courseAbout"
+                        id="courseAbout" rows="8" placeholder="About the Course.."></textarea>
+            </div>
+
+            <div class="">
+              <label>Choose Course Image</label>
+              <div>
+
+                <label class="custom-file"> <input type="file" required
+                                                   id="file" class="custom-file-input"> <span
+                    class="custom-file-control"></span>
+                </label> <input type="button" class="button btn-primary" value="Upload"
+                                id="but_upload">
+                <div style="display: none;" id="loaderUpload">
+                  <img width="30px" height="30px"
+                       src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                </div>
+
+              </div>
+              <img src="" id="upload-img-tag" width="100px"/>
+            </div>
+
+            <div class="form-group">
+              <label>Image Alt Text</label> <input type="text" required
+                                                   name="imageAltText" class="form-control"
+                                                   id="imageAltText"
+                                                   placeholder="Enter alt text of the image.....">
+
+            </div>
+
+
+            <div class="form-group requirement_wrap"
+                 style="margin-top: 10px;">
+              <label>Course Requirements</label>
+              <div class="input-group control-group after-add-more"
+                   disabled="">
+                <input type="text" name="CourseRequirements[]" disabled
+                       id="CourseRequirements" class="form-control" maxlength="255"
+                       minlength="2" placeholder="Course Requirements....">
+                <div class="input-group-btn">
+
+                  <button class="btn btn-success add-more-require"
+                          style="width: 104px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;"
+                          type="button" disabled>
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add Field
+                  </button>
+
+                </div>
+              </div>
+              <div class="field_wrapper"></div>
+            </div>
+
+
+            <div class="form-group inclusions_wrap">
+              <label>Course Inclusions</label>
+
+              <div class="row">
+                <div class="col-md-4">
+
+                  <input type="text" name="CourseIncludesText[]"
+                         id="CourseIncludesText" class="form-control includesText"
+                         placeholder="Text" maxlength="255" minlength="2">
+                </div>
+
+                <div class="col-md-6">
+                  <input type="text" name="CourseIncludesDescription[]"
+                         id="CourseIncludesDescription"
+                         class="form-control includesDescription" maxlength="255"
+                         minlength="10" placeholder="Description">
+                </div>
+                <div class="col-md-1">
+                  <button class="btn btn-success add-more"
+                          style="width: 104px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;"
+                          type="button">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add Fields
+                  </button>
+                </div>
+              </div>
+              <div class="field_wrapper1"></div>
+
+            </div>
+
+
+            <div class="form-group add_info_wrap">
+              <label>Course Additional Information</label>
+
+              <div class="row">
+                <div class="col-md-4">
+
+                  <input type="text" name="CourseAdditionalInfoText[]"
+                         id="CourseAdditionalInfoText" class="form-control"
+                         maxlength="255" minlength="2" placeholder="Text">
+                </div>
+                <div class="col-md-6">
+
+                  <input type="text"
+                         name="CourseAdditionalInfoDescription[]"
+                         id="CourseAdditionalInfoDescription" class="form-control"
+                         maxlength="255" minlength="10" placeholder="Description">
+                </div>
+                <div class="col-md-1">
+
+                  <button class="btn btn-success btn-add"
+                          style="width: 104px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;"
+                          type="button">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add Fields
+                  </button>
+                </div>
+              </div>
+              <div class="field_wrapper2"></div>
+            </div>
+
+
+            <!--<div class="form-group">
+              <label>Demo Lecture</label> <input type="url" name="demolecture"
+                                                 maxlength="255" id="demolecture"
+                                                 class="form-control"
+                                                 placeholder="Add the Demo lecture..">
+            </div>-->
+            <div class="form-group">
+              <label>No Of Students Currently Enrolled</label> <input
+                type="number" min="0" class="form-control"
+                name="noOfStudentsCurrentlyEnrolled"
+                id="noOfStudentsCurrentlyEnrolled"
+                placeholder="Enter the no of students Enrolled..">
+            </div>
+
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+
+                  <div class="col-sm-6">
+                    <label>Course Rating</label> <input type="number" min="0"
+                                                        max="5" class="form-control"
+                                                        name="courseRating"
+                                                        id="courseRating"
+                                                        placeholder="Enter course rating...">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>No of Reviewers</label> <input type="number" min="0"
+                                                          class="form-control" name="noOfReviewers"
+                                                          id="noOfReviewers"
+                                                          placeholder="Enter Number of Reviewers rating...">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group" style="margin-top: 10px;">
+              <label>Course ExamSegment</label> <select
+                name="courseExamSegment" required id="courseExamSegment"
+                class="form-control">
+            </select>
+            </div>
+
+            <div class="form-group">
+              <label>Course Category</label> <select name="courseCategory"
+                                                     disabled id="courseCategory"
+                                                     class="form-control">
+
+            </select>
+            </div>
+
+            <div class="form-group">
+              <label>Course Sub Category</label> <select
+                name="courseSubCategory" disabled id="courseSubCategory"
+                class="form-control">
+
+            </select>
+            </div>
+
+            <div class="form-group">
+              <label>Course Subject</label> <select name="subjectList"
+                                                    id="subjectList" multiple
+                                                    class="form-control selectpicker"
+                                                    data-live-search="true"
+                                                    title="Select Multiple Subject">
+            </select>
+            </div>
+
+            <div class="form-group">
+              <label>Course Medium</label> <input type="text"
+                                                  name="courseMedium" id="courseMedium"
+                                                  class="form-control"
+                                                  maxlength="255" placeholder="Enter course medium">
+            </div>
+
+
+            <div class="form-group">
+              <label>Course Suitable For</label> <input type="text"
+                                                        name="suitableFor" id="suitableFor"
+                                                        class="form-control"
+                                                        maxlength="30000"
+                                                        placeholder="Course Suitable For....">
+            </div>
+
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+
+                  <div class="col-sm-6">
+                    <label>Start Date</label>
+                    <div class='input-group datepicker'>
+                      <input type='text' class="form-control" name="startDate"
+                             id="startDate" autofocus required/> <span
+                        class="input-group-addon"> <span
+                        class="glyphicon glyphicon-calendar"></span>
+												</span>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Course Validity For Display</label> <input type="text"
+                                                                name="courseValidity"
+                                                                id="courseValidity"
+                                                                class="form-control"
+                                                                placeholder="Enter course validity">
+            </div>
+
+            <div class="form-group">
+              <label>No of Session</label> <input type="text"
+                                                  name="noOfSessions" id="noOfSessions"
+                                                  class="form-control"
+                                                  placeholder="Enter course medium">
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="">
+                <label class="container"><input type="checkbox"
+                                                name="popular" id="popular">is Popular</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Related Courses</label> <select name="related-courses"
+                                                     multiple id="related-courses"
+                                                     class="form-control selectpicker"
+                                                     data-live-search="true">
+              <option value="0">Select multiple related courses</option>
+              <option th:each="rc : ${relatedCourses}"
+                      th:text="${rc.courseTitle}"
+                      th:data-subtext="${rc.instructorName}"
+                      th:value="${rc.courseSummaryId}"
+                      th:if="${#strings.toString(rc?.status)}==publish"></option>
+
+            </select>
+            </div>
+
+            <div class="form-group">
+              <label>Frequently Bought Together</label> <select
+                name="bought_together-courses" multiple
+                id="bought_together-courses" class="form-control selectpicker"
+                data-live-search="true">
+              <option value="0">Select multiple frequently bought
+                together courses
+              </option>
+              <option th:each="rc : ${relatedCourses}"
+                      th:text="${rc.courseTitle}"
+                      th:data-subtext="${rc.instructorName}"
+                      th:value="${rc.courseSummaryId}"
+                      th:if="${#strings.toString(rc?.status)}==publish"></option>
+            </select>
+            </div>
+
+            <div class="form-group">
+              <label>Course Schedule</label>
+              <textarea id="summernote" name="summernote"></textarea>
+            </div>
+
+            <div class="panel panel-primary">
+              <div class="panel-heading">Meta Information</div>
+              <div class="panel-body">
+                <div class="row" id="metaPanel"></div>
+
+                <div style="margin-top: 20px;" class="col-md-9">
+                  <label> SEO Title :</label> <input type="text"
+                                                     placeholder="Enter Meta Title" id="titleTag"
+                                                     class="form-control">
+                </div>
+
+                <div class="col-md-6" id="social-image"
+                     style="margin-top: 20px; width: 100%; margin-bottom: 20px;">
+                  <label>Social Image:</label>
+                  <div>
+
+                    <label class="custom-file"> <input type="file"
+                                                       id="socialImage" class="custom-file-input">
+                      <span
+                          class="custom-file-control"></span>
+                    </label> <input type="button" class="button btn-primary"
+                                    value="Upload" id="but_social_upload">
+                    <div style="display: none;" id="loaderSocialUpload">
+                      <img width="30px" height="30px"
+                           src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                    </div>
+
+                  </div>
+                  <img src="" id="upload-social-img-tag" width="100px"/> <br>
+                </div>
+                <br>
+
+                <div class="metaPanel" style="margin-top: 20px">
+
+                  <div class="metaPanelData">
+                    <div class="col-md-4">
+                      <label style="font-weight: bold;">Meta Type:</label> <input
+                        type="text" readonly="readonly" id="metaType"
+                        value="description">
+                    </div>
+
+                    <div class="col-md-5">
+                      <label style="font-weight: bold;">Meta Content:</label> <input
+                        style="width: 100%;" type="text" id="metaContent">
+                    </div>
+
+                  </div>
+
+
+                </div>
+
+                <div class="">
+                  <div style="margin-top: 20px;" class="col-md-9">
+                    <button type="button" class="btn btn-primary"
+                            onclick="showAddMetaPanel();">Add More MetaData
+                    </button>
+                  </div>
+                </div>
+
+
+                <div id="addMetaPanel">
+
+                  <div style="margin-top: 20px;" class="col-md-6">
+                    <label> Meta Type:</label><select
+                      class="form-control selectpicker" id="ddMetaType"
+                      data-live-search="true">
+                    <option value="twitter:card">twitter:card</option>
+                    <option value="twitter:description">twitter:description</option>
+                    <option value="og:locale">og:locale</option>
+                    <option value="twitter:title">twitter:title</option>
+                    <option value="twitter:site">twitter:site</option>
+                    <option value="og:site_name">og:site_name</option>
+                    <option value="article:section">article:section</option>
+                    <option value="og:type">og:type</option>
+                    <option value="og:description">og:description</option>
+                    <option value="fb:app_id">fb:app_id</option>
+                    <option value="og:url">og:url</option>
+                    <option value="article:publisher">article:publisher</option>
+                    <option value="og:title">og:title</option>
+                    <option value="og:image">og:image</option>
+                    <option value="og:image:secure_url">og:image:secure_url</option>
+                    <option value="twitter:image">twitter:image</option>
+                  </select>
+                  </div>
+
+                  <div style="margin-top: 20px;" class="col-md-6">
+                    <label> Meta Content:</label> <input type="text"
+                                                         placeholder="Enter comma separated meta content"
+                                                         id="txtMetaContent" class="form-control">
+                  </div>
+
+                  <div style="margin-top: 20px;" class="col-md-6">
+                    <button type="button" class="btn btn-primary"
+                            onclick="addMetaInfo();">Save Meta
+                    </button>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+
+
+            <br/>
+            <div class="panel panel-primary" id="pnlFeaturedImage">
+              <div class="panel-heading">Featured Image</div>
+              <div class="panel-body">
+
+                <div style="margin-top: 20px;" class="col-md-9">
+                  <label> Title:</label> <input type="text"
+                                                placeholder="Enter featured image title"
+                                                id="txtFITitle"
+                                                maxlength="255" class="form-control">
+                </div>
+
+                <div style="margin-top: 20px;" class="col-md-9">
+                  <label> Caption:</label> <input type="text"
+                                                  placeholder="Enter featured image caption"
+                                                  id="txtFICaption"
+                                                  maxlength="255" class="form-control">
+                </div>
+
+                <div style="margin-top: 20px;" class="col-md-9">
+                  <label> Alt Text:</label> <input type="text"
+                                                   placeholder="Enter featured image alt text"
+                                                   id="txtFIAltText"
+                                                   maxlength="255" class="form-control">
+                </div>
+
+                <div style="margin-top: 20px;" class="col-md-9">
+                  <label> Description:</label> <input type="text"
+                                                      placeholder="Enter featured image description"
+                                                      maxlength="255" id="txtFIDescription"
+                                                      class="form-control">
+                </div>
+
+                <div style="margin-top: 20px;" class="col-md-9">
+                  <label>Upload Image:</label></br> <label class="custom-file">
+                  <input type="file" required id="featureImage"
+                         class="custom-file-input"> <span
+                    class="custom-file-control"></span>
+                </label> <input type="button" class="button btn-primary"
+                                value="Upload" id="but_feature_upload">
+
+                  <div style="display: none;" id="loaderFeatureUpload">
+                    <img width="30px" height="30px"
+                         src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                  </div>
+                  <img src="" id="upload-feature-img-tag" width="100px"/>
+                </div>
+
+              </div>
+            </div>
+
+         <!--   <div class="panel panel-primary">
+              <div class="panel-heading">BreadCrumbs</div>
+              <div class="panel-body" id="panel-body">
+
+                <div class="saved-breadcrumb" id="saved-breadCrumb">
+                  <div class="form-group">
+                    <label style="margin-top: 10px" ;>BreadCrumb Level 1</label> <select
+                      name="show-breadCrumb" class="form-control show-breadCrumb"
+                      title="Select BreadCrumb">
+
+                    <option selected disabled>Select BreadCrumb</option>
+
+                    <option th:each="breadCrumb : ${breadCrumbs}"
+                            th:data-subtext="${breadCrumb.link}"
+                            th:text="${breadCrumb.text}"
+                            th:value="${breadCrumb.breadcrumbId}"></option>
+
+                  </select>
+
+
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-default create-breadcrumb"
+                        style="margin-top: 2px" onclick="createBreadCrumb()">
+                  <span class="glyphicon glyphicon-plus-sign"></span> Create
+                  BreadCrumb
+                </button>
+
+              </div>
+            </div>-->
+
+            <br/> <label class="radio-inline" style="margin-top: 10px;"><input
+              type="radio" name="optradio" id="publish" value="publish">Publish</label>
+            <label class="radio-inline" style="margin-top: 10px;"><input
+                type="radio" name="optradio" id="draft" value="draft">Draft</label>
+
+
+            <div class="row">
+              <div class="col-md-9" style="margin-top: 20px;">
+                <button class="submit btn btn-success" type="submit"
+                        value="submit">Submit
+                </button>
+                <i class="fa fa-spinner fa-spin" id="loader"></i> <a
+                  href="/admin_lmsadmin/lms/courses" class="btn btn-default"
+                  style="margin-left: 60px;">All Course</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+  </form>
+</div>
+</div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-1.255.4.js"></script>
+<!--/*/
+<th:block th:include="admin/footer"></th:block>
+/*/-->
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/bootstrap-maxlength.js')}}"></script>
+<script>
+
+  var metaInfoList = [];
+  var courseImageUrl;
+  var featureImageUrl;
+  var postSocialImageUrl;
+
+  function initMaxLengthForIncludes() {
+    $('input.includesText').maxlength({
+      alwaysShow: true,
+      warningClass: "label label-info",
+      limitReachedClass: "label label-warning",
+      placement: 'top',
+      message: 'used %charsTyped% of %charsTotal% chars.',
+      validate: true,
+      appendToParent: true
+    });
+
+    $('input.includesDescription').maxlength({
+      alwaysShow: true,
+      warningClass: "label label-info",
+      limitReachedClass: "label label-warning",
+      placement: 'top',
+      message: 'used %charsTyped% of %charsTotal% chars.',
+      validate: true,
+      appendToParent: true
+    });
+  }
+
+  function initMaxLengthForAdditional() {
+    $('input#CourseAdditionalInfoText').maxlength({
+      alwaysShow: true,
+      warningClass: "label label-info",
+      limitReachedClass: "label label-warning",
+      placement: 'top',
+      message: 'used %charsTyped% of %charsTotal% chars.',
+      validate: true
+    });
+
+    $('input#CourseAdditionalInfoDescription').maxlength({
+      alwaysShow: true,
+      warningClass: "label label-info",
+      limitReachedClass: "label label-warning",
+      placement: 'top',
+      message: 'used %charsTyped% of %charsTotal% chars.',
+      validate: true
+    });
+  }
+
+  $(document).ready(function () {
+    getExamSegment();
+
+    $(document).ready(function () {
+      $('#summernote').summernote({
+
+        styleTags: ['p', 'pre', 'h2', 'h3', 'h4', 'h5', 'h6'],
+        height: 200, // set editor height
+        minHeight: null, // set minimum height of editor
+        maxHeight: null, // set maximum height of editor
+        focus: true
+        // set focus to editable area after initializing summernote
+      });
+      $('#summernote').summernote('formatH2');
+      $('#summernote').summernote('formatH6');
+
+      var markupStr = $('#summernote').summernote('code');
+
+      $('#addMetaPanel').hide();
+      $('#metaPanel').hide();
+    });
+
+    $('#startDate').datepicker({
+      format: 'dd/mm/yyyy',
+      autoclose: true,
+      todayHighlight: true
+    });
+
+    $('#addMetaPanel').hide();
+    $('#metaPanel').hide();
+
+    initMaxLengthForIncludes();
+    initMaxLengthForAdditional()
+  });
+
+  $('input#courseTitle').maxlength({
+    alwaysShow: true,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-warning",
+    placement: 'top',
+    message: 'used %charsTyped% of %charsTotal% chars.',
+    validate: true
+  });
+
+  $('input#courseName').maxlength({
+    alwaysShow: true,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-warning",
+    placement: 'top',
+    message: 'used %charsTyped% of %charsTotal% chars.',
+    validate: true
+  });
+
+  $('input#demolecture').maxlength({
+    alwaysShow: true,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-warning",
+    placement: 'top',
+    message: 'used %charsTyped% of %charsTotal% chars.',
+    validate: true
+  });
+
+  $('input#courseMedium').maxlength({
+    alwaysShow: true,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-warning",
+    placement: 'top',
+    message: 'used %charsTyped% of %charsTotal% chars.',
+    validate: true
+  });
+
+  $('input#suitableFor').maxlength({
+    alwaysShow: true,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-warning",
+    placement: 'top',
+    message: 'used %charsTyped% of %charsTotal% chars.',
+    validate: true
+  });
+
+  $('input#txtFITitle').maxlength({
+    alwaysShow: true,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-warning",
+    placement: 'top',
+    message: 'used %charsTyped% of %charsTotal% chars.',
+    validate: true
+  });
+
+  $('input#txtFICaption').maxlength({
+    alwaysShow: true,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-warning",
+    placement: 'top',
+    message: 'used %charsTyped% of %charsTotal% chars.',
+    validate: true
+  });
+
+  $('input#txtFIAltText').maxlength({
+    alwaysShow: true,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-warning",
+    placement: 'top',
+    message: 'used %charsTyped% of %charsTotal% chars.',
+    validate: true
+  });
+
+  $('input#txtFIDescription').maxlength({
+    alwaysShow: true,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-warning",
+    placement: 'top',
+    message: 'used %charsTyped% of %charsTotal% chars.',
+    validate: true
+  });
+
+  $('input#CourseRequirements').maxlength({
+    alwaysShow: true,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-warning",
+    placement: 'top',
+    message: 'used %charsTyped% of %charsTotal% chars.',
+    validate: true
+  });
+
+  $("#teacherInstitute").change(function (event) {
+    es = $(this).val();
+    getTeachersByInstitute(es)
+  });
+
+  function getTeachersByInstitute(instituteId) {
+    $
+    .ajax({
+      type: 'GET',
+      async: false,
+      dataType: 'json',
+      url: apiBasePath + "/institutes/" + instituteId,
+      success: function (response) {
+        $('#loaderInstitute').hide();
+        var htmlToShow = '<option value="0" disabled>Select Teacher(s)</option>';
+        var teachersList = '<option value="#userId#">#teacherName#</option>';
+        if (response.teachers.length > 0) {
+          $.each(response.teachers, function (index,
+              element) {
+            i = index + 1;
+            htmlToShow = htmlToShow += teachersList;
+            htmlToShow = htmlToShow.replace(
+                /#userId#/g, element.id);
+            htmlToShow = htmlToShow.replace(
+                "#teacherName#",
+                element.teacherName);
+            htmlToShow = htmlToShow.replace("#slug#",
+                element.slug);
+          });
+          $('#courseInstructorId').html(htmlToShow);
+        } else {
+          $('#courseInstructorId').html("");
+        }
+      },
+
+      error: function (response) {
+        alert("No teacher found by that institute");
+      }
+    });
+    $('#courseInstructorId').selectpicker('refresh');
+  }
+
+  function getExamSegment() {
+    $
+    .ajax({
+      type: 'GET',
+      dataType: 'json',
+      url: apiBasePath + "/examsegments",
+
+      success: function (response) {
+        var htmlToShow = '<option value="0" disabled>Select Exam Segment</option>';
+        var examSegmentList = '<option value="#key#">#value#</option>';
+        if (response != null) {
+          $.each(response, function (key, value) {
+            htmlToShow = htmlToShow += examSegmentList;
+            htmlToShow = htmlToShow.replace(/#key#/g,
+                key);
+            htmlToShow = htmlToShow.replace(/#value#/g,
+                value);
+
+          });
+          $('#courseExamSegment').html(htmlToShow);
+
+        } else {
+          $('#courseExamSegment').html("");
+        }
+      },
+
+      error: function (response) {
+
+      }
+    });
+  }
+
+  function getCategoryByExamSegment(category) {
+    $
+    .ajax({
+      type: 'GET',
+      dataType: 'json',
+      url: apiBasePath + "/examsegments/category/"
+      + category,
+      success: function (response) {
+        var htmlToShow = '<option value="0" disabled>Select Course Category</option>';
+        var categoryList = '<option value="#key#">#value#</option>';
+        if (response != null > 0) {
+          $.each(response, function (key, value) {
+            htmlToShow = htmlToShow += categoryList;
+            htmlToShow = htmlToShow.replace(/#key#/g,
+                key);
+            htmlToShow = htmlToShow.replace(/#value#/g,
+                value);
+
+          });
+          $('#courseCategory').html(htmlToShow)
+          .removeAttr('disabled');
+
+        } else {
+          $('#courseCategory').html("");
+        }
+      },
+
+      error: function (response) {
+
+      }
+    });
+  }
+
+  $("#courseExamSegment").change(function (event) {
+    es = $(this).val();
+    getCategoryByExamSegment(es);
+  });
+
+  function getSubCategoryByExamSegment(examSegment, category) {
+    $
+    .ajax({
+      type: 'GET',
+      dataType: 'json',
+      url: apiBasePath + "/examsegments/" + examSegment
+      + "/category/" + category,
+      success: function (response) {
+        var htmlToShow = '<option value="0" disabled>Select Course SubCategory</option>';
+        var subCategoryList = '<option value="#key#">#value#</option>';
+        if (response != null) {
+          $.each(response, function (key, value) {
+            htmlToShow = htmlToShow += subCategoryList;
+            htmlToShow = htmlToShow.replace(/#key#/g,
+                key);
+            htmlToShow = htmlToShow.replace(/#value#/g,
+                value);
+
+          });
+          $('#courseSubCategory').html(htmlToShow)
+          .removeAttr('disabled');
+
+        } else {
+          $('#courseSubCategory').html("");
+        }
+      },
+
+      error: function (response) {
+
+      }
+    });
+  }
+
+  $("#courseCategory").click(function () {
+    es = $("#courseExamSegment").val();
+    cat = $(this).val();
+    getSubCategoryByExamSegment(es, cat);
+  });
+
+  $("#courseSubCategory").click(function () {
+    es = $("#courseExamSegment").val();
+    cat = $("#courseCategory").val();
+    subCat = $(this).val();
+    getSubjectsBySubCategory(es, cat, subCat);
+  });
+
+  function getSubjectsBySubCategory(examSegment, category, subCategory) {
+    $
+    .ajax({
+      async: true,
+      type: 'GET',
+      dataType: 'json',
+      url: apiBasePath + "/examsegments/" + examSegment
+      + "/category/" + category + "/subcatgory/" + subCategory,
+      success: function (response) {
+        var htmlToShow = '<option value="0" disabled>Select Course Subjects</option>';
+        var subjects = '<option value="#name#">#name#</option>';
+        if (response.length > 0) {
+          $.each(response, function (index, element) {
+            i = index + 1;
+            htmlToShow = htmlToShow += subjects;
+            htmlToShow = htmlToShow.replace(/#name#/g,
+                element);
+
+          });
+          $('#subjectList').html(htmlToShow);
+          $('#subjectList').selectpicker('refresh');
+
+        } else {
+          $('#subjectList').html("");
+          $('#subjectList').selectpicker('refresh');
+        }
+      },
+
+      error: function (response) {
+
+      }
+    });
+
+  }
+
+  $('.btn-add')
+  .click(
+      function () {
+
+        blank = false;
+        $(".add_info_wrap input").each(
+            function (index, elm) {
+              if ($(elm).val() == "") {
+                blank = true;
+              }
+            });
+
+        if (!blank) {
+          var fieldHTML = '<div class="row">\n'
+              + '                                <div class="col-md-4">\n'
+              + '\n'
+              + '                                    <input type="text" name="CourseAdditionalInfoText[]" id="CourseAdditionalInfoText" class="form-control"\n'
+              +
+              '                                           placeholder="Text" maxlength="255" minlength="2">\n'
+              + '                                </div>\n'
+              + '                                <div class="col-md-6">\n'
+              + '\n'
+              + '                                    <input type="text" name="CourseAdditionalInfoDescription[]" id="CourseAdditionalInfoDescription" class="form-control"\n'
+              +
+              '                                           placeholder="Description" maxlength="255" minlength="10">\n'
+              + '                                </div>\n'
+              + '                                <div class="col-md-1">\n'
+              + '\n'
+              + '                                    <button class="btn btn-danger remove" style="width: 100px;padding-left: 2px;padding-right: 100px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;" type="button"><i class="fa fa-times" aria-hidden="true"></i> Remove Field</button>'
+              + '                                </div>\n'
+              + '                            </div>';
+
+          $('.field_wrapper2').append(fieldHTML);
+          initMaxLengthForAdditional();
+        }
+      });
+
+  $('.field_wrapper2').on('click', '.remove', function () {
+    $(this).parent().parent('div').remove();
+
+  });
+
+  $('.add-more')
+  .click(
+      function () {
+        blank = false;
+        $(".inclusions_wrap input").each(
+            function (index, elm) {
+              if ($(elm).val() == "") {
+                blank = true;
+              }
+            });
+
+        if (!blank) {
+          var fieldHTML = '<div class="row">\n'
+              + '                                    <div class="col-md-4">\n'
+              + '\n'
+              + '                                        <input type="text" name="CourseIncludesText[]" id="CourseIncludesText" class="form-control includesText"\n'
+              +
+              '                                               placeholder="Text" maxlength="255" minlength="2">\n'
+              + '                                    </div>\n'
+              + '\n'
+              + '                                    <div class="col-md-6">\n'
+              + '                                        <input type="text" name="CourseIncludesDescription[]" id="CourseIncludesDescription" class="form-control includesDescription"\n'
+              +
+              '                                               placeholder="Description" maxlength="255" minlength="10">\n'
+              + '                                    </div>\n'
+              + '                                    <div class="col-md-1">\n'
+              + '                                        <button class="btn btn-danger remove-btn"  style="width: 100px;padding-left: 2px;padding-right: 100px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;" type="button"><i class="fa fa-times" aria-hidden="true"></i> Remove Field</button>\n'
+              + '                                    </div>\n'
+              + '                                </div>';
+
+          $('.field_wrapper1').append(fieldHTML);
+          initMaxLengthForIncludes();
+        }
+      });
+
+  $('.field_wrapper1').on('click', '.remove-btn', function () {
+    $(this).parent().parent('div').remove();
+
+  });
+
+  $('.add-more-require')
+  .click(
+      function () {
+        blank = false;
+        $(".requirement_wrap input").each(
+            function (index, elm) {
+              if ($(elm).val() == "") {
+                blank = true;
+              }
+            })
+        if (!blank) {
+          var fieldHTML = '<div class="input-group control-group after-add-more">\n'
+              + '                                <input type="text" required name="CourseRequirements[]"  class="form-control" placeholder="Course Requirements....">\n'
+              + '                                <div class="input-group-btn" maxlength="255" minlength="2">\n'
+              + '\n'
+              + '                                          <button class="btn btn-danger remove-require-btn" style="width: 100px;padding-left: 2px;padding-right: 100px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;" type="button"><i class="fa fa-times" aria-hidden="true"></i> Remove Field</button>\n'
+              + '\n'
+              + '                                </div>\n'
+              + '                            </div>';
+          $('.field_wrapper').append(fieldHTML);
+        }
+
+      });
+
+  $('.field_wrapper').on('click', '.remove-require-btn', function () {
+    $(this).parent().parent('div').remove();
+
+  });
+
+  $('.field_wrapper2').on(
+      'click',
+      '.all',
+      function () {
+        var $this = $(this);
+        if ($this.is(":checked")) {
+          $this.parents('.list-group').find("[type=checkbox]")
+          .prop("checked", true);
+        } else {
+          $this.parents('.list-group').find("[type=checkbox]")
+          .prop("checked", false);
+          $this.prop("checked", false);
+        }
+
+      });
+
+  $('#coursecreation').validate({
+
+    rules: {
+      courseTitle: {
+        required: true,
+      },
+
+      courseName: {
+        required: true
+      },
+
+      file: {
+        required: true
+      },
+
+      slug: {
+        required: true
+      },
+
+      courseDescription: {
+        required: true
+      },
+
+      courseAbout: {
+        required: true
+      },
+
+      courseSubject: {
+        required: true
+      },
+
+      demolecture: {
+        required: true
+      },
+
+      courseExamSegment: {
+        required: true
+      },
+
+    },
+    messages: {
+      courseTitle: {
+        required: "Please enter course title"
+      },
+
+      courseName: {
+        required: "Please enter course name"
+      },
+
+      courseImage: {
+        required: "Please enter course image"
+      },
+
+      slug: {
+        required: "Please enter course slug"
+      },
+
+      courseDescription: {
+        required: "Please enter course description"
+      },
+
+      courseAbout: {
+        required: "Please enter course about"
+      },
+
+      courseSubject: {
+        required: "Please enter course subject"
+      },
+
+      demolecture: {
+        required: "Please enter demo lecture link"
+      },
+
+      courseExamSegment: {
+        required: "Please enter course exam segment"
+      },
+
+    },
+
+    submitHandler: function () {
+      $('#loader').show();
+      submitRequest()
+
+    }
+
+  });
+
+  function submitRequest() {
+    if (document.getElementById('popular').checked) {
+      $('#free').attr('checked', true);
+      $('input[name="popular"]').val(true);
+    } else {
+      $('#free').attr('checked', false);
+      $('input[name="popular"]').val(false);
+    }
+
+    var featuredImageReq = {};
+
+    featuredImageReq["url"] = featureImageUrl;
+    featuredImageReq["name"] = $('#featureImage')[0].files[0].name;
+    featuredImageReq["title"] = $('#txtFITitle').val();
+    featuredImageReq["caption"] = $('#txtFICaption').val();
+    featuredImageReq["altText"] = $('#txtFIAltText').val();
+    featuredImageReq["description"] = $('#txtFIDescription').val();
+
+    var input = {
+
+      courseTitle: $('#courseTitle').val(),
+      courseName: $('#courseName').val(),
+      // courseDescription: $('#courseDescription').val(),
+      courseImage: $('#file')[0].files[0].name,
+      courseImageUrl: courseImageUrl,
+      instructors: getInstructor(),
+      courseType: $('#courseType').val() != "" ? $('#courseType')
+      .val() : null,
+      instructorName: $('#instructorName').val(),
+      courseRating: $('#courseRating').val(),
+      noOfReviewers: $('#noOfReviewers').val(),
+      courseSubject: getSubject(),
+      courseAbout: $('#courseAbout').val(),
+      inclusion: getCourseInclusion().length==0?null:JSON.stringify(getCourseInclusion()),
+      additionalInfo: getCourseAddInfo().length==0?null:JSON.stringify(getCourseAddInfo()),
+      studentsEnrolled: $('#noOfStudentsCurrentlyEnrolled').val(),
+      demoLecture: $('#demolecture').val(),
+      courseExamSegment: $('#courseExamSegment').val() != "" ? $('#courseExamSegment').val() : null,
+      courseCategory: $('#courseCategory').val() != "" ? $('#courseCategory').val() : null,
+      courseSubCategory: $('#courseSubCategory').val() != "" ? $('#courseSubCategory').val() : null,
+      courseOldSlug: $('#slug').val(),
+      institute: {
+        id: $('#teacherInstitute').val()
+      },
+      courseMedium: $('#courseMedium').val(),
+      suitableFor: $('#suitableFor').val(),
+      startDate: $('#startDate').val(),
+      instituteName: $('#instituteName').val(),
+      noOfSessions: $('#noOfSessions').val(),
+      courseValidity: $('#courseValidity').val(),
+      status: getStatus(),
+      popular: $('#popular').val(),
+      metaList: getUpdatedMetaList(),
+      titleTag: $('#titleTag').val(),
+      relatedCourses: getRelatedCourses(),
+      boughtTogetherCourses: getBoughtTogetherCourses(),
+      featuredImage: featuredImageReq,
+      breadCrumb: {
+        breadcrumbId: breadCrumbParentId
+      },
+      schedule: $('#summernote').summernote('code'),
+      imageAltText: $('#imageAltText').val()
+
+    };
+
+    $.ajax({
+      url: apiBasePath + "/admin_lmsadmin/courses",
+      type: "post",
+      data: JSON.stringify(input),
+      contentType: "application/json",
+      processData: false,
+      success: function (response) {
+        $('#loader').hide();
+        location.reload();
+        alert("Course Add successfully");
+
+      },
+
+      error: function (response) {
+        $('#loader').hide();
+        alert("Course add failed");
+      }
+    });
+
+  }
+
+  function getRelatedCourses() {
+    list = [];
+
+    $("#related-courses").val().forEach(function (value, index) {
+      list.push({
+        courseSummaryId: value
+      });
+    });
+
+    return list;
+  }
+
+  function getBoughtTogetherCourses() {
+    list = [];
+
+    $("#bought_together-courses").val().forEach(function (value, index) {
+      list.push({
+        courseSummaryId: value
+      });
+    });
+
+    return list;
+  }
+
+  function getCourseRequirement() {
+    list = [];
+    $(".requirement_wrap input").each(function (index, elm) {
+
+      list.push($(elm).val());
+    });
+    return list;
+  }
+
+  function getCourseInclusion() {
+    list = [];
+    $(".inclusions_wrap .row").each(function (index, elm) {
+      text = $(elm).find("#CourseIncludesText").val();
+      description = $(elm).find("#CourseIncludesDescription").val();
+
+      if (text!="" && description!="") {
+
+        var input = {
+          text: text,
+          description: description
+        };
+
+        list.push(input);
+      }
+    });
+    return list;
+  }
+
+  function getCourseAddInfo() {
+    list = [];
+    $(".add_info_wrap .row").each(
+        function (index, elm) {
+          text = $(elm).find("#CourseAdditionalInfoText").val();
+          description = $(elm).find(
+              "#CourseAdditionalInfoDescription").val();
+
+          if (text!="" && description!="") {
+
+            var input = {
+              text: text,
+              description: description
+            };
+            list.push(input);
+          }
+        });
+    return list;
+  }
+
+  function getInstructor() {
+    list = [];
+
+    $("#courseInstructorId").val().forEach(function (value, index) {
+      list.push({
+        id: value
+      });
+    });
+
+    return list;
+  }
+
+  function getSubject() {
+    list = [];
+
+    $("#subjectList").val().forEach(function (value, index) {
+      list.push(value);
+    });
+
+    return list.join();
+  }
+
+  $("#but_upload").click(function () {
+
+    $('#loaderUpload').show();
+
+    var files = $('#file')[0].files[0];
+    var fd = new FormData();
+    fd.append('file', files);
+    fd.append('type', "courses");
+    fd.append('contentType', files.type);
+
+    uploadFile(fd, function (response) {
+      if (response != null) {
+        alert("Upload File " + response + " " + "successfully");
+        getImageUrl(response, function (imageUrlResponse) {
+
+          if (imageUrlResponse != null) {
+            $('#loaderUpload').hide();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              $('#upload-img-tag').attr('src', e.target.result);
+            };
+            reader.readAsDataURL($('#file')[0].files[0]);
+
+            courseImageUrl = imageUrlResponse;
+          }
+          else {
+            $('#loaderUpload').hide();
+
+          }
+        });
+
+      }
+
+      else {
+        $('#loaderUpload').hide();
+
+      }
+
+    });
+
+  });
+
+  function getStatus() {
+    var status;
+    if (document.getElementById('publish').checked) {
+      status = document.getElementById('publish').value;
+    } else if (document.getElementById('draft').checked) {
+      status = document.getElementById('draft').value;
+    } else {
+      status = document.getElementById('draft').value;
+    }
+
+    return status;
+  }
+
+  function showAddMetaPanel() {
+    $('#addMetaPanel').show();
+  }
+
+  function addMetaInfo() {
+
+    var htmlToShow = '<div class="metaPanelData">\n'
+        + '                  <div class="col-md-4">\n'
+        + '                    <label style="font-weight: bold;">Meta Type:</label> <input type="text" readonly="readonly" id="metaType" value="#type#">\n'
+        + '                  </div>\n'
+        + '                  <div class="col-md-5">\n'
+        + '                    <label style="font-weight: bold;">Meta Content:</label> <input style="width: 100%;" type="text" value="#content#" id="metaContent">\n'
+        + '                  </div>\n'
+        + '                </div>';
+
+    htmlToShow = htmlToShow.replace("#type#", $('#ddMetaType').val());
+    htmlToShow = htmlToShow.replace("#content#", $('#txtMetaContent').val());
+
+    $('.metaPanel').append(htmlToShow);
+    $('#addMetaPanel').hide();
+
+    $('#ddMetaType').prop('selectedIndex', 0);
+    $('#txtMetaContent').prop('value', '');
+  }
+
+  $("#but_feature_upload").click(function () {
+    $('#loaderFeatureUpload').show();
+
+    var files = $('#featureImage')[0].files[0];
+    var fd = new FormData();
+    fd.append('file', files);
+    fd.append('type', "featureImage/courses");
+    fd.append('contentType', files.type);
+
+    uploadFile(fd, function (response) {
+      if (response != null) {
+        getImageUrl(response, function (imageUrlResponse) {
+
+          if (imageUrlResponse != null) {
+            $('#loaderFeatureUpload').hide();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              $('#upload-feature-img-tag').attr('src', e.target.result);
+            };
+            reader.readAsDataURL($('#featureImage')[0].files[0]);
+            featureImageUrl = imageUrlResponse;
+          }
+          else {
+            $('#loaderFeatureUpload').hide();
+
+          }
+        });
+
+      }
+
+      else {
+        $('#loaderFeatureUpload').hide();
+
+      }
+
+    });
+
+  });
+
+  $("#but_social_upload")
+  .click(
+      function () {
+        $('#loaderSocialUpload').show();
+        var files = $('#socialImage')[0].files[0];
+        var fd = new FormData();
+        fd.append('file', files);
+        fd.append('type', "socialImage/course");
+        fd.append('contentType', files.type);
+
+        uploadFile(
+            fd,
+            function (response) {
+              if (response != null) {
+                getImageUrl(
+                    response,
+                    function (imageUrlResponse) {
+
+                      if (imageUrlResponse != null) {
+                        $('#loaderSocialUpload')
+                        .hide();
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                          $(
+                              '#upload-social-img-tag')
+                          .attr(
+                              'src',
+                              e.target.result);
+                        };
+                        reader
+                        .readAsDataURL($('#socialImage')[0].files[0]);
+                        postSocialImageUrl = imageUrlResponse;
+                        if ($("#social-image-url").length > 0) {
+
+                          $('#social-image-url').remove();
+                          var mydiv = document.getElementById("social-image");
+                          var aTag = document.createElement('a');
+                          aTag.setAttribute('href', imageUrlResponse);
+                          aTag.setAttribute('id', "social-image-url");
+                          aTag.innerHTML = imageUrlResponse;
+                          mydiv.appendChild(aTag);
+
+                        }
+                        else {
+                          var mydiv = document.getElementById("social-image");
+                          var aTag = document.createElement('a');
+                          aTag.setAttribute('href', imageUrlResponse);
+                          aTag.setAttribute('id', "social-image-url");
+                          aTag.innerHTML = imageUrlResponse;
+                          mydiv.appendChild(aTag);
+                        }
+                      } else {
+                        $('#loaderSocialUpload')
+                        .hide();
+                      }
+                    });
+
+              }
+
+              else {
+                $('#loaderSocialUpload').hide();
+              }
+
+            });
+
+      });
+
+  function getUpdatedMetaList() {
+    list = [];
+    $(".metaPanel .metaPanelData").each(function (index, elm) {
+
+      metaType = $(elm).find("#metaType").val();
+      metaContent = $(elm).find("#metaContent").val();
+
+      if (metaType.includes("og")) {
+        attributeType = 'property';
+      }
+      else {
+        attributeType = 'name';
+      }
+
+      var input = {
+        type: metaType,
+        content: metaContent,
+        attributeType: attributeType
+      };
+
+      list.push(input);
+    });
+
+    return list;
+  }
+
+
+</script>
+
+</body>
+
+</html>

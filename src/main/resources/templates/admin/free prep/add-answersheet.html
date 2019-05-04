@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+
+			<div class="panel-body">
+
+				<form name="add-answer-sheet" id="formAnsSheet">
+					<div class="form-group">
+						<label>Title</label> <input type="text" name="sheet-title"
+							id="sheet-title" value="" class="form-control"
+							placeholder="Title of the Answer Sheet" required>
+
+					</div>
+
+					<div class="form-group">
+						<label>Category</label> <select name="sheet-category"
+							id="sheet-category" class="form-control" required>
+							<option value="0" selected disabled>Select Sheet
+								Category</option>
+							<option th:each="category : ${categories}" th:text="${category}"
+								th:value="${category}"></option>
+						</select>
+					</div>
+
+					<div id="booklets"></div>
+
+
+
+					<button id="btnBooklet" type="button" class="btn btn-primary"
+						onclick="showBookletPanel();">Add Booklet</button>
+
+					<br />
+					<div class="panel panel-primary" id="pnlBooklet">
+						<div class="panel-heading">Booklet</div>
+						<div class="panel-body">
+
+							<div style="margin-top: 20px;" class="col-md-9">
+								<label>Booklet Title:</label> <input type="text"
+									placeholder="Enter Booklet title" id="txtBookletTitle"
+									class="form-control">
+							</div>
+
+							<div style="margin-top: 20px;" class="col-md-9">
+								<label> Upload Booklet:</label> <input type="text"
+									placeholder="Enter Booklet URL" id="txtBookletContent"
+									class="form-control">
+							</div>
+
+							<div class="row" id="addMetaPanel">
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Title:</label> <input type="text"
+																								placeholder="Enter Title"
+																								id="titleTag" class="form-control">
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Meta KeyWord:</label><input type="text"
+																											placeholder="Enter Meta KeyWord"
+																											id="titleKeyWord" class="form-control">
+									</select>
+								</div>
+
+								<div style="margin-top: 20px;" class="col-md-9">
+									<label> Meta Description:</label> <textarea
+										placeholder="Enter Meta Description"
+										id="txtMetaDescription" class="form-control">
+              </textarea>
+								</div>
+
+							</div>
+
+							<div style="margin-top: 20px;" class="col-md-9">
+
+								<button type="button" class="btn btn-primary"
+									id="btnSaveBooklet" onclick="onSaveBooklet();">Save</button>
+
+								<button type="button" class="btn btn-primary" id="btnCancel"
+									onclick="onCancel();">Cancel</button>
+
+							</div>
+
+
+						</div>
+					</div>
+
+					<div id="">
+
+						<button type="submit" id="btnSubmit" onclick="onSubmit();">Submit</button>
+
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+	<script
+			th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/freeprep.js')}}"
+	></script>
+	 </body>
+
+</html>

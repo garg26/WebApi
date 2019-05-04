@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+<head>
+<link
+	href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+
+			<div id="mainMenu">
+				<ul class="nav nav-tabs">
+					<li class="active"><a onclick="generateReport('Year')"
+						href="#">Year</a></li>
+					<li><a onclick="generateReport('LastMonth')" href="#">Last
+							Month</a></li>
+					<li><a onclick="generateReport('ThisMonth')" href="#">This
+							Month</a></li>
+					<li><a onclick="generateReport('ThisWeek')" href="#">Last
+							7 days</a></li>
+					<li><div class="row">
+							Custom <input type="date" class="form-control" name="startDate"
+								id="startDate" placeholder="Select From Date"> <span>&nbsp;&nbsp;To&nbsp;&nbsp;</span><input
+								type="date" class="form-control" name="endDate" id="endDate"
+								placeholder="Select To Date">
+							<button class="btn btn-default" id="btnGo"
+								onclick="generateReport('Custom')">Go</button>
+						</div></li>
+				</ul>
+			</div>
+
+			<div id="dataItemsYear">
+				<ul class="nav nav-pills nav-stacked">
+					<li><a href="#"><span><b>Gross Sales(Manual Orders):</b>&nbsp;&nbsp;
+								<i class="fa fa-inr"></i> </span><span
+							th:text="${report.grossSalesManual} % 1 == 0? ${report.grossSalesManual} :${#numbers.formatDecimal(report.grossSalesManual, 0, 0)}"></span></a></li>
+							<li><a href="#"><span><b>Gross Sales(Regular Orders):</b>&nbsp;&nbsp;
+								<i class="fa fa-inr"></i> </span><span
+							th:text="${report.grossSalesRegular} % 1 == 0? ${report.grossSalesRegular} :${#numbers.formatDecimal(report.grossSalesRegular, 0, 0)}"></span></a></li>
+							<li><a href="#"><span><b>Gross Sales(Total):</b>&nbsp;&nbsp;
+								<i class="fa fa-inr"></i> </span><span
+							th:text="${report.grossSales} % 1 == 0? ${report.grossSales} :${#numbers.formatDecimal(report.grossSales, 0, 0)}"></span></a></li>
+							
+							<li><a href="#"><span><b>Net Sales(Regular Orders):</b>&nbsp;&nbsp;
+								<i class="fa fa-inr"></i> </span><span
+							th:text="${report.netSalesRegular} % 1 == 0? ${report.netSalesRegular} :${#numbers.formatDecimal(report.netSalesRegular, 0, 0)}"></span></a></li>
+							<li><a href="#"><span><b>Net Sales(Manual Orders):</b>&nbsp;&nbsp;
+								<i class="fa fa-inr"></i> </span><span
+							th:text="${report.netSalesManual} % 1 == 0? ${report.netSalesManual} :${#numbers.formatDecimal(report.netSalesManual, 0, 0)}"></span></a></li>
+							<li><a href="#"><span><b>Net Sales(Total):</b>&nbsp;&nbsp;
+								<i class="fa fa-inr"></i> </span><span
+							th:text="${report.netSales} % 1 == 0? ${report.netSales} :${#numbers.formatDecimal(report.netSales, 0, 0)}"></span></a></li>
+
+					<li><a href="#"><span><b>Gross Average Monthly
+									Sales:</b>&nbsp;&nbsp; <i class="fa fa-inr"></i> </span><span
+							th:text="${report.grossAvgMonthlySales} % 1 == 0? ${report.grossAvgMonthlySales} :${#numbers.formatDecimal(report.grossAvgMonthlySales, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>Gross Average Monthly
+									(Manual Orders) Sales:</b>&nbsp;&nbsp; <i class="fa fa-inr"></i> </span><span
+							th:text="${report.grossAvgMonthlySalesManual} % 1 == 0? ${report.grossAvgMonthlySalesManual} :${#numbers.formatDecimal(report.grossAvgMonthlySalesManual, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>Gross Average Monthly
+									(Regular Orders) Sales:</b>&nbsp;&nbsp; <i class="fa fa-inr"></i> </span><span
+							th:text="${report.grossAvgMonthlySalesRegular} % 1 == 0? ${report.grossAvgMonthlySalesRegular} :${#numbers.formatDecimal(report.grossAvgMonthlySalesRegular, 0, 0)}"></span></a></li>
+
+					<li><a href="#"><span><b>Net Average Monthly</b>
+								Sales: &nbsp;&nbsp; <i class="fa fa-inr"></i></span><span
+							th:text="${report.netAvgMonthlySales} % 1 == 0? ${report.netAvgMonthlySales} :${#numbers.formatDecimal(report.netAvgMonthlySales, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>Net Average Monthly
+									(Manual Orders)</b> Sales: &nbsp;&nbsp; <i class="fa fa-inr"></i></span><span
+							th:text="${report.netAvgMonthlySalesManual} % 1 == 0? ${report.netAvgMonthlySalesManual} :${#numbers.formatDecimal(report.netAvgMonthlySalesManual, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>Net Average
+									Monthly(Regular Orders)</b> Sales: &nbsp;&nbsp; <i
+								class="fa fa-inr"></i></span><span
+							th:text="${report.netAvgMonthlySalesRegular} % 1 == 0? ${report.netAvgMonthlySalesRegular} :${#numbers.formatDecimal(report.netAvgMonthlySalesRegular, 0, 0)}"></span></a></li>
+
+
+					<li><a href="#"><span><b>No.Of Paid Orders
+									Placed:&nbsp;&nbsp; </b></span><span
+							th:text="${report.noOfPaidOrders} % 1 == 0? ${report.noOfPaidOrders} :${#numbers.formatDecimal(report.noOfOrders, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>No. Of Paid Items
+									Purchased :&nbsp;&nbsp; </b></span><span
+							th:text="${report.noOfPaidItems} % 1 == 0? ${report.noOfPaidItems} :${#numbers.formatDecimal(report.noOfItems, 0, 0)}"></span></a></li>
+
+					<li><a href="#"><span><b>No.Of Free Orders
+									Placed:&nbsp;&nbsp; </b></span><span
+							th:text="${report.noOfFreeOrders} % 1 == 0? ${report.noOfFreeOrders} :${#numbers.formatDecimal(report.noOfOrders, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>No. Of Items in Free
+									Orders :&nbsp;&nbsp; </b></span><span
+							th:text="${report.noOfFreeItems} % 1 == 0? ${report.noOfFreeItems} :${#numbers.formatDecimal(report.noOfItems, 0, 0)}"></span></a></li>
+
+					<li><a href="#"><span><b>No.Of Manual Orders
+									Placed:&nbsp;&nbsp; </b></span><span
+							th:text="${report.noOfManualOrders} % 1 == 0? ${report.noOfManualOrders} :${#numbers.formatDecimal(report.noOfOrders, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>No. Of Items in Manual
+									Orders :&nbsp;&nbsp; </b></span><span
+							th:text="${report.noOfManualItems} % 1 == 0? ${report.noOfManualItems} :${#numbers.formatDecimal(report.noOfItems, 0, 0)}"></span></a></li>
+
+					<li><a href="#"><span><b>Total No.Of Orders
+									Placed:&nbsp;&nbsp; </b></span><span
+							th:text="${report.noOfOrders} % 1 == 0? ${report.noOfOrders} :${#numbers.formatDecimal(report.noOfOrders, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>Total No. Of Items
+									Purchased :&nbsp;&nbsp; </b></span><span
+							th:text="${report.noOfItems} % 1 == 0? ${report.noOfItems} :${#numbers.formatDecimal(report.noOfItems, 0, 0)}"></span></a></li>
+
+					<li><a href="#"><span><b>Total Coupon
+									Discount(Manual Orders):</b> &nbsp;&nbsp; <i class="fa fa-inr"></i></span><span
+							th:text="${report.totalCouponDiscountManual} % 1 == 0? ${report.totalCouponDiscountManual} :${#numbers.formatDecimal(report.totalCouponDiscountManual, 0, 0)}"></span></a></li>
+
+					<li><a href="#"><span><b>Total Coupon
+									Discount(Regular Orders):</b> &nbsp;&nbsp; <i class="fa fa-inr"></i></span><span
+							th:text="${report.totalCouponDiscountRegular} % 1 == 0? ${report.totalCouponDiscountRegular} :${#numbers.formatDecimal(report.totalCouponDiscountRegular, 0, 0)}"></span></a></li>
+
+					<li><a href="#"><span><b>Total Coupon Discount:</b>
+								&nbsp;&nbsp; <i class="fa fa-inr"></i></span><span
+							th:text="${report.totalCouponDiscount} % 1 == 0? ${report.totalCouponDiscount} :${#numbers.formatDecimal(report.totalCouponDiscount, 0, 0)}"></span></a></li>
+
+					<li><a href="#"><span><b>No. Of Refunds(Full):
+									&nbsp;&nbsp; </b></span><span
+							th:text="${report.noOfRefundedOrders} % 1 == 0? ${report.noOfRefundedOrders} :${#numbers.formatDecimal(noOfRefundedOrders, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>Total Refund(Full)
+									Value: </b>&nbsp;&nbsp; <i class="fa fa-inr"></i> </span><span
+							th:text="${report.refundValue} % 1 == 0? ${report.refundValue} :${#numbers.formatDecimal(report.refundValue, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>No. Of
+									Refunds(Partial): </b>&nbsp;&nbsp; <i class="fa fa-inr"></i></span><span
+							th:text="${report.noOfPartialRefunds} % 1 == 0? ${report.noOfPartialRefunds} :${#numbers.formatDecimal(report.noOfPartialRefunds, 0, 0)}"></span></a></li>
+					<li><a href="#"><span><b>Total Refund(Partial)
+									Value: </b>&nbsp;&nbsp; <i class="fa fa-inr"></i> </span><span
+							th:text="${report.partialRefundValue} % 1 == 0? ${report.partialRefundValue} :${#numbers.formatDecimal(report.partialRefundValue, 0, 0)}"></span></a></li>
+					
+				</ul>
+			</div>
+
+			<div id="dataItemsOthers"></div>
+		</div>
+
+
+
+	</div>
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/ecommerce.js')}}"></script>
+</body>
+
+</html>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Add New Teacher</h1>
+					</div>
+				</div>
+
+				<form role="form" name="newTeacher" id="newTeacher">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="form-group">
+								<label>Name</label> <input type="text" name="teacherName"
+									id="teacherName" onkeyup="generateSlug(this.value,'teacher');"
+									class="form-control" maxlength="255"
+									placeholder="Enter name of the teacher...">
+							</div>
+
+							<div class="slug_wrapper"></div>
+
+							<div class="form-group">
+								<label>Description</label>
+								<textarea type="text" name="teacherDescription"
+									id="teacherDescription" rows="4" class="form-control"
+									placeholder="Enter description of the teacher..."></textarea>
+							</div>
+
+							<!--<div class="form-group">-->
+								<!--<label>Subjects</label> <input type="text"-->
+									<!--name="teacherSubjects" id="teacherSubjects"-->
+									<!--class="form-control" maxlength="20000"-->
+									<!--placeholder="Enter subject names taught by the teacher...">-->
+							<!--</div>-->
+
+							<div class="form-group">
+								<label style="margin-top: 10px";>Institute</label> <select
+									name="teacherInstitute" id="teacherInstitute"
+									class="form-control selectpicker" data-live-search="true"
+									title="Select Institute">
+									<option th:each="institute : ${institutes}"
+										th:data-subtext="${institute.id}" th:text="${institute.name}"
+										th:value="${institute.id}"></option>
+
+
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Bio</label>
+								<textarea name="teacher-bio" id="teacherBio"
+									class="form-control" rows="4"
+									placeholder="Enter teacher bio..."></textarea>
+							</div>
+
+
+							<div class="form-group">
+								<label style="margin-top: 10px";>Experience (in years)</label> <input
+									type="number" min="0" class="form-control"
+									name="teacherExperience" id="teacherExperience"
+									placeholder="Enter total experience of the teacher (in years)...">
+							</div>
+
+							<div class="form-group">
+								<label style="margin-top: 10px";><input type="checkbox"
+									name="product" id="receivesQuery">Receives Queries
+									During Lecture</label>
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+
+									<div class="">
+										<div class="col-sm-6">
+											<label>Teacher ExamSegment</label> <select
+												name="teacherExamSegment" required id="teacherExamSegment"
+												class="form-control">
+
+											</select>
+										</div>
+
+
+										<div class="col-sm-6">
+											<label>Teacher Category</label> <select
+												name="teacherCategory" disabled id="teacherCategory"
+												class="form-control">
+
+											</select>
+										</div>
+
+										<div class="col-sm-6 teacherSubjects_wrap">
+											<label>Teacher Subject</label> <select
+												name="teacherSubject" id="teacherSubject"
+												multiple class="form-control">
+
+										</select>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label style="margin-top: 10px";>Teacher Rating</label> <input
+									type="number" min="1" max="5" class="form-control"
+									name="teacherRating" id="teacherRating"
+									placeholder="Enter teacher's rating upto 5..">
+							</div>
+
+							<div class="form-group">
+								<label>Location</label> <input type="text"
+									name="teacher-location" id="teacherLocation"
+									class="form-control" maxlength="255"
+									placeholder="Enter location of the teacher...">
+							</div>
+
+							<div class="">
+								<label>Choose Teacher Image</label>
+								<div>
+
+									<label class="custom-file"> <input type="file" required
+										id="file" class="custom-file-input"> <span
+										class="custom-file-control"></span>
+									</label> <input type="button" class="button btn-primary" value="Upload"
+										id="but_upload">
+									<div style="display: none;" id="loaderUpload">
+										<img width="30px" height="30px"
+											src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+									</div>
+
+								</div>
+								<img src="" id="upload-img-tag" width="100px" />
+							</div>
+
+							<div class="form-group">
+								<label>Image Alt Text</label> <input type="text" required
+									name="imageAltText" class="form-control" id="imageAltText"
+									placeholder="Enter alt text of the image.....">
+
+							</div>
+
+
+							<div class="form-group education_wrap">
+								<label>Teacher Education</label>
+
+								<div class="row">
+									<div class="col-md-4">
+
+										<input type="text" required name="TeacherEducationText[]"
+											id="TeacherEducationText" class="form-control"
+											placeholder="Text" maxlength="150" minlength="2">
+									</div>
+
+									<div class="col-md-7">
+										<input type="text" required
+											name="TeacherEducationDescription[]"
+											id="TeacherEducationDescription" class="form-control"
+											placeholder="Description" maxlength="150" minlength="10">
+									</div>
+									<div class="col-md-1">
+										<button class="btn btn-success add-education-more pull-right"
+											type="button">
+											<i class="glyphicon glyphicon-plus"></i>
+										</button>
+									</div>
+								</div>
+								<div class="field_wrapper1"></div>
+
+							</div>
+
+							<div class="form-group highlight_wrap">
+								<label>Teacher Highlight</label>
+								<div class="highlight_row" id="highlight_row_id">
+									<div class="row">
+										<div class="col-md-4">
+
+											<label class="custom-file"> <input type="file"
+												required name="multipleImageIcon[]"
+												id="TeacherHighlightIcon" class="custom-file-input">
+												<span class="custom-file-control"></span>
+											</label>
+
+
+										</div>
+										<div style="position: absolute; left: 300px; display: none;"
+											id="loaderIconUpload">
+											<img width="30px" height="30px"
+												src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+										</div>
+
+										<div class="col-md-7">
+											<input type="text" required
+												name="TeacherHighlightDescription[]"
+												id="TeacherHighlightDescription" class="form-control"
+												placeholder="Description" maxlength="150" minlength="2">
+
+
+										</div>
+
+
+										<div class="col-md-1">
+											<button class="btn btn-success add-more-highlight pull-right"
+												type="button">
+												<i class="glyphicon glyphicon-plus"></i>
+											</button>
+										</div>
+									</div>
+									<div class="field_wrapper"></div>
+
+								</div>
+
+								<input type="button" class="button btn-primary" value="Upload"
+									id="but_icon_upload">
+
+
+							</div>
+
+							<div class="form-group experience_wrap">
+								<label>Teacher Experience</label>
+
+								<div class="row">
+									<div class="col-md-4">
+
+										<input type="text" required name="TeacherExperienceText[]"
+											id="TeacherExperienceText" class="form-control"
+											placeholder="Text" maxlength="150" minlength="2">
+									</div>
+
+									<div class="col-md-7">
+										<input type="text" required
+											name="TeacherExperienceDescription[]"
+											id="TeacherExperienceDescription" class="form-control"
+											placeholder="Description" maxlength="150" minlength="2">
+									</div>
+									<div class="col-md-1">
+										<button class="btn btn-success add-more-experience pull-right"
+											type="button">
+											<i class="glyphicon glyphicon-plus"></i>
+										</button>
+									</div>
+								</div>
+								<div class="field_wrapper2"></div>
+
+							</div>
+
+							<div class="form-group">
+								<label>Address</label> <input type="text" name="teacher-address"
+									id="teacherAddress" class="form-control"
+									placeholder="Enter Address of the teacher..." maxlength="20000">
+							</div>
+
+							<div class="form-group">
+								<label>Contact No.</label> <input type="text"
+									name="teacher-contact-no" id="teacherContactNo"
+									class="form-control"
+									placeholder="Enter Contact of the teacher..." maxlength="255">
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+
+									<div class="">
+
+										<div class="col-sm-6">
+											<label>EmailId</label> <input type="email"
+												name="teacher-emailId" id="teacherEmailId"
+												class="form-control" maxlength="255"
+												placeholder="Enter teacher emailId..... " autofocus>
+										</div>
+
+										<div class="col-sm-6">
+											<label>Website</label> <input type="url"
+												name="teacher-website" id="teacherWebsite"
+												class="form-control" maxlength="255"
+												placeholder="Enter teacher website....">
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row" style="margin-top: 10px;">
+
+									<div class="">
+
+										<div class="col-sm-6">
+											<label>Facebook Url</label> <input type="url"
+												name="teacher-facebook" id="teacherFacebook"
+												class="form-control" maxlength="255"
+												placeholder="Enter teacher facebook url....." autofocus>
+										</div>
+
+										<div class="col-sm-6">
+											<label>Twitter Url</label> <input type="url"
+												name="teacher-twitter" id="teacherTwitter"
+												class="form-control" maxlength="255"
+												placeholder="Enter teacher twitter url....">
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="form-horizontal">
+								<div class="row" style="margin-top: 10px;">
+
+									<div class="">
+
+										<div class="col-sm-6">
+											<label>Linkedin Url</label> <input type="url"
+												name="teacher-linkedin" id="teacherLinkedin"
+												class="form-control" maxlength="255"
+												placeholder="Enter teacher linkedin url....." autofocus>
+										</div>
+
+										<div class="col-sm-6">
+											<label>Google Plus Url</label> <input type="url"
+												name="teacher-google-plus" id="teacherGooglePlus"
+												class="form-control" maxlength="255"
+												placeholder="Enter teacher google plus url....">
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label style="margin-top: 10px;">Commission Percentage</label> <input
+									type="number" min="0" class="form-control"
+									name="commissionPercentage" id="commissionPercentage"
+									placeholder="Enter the teacher commission in percentage"></input>
+							</div>
+
+
+							<div class="form-group">
+								<label style="margin-top: 10px;">Teacher Current Status</label>
+								<textarea class="form-control" name="teacher-current-status"
+									id="teacherCurrentStatus" rows="6"
+									placeholder="Enter the teacher current status"></textarea>
+							</div>
+
+							<div class="form-group teacher_certificate"
+								style="margin-top: 10px;">
+								<label>Certificates/Galley Image</label>
+								<div class="certificate_row" id="certificate_row_id">
+									<div class="row">
+										<div class="col-md-4">
+											<label class="custom-file"> <input type="file"
+												name="teacherCertificate[]" id="teacherCertificate"
+												class="custom-file-input"> <span
+												class="custom-file-control"></span>
+											</label>
+										</div>
+
+										<div style="position: absolute; left: 300px; display: none;"
+											id="loaderCertificateUpload">
+											<img width="30px" height="30px"
+												src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+										</div>
+
+
+										<div class="col-md-1">
+											<button
+												class="btn btn-success add-more-certificate pull-right"
+												type="button">
+												<i class="glyphicon glyphicon-plus"></i>
+											</button>
+										</div>
+
+									</div>
+									<div class="field_wrapper3"></div>
+								</div>
+
+								<input type="button" class="button btn-primary" value="Upload"
+									id="but_certificate_upload">
+
+
+							</div>
+
+							<!-- <div class="row" id="addMetaPanel">
+
+              <div style="margin-top: 20px;" class="col-md-9">
+                <label> Title:</label> <input type="text"
+                                              placeholder="Enter Title"
+                                              id="titleTag" class="form-control">
+              </div>
+
+              <div style="margin-top: 20px;" class="col-md-9">
+                <label> Meta KeyWord:</label><input type="text"
+                                                    placeholder="Enter Meta KeyWord"
+                                                    id="titleKeyWord" class="form-control">
+                </select>
+              </div>
+
+              <div style="margin-top: 20px;" class="col-md-9">
+                <label> Meta Description:</label> <textarea
+                  placeholder="Enter Meta Description"
+                  id="txtMetaDescription" class="form-control">
+              </textarea>
+              </div>
+
+            </div> -->
+
+							<div class="panel panel-primary">
+								<div class="panel-heading">Meta Information</div>
+								<div class="panel-body">
+									<div class="row" id="metaPanel"></div>
+
+									<div style="margin-top: 20px;" class="col-md-9">
+										<label> Meta Title :</label> <input type="text"
+											placeholder="Enter Meta Title" id="titleTag"
+											class="form-control">
+									</div>
+									<div style="margin-top: 20px;" class="col-md-9">
+										<h4>Other Meta Info</h4>
+									</div>
+									<div style="margin-top: 20px;" class="col-md-9">
+										<label> Meta Type :</label> <input type="text"
+											value="description" readonly="readonly" id="metaDesc"
+											class="form-control">
+									</div>
+
+									<div style="margin-top: 20px;" class="col-md-9">
+										<label> Meta Content:</label> <input type="text"
+											placeholder="Enter meta description" id="txtMetaDesc"
+											class="form-control" required="required">
+									</div>
+									<div style="margin-top: 20px;" class="col-md-9" id ="socialImageContainer">
+										<label> Social Image:</label> <br /> <label
+											class="custom-file"> <input type="file" required
+											id="socialImage" class="custom-file-input"> <span
+											class="custom-file-control"></span>
+										</label> <input type="button" class="btn btn-primary" value="Upload"
+											id="but_social_upload">
+
+										<div style="display: none;" id="loaderSocialUpload">
+											<img width="30px" height="30px"
+												src="https://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+										</div>
+										<br/>
+										<img src="" id="upload-social-img-tag" width="100px" /><br/>
+									</div>
+									<div class="row">
+										<div style="margin-top: 20px;" class="col-md-9">
+											<button type="button" class="btn btn-primary"
+												onclick="showAddMetaPanel();">Add More MetaData</button>
+										</div>
+									</div>
+
+
+									<div class="row" id="addMetaPanel">
+
+										<div style="margin-top: 20px;" class="col-md-9">
+											<label> Meta Type:</label><select
+												class="form-control selectpicker" id="ddMetaType"
+												data-live-search="true">
+												<option value="twitter:card">twitter:card</option>
+												<option value="twitter:description">twitter:description</option>
+												<option value="og:locale">og:locale</option>
+												<option value="twitter:title">twitter:title</option>
+												<option value="twitter:site">twitter:site</option>
+												<option value="og:site_name">og:site_name</option>
+												<option value="article:section">article:section</option>
+												<option value="og:type">og:type</option>
+												<option value="og:description">og:description</option>
+												<option value="fb:app_id">fb:app_id</option>
+												<option value="og:url">og:url</option>
+												<option value="article:publisher">article:publisher</option>
+												<option value="og:title">og:title</option>
+											</select>
+										</div>
+
+										<div style="margin-top: 20px;" class="col-md-9">
+											<label> Meta Content:</label> <input type="text"
+												placeholder="Enter comma separated meta content"
+												id="txtMetaContent" class="form-control">
+										</div>
+
+										<div style="margin-top: 20px;" class="col-md-9">
+											<button type="button" class="btn btn-primary"
+												onclick="addMetaInfo();">Save Meta</button>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<br />
+							<div class="panel panel-primary" id="pnlFeaturedImage">
+								<div class="panel-heading">Featured Image</div>
+								<div class="panel-body">
+
+									<div style="margin-top: 20px;" class="col-md-9">
+										<label> Title:</label> <input type="text"
+											placeholder="Enter featured image title" id="txtFITitle"
+											maxlength="255" class="form-control">
+									</div>
+
+									<div style="margin-top: 20px;" class="col-md-9">
+										<label> Caption:</label> <input type="text"
+											placeholder="Enter featured image caption" id="txtFICaption"
+											maxlength="255" class="form-control">
+									</div>
+
+									<div style="margin-top: 20px;" class="col-md-9">
+										<label> Alt Text:</label> <input type="text"
+											placeholder="Enter featured image alt text" id="txtFIAltText"
+											maxlength="255" class="form-control">
+									</div>
+
+									<div style="margin-top: 20px;" class="col-md-9">
+										<label> Description:</label> <input type="text"
+											placeholder="Enter featured image description"
+											maxlength="255" id="txtFIDescription" class="form-control">
+									</div>
+
+									<div style="margin-top: 20px;" class="col-md-9">
+										<label>Upload Image:</label></br> <label class="custom-file">
+											<input type="file" required id="featureImage"
+											class="custom-file-input"> <span
+											class="custom-file-control"></span>
+										</label> <input type="button" class="button btn-primary"
+											value="Upload" id="but_feature_upload">
+
+										<div style="display: none;" id="loaderFeatureUpload">
+											<img width="30px" height="30px"
+												src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+										</div>
+										<img src="" id="upload-feature-img-tag" width="100px" />
+									</div>
+
+								</div>
+							</div>
+
+							<div class="panel panel-primary">
+								<div class="panel-heading">BreadCrumbs</div>
+								<div class="panel-body" id="panel-body">
+
+									<div class="saved-breadcrumb" id="saved-breadCrumb">
+										<div class="form-group">
+											<label style="margin-top: 10px";>BreadCrumb Level 1</label> <select
+												name="show-breadCrumb" class="form-control show-breadCrumb"
+												title="Select BreadCrumb">
+
+												<option selected disabled>Select BreadCrumb</option>
+
+												<option th:each="breadCrumb : ${breadCrumbs}"
+													th:data-subtext="${breadCrumb.link}"
+													th:text="${breadCrumb.text}"
+													th:value="${breadCrumb.breadcrumbId}"></option>
+
+											</select>
+
+
+										</div>
+									</div>
+
+									<button type="button" class="btn btn-default create-breadcrumb"
+										style="margin-top: 2px" onclick="createBreadCrumb()">
+										<span class="glyphicon glyphicon-plus-sign"></span> Create
+										BreadCrumb
+									</button>
+
+								</div>
+							</div>
+
+							<br /> <label class="radio-inline" style="margin-top: 10px;"><input
+								type="radio" name="optradio" id="publish" value="publish">Publish</label>
+							<label class="radio-inline" style="margin-top: 10px;"><input
+								type="radio" name="optradio" id="draft" value="draft">Draft</label>
+
+							<div class="row">
+								<div style="margin-top: 20px;" class="col-md-9">
+									<button class="submit btn btn-success" type="submit"
+										value="submit">Submit</button>
+									<i class="fa fa-spinner fa-spin" id="loader"></i> <a
+										href="/admin_lmsadmin/lms/teachers" class="btn btn-default"
+										style="margin-left: 60px;">All Teacher</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+	<script
+			th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/bootstrap-maxlength.js')}}"
+	></script>
+	<script
+			th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/teacher.js')}}"
+	></script>
+
+</body>
+
+</html>

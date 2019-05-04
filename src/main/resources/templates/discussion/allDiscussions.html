@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title th:utext="${post?.titleTag}"></title>
+  <meta th:if="${#strings.toString(post?.status)} != 'publish'"
+        name="robots" content="nofollow, noindex"/>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+
+  <meta th:each="metaTag : ${post?.metaList}"
+        th:if="${metaTag.metaInformation.attributeType} != 'property'"
+        th:attr="name=${metaTag.metaInformation.type},content=${metaTag.metaInformation.content}"/>
+
+  <meta th:each="metaTag : ${post?.metaList}"
+        th:if="${metaTag.metaInformation.attributeType} == 'property'"
+        th:attr="property=${metaTag.metaInformation.type},content=${metaTag.metaInformation.content}"/>
+
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+
+  <!--<link
+    th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.css')}}"
+    rel="stylesheet" media="screen" />-->
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/answerkey.css')}}"
+      rel="stylesheet" media="screen"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+  <!--<link
+    th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick-theme.css')}}"
+    rel="stylesheet" media="screen" />-->
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/blogs.css')}}"
+      rel="stylesheet" media="screen"/>
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/discussion.css')}}"
+      rel="stylesheet" media="screen"/>
+
+  <link rel="canonical"
+        th:href="${'https://neostencil.com/'+post?.postSlug}"/>
+  <style>
+
+
+
+  </style>
+</head>
+<body class="">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+  <nav role="navigation" id="navigation" style="top: 100px; position: relative; display: none;">
+    <div id="menuToggle">
+      <input type="checkbox" />
+      <span></span>
+      <span></span>
+      <span></span>
+      <ul id="menu" class="blog-share">
+        <li class="is-clicked" ><a href="/discussions"><i class="material-icons side-nav-bar"> supervisor_account </i>&nbsp;
+          All Discussions</a>
+        </li>
+        <li class="is-clicked" ><a href="/user-discussions"><i class="material-icons side-nav-bar "> question_answer </i>&nbsp;
+          My Discussions</a>
+        </li>
+        <!--<li><a ><i class="material-icons side-nav-bar"> reply_all </i>&nbsp;My Participation</a>-->
+        <!--</li>-->
+      </ul>
+    </div>
+  </nav>
+  <img src="https://lh3.googleusercontent.com/bO7HpwjNud9Fwlt2W8P9YwRmnRYCrTb1PEkQxHuGqtW7Ros4Gmct-HMtpmu3KXnGQv6F1ftFNqZtGec-z54DqLeWFjo=w1800" style="
+    width: 100%;
+    position: absolute;">
+  <div class="mat-content mdl-layout__content" id="mat-content">
+    <div class="container-header" style="margin-top: 30px;">
+      <h3 style="margin: 0 auto; width: fit-content; padding: 20px;"> DISCUSSIONS</h3>
+      <hr class="hr">
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone navigation">
+          <ul class="blog-share">
+            <li class="is-clicked" ><a href="/discussions"><i class="material-icons side-nav-bar"> supervisor_account </i>&nbsp;
+              All Discussions</a>
+            </li>
+            <li ><a href="/user-discussions"><i class="material-icons side-nav-bar "> question_answer </i>&nbsp;
+              My Discussions</a>
+            </li>
+            <!--<li><a ><i class="material-icons side-nav-bar"> reply_all </i>&nbsp;My Participation</a>-->
+            <!--</li>-->
+          </ul>
+        </div>
+        <div
+            class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone discussion-container">
+
+
+          <div class="mdl-grid" style="margin: 0;padding: 0;">
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="height: fit-content;">
+              <div style=" width: fit-content; float: right; " class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="createDiscussionsBtn" onclick="openDiscussionDialog();">create</div>
+            </div>
+          </div>
+          <div style="display: none;" class="common-loader"
+               id="loader-discussions">
+            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+          </div>
+
+          <div id="all-discussion-list" style="margin-top: 8px;"></div>
+
+
+
+
+
+
+          <!--<div id="single-discussions" >-->
+            <!--<h3 class="discussion-heading">Horizontal masonry layout with flexbox CSS only-->
+              <!--[duplicate]</h3>-->
+            <!--<div class="user-profile mdl-grid">-->
+              <!--<div class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                <!--<img-->
+                    <!--src="https://lh3.googleusercontent.com/jxbWnoQ03TnkHZlrSROHVyYPhtCR_vrkkGpAWPCci29jhkqiSdHJvgQUGFCFkh6fQlZkXA2gfimFeqe7_llBwo7Jw6w=w50-h52-cc"/>-->
+              <!--</div>-->
+              <!--<div class=" mdl-cell mdl-cell&#45;&#45;9-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                <!--<div class="user-name">Satish Kumar Gaur</div>-->
+                <!--<div class="last-active"> 4 days ago</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="mdl-cell mdl-cell&#45;&#45;11-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+              <!--<p class="comment-text">I'm trying to create a horizontal masonry layout using only CSS-->
+                <!--and flexbox. The-->
+                <!--problem I'm having is there are vertical gaps between the elements, without using-->
+                <!--align-left: stretch; is it possible to close the gaps?</p>-->
+            <!--</div>-->
+            <!--<div class="mdl-grid ">-->
+              <!--<div class="mdl-cell mdl-cell&#45;&#45;5-col mdl-cell&#45;&#45;3-col-tablet mdl-cell&#45;&#45;2-col-phone">-->
+                <!--<div style="cursor: pointer"><i class="fa fa-heart-o like "></i></div>-->
+                <!--<span style="position: relative; top: 8px;">4 likes</span>-->
+              <!--</div>-->
+              <!--<div class="mdl-cell mdl-cell&#45;&#45;7-col mdl-cell&#45;&#45;5-col-tablet mdl-cell&#45;&#45;2-col-phone">-->
+                <!--<div class="report">-->
+                <!--<span class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect">-->
+                <!--<i class="material-icons"> error_outline </i>-->
+                <!--</span>-->
+                  <!--<span>Report</span></div>-->
+              <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+              <!--<div class="no-of-answers"> 12 Answers</div>-->
+            <!--</div>-->
+            <!--<div class="mdl-grid user-comments">-->
+              <!--<div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                <!--<div class="user-profile mdl-grid">-->
+                  <!--<div-->
+                      <!--class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                    <!--<img-->
+                        <!--src="https://lh3.googleusercontent.com/jxbWnoQ03TnkHZlrSROHVyYPhtCR_vrkkGpAWPCci29jhkqiSdHJvgQUGFCFkh6fQlZkXA2gfimFeqe7_llBwo7Jw6w=w50-h52-cc">-->
+                  <!--</div>-->
+                  <!--<div-->
+                      <!--class=" mdl-cell mdl-cell&#45;&#45;9-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                    <!--<div class="user-name">Abhishek Singh</div>-->
+                    <!--<div class="last-active"> 1 days ago</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div-->
+                    <!--class=" mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                <!--<span class="comment-text">Flex box wrap wraps the overflowing elements to a new row. This new row has,-->
+                  <!--just like the previous row, the height of the highest flex child in it. It will-->
+                  <!--not let the elements in the row go outside that rows boundaries.-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--<div-->
+                    <!--class=" mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone answer-descriptions">-->
+                <!--<span class="comment-text ">Flex box wrap wraps the overflowing elements to a new row. This new row has,-->
+                  <!--just like the previous row, the height of the highest flex child in it. It will-->
+                  <!--not let the elements in the row go outside that rows boundaries.-->
+                <!--</span>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="comment-action" id="commentAction78061">-->
+                <!--<button id="commentBtn78061" value="78061"-->
+                        <!--onclick="onClickReplyBtn(78061,'comment',78061)" class="reply-to-comment">-->
+                  <!--Reply-->
+                <!--</button> &nbsp;&nbsp;-->
+                <!--<div id="reply78061" class="reply_wrapper"></div>-->
+              <!--</div>-->
+            <!--</div>-->
+
+            <!--<hr class="hr">-->
+            <!--<div class="mdl-grid user-comments" >-->
+              <!--<div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                <!--<div class="user-profile mdl-grid">-->
+                  <!--<div-->
+                      <!--class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                    <!--<img-->
+                        <!--src="https://lh3.googleusercontent.com/jxbWnoQ03TnkHZlrSROHVyYPhtCR_vrkkGpAWPCci29jhkqiSdHJvgQUGFCFkh6fQlZkXA2gfimFeqe7_llBwo7Jw6w=w50-h52-cc">-->
+                  <!--</div>-->
+                  <!--<div-->
+                      <!--class=" mdl-cell mdl-cell&#45;&#45;9-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                    <!--<div class="user-name">Abhishek Singh</div>-->
+                    <!--<div class="last-active"> 1 days ago</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div-->
+                    <!--class=" mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                <!--<span class="comment-text">Flex box wrap wraps the overflowing elements to a new row. This new row has,-->
+                  <!--just like the previous row, the height of the highest flex child in it. It will-->
+                  <!--not let the elements in the row go outside that rows boundaries.-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--<div-->
+                    <!--class=" mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone answer-descriptions">-->
+                <!--<span class="comment-text ">Flex box wrap wraps the overflowing elements to a new row. This new row has,-->
+                  <!--just like the previous row, the height of the highest flex child in it. It will-->
+                  <!--not let the elements in the row go outside that rows boundaries.-->
+                <!--</span>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="comment-action" id="commentAction78061">-->
+                <!--<button id="commentBtn78061" value="78061"-->
+                        <!--onclick="onClickReplyBtn(78061,'comment',78061)" class="reply-to-comment">-->
+                  <!--Reply-->
+                <!--</button> &nbsp;&nbsp;-->
+                <!--<div id="reply78061" class="reply_wrapper"></div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<hr class="hr">-->
+            <!--<div class="mdl-grid user-comments" >-->
+              <!--<div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                <!--<div class="user-profile mdl-grid">-->
+                  <!--<div-->
+                      <!--class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                    <!--<img-->
+                        <!--src="https://lh3.googleusercontent.com/jxbWnoQ03TnkHZlrSROHVyYPhtCR_vrkkGpAWPCci29jhkqiSdHJvgQUGFCFkh6fQlZkXA2gfimFeqe7_llBwo7Jw6w=w50-h52-cc">-->
+                  <!--</div>-->
+                  <!--<div-->
+                      <!--class=" mdl-cell mdl-cell&#45;&#45;9-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                    <!--<div class="user-name">Abhishek Singh</div>-->
+                    <!--<div class="last-active"> 1 days ago</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div-->
+                    <!--class=" mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                <!--<span class="comment-text">Flex box wrap wraps the overflowing elements to a new row. This new row has,-->
+                  <!--just like the previous row, the height of the highest flex child in it. It will-->
+                  <!--not let the elements in the row go outside that rows boundaries.-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--<div-->
+                    <!--class=" mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone answer-descriptions">-->
+                <!--<span class="comment-text ">Flex box wrap wraps the overflowing elements to a new row. This new row has,-->
+                  <!--just like the previous row, the height of the highest flex child in it. It will-->
+                  <!--not let the elements in the row go outside that rows boundaries.-->
+                <!--</span>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="comment-action" id="commentAction78061">-->
+                <!--<button id="commentBtn78061" value="78061"-->
+                        <!--onclick="onClickReplyBtn(78061,'comment',78061)" class="reply-to-comment">-->
+                  <!--Reply-->
+                <!--</button> &nbsp;&nbsp;-->
+                <!--<div id="reply78061" class="reply_wrapper"></div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<hr class="hr">-->
+            <!--<div class="mdl-grid user-comments">-->
+              <!--<div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                <!--<div class="user-profile mdl-grid">-->
+                  <!--<div-->
+                      <!--class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                    <!--<img-->
+                        <!--src="https://lh3.googleusercontent.com/jxbWnoQ03TnkHZlrSROHVyYPhtCR_vrkkGpAWPCci29jhkqiSdHJvgQUGFCFkh6fQlZkXA2gfimFeqe7_llBwo7Jw6w=w50-h52-cc">-->
+                  <!--</div>-->
+                  <!--<div-->
+                      <!--class=" mdl-cell mdl-cell&#45;&#45;9-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                    <!--<div class="user-name">Abhishek Singh</div>-->
+                    <!--<div class="last-active"> 1 days ago</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div-->
+                    <!--class=" mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+                <!--<span class="comment-text">Flex box wrap wraps the overflowing elements to a new row. This new row has,-->
+                  <!--just like the previous row, the height of the highest flex child in it. It will-->
+                  <!--not let the elements in the row go outside that rows boundaries.-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--<div-->
+                    <!--class=" mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone answer-descriptions">-->
+                <!--<span class="comment-text ">Flex box wrap wraps the overflowing elements to a new row. This new row has,-->
+                  <!--just like the previous row, the height of the highest flex child in it. It will-->
+                  <!--not let the elements in the row go outside that rows boundaries.-->
+                <!--</span>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="comment-action" id="commentAction78061">-->
+                <!--<button id="commentBtn78061" value="78061"-->
+                        <!--onclick="onClickReplyBtn(78061,'comment',78061)" class="reply-to-comment">-->
+                  <!--Reply-->
+                <!--</button> &nbsp;&nbsp;-->
+                <!--<div id="" class="reply_wrapper"></div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<hr class="hr">-->
+            <!--<div class=" mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">-->
+              <!--<h5>Post your Answer</h5>-->
+              <!--<form name="create-comment" id="create-comment" novalidate="novalidate">-->
+                <!--<div class="mdl-grid" style="margin: 0px; padding: 0px">-->
+                  <!--<div id="comment-box" class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone" style="margin: 0px">-->
+                    <!--<label for="username_login">Comment*</label><br>-->
+                    <!--<textarea rows="7" id="commentsBox" name="commentsBox" style="width: 100%;"></textarea>-->
+
+                    <!--<br> <input style="width: auto; height: auto; float: left;" type="file" id="uploadAttachment" accepts=".pdf"> <i class="fa fa-spinner fa-spin" id="attachemtLoader" style="display: none;"></i><br>-->
+                  <!--</div>-->
+
+
+
+                  <!--<br>-->
+                  <!--<button id="post-comment" class="post-comment">POST-->
+                    <!--COMMENT</button>-->
+                <!--</div>-->
+              <!--</form>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+
+        <dialog id="createNewDiscussion" class="mdl-dialog">
+          <h3 class="mdl-dialog__title">Create New Discussion</h3>
+          <div class="mdl-dialog__content">
+            <div class="mdl-grid" id="createDiscussions">
+              <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                    <label>Discussion Title</label>
+                    <input type="text" id ="title" minlength="100" placeholder="Please enter Title for your discussion.">
+                    <div class="error-message" id = "errorTitle"> Please fill a title for this Discussion.</div>
+                  </div>
+
+                  <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                    <label>Exam Segment</label>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: -webkit-fill-available; width: -moz-available;padding: 0px">
+                      <select class="mdl-textfield__input" id ="examsegment" onchange="$('#errorSegment').hide();" name="examsegment" style="height: 46px; border: 1px solid #a8a8a8;">
+                        <option value="">Select exam segment</option>
+                        <option value="IAS">IAS</option>
+                        <option value="IES">IES</option>
+                        <option value="GATE">GATE</option>
+                        <option value="STATE_PSC">STATE PSC</option>
+                        <option value="JEE">IIT-JEE</option>
+                        <option value="NEET">NEET</option>
+                        <option value="RRB">RRB</option>
+                        <option value="SSC">SSC</option>
+                        <option value="LAW">LAW</option>
+                      </select>
+                    </div>
+                    <div class="error-message" id ="errorSegment"> Please select Exam Segment</div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                    <label>Body</label>
+                    <textarea name="discussionContent" id="discussionContent" minlength="100" placeholder="" cols="10" rows="5"></textarea>
+                    <div class="error-message" id = "errorContent"> Please write the description. </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-dialog__actions" style="padding-right: 25px">
+            <button class=" createBtn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="createNewDiscussion();">
+              Create
+            </button>
+
+            <div style="display: none;" class=""
+                 id="loader-create-discussion">
+              <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
+            <button type="button" id ="closeBtn" class="mdl-button">Close</button>
+          </div>
+        </dialog>
+      </div>
+    </div>
+
+
+    <!--<section id="reviews" class="reviews">-->
+    <!--<div class="container">-->
+
+    <!--</div>-->
+    <!--</section>-->
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+  <!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+</div>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<!--<script
+  th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"></script>
+<script
+  th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>-->
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/scorecard.js')}}"></script>
+<!--<script-->
+    <!--th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/post.js')}}"></script>-->
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/discussion.js')}}"></script>
+<script>
+
+  $( document ).ready(function() {
+    getAllDiscussions();
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+

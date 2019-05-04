@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+
+    <meta property="og:title"
+          content="LIVE Online Coaching for IAS, IES, GATE, IIT-JEE, NEET - NeoStencil"/>
+    <meta name="description"
+          content="Prepare from India's best coaching institutes, Live Online! Get 24/7 access to lectures, unlimited revision, study material, test series & free counselling.">
+
+    <title>LIVE Online Coaching for IAS, IES, GATE, IIT-JEE, NEET -
+        NeoStencil </title>
+
+
+    <link rel="stylesheet" media="screen"
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/home.css')}}"/>
+
+    <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.css"
+            rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" media="screen"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+    <link rel="stylesheet" media="screen"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+    <link rel="stylesheet" media="screen"
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+
+
+    <link rel="canonical" href="https://neostencil.com"/>
+    <style>
+        .exam-details h3 {
+            font-size: 24px;
+            line-height: 32px;
+            margin: 24px 0 16px;
+            font-weight: 400;
+            text-align: left;
+        }
+
+        .zoom-effect-container {
+            max-width: 240px;
+        }
+
+        .mdl-layout__header.is-casting-shadow {
+            background: #fff !important;
+        }
+
+        .swiper-button-prev, .swiper-button-next {
+            background-image: none;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .course-rating i {
+            float: left;
+        }
+
+        /* @media screen and (max-width: 1024px) {
+            .user-icon-mobile {
+                right: 72px !important;
+                position: absolute !important;
+            }
+            form.search-mobile {
+                display: none;
+            }
+        } */
+        .main-home-page-banner-image-small {
+            display: none;
+        }
+
+        .input-call-me {
+            background: #fff;
+            border: 1px solid #999;
+            border-radius: 4px;
+            padding: 0 16px 0 56px;
+            height: 48px;
+            color: #000;
+            resize: none;
+            display: block;
+            width: calc(100% - 72px);
+            max-width: 400px;
+            outline: 0;
+            font-size: 18px;
+        }
+
+        .video-play-button {
+            z-index: 10;
+            transform: translateX(0%) translateY(0%);
+            box-sizing: content-box;
+            display: block;
+            width: 32px;
+            height: 44px;
+            /* background: #fa183d; */
+            border-radius: 50%;
+            padding: 18px 20px 18px 28px;
+        }
+
+        .video-play-button:before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            display: block;
+            width: 72px;
+            height: 72px;
+            background: #ff6600;
+            border-radius: 50%;
+            /* animation: pulse-border 1500ms ease-out infinite;*/
+        }
+
+        .video-play-button:after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            display: block;
+            width: 56px;
+            height: 56px;
+            background: #ff6600;
+            border-radius: 50%;
+            transition: all 200ms;
+        }
+
+        .video-play-button:hover:after {
+            background-color: darken(#ff6600, 10%);
+        }
+
+        .video-play-button img {
+            position: relative;
+            z-index: 3;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        .video-play-button span {
+            display: block;
+            position: relative;
+            z-index: 3;
+            width: 0;
+            height: 0;
+            border-left: 18px solid #fff;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin: 10px 6px;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .section-play-video-pulse label {
+            font-family: arimo;
+            font-size: 20px;
+            font-weight: 700;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .section-play-video-pulse p {
+            color: #555;
+            font-size: 18px;
+            font-family: arimo;
+            margin: 16px 0 4px 0;
+        }
+
+        .section-play-video-pulse {
+            margin: 8px 0 40px 0;
+        }
+
+        .mat-slogan {
+            font-size: 32px;
+            font-weight: 600;
+            color: #555;
+            margin: 0;
+        }
+
+        .section-call-me > div {
+            width: 100%;
+            max-width: 434px;
+        }
+
+        .btn-call-me {
+            float: right;
+            margin: -50px -2px 0 0;
+            border-radius: 0 4px 4px 0px;
+            background-color: #ff6600 !important;
+            height: 50px;
+            line-height: 48px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: none;
+        }
+
+        #examSection .exam-details {
+            padding: 0 8px 16px 12px;
+            font-family: arimo;
+        }
+
+        #examSection .view-courses {
+            color: #02b3e4;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 56px 0 8px 0px;
+            display: block;
+            font-family: arimo;
+            cursor: pointer;
+            transition: 200ms;
+        }
+
+        #examSection .view-courses:hover {
+            color: #028bb1;
+        }
+
+        #examSection .mdl-cell {
+            padding: 16px 8px;
+        }
+
+        .counter-code {
+            margin: -49px 0 0 1px;
+            display: block;
+            width: 32px;
+            height: 48px;
+            line-height: 48px;
+            padding: 0 8px;
+            background: #fff;
+            border-radius: 4px 0px 0px 4px;
+            font-weight: 600;
+            font-size: 18px;
+            border-right: 1px solid #ddd;
+        }
+
+        #getNumber #mobile-error {
+            position: absolute;
+        }
+
+        .call-shortly {
+            position: absolute;
+            color: green;
+        }
+
+        #loader-getNumber {
+            float: right;
+            margin: -44px 20px 0 0;
+            border-radius: 27px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        #getNumberCheck {
+            float: right;
+            margin: -44px 12px 0 0;
+            border-radius: 27px;
+            height: 32px;
+            line-height: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            background: #00e48d;
+            border-radius: 50%;
+            color: #fff;
+            width: 32px;
+        }
+
+        #getNumberCheck i {
+            text-align: center;
+            display: block;
+            line-height: 32px;
+        }
+
+        #examSection img {
+            border-radius: 6px 6px 0px 0px;
+        }
+
+        #section-courses .demo-card-square {
+            width: 100%;
+        }
+
+        .zoom-effect-container {
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+
+        .zoom-effect-container img {
+            -webkit-transition: 0.4s ease;
+            transition: 0.4s ease;
+        }
+
+        .zoom-effect-container:hover img {
+            -webkit-transform: scale(1.08);
+            transform: scale(1.08);
+        }
+
+        @media screen and (min-width: 768px) {
+            .section-play-video-pulse {
+                margin-left: -16px;
+            }
+
+            .topper-banner-mobile {
+                display: none;
+            }
+
+            .topper-banner {
+                display: block;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .our-promise h4 {
+                text-align: center;
+            }
+
+            .our-promise .icon-promise {
+                display: block;
+                margin: 0 auto;
+            }
+
+            .get-number-desktop {
+                margin: -8px auto 0 auto !important;
+            }
+
+            .testimonials {
+                top: -8px;
+                margin-bottom: 40px;
+            }
+
+            #testimonials .slick-slide, #testimonials .slick-slide:hover {
+                padding: 0 0;
+            }
+
+            .video-bg-image {
+                margin: 0;
+            }
+
+            .our-promise-img {
+                width: 100%;
+            }
+
+            .explore-all-courses {
+                padding: 164px 0 24px 0 !important;
+            }
+
+            .talk-to-expert {
+                text-align: center;
+            }
+
+            .topper-banner-mobile {
+                display: block;
+            }
+
+            .topper-banner {
+                display: none;
+            }
+
+            .section-jee img {
+                width: 100%;
+            }
+
+            .section-call-me > div, .input-call-me {
+            <!-- width: 100 %;
+            --> max-width: 100%;
+            }
+
+            .section-call-me > div {
+                margin: 0px auto;
+            }
+
+            .demo-video-big-screen {
+                display: none;
+            }
+
+            #demoVideoDialog {
+                position: fixed;
+                margin-top: 56px;
+            }
+
+            .input-call-me {
+                font-size: 12px;
+            }
+
+            .video-play-button {
+                margin: 0 auto;
+            }
+
+            .section-play-video-pulse p {
+                text-align: center;
+            }
+
+            .section-play-video-pulse label {
+                text-align: center;
+                display: block;
+            }
+
+            .main-home-page-banner-image-small {
+                display: block;
+            }
+
+            .main-home-page-banner-image-big {
+                display: none;
+            }
+
+        }
+
+
+        @media screen and (max-width: 360px) {
+            .btn-call-me {
+                margin: -46px 6px 0 0;
+                height: 35px;
+                line-height: 35px;
+                font-size: 12px;
+                padding: 0px 12px;
+            }
+        }
+
+        .get-number-desktop {
+            width: 90%;
+            max-width: 1100px;
+            background: #fff;
+            position: absolute;
+            display: block;
+            left: 0;
+            right: 0;
+            margin: -50px auto 0 auto;
+            box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 8px 0;
+        }
+
+        .talk-to-expert {
+            font-size: 22px;
+            line-height: 49px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .talk-to-expert span {
+            color: #ff6600;
+        }
+
+        .slick-slide img {
+            margin: 0;
+        }
+
+        .media_mid p {
+            margin-left: 8px;
+        }
+
+        .our-impact {
+            background-image: url(https://lh3.googleusercontent.com/dY82VDGtNEC9phpKn7sp_RxVQpXRdZ_c0XfD5gdmGtreDe1dP_ncE4RU6iwL6ZVUMFCKdM1v9Ee0aWT7rZd8VY5Khm41=h600);
+            min-height: 380px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .our-promise {
+            background-image: url(https://lh3.googleusercontent.com/PxOPR77yiQiFHgVQTJxPsDzI9JcyVIsEqdb2vGIPONQZ4cEI36XLA0j-iKmEkiZaiQ4J-F9g-lvCOYRsk2plN7BHsxe9=h600);
+            min-height: 350px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 48px 0 0 0;
+        }
+
+        .video-bg-image {
+            margin: 0 0 0 auto;
+            display: block;
+        }
+
+        .video-section-home-page .mdl-cell .img-video-bg {
+            margin: 24px;
+            width: calc(100% - 48px);
+            border-radius: 6px;
+        }
+
+        .video-section-home-page .mdl-cell .video-bg-div {
+            margin: 24px;
+            width: calc(100% - 48px);
+        }
+
+        .video-section-home-page .mdl-cell .video-bg-div h3 {
+            font-size: 24px;
+            line-height: 32px;
+            font-family: arimo;
+            margin: 16px 0 8px 0;
+        }
+
+        .video-section-home-page .mdl-cell .video-bg-div p {
+            font-size: 16px;
+            line-height: 26px;
+            font-family: arimo;
+        }
+
+        .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-play-button-one {
+            position: relative;
+            width: 100%;
+            cursor: pointer;
+            display: block;
+        }
+
+        .play-video-btn-home-page {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 56px;
+            cursor: pointer;
+            margin-top: -20px;
+            background: #f2f2f2;
+            text-align: center;
+            margin-left: -20px;
+            border-radius: 50%;
+            height: 56px;
+        }
+
+        .play-video-btn-home-page i {
+            line-height: 56px;
+            color: #ff6600;
+            font-size: 22px;
+            margin: 0 0 0 4px;
+        }
+
+        .video-play-button-one, .play-video-btn-home-page i, .play-video-btn-home-page, .img-video-bg {
+            transition: all .2s ease;
+        }
+
+        .video-play-button-one:hover .play-video-btn-home-page {
+            background: #ff6600;
+        }
+
+        .video-play-button-one:hover .play-video-btn-home-page i {
+            color: #fff;
+        }
+
+        .video-play-button-one:hover .img-video-bg {
+            box-shadow: 0 10px 15px 0 rgba(0, 0, 0, .06), 0 15px 40px 0 rgba(0, 0, 0, .12);
+        }
+
+        .video-section-home-page {
+            padding: 0 0 48px 0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+    <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+
+    <div class="mat-content mdl-layout__content">
+        <div class="landing-darken" style="display: none;"></div>
+        <img class="show-until-loaded main-home-page-banner-image-big" width="100%"
+             src="https://lh3.googleusercontent.com/wPQb3KlXCVIlj5WCq7Xm2FHWuZCtF70UMXQsFHnEH4rCO7V9mGgTl5YMcYjXtMltvX4v4mnVtu60ZFLwZKlmppO3kGE=h600">
+        <img class="show-until-loaded main-home-page-banner-image-small" width="100%"
+             src="https://lh3.googleusercontent.com/wPQb3KlXCVIlj5WCq7Xm2FHWuZCtF70UMXQsFHnEH4rCO7V9mGgTl5YMcYjXtMltvX4v4mnVtu60ZFLwZKlmppO3kGE=h600">
+        <div class="slideshow-landing" style="display: none;">
+
+
+            <div class="mySlides fade main-slide-one">
+                <a href="/courses">
+                    <img class="main-home-page-banner-image-big" width="100%"
+                         src="https://lh3.googleusercontent.com/wPQb3KlXCVIlj5WCq7Xm2FHWuZCtF70UMXQsFHnEH4rCO7V9mGgTl5YMcYjXtMltvX4v4mnVtu60ZFLwZKlmppO3kGE=h600">
+                    <img class="main-home-page-banner-image-small" width="100%"
+                         src="https://lh3.googleusercontent.com/wPQb3KlXCVIlj5WCq7Xm2FHWuZCtF70UMXQsFHnEH4rCO7V9mGgTl5YMcYjXtMltvX4v4mnVtu60ZFLwZKlmppO3kGE=h315">
+                </a>
+            </div>
+
+            <div class="mySlides fade main-slide-two">
+                <a href="/reviews-testimonials">
+                    <img width="100%" class="main-home-page-banner-image-big"
+                         src="https://lh3.googleusercontent.com/OyVesRzRdV3snVLcX41v_HYUcbzAMTGrVnFroH7idKx2e-RSlxFHzabllW-2uYsY8fDI6YKb9Fn9vyYSXZPJtux5B2Q=h600">
+                    <img width="100%" class="main-home-page-banner-image-small"
+                         src="https://lh3.googleusercontent.com/OyVesRzRdV3snVLcX41v_HYUcbzAMTGrVnFroH7idKx2e-RSlxFHzabllW-2uYsY8fDI6YKb9Fn9vyYSXZPJtux5B2Q=h315">
+                </a>
+            </div>
+
+            <div class="mySlides fade main-slide-three">
+                <a href="/courses">
+                    <img width="100%" class="main-home-page-banner-image-big"
+                         src="https://lh3.googleusercontent.com/wdMrrOWC5dnfL_cTUFEABPeixmnY0EP-szL8ny-uTfN9WKtbfNQKCrz5mfrZ9YdF-SJXq5USQJkgMuMyPy-kYq8mQw=h600">
+                    <img width="100%" class="main-home-page-banner-image-small"
+                         src="https://lh3.googleusercontent.com/wdMrrOWC5dnfL_cTUFEABPeixmnY0EP-szL8ny-uTfN9WKtbfNQKCrz5mfrZ9YdF-SJXq5USQJkgMuMyPy-kYq8mQw=h315">
+                </a>
+            </div>
+
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a
+                class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <div class="thumbnail-slider">
+            <span class="dot" onclick="currentSlide(1)"></span><span
+                class="dot" onclick="currentSlide(2)"></span><span
+                class="dot" onclick="currentSlide(3)"></span>
+        </div>
+        <div class="mdl-shadow--2dp get-number-desktop">
+
+            <div class="mdl-grid">
+                <div
+                        class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone"></div>
+                <div
+                        class="mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone"><p
+                        class="talk-to-expert">Talk to an <span>EXPERT</span> now</p></div>
+                <div
+                        class="mdl-cell mdl-cell--5-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                    <form id="getNumber">
+                        <input type="text" name="mobile" class="input-call-me"
+                               placeholder="Phone Number">
+                        <p style="display: none;" class="call-shortly">We will call you shortly!</p>
+                        <div style="display: none;" class="common-loader"
+                             id="loader-getNumber">
+                            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                        </div>
+                        <button type="submit"
+                                class="btn-call-me btn-cta-secondary mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent">
+                            Start Learning
+                        </button>
+                        <div style="display: none;" id="getNumberCheck"><i class="fa fa-check"></i></div>
+                    </form>
+                    <span class="counter-code">+91</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- <a href="/upsc-civil-services-exam-ias-result"><img
+                 src="https://lh3.googleusercontent.com/NzltYQNnF_c8Kx4Fyio22UQWQXq7zvtmUhkLjtdxjeAwtx6glEXhHD-y7I3foRAGm1ysdaoFXrL-23kZptSOU-pKQH0=w500"
+                 width="100%" class="topper-banner-mobile"><img class="topper-banner"
+                                                                src="https://lh3.googleusercontent.com/7VpBr1IKWVJzZSGLEgsam_Lvuhvjk0TZkteOF4_w34hTyRT4_4DwIcBuC6sVhEyrvZdJ2FDHL7Te8cBliM7Mwq5yEIs=w2000"
+                                                                width="100%">
+         </a>-->
+        <!--<div style="display:none;" class="mat-be-together-section">
+            <div class="container">
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell&#45;&#45;8-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                        <h1 class="logo-font mat-slogan mat-slogan-slider-mobile">
+                            Prepare from India's best Coaching Institutes Live Online
+                        </h1>
+
+                        <br/>
+                        &lt;!&ndash; <div id="homeSearch" class="mat-search-box box">
+                             <div class="container-4">
+                     <span> <u><a href="/upsc-civil-ias/">#IAS</a></u>&nbsp;&nbsp;&nbsp;
+                       <u><a href="/ese-ies-exam/">#IES</a></u>&nbsp;&nbsp;&nbsp; <u><a
+                                 href="/gate-exam">#GATE</a> </u>&nbsp;&nbsp;&nbsp; <u><a
+                                 href="/ssc-cgl-exam/">#SSC CGL</a></u>&nbsp;&nbsp;&nbsp; <u><a
+                                 href="/courses?category=STATE PSC">#STATE PCS</a></u>
+                     </span>
+                             </div>
+                             &lt;!&ndash;  <span class="or-home-search"> or </span> &ndash;&gt;
+                         </div>&ndash;&gt;
+                        <div class="section-call-me">
+
+                            <div id="show-dialog" class="section-play-video-pulse">
+                                <div class="mdl-grid">
+                                    <div
+                                            class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                                        <a class="video-play-button" href="#">
+                                            <span></span>
+                                        </a></div>
+                                    <div
+                                            class="mdl-cell mdl-cell&#45;&#45;9-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                                        <p>Making dreams come true!</p>
+                                        <label>Watch Video</label></div>
+                                </div>
+                            </div>
+                            <div>
+                                <form id="getNumber">
+                                    <input type="text" name="mobile" class="input-call-me"
+                                           placeholder="Phone Number">
+                                    <p style="display: none;" class="call-shortly">We will call you shortly!</p>
+                                    <div style="display: none;" class="common-loader"
+                                         id="loader-getNumber">
+                                        <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                                    </div>
+                                    <button type="submit"
+                                            class="btn-call-me btn-cta-secondary mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent">
+                                        Start Learning
+                                    </button>
+                                    <div style="display: none;" id="getNumberCheck"><i class="fa fa-check"></i></div>
+                                </form>
+                                <span class="counter-code">+91</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone videoWrapper"
+                            id="">
+                        <a> <img width="100%"
+                                 class="img-video demo-video-big-screen"
+                                 alt="Neostencil Icon"
+                                 src="https://lh3.googleusercontent.com/NZwAhIrgHeV3QXpvPO8I0IOkKWeRehaaYTYPJf1LD09tZ5qdFYpbzBxLS2fxKIooysZahswpFT8WJ6U2V9fzbROlpOpn">
+
+
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="mat-landing-bar mdl-typography&#45;&#45;text-center">
+                <div class="container-header">
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone center_padding">
+                            <img src="images/icons/icon1.png"
+                                 alt="Neostencil Live & Recorded Classes" width="48px">
+                            <h2>
+                                <b>Live & Recorded Classes</b><br/>
+                                <h3> 24/7 access
+                                    to live lectures</h3>
+                            </h2>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone center_padding">
+                            <img src="images/icons/icon2.png" alt="Neostencil Courses"
+                                 width="48px">
+                            <h2>
+                                <b>500+ courses</b><br/>
+                                <h3>Spanning 5 biggest job
+                                    exams</h3>
+                            </h2>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone center_padding">
+                            <img src="images/icons/icon3.png" alt="Neostencil Top Teachers"
+                                 width="48px">
+                            <h2>
+                                <b>India's 40+ Top Institutes</b><br/>
+                                <h3> All best.
+                                    Only the best</h3>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+
+        <div id="explore-all-courses" class="explore-all-courses">
+            <div class="container">
+                <div class="container">
+                    <h2>Explore our Online Courses</h2>
+                </div>
+                <div class="underline"></div>
+                <div id="examSection">
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;4-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                            <a href="/courses?courseExamSegment=IAS" class="">
+                                <div class="mdl-shadow&#45;&#45;2dp zoom-effect-container">
+                                    <img src="https://lh3.googleusercontent.com/frxMDY4b4_qmBtg_PLbP7uK1bnk7gpjiCqFYw-c9xayKW37CgAOeqR905iPzLn4lxJicPvcp1qk_Do0sl8UsM5zuKxA"
+                                         style=" width: 100%;  height: 120px;"/>
+                                    <div class="exam-details"><h3>IAS</h3>
+                                        <p class="view-courses">View all courses of IAS ></p>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+
+
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;4-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                            <a href="/courses?courseExamSegment=IES">
+                                <div class="mdl-shadow&#45;&#45;2dp zoom-effect-container">
+                                    <img src="https://lh3.googleusercontent.com/bE7lK53NgbvsArVUubSgAyzyXfxfzeJRVOUP1Y9fkUJHSKPej34dSDHr9iFGJevWnd6T6-J9wtyDIAQmmXuzTJVCo08"
+                                         style=" width: 100%;  height: 120px;"/>
+                                    <div class="exam-details"><h3>IES</h3>
+                                        <p class="view-courses">View all courses of IES ></p>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;4-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                            <a href="/courses?courseExamSegment=GATE">
+                                <div class="mdl-shadow&#45;&#45;2dp zoom-effect-container">
+                                    <img src="https://lh3.googleusercontent.com/WMDOLZBHmcCZcuJMREdhcuac4wgFUaOQg2KAUusKzD-FH6JnM8bfI6faErUcVY1Wu-ocz-D_r44LDQ9tfTWh4A3xsEg"
+                                         style=" width: 100%;  height: 120px;"/>
+                                    <div class="exam-details"><h3>GATE</h3>
+                                        <p class="view-courses">View all courses of GATE ></p>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;4-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                            <a href="/courses?courseExamSegment=STATE PSC">
+                                <div class="mdl-shadow&#45;&#45;2dp zoom-effect-container">
+                                    <img src="https://lh3.googleusercontent.com/dNgT6qZkUDZlSujQC_iX05dPlrjvTHzDwQ_06fFeNknxEO_pYmaZpzDLH7xxJmvPYOBh_bKXVTgQe0dWi0gEEv9iG-JL"
+                                         style=" width: 100%;  height: 120px;"/>
+                                    <div class="exam-details"><h3>STATE PSC</h3>
+                                        <p class="view-courses">View all courses of STATE PSC ></p>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;4-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                            <a href="/jee/main" class="">
+                                <div class="mdl-shadow&#45;&#45;2dp zoom-effect-container">
+                                    <img src="https://lh3.googleusercontent.com/za6CTPpVrP9ifK9j_ZyrQ0_6FW_Y_nRODGhf02623g5XuKlSTrpbl7wQC8UCPJmQT16uzlATF_rE-EjZLUloz0-OFrM"
+                                         style=" width: 100%;  height: 120px;"/>
+                                    <div class="exam-details"><h3>IIT-JEE</h3>
+                                        <p class="view-courses">View all courses of IIT-JEE ></p>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;4-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                            <a href="/neet">
+                                <div class="mdl-shadow&#45;&#45;2dp zoom-effect-container">
+                                    <img src="https://lh3.googleusercontent.com/e08NCkHGeTdsL-w_9UtXZz_K1MhxADc9jJTnmCHMPRyHLHZLilUOB0kW8PMWtjt_WdiAM86NjTXuDMOl48tZFpUZ5eY"
+                                         style=" width: 100%;  height: 120px;"/>
+                                    <div class="exam-details"><h3>NEET/AIIMS</h3>
+                                        <p class="view-courses">View all courses of NEET ></p>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+
+                        <div
+                                class="mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;4-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                            <a href="/courses">
+                                <div class="mdl-shadow&#45;&#45;2dp zoom-effect-container">
+                                    <img src="https://lh3.googleusercontent.com/x7yBhTtQiugwh5vLrRpnvR7eoyt8rtMLCvLBJ1CphuO9ZxMThpoEpBpybAHBy3CcC-daQiRCnEZNrQHVu5GBJPqhQw"
+                                         style=" width: 100%;  height: 120px;"/>
+                                    <div class="exam-details"><h3>Other Exams</h3>
+                                        <p class="view-courses">View all other exams ></p>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="our-impact">
+            <div class="container-header">
+                <h2>Our Impact</h2>
+                <div class="underline" style="margin: 4px auto 16px auto;"></div>
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                        <h3>40+</h3>
+                        <h4>Partner Institutes</h4>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                        <h3>500+</h3>
+                        <h4>Online Courses</h4>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                        <h3>40 Lakh</h3>
+                        <h4>Student Users</h4>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                        <h3>124</h3>
+                        <h4>UPSC 2018 Online Toppers</h4>
+                    </div>
+
+                    <div
+                            class="mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                        <h3>215</h3>
+                        <h4>IES/GATE Toppers in Top 100 across streams</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="section-testimonials-lazyload" class="testimonials">
+            <!-- <img class="img-big-only"
+      src="images/background/Homepage/homepagetestimonialbg.png"
+      style="position: absolute; left: 18%; margin-top: -100px;"> -->
+            <div class="">
+                <h2 class="testimonial-heading">Why study at NeoStencil</h2>
+                <div class="underline"></div>
+                <div id="testimonials-lazyload">
+                    <div>
+                        <div class="mdl-shadow--2dp">
+                            <div class="ns-card">
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <br/> <br/> <br/> <br/>
+                                <div class="lazyload-teacher"></div>
+                                <div class="lazyload-price" style="float: left;"></div>
+                                <div class="lazyload-testimonial-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mdl-shadow--2dp">
+                            <div class="ns-card">
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <br/> <br/> <br/> <br/>
+                                <div class="lazyload-teacher"></div>
+                                <div class="lazyload-price" style="float: left;"></div>
+                                <div class="lazyload-testimonial-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mdl-shadow--2dp">
+                            <div class="ns-card">
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <div class="lazyload-heading"></div>
+                                <br/> <br/> <br/> <br/>
+                                <div class="lazyload-teacher"></div>
+                                <div class="lazyload-price" style="float: left;"></div>
+                                <div class="lazyload-testimonial-image"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a href="/reviews-testimonials"
+                   class="btn-all-testimonial btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-View-all-teachers">See
+                    More Testimonials</a>
+            </div>
+        </div>
+        <div style="display: none;" id="section-testimonials"
+             class="testimonials">
+            <!-- <img class="img-big-only"
+      src="images/background/Homepage/homepagetestimonialbg.png"
+      style="position: absolute; left: 18%; margin-top: -100px;"> -->
+            <div class="">
+                <h2 class="testimonial-heading">Why study at NeoStencil</h2>
+                <div class="underline"></div>
+
+                <section id="testimonials" class="regular slider">
+                    <div th:each="testimonial: ${testimonials}">
+
+                        <p class="mdl-card__supporting-text"
+                           th:text="@{'&#34;' + ${testimonial.text} + '&#34;'}"
+                           th:id="@{'testimonial_' + ${testimonial.id}}"></p>
+                        <div class="testimonial-name-and-image">
+                            <hr style="width: 200px;margin:0 auto;border-top: 3px solid #fcc62f;">
+                            <div class="mdl-grid">
+                                <div
+                                        class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone"
+                                        style="margin-bottom: 0;">
+
+
+                                    <img class="testimonial-image lazy"
+                                         th:if="${testimonial.studentImage} != '' "
+                                         th:attr="data-src=@{${testimonial.studentImage}+'=w70-h72-s'},data-srcset=@{${testimonial.studentImage}+'=w70-h72-s'}"
+                                         th:alt="${testimonial.studentName}"> <img
+                                        class="testimonial-image"
+                                        th:unless="${testimonial.studentImage} != '' "
+                                        src="https://artscimedia.case.edu/wp-content/uploads/sites/79/2016/12/14205134/no-user-image.gif">
+                                </div>
+                                <div
+                                        class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+										<span class="testimonials-name-slick"
+                                              th:utext="${#strings.replace(testimonial.studentName,'&#40;','&lt;br /&gt;&#40;')}"></span>
+                                    <div style="width: fit-content;
+    margin: 0 auto;"><img th:if="${testimonial.isNeostencilUser == true}" id="verifiedUser"
+                          src="https://lh3.googleusercontent.com/MMHPSwSPZlEs1Gryl0sSQHuHQ8JbiE7TnRr39AcPn6qLGQ8oIZF3QKWG6hz6AmU_ImGLc5cTUbPY03P5QV9cJReoXMs=h20"
+                          style="margin-left: -5px;"/>
+
+                                        <span th:if="${testimonial.studentRank != 0} "
+                                              th:text="@{'AIR '+ ${testimonial.studentRank} +', '+ ${testimonial.exam}+'-' + ${testimonial.year}}"
+                                              class="testimonials-rank-slick"></span> <span
+                                                th:unless="${testimonial.studentRank == 0} "
+                                                class="testimonials-rank-slick"></span></div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <a href="/reviews-testimonials"
+                   class="btn-all-testimonial btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-View-all-teachers">See
+                    More Testimonials</a>
+            </div>
+        </div>
+        <!--<div class="teachers-slider mdl-typography&#45;&#45;text-center explore-all-courses">
+            <div class="container-header">
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone moz-cell">
+                        &lt;!&ndash; <img width="40px" src="images/icons/common heading ICON.svg">
+            <br /> &ndash;&gt;
+                        <h2 style="text-align: center"
+                            class="logo-font mat-teachers-slogan">India's Best
+                            Coaching Institutes & Top Teachers
+                        </h2>
+                        <div class="underline"></div>
+                        &lt;!&ndash; <p>We partner only with the most reputed institutes and
+            experienced teachers - with an unparalleled track record.</p> &ndash;&gt;
+                        &lt;!&ndash; <a href="teachers" id="comingSoon"
+            class="btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent btn-View-all-teachers">
+            VIEW ALL TEACHERS</a> &ndash;&gt;
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell&#45;&#45;12-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;4-col-phone moz-swipper block-center">
+                        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                            <div class="">
+                                <div class="mdl-cell mdl-cell&#45;&#45;12-col scroll-tabs-overflow">
+                                    <div class="mdl-tabs__tab-bar">
+                                        <a href="#teacher-ias"
+                                           class="mdl-tabs__tab is-active"> IAS </a> <a href="#teacher-ies"
+                                                                                        class="mdl-tabs__tab">
+                                        IES/GATE </a>
+                                        <a href="#teacher-jee" class="mdl-tabs__tab"> IIT-JEE </a><a
+                                            href="#teacher-neet" class="mdl-tabs__tab"> NEET </a><a
+                                            href="#teacher-psc" class="mdl-tabs__tab">
+                                        STATE PSC </a>
+                                        <a
+                                                href="#teacher-psc" class="mdl-tabs__tab">
+                                            OTHERS </a>
+                                    </div>
+                                </div>
+                                <div class="mdl-tabs__panel is-active"
+                                     id="teacher-ias">
+                                    <section id="teachersSlider" class="regular slider">
+                                        <div th:each="teacher : ${teachers}">
+                                            <div class="teacher-image">
+                                                <a th:href="@{'/teacher/' + ${teacher?.slug}}"> <img
+                                                        class="lazy"
+                                                        src="https://lh3.googleusercontent.com/46iL17PdegcEAEFahtD4XKq703TlOyM1UdmSsKB4iuK4AtFnQU8SZ1TOZGZJenxP9zvQtnjz0kpVEymD0_WJBHWvZk8=cc-s140"
+                                                        th:attr="data-src=@{${teacher.displayPictureUrl}+'=s140-e7'},data-srcset=@{${teacher.displayPictureUrl}+'=s140-e7'}"
+                                                        th:alt="${teacher?.teacherName}">
+                                                </a>
+                                            </div>
+                                            <div class="coverflow-card">
+                                                <h3>
+                                                    <a th:href="@{'/teacher/' + ${teacher?.slug}}"
+                                                       class="teacher-institute" th:text="${teacher?.teacherName}"></a>
+                                                </h3>
+                                                <span class="slideItem-institite"> <a
+                                                        th:href="${teacher.instituteSlug!=null}?@{'/institute/' + ${teacher.instituteSlug}}:''"
+                                                        th:text="${teacher.name!=null}?${teacher.name}:'not found'"></a>
+                    </span>
+
+                                                <div class="teacher-subjects-ellipsis">
+                      <span
+                                                    th:each="subject:${#strings.arraySplit(teacher.subjects, ',')}"><span
+                                                    class="mdl-chip"><span class="mdl-chip__text"
+                                                                           th:text="${subject}"></span></span>&nbsp;</span>
+                                                </div>
+                                                <a th:href="@{'/teacher/' + ${teacher?.slug}}"
+                                                   class="view-profile">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="mdl-tabs__panel is-active"
+                                     id="teacher-ies">
+
+                                </div>
+                                <div class="mdl-tabs__panel is-active"
+                                     id="teacher-psc">
+
+                                </div>
+                                <div class="mdl-tabs__panel is-active"
+                                     id="teacher-jee">
+
+                                </div>
+                                <div class="mdl-tabs__panel is-active"
+                                     id="teacher-neet">
+
+                                </div>
+                                <div class="mdl-tabs__panel is-active"
+                                     id="teacher-others">
+
+                                </div>
+                            </div>
+
+
+                            <a href="teachers"
+                               class="btn-all-courses btn-cta-secondary mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent btn-View-all-teachers ">View
+                                all teachers</a>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+    </div>
+
+    <!--<div class="subscribe" id="subscribe">
+        <div class="container">
+            <img width="100px" class="heading-icon"
+                 src="images/icons/newsletter-icon.svg" alt="Subscribe Newsletter">
+            <h2 style="margin-bottom: 0;">Subscribe to our Newsletter</h2>
+            <h3 class="mdl-card__supporting-text">Want to recieve Latest
+                News, Tutorials, Articles and the best resources for your
+                preparation?</h3>
+            <form class="subscribe-to-newsletter-form" name="subscribe">
+                <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell&#45;&#45;7-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;4-col-phone">
+                        <div
+                                class="mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;floating-label">
+                            <input class="mdl-textfield__input input_subscribe"
+                                   type="email" id="input_subscribe" name="input_subscribe">
+                            <label class="mdl-textfield__label" for="sample3">Yourname@example.com</label>
+                        </div>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell&#45;&#45;5-col mdl-cell&#45;&#45;8-col-tablet mdl-cell&#45;&#45;4-col-phone">
+                        <button class="btn-subscribe ">Subscribe</button>
+                    </div>
+                </div>
+                <div style="display: none; margin: 0 auto;" class="common-loader"
+                     id="loader-subscribe">
+                    <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                </div>
+                <label class="error-single" id="subscribeError"></label>
+            </form>
+        </div>
+    </div>-->
+
+    <div class="video-section-home-page">
+
+        <div class="container">
+            <h2 class="testimonial-heading">Making dreams come true</h2>
+            <div class="underline"></div>
+            <div class="mdl-grid" style="padding: 0;">
+                <div style="margin: 0;"
+                     class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                    <div
+                            class="video-play-button-one" id="show-dialog-one">
+                        <img class="img-video-bg"
+                             src="https://lh3.googleusercontent.com/dj2KYgtO6g_cZnyhv42MU10h61_bVtsImhYaYK9KKwzlJALAOMFn8iNutzMjGqp9P1uflpZ4TV-49URWrXreTTg3fFA">
+                        <div class="mask"><a class="play-video-btn-home-page"><i class="fa fa-play"></i></a></div>
+                    </div>
+
+                </div>
+                <div
+                        class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                    <div class="video-bg-div">
+                        <img
+                                src="https://lh3.googleusercontent.com/uu9sGBU5fg4s3GllWiYTkiFJyvqqdidzyCjKB0K8kOz99u9czmpbVPrnhz2baGVbSydhlTVJ_yphEfCojVkvTSyJ9w=w50">
+                        <br/>
+                        <h3>Our child has a psychological advantage of preparing from home</h3>
+                        <p>Every year, bringing smiles to
+                            thousands of parents like Vinay makes us believe in the level of
+                            satisfaction parents achieve when their child is not alone while preparing for such
+                            difficult
+                            exams. </p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="mdl-grid" style="padding: 0;">
+                <div
+                        class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                    <div class="video-bg-div"><img
+                            src="https://lh3.googleusercontent.com/uu9sGBU5fg4s3GllWiYTkiFJyvqqdidzyCjKB0K8kOz99u9czmpbVPrnhz2baGVbSydhlTVJ_yphEfCojVkvTSyJ9w=w50">
+                        <br/>
+                        <h3>NeoStencil helped me focus more on hard work than hardship of relocating to coaching
+                            hub</h3>
+                        <p>India's top test prep Institute's real-time classes are available on NeoStencil, thus, making
+                            the real quality education accessible and affordable
+                        </p>
+                    </div>
+                </div>
+                <div style="margin: 0;"
+                     class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+
+
+                    <div
+                            class="video-play-button-one" id="show-dialog">
+                        <img class="video-bg-image img-video-bg"
+                             src="https://lh3.googleusercontent.com/OcxgwMwkuelUgr4RaQNbowFj28oU1ccdJBbw3vfzPmwieO4q6Nqp_mamG-1tq2H75ishJjm6G_2hdwj_pCgXHmVy32E">
+                        <div class="mask"><a class="play-video-btn-home-page"><i class="fa fa-play"></i></a></div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="our-promise">
+        <div class="container-header">
+            <h2 class="testimonial-heading">Our Promise</h2>
+            <div class="underline"></div>
+            <div class="mdl-grid" style="padding: 0;">
+                <div style="margin: 0;"
+                     class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone"><img
+                        class="our-promise-img"
+                        src="https://lh3.googleusercontent.com/juxcf1JN-q4TFtWIS0qOwpqu-Z-Ktdi_sxqdE1ESlrpT84_b9W16fbmBFYOaZ3JrOuQ2i0EoAg0KGJ8Njxr6L2EDytNp">
+                </div>
+                <div style="margin: 40px 0 0 0;"
+                     class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <img class="icon-promise"
+                                 src="https://lh3.googleusercontent.com/8ymSfs0ZH6aNsdmG_j3g1evv7Y0QDeXl76Xtjoju7jKKIt7w92qfwI4N_49g2M5qQ8LarMVRLAl0o_WPt9xWqL1mJbA"
+                                 alt="Neostencil Live & Recorded Classes" width="64px"></div>
+                        <div
+                                class="mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <h4 style="margin: 0">
+                                <b>24/7 access to classes</b><br/>
+                                <p> Live and Recorded classes available throughout the course validity</p>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <img class="icon-promise"
+                                 src="https://lh3.googleusercontent.com/IPf6XMzbYxmGDqXMTrjTgXD9uRvp66PZlr62qbLENZ1DilrF7VF4m0CTY4oo1Kz8semyxv_4uqtm8RcjPlBI3tBj2-I"
+                                 alt="Neostencil Courses"
+                                 width="64px"></div>
+                        <div
+                                class="mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <h4 style="margin: 0">
+                                <b>Unlimited revision</b><br/>
+                                <p>Play, pause, rewind as and when you want</p>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <img class="icon-promise"
+                                 src="https://lh3.googleusercontent.com/t21zuhLS01IAPNUbSt6HGkg1ir-RAqLSV1t4aHZlkAm9VLy8LYsnHYOghf4rEqP0BTEPEnnb0tOSqwNISj4gqRnrssM"
+                                 alt="Neostencil Top Teachers"
+                                 width="64px"></div>
+                        <div
+                                class="mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <h4 style="margin: 0">
+                                <b>Assignments and evaluation</b><br/>
+                                <p> Timely query resolution and evaluation of assignments</p>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div
+                                class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <img class="icon-promise"
+                                 src="https://lh3.googleusercontent.com/pJxH5fjw_Zx27mi0zK-olpPinkvhQRZsczBiiAj6InzzZIvd3j14si2jcgD7QR_1CvLnDwrYbuDCSO2C2yTEpD-ufA"
+                                 alt="Neostencil Top Teachers"
+                                 width="64px"></div>
+                        <div
+                                class="mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                            <h4 style="margin: 0">
+                                <b>Up to date content</b><br/>
+                                <p> Entire study material dispatched within 3 days of enrollment</p>
+                            </h4>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="press">
+        <div class="container-header">
+            <!-- <img class="heading-icon"
+    src="images/icons/common heading ICON.svg"> <br/ 	> -->
+            <h2>As Featured In</h2>
+            <div class="underline"></div>
+            <section id="press" class="regular slider">
+                <div class="media_mid">
+                    <a
+                            href="https://economictimes.indiatimes.com/small-biz/startups/newsbuzz/neostencil-among-global50-education-companies/articleshow/64976659.cms"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/BU0zNsqoLk6AWr681LufX_31b4xyKGXXhrLatoZeLjinu-G2IUVumSFz7fC9ZA48uZTsLB3FwaqjBYuSLctRfnAxbE0"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://economictimes.indiatimes.com/small-biz/startups/newsbuzz/neostencil-among-global50-education-companies/articleshow/64976659.cms">
+                            NeoStencil among Global50 education companies</a><br/>
+                    </p></div>
+
+                <div class="media_mid">
+                    <a
+                            href="https://timesofindia.indiatimes.com/home/sunday-times/how-online-coaching-is-driving-upsc-dreams/articleshow/64045623.cms"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/382Annw0uHhcPNcyKARaYm3esF_9zmMZH_S4sDjbmbcc2gRrMycf1cIUQoDTwaju0W9SRu6oy9txX2h-CSQ_cK0r1T0"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://timesofindia.indiatimes.com/home/sunday-times/how-online-coaching-is-driving-upsc-dreams/articleshow/64045623.cms">
+                            How online coaching is driving UPSC dreams</a><br/>
+                    </p></div>
+
+                <div class="media_mid">
+                    <a
+                            href="https://yourstory.com/2018/06/neostencil-changing-way-students-prepare-government-exams/"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/vOTboCdBbd5j3t77Zmg6Yalf6b5cNVW_wuHFny1IaxHg9HBptn-9QdiaJoKsN90OuL0eQleoJUPGGwKSuU1lBMmWkIg"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://yourstory.com/2018/06/neostencil-changing-way-students-prepare-government-exams/">
+                            NeoStencil is looking to change the way students prepare for government exams</a><br/>
+                    </p></div>
+
+
+                <div class="media_mid">
+                    <a
+                            href="https://khabar.ndtv.com/news/career/village-residents-now-easily-take-coaching-for-preparation-for-ias-1869151"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/DhifRG9u-IOTX_j6HoOmIUWIYRrE2-ufu8l_nkT512hvp2b9-2ZOeTIJIYEuhCGWzFeoylcksuqGcK6kw6Fwqg_8_0A"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://khabar.ndtv.com/news/career/village-residents-now-easily-take-coaching-for-preparation-for-ias-1869151">
+                            Students living in the village will now be able to access UPSC coaching at home</a><br/>
+                    </p></div>
+
+                <div class="media_mid">
+                    <a
+                            href="https://www.dnaindia.com/india/report-ias-preparation-online-how-technology-can-help-you-crack-civil-services-examination-2610707"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/EyDJ-weSkm4YNuJDVI8ulK0TqTsH2M3x3XKLT_lRRWRDaEWaaRVriDEr_gCotB9-x--UD5DAsL_RQi9hmZ2JRbX2RlVs"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://www.dnaindia.com/india/report-ias-preparation-online-how-technology-can-help-you-crack-civil-services-examination-2610707">
+                            IAS Preparation Online: How technology can help you crack Civil Services
+                            Examination</a><br/>
+                    </p></div>
+
+
+                <div class="media_mid">
+                    <a
+                            href="https://www.thehindubusinessline.com/news/education/neostencil-redcarpet-ink-mou-to-aid-students/article24539079.ece"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/Gl8SqfH4viP73R8IJ_ztHHqzLPsEDkvte9adHoFtIPzgLMKHjitreWtvmwGo7Tb4qrjeGkPEO1yq7jffD5RgWUJESICk"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://www.thehindubusinessline.com/news/education/neostencil-redcarpet-ink-mou-to-aid-students/article24539079.ece">
+                            NeoStencil, RedCarpet ink MoU to financially aid students </a><br/>
+                    </p></div>
+
+                <div class="media_mid">
+                    <a
+                            href="https://economictimes.indiatimes.com/small-biz/startups/newsbuzz/edu-tech-startup-neostencil-acquired-testcafe/articleshow/64204945.cms"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/BU0zNsqoLk6AWr681LufX_31b4xyKGXXhrLatoZeLjinu-G2IUVumSFz7fC9ZA48uZTsLB3FwaqjBYuSLctRfnAxbE0"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://economictimes.indiatimes.com/small-biz/startups/newsbuzz/edu-tech-startup-neostencil-acquired-testcafe/articleshow/64204945.cms">
+                            Edu-tech startup NeoStencil acquires TestCafe</a><br/>
+                    </p></div>
+                <div class="media_mid">
+                    <a
+                            href="http://www.newindianexpress.com/states/odisha/2018/feb/12/now-avail-classroom-coaching-for-civil-services-online-1772054.html"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img style="width: 220px;height: 70px;"
+                                                                                     src="https://lh3.googleusercontent.com/rnVhtJpCwu8rmy0otQh0VC6NIpNA2V7Qtwz6g-MHMxV0scLWB5fpChoENR2jRpw4zD_Kyf1f7gSuM6tNt_DO82IerYc"
+                                                                                     alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="http://www.newindianexpress.com/states/odisha/2018/feb/12/now-avail-classroom-coaching-for-civil-services-online-1772054.html">
+                            Now, avail classroom coaching for civil services online</a><br/>
+                    </p></div>
+
+
+                <div class="media_mid">
+                    <a
+                            href="https://www.theindianwire.com/startups/top-edtech-startups-india-70862/"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/XvdlhMDxwMr4dkM5csdM4wzYd1feisUbUz7A41-OaFqcJkfiOZ5ObfUXR3NFXM4xmbLO5TyRZJqsIH77VGGtJPRiGMM"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://www.theindianwire.com/startups/top-edtech-startups-india-70862/">
+                            Top Edtech Startups in India for K12, competition exams, upskilling courses</a><br/>
+                    </p></div>
+
+                <div class="media_mid">
+                    <a
+                            href="https://markets.businessinsider.com/news/stocks/tyton-announces-global-growth50-1027201483"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/nnhqJDL4lrJBiTKJFvAF6oicTr2prdzhf66XTduBgUHnA6o91LhYZ4Z8CT83RwTRB5b2Xx9ZWfJ6o1OFzY03b274tKQT"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://markets.businessinsider.com/news/stocks/tyton-announces-global-growth50-1027201483">
+                            Tyton Announces Global Growth50</a><br/>
+                    </p></div>
+
+                <div class="media_mid">
+                    <a
+                            href="https://www.thehindubusinessline.com/news/neostencil-most-impactful-edutech-co/article24413935.ece"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/aWH-Prbcqwe05N2fPLbM2i0q3H5JCXjL8Ovr8EN6bkNzo1qbJ9_pqU-RkcZ8CAxVxzvMkC9ed63hHbuyO2POsr29k9Fx"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://www.thehindubusinessline.com/news/neostencil-most-impactful-edutech-co/article24413935.ece">
+                            Neostencil‘most impactful edutech co’</a><br/>
+                    </p></div>
+
+                <div class="media_mid">
+                    <a
+                            href="http://knowstartup.com/2017/11/10-education-focused-startups-india-will-rule-2018/"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img style="width: 220px;height: 70px;"
+                                                                                     src="https://lh3.googleusercontent.com/x_btJS4dArEycLay9m747sfvHDFUc5eRFPZtrTPSmRRpy7EgdNxaHaEY6MaqSc6XbgdZeHt_b_akNr1v5BU5beyolyk"
+                                                                                     alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="http://knowstartup.com/2017/11/10-education-focused-startups-india-will-rule-2018/">
+                            10 Education focused startups in India that will rule in 2018 and
+                            beyond</a><br/>
+                    </p></div>
+
+
+                <div class="media_mid">
+                    <a
+                            href="https://economictimes.indiatimes.com/small-biz/startups/newsbuzz/ed-tech-startup-neostencil-joins-hands-with-motion-education-to-provide-iit-jee-neet-exam-coaching/articleshow/68479602.cms"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img style="width: 220px;height: 70px;"
+                                                                                     src="https://lh3.googleusercontent.com/BU0zNsqoLk6AWr681LufX_31b4xyKGXXhrLatoZeLjinu-G2IUVumSFz7fC9ZA48uZTsLB3FwaqjBYuSLctRfnAxbE0"
+                                                                                     alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://economictimes.indiatimes.com/small-biz/startups/newsbuzz/ed-tech-startup-neostencil-joins-hands-with-motion-education-to-provide-iit-jee-neet-exam-coaching/articleshow/68479602.cms">
+                            Ed-tech startup NeoStencil joins hands with Motion Education to provide IIT-JEE, NEET exam
+                            coaching
+                        </a><br/>
+                    </p></div>
+
+
+                <div class="media_mid">
+                    <a
+                            href="https://yourstory.com/socialstory/2019/04/upsc-dantewada-civil-services-namrata-jain"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img style="width: 220px;height: 70px;"
+                                                                                     src="https://lh3.googleusercontent.com/vOTboCdBbd5j3t77Zmg6Yalf6b5cNVW_wuHFny1IaxHg9HBptn-9QdiaJoKsN90OuL0eQleoJUPGGwKSuU1lBMmWkIg"
+                                                                                     alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://yourstory.com/socialstory/2019/04/upsc-dantewada-civil-services-namrata-jain">
+                            Meet Namrata Jain, the first woman from Naxal-hit Dantewada to secure top rank in UPSC
+                            exams</a><br/>
+                    </p></div>
+
+                <div class="media_mid">
+                    <a
+                            href="https://hindi.indiatvnews.com/jobs-education/news-now-you-can-prepare-from-ias-exams-online-even-from-villages-know-how-587592"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/1npa36neHtmkTxMLn6SEafkevQDWqtWw7HyMI40TCY5DehzWdC0Ot-AFTjwwnIV8wMrrzAMgxv_X3KZAbLBF6Ts4hcQ"
+                            alt="ET rise" height="70px"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://hindi.indiatvnews.com/jobs-education/news-now-you-can-prepare-from-ias-exams-online-even-from-villages-know-how-587592">
+                            Now prepare for IAS even from small villages, online. </a><br/>
+                    </p></div>
+
+
+                <div class="media_mid">
+                    <a
+                            href="https://www.indiatimes.com/news/india/think-beyond-classroom-studies-online-coaching-has-become-a-new-way-to-achieve-upsc-dreams-344833.html"
+                            rel='nofollow noopener noreferrer' target="_blank"> <img
+                            src="https://lh3.googleusercontent.com/aZ44oRhJeFC8rHiPRaIWRwflZF4heMB7526NoXmNxwun6c7sv4bzMzf1UEP3bsWpH0W8s1Ah0MP3DHkzmNc0UwKALRsB"
+                            alt="ET rise"/>
+                    </a> <br/>
+                    <p style="text-align: left;">
+                        <a style="color: #2199e8;" target="_blank" rel="nofollow"
+                           href="https://www.indiatimes.com/news/india/think-beyond-classroom-studies-online-coaching-has-become-a-new-way-to-achieve-upsc-dreams-344833.html">
+                            Think Beyond Classroom Studies, Online Coaching Has Become A New Way To Achieve UPSC
+                            Dreams</a><br/>
+                    </p></div>
+
+            </section>
+            <a href="media-coverage"
+               class="media-coverage-see-more btn-all-courses btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent ">View
+                More Coverage</a>
+
+        </div>
+    </div>
+
+</div>
+<div class="" style="background: #f6f6f6; padding: 40px 0;">
+    <div class="container">
+        <div class="mdl-grid">
+            <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <h2 class="logo-font mat-slogan">
+                    Schedule a Demo and Counselling at Your Home
+                    <h3 style="font-size: 14px; letter-spacing: 0; margin: 0 0 16px;">Avail demo at home, a
+                        service which is totally free of
+                        cost.</h3>
+                </h2>
+                <br/> <a href="demo-counselling-at-home" id="demoBtn"
+                         class="btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Book a Slot Now</a>
+            </div>
+            <div
+                    class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone videoWrapper"
+                    id="">
+                <img class="demo-video-big-screen"
+                     src="https://lh3.googleusercontent.com/_pH2SAwEJUFP4z0aRm0yD3-npwJLcw9EjA4eqHJm8CfwdV3PlgLCKDFqNE4pjPzIfv0ErLYqdNZOjMRus8Fm3IOaow"
+                     style="max-width: 300px; display: block; margin: 0 0 0 auto;">
+                <!--<a id="show-dialog">-->
+                <!--<img class="img-video"-->
+                <!--src="images/background/Homepage/videoimg4.png">-->
+                <!--</a>-->
+                <!--<img-->
+                <!--src="images/background/Homepage/watchDemoVideo.png"-->
+                <!--style="margin-left: 60px; width: 180px;">-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+<dialog tabindex="1" id="demoVideoDialog" style="position:fixed;"
+        class="mdl-dialog mdl-dialog-video">
+    <div class="mdl-dialog__content">
+        <iframe id="video" width="100%" height=""
+                src="https://www.youtube.com/embed/z3U-mcM_U0g" allowfullscreen allow="autoplay">
+        </iframe>
+        <button
+                class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+</dialog>
+
+<dialog tabindex="1" id="demoVideoDialog-one" style="position:fixed;"
+        class="mdl-dialog mdl-dialog-video">
+    <div class="mdl-dialog__content">
+        <iframe id="video-one" width="100%" height=""
+                src="https://www.youtube.com/embed/bugVhLuQpZY" allowfullscreen allow="autoplay">
+        </iframe>
+        <button
+                class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+</dialog>
+<!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+
+</div>
+</div>
+
+<!-- include scripts -->
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script
+        src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>
+
+
+<script>
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+
+    var slideIndexAutomate = 0;
+    automateSlides();
+
+
+    function automateSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndexAutomate++;
+        if (slideIndexAutomate > slides.length) {
+            slideIndexAutomate = 1
+        }
+        slides[slideIndexAutomate - 1].style.display = "block";
+        setTimeout(automateSlides, 6000); // Change image every 2 seconds
+    }
+
+
+    $(document).ready(function () {
+        $(".slideshow-landing").show();
+        $(".show-until-loaded").hide();
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+        if ("IntersectionObserver" in window) {
+            let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.srcset = lazyImage.dataset.srcset;
+                        lazyImage.classList.remove("lazy");
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+
+            lazyImages.forEach(function (lazyImage) {
+                lazyImageObserver.observe(lazyImage);
+            });
+            lazyImageObserver.thresholds
+        } else {
+            // Possibly fall back to a more compatible method here
+        }
+    });
+
+
+    var dialogone = document.querySelector('#demoVideoDialog-one');
+    var showDialogButtonone = document.querySelector('#show-dialog-one');
+    if (!dialogone.showModal) {
+        dialogPolyfill.registerDialog(dialogone);
+    }
+    showDialogButtonone.addEventListener('click', function () {
+        $("#video-one")[0].src += "?rel=0&autoplay=1&showinfo=0&controls=1&modestbranding=1";
+        dialogone.showModal();
+    });
+    dialogone.addEventListener('click', function (event) {
+        var rect = dialogone.getBoundingClientRect();
+        var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+            && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+        if (!isInDialog) {
+            dialogone.close();
+            var video = $('#video-one')[0].src.split('?')[0];
+            $("#video-one").attr("src", video);
+        }
+    });
+    dialogone.querySelector('.close-dialog').addEventListener('click',
+        function () {
+            dialogone.close();
+            var video = $('#video-one')[0].src.split('?')[0];
+            $("#video-one").attr("src", video);
+        });
+
+
+    var dialog = document.querySelector('#demoVideoDialog');
+    var showDialogButton = document.querySelector('#show-dialog');
+
+
+    if (!dialog.showModal) {
+        dialogPolyfill.registerDialog(dialog);
+    }
+    showDialogButton.addEventListener('click', function () {
+        $("#video")[0].src += "?rel=0&autoplay=1&showinfo=0&controls=1&modestbranding=1";
+        dialog.showModal();
+    });
+    dialog.addEventListener('click', function (event) {
+        var rect = dialog.getBoundingClientRect();
+        var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+            && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+        if (!isInDialog) {
+            dialog.close();
+            var video = $('#video')[0].src.split('?')[0];
+            $("#video").attr("src", video);
+        }
+    });
+    dialog.querySelector('.close-dialog').addEventListener('click',
+        function () {
+            dialog.close();
+            var video = $('#video')[0].src.split('?')[0];
+            $("#video").attr("src", video);
+        });
+
+
+    function sizeTheVideo() {
+        var aspectRatio = 1.78;
+        var video = $('#videoWithJs iframe');
+        var videoHeight = video.outerHeight();
+        var newWidth = videoHeight * aspectRatio;
+        //Define the new width and centrally align the iframe
+        video.css({"width": newWidth + "px", "left": "50%"});
+    }
+
+    function mobileSizeVideo() {
+        var aspectRatio = 1.78;
+        var video = $('#videoWithJs iframe');
+        var videoHeight = video.outerHeight();
+        var newWidth = videoHeight * aspectRatio;
+        var halfNewWidth = newWidth / 2;
+        video.css({"width": "-webkit-fill-available", "left": "50%"});
+    }
+
+
+    $("#homeSearch input").keyup(function () {
+        if ($('#homeSearch input').val().length > 0) {
+            $('#homeSearch button').css("pointer-events", "auto");
+        } else {
+            $('#homeSearch button').css("pointer-events", "none");
+        }
+    })
+    $("#homeSearch input").focus(function () {
+        $(this).removeAttr("placeholder");
+        $('#exploreCourses').hide();
+        $('#homeSearch input').css("width", "100%");
+        $('#clearHomeSearch').show();
+        $("#homeSearch button").addClass("active");
+        $("#homeSearch input").parent(".container-4").css("width", "auto");
+        $('.or-home-search').hide();
+    });
+
+    /* $("#searchResultsHome").focusout(function() {
+      $('#exploreCourses').show(500);
+      $('#homeSearch input').css("width", "380px");
+      $("#homeSearch input").parent(".container-4").css("width","380px");
+      $('.or-home-search').show();
+
+    }); */
+    $('#clearHomeSearch')
+        .click(
+            function () {
+                $('#exploreCourses').show();
+                $('#homeSearch input').attr("placeholder",
+                    "Search for Courses,Teachers,Posts....");
+                if ($(window).width() > '767') {
+                    $('#homeSearch input').css("width", "380px");
+                    $("#homeSearch input").parent(".container-4")
+                        .css("width", "380px");
+                } else {
+                    $('#homeSearch input').css("width", "100%");
+                    $("#homeSearch input").parent(".container-4")
+                        .css("width", "100%");
+                }
+
+                $('#searchResultsHome').hide();
+                $('#clearHomeSearch').hide();
+                $("#homeSearch input").val("");
+                $("#homeSearch button").removeClass("active");
+                $('#loader-search-home').hide();
+                $('.or-home-search').show();
+            })
+
+    $("#homeSearch button").click(function (e) {
+        e.preventDefault();
+        $('#loader-search-home').show();
+        $("#homeSearch button").hide();
+        var homeSearchInputValue = $('#homeSearch input').val();
+        window.location = '/search?search=' + homeSearchInputValue;
+    });
+
+    $("#search").on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            $('#loader-search-home').show();
+            $("#homeSearch button").hide();
+            var homeSearchInputValue = $('#homeSearch input').val();
+            window.location = '/search?search=' + homeSearchInputValue;
+        }
+    });
+
+    $(window).load(function () {
+        $('#explore-all-courses, #section-testimonials').css("display", "block");
+        $('#explore-all-courses-lazyload, #section-testimonials-lazyload').hide();
+        if ($(window).width() > '1024') {
+            var swiper3 = new Swiper('.swiper-container-courses', {
+                slidesPerView: 5,
+                spaceBetween: 16,
+                slidesPerGroup: 5,
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+
+            });
+            $('.trending-courses-card img').show();
+        } else if ($(window).width() < '1025' && $(window).width() > '767') {
+            var swiper3 = new Swiper('.swiper-container-courses', {
+                slidesPerView: 3,
+                spaceBetween: 16,
+                slidesPerGroup: 3,
+                loop: true,
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+
+            });
+            $('.trending-courses-card img').show();
+        } else if ($(window).width() < '768' && $(window).width() > '480') {
+            var swiper3 = new Swiper('.swiper-container-courses', {
+                slidesPerView: 2,
+                spaceBetween: 16,
+                slidesPerGroup: 2,
+                loop: true,
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+
+            });
+            $('.trending-courses-card img').show();
+        } else {
+            var swiper3 = new Swiper('.swiper-container-courses', {
+                slidesPerView: 1,
+                spaceBetween: 16,
+                slidesPerGroup: 1,
+                loop: true,
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+
+            });
+            $('.trending-courses-card img').show();
+        }
+    })
+
+
+    $('#getNumber').validate({
+        rules: {
+            mobile: {
+                required: true,
+                maxlength: 10,
+                minlength: 10
+            }
+        },
+        messages: {
+            mobile: {
+                required: "Please enter your number",
+                maxlength: "Please enter a valid number",
+                minlength: "Please enter a valid number"
+            }
+        },
+        submitHandler: function () {
+            $('#loader-getNumber').show();
+            $('.btn-call-me').hide();
+            $
+                .ajax({
+                    url: apiBasePath + "/extrainfo",
+                    type: "post",
+                    data: JSON.stringify({
+                        mobileNumber: "+91" + $("input[name='mobile']").val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        $('#loader-getNumber').hide();
+                        $('.btn-call-me').hide();
+                        $('#getNumberCheck, .call-shortly').show();
+                        $('.input-call-me').attr("disabled", true);
+                    },
+
+                    error: function (response) {
+                        $('#loader-getNumber').hide();
+                        $('.btn-call-me').show();
+                    }
+                });
+        }
+    });
+
+
+</script>
+</body>
+</html>

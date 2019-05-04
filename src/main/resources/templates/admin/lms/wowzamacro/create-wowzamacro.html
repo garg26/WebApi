@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+
+<body>
+
+<div id="wrapper">
+
+    <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+    <div id="page-wrapper">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Add New WowzaMacro</h1>
+                </div>
+            </div>
+            <form name="wowzamacro-form">
+
+                <div class="row">
+                    <div class="col-md-9">
+
+                        <div class="form-horizontal">
+                            <div class="row">
+
+                                <div class="">
+                                    <div class="col-sm-6">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" name="name" id="wowzaMacroName"
+                                               placeholder="Enter the Wowza Macro Name....">
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Description</label>
+                                        <input type="text" class="form-control" name="description"
+                                               id="wowzaMacroDescription"
+                                               placeholder="Enter the wowza Macro Description">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="form-horizontal" style="margin-top:  10px;">
+                            <div class="row">
+
+                                <div class="">
+                                    <div class="col-sm-6">
+                                        <label>Server Ip</label>
+                                        <input type="text" class="form-control" name="serverIp" id="serverIp"
+                                               placeholder="Enter the Server Ip">
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Token</label>
+                                        <input type="text" class="form-control" name="token" id="token"
+                                               placeholder="Enter the token">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-horizontal" style="margin-top:  10px;">
+                            <div class="row">
+
+                                <div class="">
+                                    <div class="col-sm-6">
+                                        <label>Wowza Start</label>
+                                        <input type="number" min="0" class="form-control" name="wowzaStart" id="wowzaStart"
+                                               placeholder="Enter the Wowza Start">
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Wowza End</label>
+                                        <input type="number" min="0" class="form-control" name="wowzaEnd" id="wowzaEnd"
+                                               placeholder="Enter the Wowza End">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:  10px;">
+                            <label>Secret</label>
+                            <input type="text" class="form-control" name="secret" id="secret"
+                                   placeholder="Enter the Secret Key...">
+                        </div>
+
+                        <div class="form-group" style="margin-top:  10px;">
+                            <label>Validity</label>
+                            <input type="number" min="0" class="form-control" name="validity" id="validity"
+                                   placeholder="Enter the Validity...">
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+
+                                <div class="row">
+                                    <div style="margin-top:  20px;" class="col-md-9">
+                                        <button class="submit btn btn-success" id="submitWowzamacro"
+                                        >Submit
+                                        </button>
+                                        <i class="fa fa-spinner fa-spin" id="loader"></i>
+
+                                        <a href="/admin_techops_lmsadmin/lms/wowzamacro" class="btn btn-default"
+                                           style="margin-left:  60px;">All
+                                            WowzaMacro</a>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+</div>
+<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+!--/*/
+<th:block th:include="admin/footer"></th:block>
+/*/-->
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+ <script>
+    $('form[name=wowzamacro-form]').validate({
+
+        submitHandler: function () {
+            submitRequest();
+            $('#loader').show();
+        }
+
+    });
+
+    function submitRequest() {
+        var input = {
+            token: $('#token').val(),
+            name: $('#wowzaMacroName').val(),
+            description: $('#wowzaMacroDescription').val(),
+            serverIp: $('#serverIp').val(),
+            wowzaStart: $('#wowzaStart').val(),
+            validity: $('#validity').val(),
+            wowzaEnd: $('#wowzaEnd').val(),
+            secret: $('#secret').val()
+        };
+        $.ajax({
+            url: apiBasePath + "/admin/wowzamacros",
+            type: "post",
+            data: JSON.stringify(input),
+            contentType: "application/json",
+            processData: false,
+            <!--"headers": {-->
+                <!--"authorization": "Bearer " + window.localStorage.getItem('access_token'),-->
+
+            <!--},-->
+            success: function (response) {
+                $('#loader').hide();
+                location.reload();
+                alert("Successfully create Wawzo Macro");
+
+            },
+            error: function (response) {
+                $('#loader').hide();
+                alert("Failed in creating wawzo macro")
+
+            }
+        });
+    };
+</script>
+</body>
+</html>

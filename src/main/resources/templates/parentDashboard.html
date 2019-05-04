@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Neostencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dashboard.css')}}"/>
+  <style>
+    .mdl-layout__drawer > * {
+      height: 70px;
+      background: #fff;
+    }
+
+    .mdl-color--blue-grey-900 {
+      background-color: #ffffff !important;
+    }
+
+    .mdl-color--blue-grey-800 {
+      background-color: #ffffff !important;
+    }
+
+    .box-1-free-demo, .box-2-free-demo, .box-3-free-demo, .box-4-free-demo {
+      margin: 0;
+      padding: 30px 30px 0 30px;
+    }
+
+    .box-heading {
+      font-size: 50px !important;
+    }
+
+    .accordian-active ~ .mdl-layout__drawer {
+      display: block;
+    }
+    .accordian-active {
+      width: 88%;
+      margin-left: 12%;
+    }
+    .trending-courses-card img {
+      min-height: 124px;
+    }
+    .dashboard-title-course {
+      height: 43.68px !important;}
+
+    @media only screen and (min-width: 1024px) {
+      .accordian-active ~ .mdl-layout__drawer {
+        margin-top: 0 !important;
+      }
+    }
+    @media only screen and (max-width: 1024px) {
+      .accordian-active {
+        width: 100%;
+        margin-left: 0%;
+      }
+    }
+    .mdl-layout__content{
+      margin-top: 117px;
+    }
+
+
+    summary::after {
+      top: -14px;
+    }
+    details[open] summary:after{
+      top: -14px;
+    }
+    details[open]{
+      border: 1px solid #d8d0d0 !important;
+    }
+    #courseCurriculum{
+    }
+    details{
+      background: #ffffff;
+      margin-bottom: 10px;
+      /*box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2)*/
+      border: 1px solid #d8d0d0;
+    }
+    #courseCurriculum a.mdl-navigation__link:hover{
+      background: #f4a639;
+      cursor: default;
+      color: #FFFFFF;
+    }
+    .active{
+      background: #1d4864;
+    }
+    #nav_details{
+      margin: 0 auto;
+      margin-top: 7px;
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 900;
+      width: fit-content;
+      width: -moz-fit-content;
+      height: 23px !important;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+    }
+
+    @media screen and (max-width: 767px){
+      summary::after {
+        top: -3px;
+        font-size: 35px;
+      }
+      details[open] summary:after{
+        top: -3px;
+        font-size: 35px;
+      }
+      #backToStudentCourses,#backToStudents{
+        padding: 0;
+      }
+      #nav_details{
+        font-size: 10px
+      }
+
+      .btn-text{
+        display: none;
+      }
+    }
+    .student-ns-card{
+      padding-bottom: 5px !important;
+    }
+    .number-students{
+      font-size: 12px;
+    }
+    .viewStudentCourses div{
+      margin: 0 auto;
+      width: -moz-fit-content;
+      width: fit-content;
+      color: #FFFFFF;
+    }
+    .viewStudentCourses{
+      background-color: #ff6600;
+    }
+    details > summary:first-of-type {
+      list-style-type: none;
+    }
+
+    /*.accordian-active ~ .mdl-layout__content {*/
+      /*margin-top: 120px;*/
+    /*}*/
+    /*!*.mdl-layout--fixed-drawer>.mdl-layout__content{*!*/
+      /*!*margin-left:0px !important;*!*/
+    /*!*}*!*/
+    /*!*.accordian-active{*!*/
+      /*!*width: 100%;*!*/
+      /*!*margin-left: 0px !important;*!*/
+    /*!*}*!*/
+    /*!*#header{*!*/
+      /*!*width: 100% !important;*!*/
+      /*!*margin-left: 0px;*!*/
+    /*!*}*!*/
+  </style>
+</head>
+<body class="dashboard">
+
+<div
+    class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  <div id="" class="accordian-active">
+    <div id="accordion-announcements" class="">
+      <div id="headerText"></div>
+    </div>
+  </div>
+  <!--/*/ <th:block th:include="common/headerDashboard"></th:block> /*/-->
+  <div
+      class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+    <header class="demo-drawer-header">
+      <div class="demo-avatar-dropdown">
+        <a href="/" class="mat-title mdl-layout-title"> <img
+            class="mat-logo-image" th:src="@{/images/logo/neostencilLogo.png}">
+        </a>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+    </header>
+
+    <nav id="dashboard-sidenav-links"
+         class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+      <a  class="mdl-navigation__link" data-value="courses" style="cursor: pointer"
+         onclick="getUserCourses();$('.mdl-layout__drawer').removeClass('is-visible');"><i
+          class="mdl-color-text--blue-grey-400 material-icons"
+          role="presentation">folder</i>My Wards</a>
+
+      <!--<a href-->
+                                                          <!--class="mdl-navigation__link" data-value="messages"-->
+                                                          <!--onclick="getAllMessageThreads();$('.mdl-layout__drawer').removeClass('is-visible');"><i-->
+        <!--class="mdl-color-text&#45;&#45;blue-grey-400 material-icons"-->
+        <!--role="presentation">email</i>&nbsp;My Messages</a>-->
+    </nav>
+  </div>
+
+  <main class="mdl-layout__content mdl-color--grey-100">
+    <div id ="nav-btn" style="width: 100%; background: #10101057; height: 52px; position: fixed;  transition: top 0.3s;  z-index: 100;">
+    <div class="mdl-grid" style="padding: 0px;">
+      <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--2-col-phone" style="width: -moz-fit-content;width: fit-content;">
+          <div id="backToStudents" class=" btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style=" background: #ff6600 !important; color: #ffffff;display: none;cursor: pointer"><i class="material-icons" style="margin-top: -3px; margin-right: 10px;"> arrow_back </i><span class="btn-text">Back to All Students</span></div>
+          <div id="backToStudentCourses" class=" btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background: #ff6600 !important; color: #ffffff;display: none;cursor: pointer"><i class="material-icons" style="margin-top: -3px; margin-right: 10px;"> arrow_back </i><span class="btn-text">Back to Courses</span></div>
+        </div>
+
+      <div class="mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet mdl-cell--2-col-phone">
+        <div id="nav_details"></div>
+      </div>
+    </div>
+    </div>
+
+    <div id="containerHeader">
+      <div class="" id="courses">
+        <div class="common-loader" id="loader-dashboard-courses">
+          <div class="mdl-spinner mdl-js-spinner is-active"></div>
+        </div>
+       <br/>
+        <div id = "studentCard" class="mdl-grid"></div>
+        <div id = "studentCourses"></div>
+
+      </div>
+      <div style="display: block;padding-top: 20px" class="container-header" >
+        <div class="common-loader" id="loader-dashboard-units" style="display: none">
+          <div class="mdl-spinner mdl-js-spinner is-active" ></div>
+        </div>
+        <div class="panel" id="courseCurriculum"
+             style="display: none; padding-bottom: 100px"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/fingerprintjs2/fingerprint2.min.js')}}"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.min.js')}}"></script>
+<!--<script-->
+    <!--th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dashboard.js')}}"></script>-->
+<script>
+  var singleCourseName;
+  $( document ).ready(function() {
+    getUserCourses();
+    $('#backToStudents').on('click',function () {
+      $('#nav-btn').hide();
+      $('#studentCard').show();
+      $('#backToStudents').hide();
+      $('#studentCourses').hide();
+    });
+  });
+
+  function getUserCourses() {
+    $('#nav_details').html("");
+    $('#nav-btn').hide();
+    $('#backToStudentCourses').hide();
+    $('#courseCurriculum').hide();
+    $('#courseCurriculum').html("");
+    $('#backToStudents').hide();
+    $('#studentCourses').hide();
+    $('#studentCard').hide();
+    $('#loader-dashboard-courses').show();
+    $('#boughtCourses').hide();
+    $
+    .ajax({
+      url : apiBasePath + '/parent_admin/courses',
+      type : "GET",
+      contentType : "application/json",
+      success : function(response) {
+        $('#loader-dashboard-courses').hide();
+        $('#studentCard').show();
+        var studentCard='<div class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp"> <div class="trending-courses-card mdl-card__media" style="padding: 10px"> <img width="100%" src="https://lh3.googleusercontent.com/Z4uHbjIjELCl1WaD_fGK7VnkE9sXzT_b4SLAmmapf7JbmtR9pNF17JW58z3vA7JsRuCGl0BiovQc7zuHiuOp6PZi7Cw=h180-cc"></div> <div class="ns-card student-ns-card"> Name&nbsp;:  #studentName# <p class="ns-card-p" style="margin-bottom: 5px !important;"> <span class="p-grid-1">Email&nbsp;:&nbsp;#email#</span> </p> <div class=""> <span class="number-students"><i class="fa fa-user"></i>&nbsp;user ID : #id#  </span> </div> </div> <div class="mdl-card__actions viewStudentCourses" data-id="#id#" style="cursor: pointer"> <div><span class="no-of-students" style="float: right;">View Courses</span></div> </div></div>';
+        var courseContainer='<div id="#userID#" class="mdl-grid mdl-course-card" style="display: none">#courseList#</div>';
+        var courseList = '<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp"> <div class="trending-courses-card mdl-card__media"><img width="100%" src="#courseImage#=h180">  </div> <div class="ns-card">  <span class="starts-on" style="float: left;margin-bottom: 8px;">Batch starts on <span class="starts-on-date"> #startDate# </span> </span><span class="starts-on"><span class=""> #remainingDays#</span> </span> #courseTitle# <p class="ns-card-p"> <span class="p-grid-1"><i>by</i> <span class="ns-card-teacher">#instructorName#</span><br />#institute.name#</span> </p> <div class=""> <h3 style="float: right; color: #f26722;" class="price">  #startCourse# </h3> <span class="number-students"><i class="fa fa-user"></i>&nbsp;#studentsEnrolled# Students </span> </div> </div> </div>';
+        var finalDivToShow;
+        var finalCoursesToShow;
+        if (response != null ) {
+          var courseContainerToShow='';
+          $.each(response.courseMap, function(key, value) {
+            var a= JSON.parse(key);
+            var studentCardToShow = '';
+            courseContainerToShow='';
+            studentCardToShow= studentCardToShow+studentCard;
+            studentCardToShow = studentCardToShow.replace(/#id#/g,a.id);
+            studentCardToShow = studentCardToShow.replace('#studentName#',a.name);
+            studentCardToShow = studentCardToShow.replace('#email#',a.email);
+            courseContainerToShow = courseContainerToShow + courseContainer;
+            courseContainerToShow = courseContainerToShow.replace('#userID#', a.id);
+            var htmlToShow = '';
+            $
+            .each(
+                value,
+                function(index, element) {
+                  htmlToShow = htmlToShow += courseList;
+                  htmlToShow = htmlToShow.replace(
+                      "#instructorName#",
+                      element.instructorName);
+                  if(element.instituteName != ""){
+                    htmlToShow = htmlToShow.replace(
+                        "#institute.name#",
+                        "("+element.instituteName+")");
+                  }else{
+                    htmlToShow = htmlToShow.replace(
+                        "#institute.name#",
+                        "");
+                  }
+
+                  htmlToShow = htmlToShow.replace(
+                      "#studentsEnrolled#",
+                      element.studentsEnrolled);
+                  htmlToShow = htmlToShow.replace(
+                      /#batchId#/g,
+                      element.courseBatchId);
+                  htmlToShow = htmlToShow.replace(
+                      "#courseImage#",
+                      element.courseImage);
+                  if (element.remainingValidity != '0') {
+                    htmlToShow = htmlToShow
+                    .replace(
+                        "#remainingDays#",
+                        element.remainingValidity
+                        + ' days left');
+                  } else {
+                    htmlToShow = htmlToShow
+                    .replace(
+                        "#remainingDays#",
+                        'Validity over');
+                  }
+
+                  if (element.status == 'ACTIVE') {
+                    htmlToShow = htmlToShow
+                    .replace(
+                        "#startCourse#",
+                        '<a  class = "viewUnits" data-id="' +
+                        + a.id
+                        + '" data-value="' +
+                        + element.courseBatchId
+                        + '">View Details</a>');
+                    htmlToShow = htmlToShow
+                    .replace(
+                        "#courseTitle#",
+                        '<a> <h3 class="dashboard-title-course">'
+                        + element.courseTitle
+                        + '</h3> </a>');
+                  } else {
+                    htmlToShow = htmlToShow
+                    .replace(
+                        "#startCourse#",
+                        '<a style="color: #666;cursor: not-allowed;">Course Inactive</a>');
+                    htmlToShow = htmlToShow
+                    .replace(
+                        "#courseTitle#",
+                        '<a> <h3 class="dashboard-title-course">'
+                        + element.courseTitle
+                        + '</h3> </a>');
+                  }
+
+                  htmlToShow = htmlToShow.replace(
+                      "#startDate#",
+                      element.startDate);
+
+
+                });
+            courseContainerToShow = courseContainerToShow.replace('#courseList#',htmlToShow );
+
+            if(finalCoursesToShow == undefined){
+              finalCoursesToShow = courseContainerToShow
+            }else{
+              finalCoursesToShow = finalCoursesToShow + courseContainerToShow
+            }
+
+            if(finalDivToShow == undefined){
+              finalDivToShow =  studentCardToShow ;
+            }else{
+              finalDivToShow = finalDivToShow + studentCardToShow ;
+            }
+
+          });
+          $('#studentCourses').html(finalCoursesToShow);
+
+        } else {
+          $('#studentCard').html("<p>No courses to show</p>");
+        }
+        if (finalDivToShow != '') {
+          $('#studentCard').html(finalDivToShow);
+        } else {
+          $('#studentCard').html("<p>No courses to show</p>");
+        }
+
+      },
+
+      error : function(response) {
+        $('#boughtCourses').show();
+        $('#loader-dashboard-courses').hide();
+        // alert("No Courses to display.");
+        $('#boughtCourses').html("<p>No courses to show</p>")
+      }
+    });
+  }
+  $(document).on('click','.viewStudentCourses',function () {
+    $('#nav_details').html("");
+    $('#nav-btn').show();
+    $('#studentCourses').show();
+    $('#studentCard').hide();
+    $('#backToStudents').show();
+    var coursesId = $(this).attr('data-id');
+    $('#'+coursesId).show().siblings().hide();
+  });
+  $(document).on('click','#backToStudentCourses',function () {
+    $('#nav_details').html("");
+    $('#nav-btn').show();
+    $('#courseCurriculum').html("");
+    $('#backToStudentCourses').hide();
+    $('#studentCourses').show();
+    $('#courseCurriculum').hide();
+    $('#backToStudents').show();
+  });
+/*  $(document).on('click',"details",function () {
+    $(this.firstChild).addClass("active");
+  });*/
+    $(document).on('click','.viewUnits',function () {
+      $('#nav_details').html("");
+      $('#nav-btn').show();
+      $('#loader-dashboard-units').show();
+      $('#backToStudents').hide();
+      $('#backToStudentCourses').show();
+      $('#studentCourses').hide();
+      var studentid= $(this).attr("data-id");
+      var batchId= $(this).attr("data-value");
+
+    $
+    .ajax({
+      url : apiBasePath + '/parent_admin/units?studentId=' + studentid +'&batchId=' + batchId,
+      type : "GET",
+      contentType : "application/json",
+      success : function(response) {
+        if (response != null) {
+          $
+          .each(
+              response.response,
+              function(key, value) {
+                var htmlToShow = '<details><summary> <div class="mdl-grid"><div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"><span class="mdl-navigation__link"><i style="font-size: 18px; color: #808080 !important; margin: 2px; display: block; width: 20px; float: left;" class="mdl-color-text--blue-grey-400 material-icons" role="presentation">folder</i>&nbsp;&nbsp;#key#</span> </div></div></summary>  <div class="content">';
+                var curriculumList = '<a  data-value="#unitId#" class="#linkClass#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation" style="font-size: 18px;color: #colorcode# !important;">#uniticon#</i>&nbsp;&nbsp;#unitDesc#</a>';
+                htmlToShow = htmlToShow.replace(
+                    /#key#/g, key);
+                $
+                .each(
+                    value,
+                    function(index,
+                        element) {
+                      singleCourseName = element.unit.batch.batchName;
+                      htmlToShow = htmlToShow
+                          + curriculumList;
+
+                      htmlToShow = htmlToShow
+                      .replace(
+                          /#unitId#/g,
+                          element.unit.unitId);
+                      htmlToShow = htmlToShow
+                      .replace(
+                          '#unitDesc#',
+                          element.unit.title);
+
+                      if (element.active == true) {
+                        htmlToShow = htmlToShow
+                        .replace(
+                            "#linkClass#",
+                            'mdl-navigation__link');
+                        htmlToShow = htmlToShow
+                        .replace(
+                            "#colorcode#",
+                            '#3fbf53');
+                        switch (element.watchStatus) {
+                          case 'NOT_STARTED':
+                            htmlToShow = htmlToShow
+                            .replace(
+                                "#uniticon#",
+                                "panorama_fish_eye");
+                            break;
+                          case 'WATCHED':
+                            htmlToShow = htmlToShow
+                            .replace(
+                                "#uniticon#",
+                                "check_circle");
+                        }
+                      } else {
+                        htmlToShow = htmlToShow
+                        .replace(
+                            "#uniticon#",
+                            "panorama_fish_eye");
+                        htmlToShow = htmlToShow
+                        .replace(
+                            "#linkClass#",
+                            'disabled');
+                        htmlToShow = htmlToShow
+                        .replace(
+                            "#colorcode#",
+                            '#808080');
+                      }
+                    });
+                htmlToShow = htmlToShow
+                    + '</div></details>';
+                $('#courseCurriculum').append(
+                    htmlToShow).show();
+                htmlToShow = '';
+              });
+
+        }
+        $('#loader-dashboard-units').hide();
+        $('#nav_details').html(singleCourseName);
+      },
+
+      error : function(response) {
+        $('#loader-dashboard-units').hide();
+
+        $('#loading-units').hide();
+        console.log(response);
+      }
+    });
+  });
+    //
+    // $(window).scroll(function() {
+    //   var prevScrollpos = window.pageYOffset;
+    //   window.onscroll = function() {
+    //     var currentScrollPos = window.pageYOffset;
+    //     if (prevScrollpos > currentScrollPos) {
+    //       document.getElementById("nav-btn").style.top = "0";
+    //     } else {
+    //       document.getElementById("nav-btn").style.top = "-50px";
+    //     }
+    //     prevScrollpos = currentScrollPos;
+    //   }
+    // });
+
+</script>
+</body>
+</html>

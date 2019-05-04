@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Facebook login</title>
+
+  <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+<a id="login" href="">Login with Google</a>
+<a id="logout" href="#">Logout</a>
+
+<hr/>
+<pre id="userinfo">
+
+</pre>
+
+<script>
+
+    var url = window.location.toString();
+
+    var code = getParameterByName("code", url);
+    var state = getParameterByName("state", url);
+
+    getLoginButtonUri();
+    function getLoginButtonUri() {
+        $.ajax({
+            url: "/google/getloginuri",
+            datatype : "text/plain",
+            contentType: "text/plain",
+            success: function (res, status) {
+                $("#login").attr("href", res);
+            }
+        })
+    }
+
+
+    if (code && state) {
+        $.ajax({
+            url: "/google/login?code=" + code + "&state=" + state,
+            datatype : "application/json",
+            contentType: "text/plain",
+
+            success: function (res, status) {
+               console.log(res)
+               console.log(status);
+            }
+        });
+    }
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+</script>
+</body>
+</html>

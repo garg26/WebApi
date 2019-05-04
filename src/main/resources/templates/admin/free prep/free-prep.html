@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+<head>
+<link
+	href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Free Prep Posts</h1>
+					</div>
+				</div>
+				<div class="row voffsetneg10">
+					<div class="col-md-12">
+						<a href="/admin_writer/free-prep/add-free-prep">
+							<button type="submit" class="submit btn btn-default"
+								id="create-new-free-prep">
+								<i class="fa fa-plus"></i> Create
+							</button>
+						</a>
+						<button type="submit" class="submit btn btn-default"
+							id="edit-post">
+							<i class="fa fa-edit"></i> Edit
+						</button>
+						<button type="submit" class="submit btn btn-default"
+							id="trash-post">
+							<i class="fa fa-trash"></i> Trash
+						</button>
+						<button type="submit" class="submit btn btn-default"
+							id="preview-post">
+							<i class="fa fa-eye"></i> Preview
+						</button>
+						<button type="submit" class="submit btn btn-default"
+							id="clone-post">
+							<i class="fa fa-copy"></i> Clone
+						</button>
+						<label class="error-single input-error"></label>
+						<div class="pull-right">
+							<label><span>View: </span></label> <select name="post-status"
+								id="post-status" class="form-control">
+								<option value="">Select Post Status</option>
+								<option value="Published">Published</option>
+								<option value="Draft">Draft</option>
+								<option value="Trash">Trash</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row voffset10">
+					<div class="col-md-12">
+						<!--<table id="all-posts" class="table table-bordered table-hover">-->
+						<table id="all-posts" class="table table-striped table-bordered"
+							cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th><input type="checkbox" name="select-all-posts"
+										id="select-all-posts"></th>
+									<th>ID</th>
+									<th>Title</th>
+									<th>Status</th>
+									<th>Category</th>
+									<th>Sub Category</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="post : ${posts}">
+									<td><input type="checkbox" name="select-post"
+										class="select-post" th:value="${post.postId}"></td>
+									<td id="post-id"><a th:href="@{'/post/' + ${post.postId}}"
+										th:text="${post.postId}" target="_blank"></a></td>
+									<td th:text="${post.title}" id="post-title"></td>
+									<td th:text="${post.status}"></td>
+									<td th:text="${post.category}"></td>
+									<td th:text="${post.postSubCategory}"></td>
+									<td><span><a
+											th:href="@{'/admin_writer/free-prep/'+ ${post.postId + '/update/'}}"
+											class="btn btn-info">Edit Post</a>
+											<button class="btn btn-primary" th:value="${post.postId}"
+												onclick="publishPost(this.value)">PublishPost</button> </span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script
+			th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/freeprep.js')}}"
+	></script>
+</body>
+
+</html>

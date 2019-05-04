@@ -1,0 +1,207 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<script>
+	// Measure adding a product to a shopping cart by using an 'add' actionFieldObject
+	// and a list of productFieldObjects.
+	var addRemoveFromCart = [];
+	addRemoveFromCart.push({
+		'event' : 'addToCart',
+		'ecommerce' : {
+			'currencyCode' : 'EUR',
+			'add' : { // 'add' actionFieldObject measures.
+				'products' : [ { //  adding a product to a shopping cart.
+					courseName : 'element.title',
+					salePrice : 'element.price',
+					quantity : 'element.quantity'
+				} ]
+			}
+		}
+	});
+	// Measure the removal of a product from a shopping cart.
+	addRemoveFromCart.push({
+		'event' : 'removeFromCart',
+		'ecommerce' : {
+			'remove' : { // 'remove' actionFieldObject measures.
+				'products' : [ { //  removing a product to a shopping cart.
+					courseName : 'element.title',
+					salePrice : 'element.price',
+					quantity : 'element.quantity'
+				} ]
+			}
+		}
+	});
+</script>
+
+<!-- Google Tag Manager -->
+<script>
+	(function(w, d, s, l, i) {
+		w[l] = w[l] || [];
+		w[l].push({
+			'gtm.start' : new Date().getTime(),
+			event : 'gtm.js'
+		});
+		var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l='
+				+ l
+				: '';
+		j.async = true;
+		j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+		f.parentNode.insertBefore(j, f);
+	})(window, document, 'script', 'addRemoveFromCart', 'GTM-NF35CF2');
+</script>
+<!-- End Google Tag Manager -->
+<title>Neostencil</title>
+
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/cart.css')}}"
+	rel="stylesheet" media="screen" />
+<style>
+.back-from-cart i {
+	margin-top: -2px;
+}
+
+.mat-title {
+	height: auto;
+}
+</style>
+</head>
+
+<body class="all-teachers-page">
+
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+		<!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+		<!-- <div class="mat-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title">
+  </span>
+
+</div> -->
+
+
+		<div class="mat-content mdl-layout__content">
+			<div class="landing-darken" style="display: none;"></div>
+			<!-- <div class="load-bar">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div> -->
+			<div class="container-header">
+				<div class="mdl-grid">
+					<div
+						class="mdl-9 mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+						<div id="cart">
+							<h4>
+								<a th:href="@{/courses}" class="back-from-cart"> <i
+									class="material-icons">keyboard_backspace</i>&nbsp;&nbsp;Back
+									to Shopping
+								</a>
+							</h4>
+							<p style="display: none;" id="emptyCart">Your cart is empty.</p>
+							<table style="display: none;" id="cartTable"
+								class="mdl-data-table mdl-js-data-table">
+								<thead>
+									<tr>
+										<th class="mdl-data-table__cell--non-numeric">Your Cart
+											Item</th>
+										<th></th>
+										<th class="cart-table-price-md">Price</th>
+										<th class="cart-table-price-md">Total</th>
+									</tr>
+								</thead>
+								<tbody id="cartItems">
+								</tbody>
+
+							</table>
+							<div id="cartLoader"
+								class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+
+						</div>
+						<div class="checkout"></div>
+					</div>
+					<div
+						class="mdl-3 mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+						<div class="order-summary">
+							<div class="order-summary-header">
+								<h3>Order Summary</h3>
+							</div>
+							<div class="order-summary-div">
+								<p class="promo-code">Have a Promocode? Apply here!</p>
+								<form action="#">
+									<div class="mdl-textfield mdl-js-textfield">
+										<input class="mdl-textfield__input" type="text"
+											id="enterCoupon"> <label class="mdl-textfield__label"
+											for="enterCoupon">Apply /Enter Promocode</label>
+									</div>
+									<br />
+									<div id="removeCoupon" class="remove-coupon">
+										<u>REMOVE COUPON</u>
+									</div>
+
+									<div id="progressBar" class="progress-button"
+										data-result="true" onclick="progressBar(this);">
+										<button>
+											<span><b>GO</b></span>
+										</button>
+
+										<!-- svg circle for progress indication -->
+										<svg class="progress-circle" width="70" height="70">
+                    <path
+												d="m35,2.5c17.955803,0 32.5,14.544199 32.5,32.5c0,17.955803 -14.544197,32.5 -32.5,32.5c-17.955803,0 -32.5,-14.544197 -32.5,-32.5c0,-17.955801 14.544197,-32.5 32.5,-32.5z" />
+                  </svg>
+
+										<!-- checkmark to show on success -->
+										<svg class="checkmark" width="70" height="70">
+                    <path d="m31.5,46.5l15.3,-23.2" />
+                    <path d="m31.5,46.5l-8.5,-7.1" />
+                  </svg>
+
+										<!-- cross to show on error -->
+										<svg class="cross" width="70" height="70">
+                    <path d="m35,35l-9.3,-9.3" />
+                    <path d="m35,35l9.3,9.3" />
+                    <path d="m35,35l-9.3,9.3" />
+                    <path d="m35,35l9.3,-9.3" />
+                  </svg>
+
+									</div>
+
+								</form>
+								<div class="cart-subtotal">
+									<p class="subtotal">
+										Subtotal <span class="float-right" id="subtotal"></span>
+									</p>
+									<p class="couponMoney">
+										Discount <span class="float-right" id="couponMoney"></span>
+									</p>
+								</div>
+								<p class="subtotal">
+									<b>Amount Payable</b> <span class="float-right"><b
+										id="amountPayableCart"></b></span>
+								</p>
+								<a href="/checkout" id="proceedToCheckout"
+									class="mat-card-login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+									PROCEED TO CHECKOUT</a>
+								<div style="display: none;" class="common-loader"
+									id="loader-create-order-for-free">
+									<div class="mdl-spinner mdl-js-spinner is-active"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+	</div>
+
+
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+	<!--<script th:src="@{/js/cart.js}"></script>-->
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/cart.js')}}"></script>
+
+</body>
+</html>

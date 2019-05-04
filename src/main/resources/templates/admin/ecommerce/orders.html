@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+<head>
+<link
+	href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+
+			<!--<div class="panel-body">-->
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Orders</h1>
+						<div class="row" style="padding-left: 15px;">
+							<b>Processed:&nbsp;</b><span th:text="${summary.noOfProcessed}"></span>&nbsp;&nbsp;<b>Refunded:&nbsp;</b><span
+								th:text="${summary.noOfRefunds}"></span>&nbsp;&nbsp;<b>Pending
+								Payment:&nbsp;</b><span th:text="${summary.noOfPendingPayment}"></span>&nbsp;&nbsp;<b>Payment
+								Complete:&nbsp;</b><span th:text="${summary.noOfPaymentComplete}"></span>&nbsp;&nbsp;<b>Failed
+								Payment:&nbsp;</b><span th:text="${summary.noOfPaymentFailed}"></span>&nbsp;&nbsp;<b>Cancelled:&nbsp;</b><span
+								th:text="${summary.noOfCancelled}"></span>&nbsp;&nbsp;<b>Approved:&nbsp;</b><span
+								th:text="${summary.noOfApproved}"></span>&nbsp;&nbsp;<b>On
+								Hold:&nbsp;</b><span th:text="${summary.noOfOnHold}"></span>
+						</div>
+						<br />
+					</div>
+				</div>
+				<div class="row voffsetneg10">
+					<div class="col-md-12">
+						<a href="/admin_sales/ecommerce/add-order">
+							<button type="submit" class="submit btn btn-default">
+								<i class="fa fa-plus"></i> Add Order
+							</button>
+						</a>
+						<button type="submit" class="submit btn btn-default"
+							id="edit-order">
+							<i class="fa fa-edit"></i> Edit
+						</button>
+						<button type="submit" class="submit btn btn-default"
+							id="trash-order">
+							<i class="fa fa-trash"></i> Trash
+						</button>
+						<label>&nbsp;Start date : </label>
+						<input type="date" name="startDate" style="height: 33px" id="startDate">
+						<label>&nbsp;End date : </label>
+						<input type="date" name="endDate" style="height: 33px" id="endDate">
+						&nbsp;<button class="btn btn-default" id="showResults">Show Results</button>
+						<label class="error-single input-error"></label>
+
+					</div>
+				</div>
+
+				<div class="row voffset10">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="table-responsive panel-body">
+								<table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" data-table ="all-orders" id="all-orders" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
+						<!--<table id="all-orders" class="table table-striped table-bordered"
+							cellspacing="0" width="100%">-->
+							<thead>
+								<tr>
+									<!-- <th><input type="checkbox" name="select-all-orders"
+                id="select-all-orders"></th> -->
+									<th>ID</th>
+									<th>Email</th>
+									<th width="1px !important">Status</th>
+									<th>AmountPaid</th>
+									<th>Payment Date</th>
+									<th>Payment Mode</th>
+									<th>Hidden 1</th>
+									<th>Hidden 2</th>
+									<th>Actions</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="order : ${orders}">
+									<td>
+										<button class="btn btn-link" th:text="${order?.orderId}"
+											th:onclick="|showSummary('${order?.orderId}')|"></button>
+									</td>
+									<td th:text="${order?.customer?.emailId}"></td>
+									<td width="1px !important" th:id="${'status'+order?.orderId}"><span th:text="${order?.orderStatus}"></span><br /> <span
+										th:if="${order?.refundAmount > 0.0}"
+										th:text="${order?.refundAmount }"></span> <br /> <span
+										th:text="${order?.refundReason}"></span></td>
+									<td th:text="${order?.payableAmount}"></td>
+									<td th:text="${order?.paymentDate}"></td>
+									<td th:text="${order?.paymentMode}"></td>
+
+									<td>
+										<table id="inner-hidden-table">
+											<tr th:each="oi:${order.orderItems}">
+												<td th:text="${oi.product.productTitle}">
+												<td th:text="${oi.product.regularPrice}">
+											</tr>
+										</table>
+
+									</td>
+									<td
+										th:text="${order?.coupon?.code+order?.customer?.emailId + order?.customer?.emailId + order?.address?.mobileNumber + order?.address?.addressText + order?.address?.city + order?.address?.pincode}"></td>
+
+									<td>
+										<!-- <div th:switch="${order?.orderStatus}">
+
+              <p th:case="'PROCESSED'"> -->
+
+										<button type="button"
+											th:disabled="${#strings.toString(order?.orderStatus)} == 'APPROVED' or ${#strings.toString(order?.orderStatus)} == 'REFUNDED' or ${#strings.toString(order?.orderStatus)} == 'PENDING_PAYMENT' or ${#strings.toString(order?.orderStatus)} == 'ON_HOLD' or ${#strings.toString(order?.orderStatus)} == 'PAYMENT_FAILED'"
+											th:id="${order?.orderId}"
+											class="btn btn-primary btn-md approve-button"
+											th:onclick="|askNotification('${order?.orderId}')|">Approve
+											Order</button>
+										<button type="button"
+											th:disabled="${#strings.toString(order?.orderStatus)} == 'APPROVED' or ${#strings.toString(order?.orderStatus)} == 'REFUNDED' or ${#strings.toString(order?.orderStatus)} == 'PROCESSED'"
+											th:id="${'cnf'+order?.orderId}"
+											class="btn btn-info btn-md approve-button"
+											th:onclick="|confirmPayment('${order?.orderId}')|">Confirm
+											Payment</button>
+
+										<button type="button" class="btn btn-success btn-md refund-button"
+											th:disabled="${#strings.toString(order?.orderStatus)} == 'REFUNDED'"
+											th:onclick="|showReasonModal('${order?.orderId}')|"
+											th:id="${'btn'+order?.orderId}">Refund</button>
+										<button type="button" class="btn btn-primary btn-md partial-refund-button"
+												th:disabled="${#strings.toString(order?.orderStatus)} == 'REFUNDED'"
+												th:onclick="showPartialReasonModal('${order?.orderId}')"
+												th:id="${'btn'+order?.orderId}">Partial Refund</button>
+										<button type="button" class="btn btn-info btn-md"
+											th:onclick="|addNote('${order?.orderId}')|">Add
+											Notes</button>
+										<button type="button" class="btn btn-success btn-md"
+											th:onclick="|showNotes('${order?.orderId}')|">
+											View Notes</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+					</div>.
+				</div>
+			<!--</div>-->
+
+			<div id="orderSummary"></div>
+			<div id="refundReasonModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					Modal content
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4>
+								<span></span> Reason For Refund
+							</h4>
+						</div>
+						<div class="modal-body" style="padding: 40px 50px;">
+							<form role="form">
+								<div class="form-group">
+									<label for="lblRefundAmount"><span></span>Refund Amount</label>
+									<input type="number" class="form-control" id="txtRefundAmount"
+										placeholder="Enter Refund Amount"></input> <label
+										for="lblReason"><span></span>Reason</label> <input type="text"
+										class="form-control" id="txtReason" placeholder="Enter Reason"></input>
+									<button id="refundBtn" class="btn btn-primary btn-block">Ok</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="partialRefundReasonModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					Modal content
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4>
+								<span></span> Reason For Refund
+							</h4>
+						</div>
+						<div class="modal-body" style="padding: 40px 50px;">
+							<form role="form">
+								<div class="form-group">
+									<label for="lblRefundAmount"><span></span>Partial Refund Amount</label>
+									<input type="number" class="form-control" id="txtPartialRefundAmount"
+										   placeholder="Enter Partial Refund Amount"></input> <label
+										for="lblReason"><span></span>Reason</label> <input type="text"
+																						   class="form-control" id="txtPartialReason" placeholder="Enter Reason"></input>
+									<button id="partialrefundBtn" class="btn btn-primary btn-block btn-partial">Ok</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="sendNotModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					Modal content
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4>
+								<span></span> Send Notification
+							</h4>
+						</div>
+						<div class="modal-body" style="padding: 40px 50px;">
+							<form role="form">
+								<div class="form-group">
+									<label for="lblReason"><span></span>Send Notification
+										To Teacher</label> <input type="text" class="form-control"
+										id="txtOrderId" hidden="hidden"></input>
+									<button id="approveBtnTrue" class="btn btn-primary btn-block">Yes</button>
+									<button id="approveBtnFalse" class="btn btn-primary btn-block">No</button>
+									<i class="fa fa-spinner fa-spin" id="orderApproveLoader" style="display: none; font-size: 30px"></i>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="orderNotesDiv"></div>
+			<div id="addNoteModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					Modal content
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4>
+								<span></span> Add New Order Note
+							</h4>
+						</div>
+						<div class="modal-body" style="padding: 40px 50px;">
+							<form role="form">
+								<div class="form-group">
+									<label for="lblReason"><span></span>Note Content</label> <input
+										type="text" class="form-control" id="txtContent"
+										placeholder="Enter Note"></input>
+									<button id="saveNoteBtn" class="btn btn-primary btn-block">
+										Save Note</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="modal fade" id="modalSummary" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" id="lectureModelLabel"
+							style="font-weight: bold;">Order Summary</h4>
+
+					</div>
+					<div class="modal-body">
+						<div class="order-summary-modal">
+							<div>
+								<h4 style="font-weight: bold;">Customer Details:</h4>
+								<label id="lblName"></label> <br> <label id="lblEmail"></label>
+								<br> <label id="lblMob"></label> <br> <label
+									id="lblAddress"></label>
+							</div>
+							<br />
+							<table id="tblOrderSummary"
+								class="table table-striped table-bordered" cellspacing="0"
+								width="100%">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Name</th>
+										<th>Type</th>
+										<th>Price</th>
+
+
+									</tr>
+								</thead>
+								<tbody id="tblOrderSummaryBody">
+
+								</tbody>
+							</table>
+
+							<div>
+								<h4 style="font-weight: bold;">Payment Details:</h4>
+								<label id="lblAmt"></label> <br>
+								<label id="lblNeoCash"></label> <br>
+								<label id="lblEMI"></label><br> <label id="lblInstallmentNo"></label><br><label id="lblCoupon"></label>
+								<br> <label id="lblPayMode"></label> <br> <label
+									id="lblPayDate"></label>
+									<br> <label id="lblOrderType"></label><br><label id="lblOrderReason"></label><br>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/ecommerce.js')}}"></script>
+	<script
+			th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dashboard.js')}}"></script>
+
+	<script>
+    $("#showResults").on("click", function(){
+      var startDate = $('#startDate').val();
+      var endDate = $('#endDate').val();
+      var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?startDate='+startDate+'&endDate='+endDate;
+      window.location.href = newurl;
+    });
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body style="background: #ffff;">
+    <table align="center" style=" margin-top: 35px;margin-bottom: 35px;border:solid 0.7px #999999;max-width: 600px;">
+      <thead>
+       <tr><td colspan="3" style="border-bottom:solid 0.7px #999999; display: block;"><center><img src="https://lh3.googleusercontent.com/5CAgFZ2_TQ3CPX42dMMhGi8nx2GwfkuSCUx4oWmpMUSKYbIvTqo7OuTyl1WXr2iHUKUFiSL7CiXrvN5SOBxmMByUAA" style="margin-bottom: 30px;margin-top: 30px;"></img></center></td></tr>
+        <tr>
+
+           <td colspan="3" style="display: block;position: relative;">
+             <img src="https://lh3.googleusercontent.com/eWNrGcCV9gZaqqIpoEopFlob5AeO-6skIsPyQ3JSK1pXbm5n1U1d3PlrdAyiJRdDXctKbN6mhPG6xqNqFiqtcXD7H7E" style="width: 100%;height: auto;"></img>
+           </td>
+
+         </tr>
+      </thead>
+      
+      <tbody style="padding: 27px 42px;background: white;margin: auto;margin-top: 18px;display: block;padding: 10px 30px;">
+      
+
+       <tr>
+         <td colspan="3"><p style="font-family: Arial; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #333333;margin-bottom: 10px;">Hi <span th:text="${userName}"></span></p></td>
+      </tr>
+       
+      <tr>
+      </tr>
+
+       <tr>
+          <td>
+             <p style="font-family: Arial; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.71; letter-spacing: normal; color: #333333;
+    margin: 0 0 25px;padding-right: 65px;">Please find your evaluated copy of <b> <a th:href="${assignmentUrl}" th:utext="@{${assignmentName} + ' by ' + ${teacherName}}"></a></b></p>
+
+          </td>
+        </tr>
+        
+      <tr>
+        <td colspan="3"><p style="font-family: HelveticaNeue; font-size: 14px; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #000000;margin-bottom: 8px;">Regards,</p></td>
+      </tr>
+
+      <tr>
+        <td colspan="3"><p style="font-family: HelveticaNeue; font-size: 14px; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #000000;margin-bottom: 8px;">Shivam</p></td>
+      </tr>
+
+      <tr>
+        <td colspan="3"><p style="font-family: HelveticaNeue; font-size: 14px; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #000000;margin-bottom: 8px;">Happy Learning,</p></td>
+      </tr>
+
+      <tr>
+        <td colspan="3" style="border-bottom:solid 0.7px #999999;"><p style="font-family: HelveticaNeue; font-size: 16px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #333333;
+    margin: 0 0 30px;">The NeoStencil team</p></td>
+      </tr>
+
+
+  
+      <!-- <tr>
+         <td style="border-bottom:solid 0.7px #999999;">
+           <ul style="margin-top: 0; margin-bottom: 20px; display: flex; padding-left: 0px;">
+            <li style="width: 80px;color: #b2b2b2;list-style: none;"><p style="color: #000;">Courses</p></li>
+            <li style="width: 80px;color: #b2b2b2;"><p style="color: #000;">Teachers</p></a></li>
+            <li style="width: 80px;color: #b2b2b2;"><p style="color: #000;">Exams</p></li>
+            <li style="width: 80px;color: #b2b2b2;"><p style="color: #000;">Blogs</p></li>
+           </ul>
+         </td>
+      </tr> -->
+
+    </tbody>
+    <tfoot align="center" style="display: block;    padding: 20px 20px 37px 20px;">
+   
+     <tr>
+      <td colspan="3"> <center><img src="ns-logo-32x32.png" style="margin-bottom: 7px;"></img></center></td>
+    </tr>
+
+
+    <tr>
+      <td colspan="3"> <p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.67; letter-spacing: normal; text-align: center; color: #666666;line-height: 1.83;margin-bottom: 0px;">© 2014-2018. All rights reserved.</p></td>
+    </tr>
+
+
+    <tr>
+      <td colspan="3"><p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.67; letter-spacing: normal; text-align: center; color: #666666;line-height: 1.83;margin-bottom: 0px;">#337, Udyog Vihar Phase II, Sector 20, Gurgaon | contact@neostencil.com | +91 9599075552/3  </p></td>
+    </tr>
+    
+     <tr>
+      <td colspan="3"><p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.67; letter-spacing: normal; text-align: center; color: #666666;margin-bottom: 0px;">Not interested in e-mail updates? <a href="#" style="color: #0077e2;">Unsubscribe from this list.</a></p></td>
+    </tr>
+
+     <tr>
+      <td colspan="3" style="text-align: center; margin-bottom: 18px;">
+       <p style=" font-size: 12px;line-height: 18px;color: black;text-align: center;margin-top: 7px;margin-bottom: 0px;">
+         <a style="margin:6px;" href="https://www.facebook.com/NeoStencil" target="_blank"><img src="https://lh3.googleusercontent.com/ddiziJcZi1WokLGFfBT2bvWyncLnJ2s9lpeJOjKHgBTXusxeDu_Etkj4kzfIMZaPKSHHXopdogMIP72PzxIFUhsIKzAE"></a>
+         <a style="margin:6px;" href="https://twitter.com/NeoStencil" target="_blank"><img src="https://lh3.googleusercontent.com/SMmwZnsdoF8nsXobPm0CxitWKGtYzZTfG8__-C0fSV0l_9lh2chNIUpwS5XxzKU1gYnxOYwJhVx_L23n2puDAvWqb_xw"></a>
+         <a style="margin:6px;" href="https://www.linkedin.com/company/neostencil-inc-/" target="_blank"><img src="https://lh3.googleusercontent.com/aaOEZItJUcrcBBPRVUikuaAGK_Ypjtg3kd3rKUAXE77GB_hdkdEukxYB1xk9fJd2nQLV7VmQrsjtJewlmXcUDdPH0Fc"></a>
+         <a style="margin:6px;" href="https://plus.google.com/+Neostencil" target="_blank"><img src="https://lh3.googleusercontent.com/1jDuugHH_o1dKPpu5tMP0_IyFNNLzkIfMy46XFlK8c7t2Uv7ygq4C-28pExEetHhnFI2uyQSf9vGrx-sPuPahosWLw"></a></td>
+
+       </p>
+    </tr>
+    </tfoot>
+    </table>
+</body>
+</html>

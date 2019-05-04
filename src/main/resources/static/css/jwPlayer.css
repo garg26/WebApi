@@ -1,0 +1,56 @@
+.transition {
+  animation: watermark 100s infinite;
+}
+.jw-logo-bottom-left{
+  opacity: 0.4 !important;
+}
+
+
+@keyframes watermark {
+  0.1% { left: 40%; animation-timing-function: ease-in; transform: translateX(100px);}
+  50%{ left : 90%; animation-timing-function: ease-in; transform: translateY(-1500%);}
+  100%{ left: 40%; animation-timing-function: ease-in; transform: translateX(100px);}
+}
+@media screen  and (max-width: 400px) and (min-width: 320px){
+  @keyframes watermark {
+    0.1% { left: 20%;animation-timing-function: ease-in; transform: translateX(50px);}
+    50%{ left : 79%; animation-timing-function: ease-in; transform: translateY(-80px);}
+    100%{ right: 30%; animation-timing-function: ease-in; transform: translateX(120px);}
+  }
+}
+
+@media screen  and (max-width: 600px) and (min-width: 400px){
+  @keyframes watermark {
+    0.1% { left: 30%;animation-timing-function: ease-in; transform: translateX(50px);}
+    50%{ left : 79%; animation-timing-function: ease-in; transform: translateY(-80px);}
+    100%{ right: 20%; animation-timing-function: ease-in; transform: translateX(180px);}
+  }
+}
+@media screen  and (max-width: 800px) and (min-width: 600px){
+  @keyframes watermark {
+    0.1% { left: 30%;animation-timing-function: ease-in; transform: translateX(50px);}
+    50%{ left : 79%; animation-timing-function: ease-in; transform: translateY(-80px);}
+    100%{ right: 20%; animation-timing-function: ease-in; transform: translateX(260px);}
+  }
+}
+@media screen  and (max-width: 1000px) and (min-width: 800px){
+  @keyframes watermark {
+    0.1% { left: 30%;animation-timing-function: ease-in; transform: translateX(50px);}
+    50%{ left : 79%; animation-timing-function: ease-in; transform: translateY(-80px);}
+    100%{ right: 20%; animation-timing-function: ease-in; transform: translateX(260px);}
+  }
+}
+@media screen  and (max-width: 800px) and (min-width: 600px){
+  @keyframes watermark {
+    0% { left: 30%;animation-timing-function: ease-in; transform: translateX(50px);}
+    50%{ left : 79%; animation-timing-function: ease-in; transform: translateY(-80px);}
+    100%{ right: 20%; animation-timing-function: ease-in; transform: translateX(260px);}
+  }
+}
+/*@media screen  and (max-width: 1000px) and (min-width: 800px){*/
+  /*@keyframes watermark {*/
+    /*0% { left: 30%;animation-timing-function: ease-in; transform: translateX(50px);}*/
+    /*50%{ left : 79%; animation-timing-function: ease-in; transform: translateY(-80px);}*/
+    /*100%{ right: 20%; animation-timing-function: ease-in; transform: translateX(260px);}*/
+  /*}*/
+/*}*/

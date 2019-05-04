@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+<head>
+<link
+	href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+</head>
+<style>
+#lableAmountDiv {
+	display: none;
+	float: left;
+	margin-right: 100px;
+}
+</style>
+
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Neo Cash</h1>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label> Customer &nbsp;:&nbsp;</label>
+				<!-- <select
+              class="form-control selectpicker" id="dropUsers"
+               data-live-search="true">
+              <option th:each="user:${users}" th:value="${user?.userId}"
+                th:text="${user?.userName}"></option>
+            </select> -->
+				<input type="text"
+					placeholder="Enter atleast 3 letters of the username or emailId"
+					required id="userEmailSearch" onblur="searchEmails(event);">
+				<div id="userList"></div>
+
+			</div>
+
+			<div id="divUserDetails">
+				<label>Current NeoCash Balance:</label><input type="number"
+					id="currentNC" readonly="readonly"> <label>NeoCash
+					To be Added: </label><input type="number" id="ipNCToBeAdded"> <label>Reason:
+				</label><input type="text" id="ipReason">
+				<button type="button" onclick="creditNeoCashToUser();">Credit</button>
+			</div>
+
+		</div>
+	</div>
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/user.js')}}"></script>
+	<script>
+		var selectedUserId = 0;
+		function searchEmails() {
+
+			$('#userList').hide();
+			if ($('#userEmailSearch').val().length > 3) {
+				getUserEmails();
+			}
+
+		}
+
+		function getUserEmails() {
+			var searchString = $('#userEmailSearch').val();
+
+			$
+					.ajax({
+						"async" : false,
+						"crossDomain" : true,
+						"url" : apiBasePath + "/search-user",
+						"method" : "POST",
+						"processData" : false,
+						"data" : searchString,
+
+						success : function(response) {
+
+							var htmlToShow = '<ul id="userList">';
+							var oneRow = '<li> <a onclick="selectUser(\'#userId1#\');" >#userEmail#</a><i id="userId">(#userId1#)</i></li>';
+
+							$.each(response, function(index, element) {
+								htmlToShow += oneRow;
+								htmlToShow = htmlToShow.replace(/#userId1#/g,
+										element[1]);
+								htmlToShow = htmlToShow.replace("#userEmail#",
+										element[0]);
+							})
+							htmlToShow += '</ul>';
+							$('#userList').html(htmlToShow).show();
+
+						},
+						error : function(response) {
+							console.log(response);
+
+						}
+					});
+		}
+
+		function selectUser(userId) {
+			/*
+			 * var userId = $("form[name='add-new-order']").find("#dropUsers :selected")
+			 * .val(); ;
+			 */
+			selectedUserId = userId;
+			getCurrentNeoCashBalance()
+		}
+
+		function getCurrentNeoCashBalance() {
+			$.ajax({
+				"async" : false,
+				"crossDomain" : true,
+				"url" : apiBasePath + "/admin/user/" + selectedUserId,
+				"method" : "GET",
+				"processData" : false,
+				"dataType" : "json",
+				success : function(response) {
+
+					$('#currentNC').val(response.neoCashBalance);
+
+				},
+				error : function(response) {
+					console.log(response);
+
+				}
+			});
+		}
+
+		function creditNeoCashToUser() {
+			request = {
+				"amount" : $('#ipNCToBeAdded').val(),
+				"reason" : $('#ipReason').val(),
+				"creditTo" : selectedUserId
+			}
+
+			$.ajax({
+				"async" : false,
+				"url" : apiBasePath + "/admin/credit-neo-cash",
+				"method" : "PUT",
+				"processData" : false,
+				"contentType" : "application/json",
+				"data" : JSON.stringify(request),
+				success : function() {
+
+					alert("Neo Cash credited successfully")
+
+				},
+				error : function() {
+					alert("Error!!!")
+
+				}
+			});
+
+		}
+	</script>
+</body>
+
+</html>

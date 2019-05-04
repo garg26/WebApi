@@ -1,0 +1,22 @@
+<div class="breadcrumb-container container-header">
+	<div class="mdl-grid">
+		<div
+			class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+			 <ol itemscope="" itemtype="http://schema.org/BreadcrumbList"
+				class="breadcrumbs mdl-color-text--grey-500">
+
+				<li th:each="breadCrumbItem, itr : ${breadCrumbs}"
+					itemprop="itemListElement" itemscope=""
+					itemtype="http://schema.org/ListItem"><a
+					th:if="${itr.size-1> itr.index}"
+					th:href="@{${breadCrumbItem?.link}}" itemprop="item"><span
+						itemprop="name" th:text="${breadCrumbItem?.text}"></span></a> <a
+					th:unless="${itr.size-1> itr.index}" style="color: #9e9e9e;"
+					itemprop="item"><span itemprop="name"
+						th:text="${breadCrumbItem?.text}"></span></a> <span
+					itemprop="position" th:attr="content=${itr.index + 1}"
+					th:text="(${itr.size-1> itr.index}? ' / ':'')"></span></li>
+			</ol>
+		</div>
+	</div>
+</div>

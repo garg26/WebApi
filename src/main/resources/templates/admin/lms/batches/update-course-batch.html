@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Update Course Batch</h1>
+					</div>
+				</div>
+				<form name="updateBatch" id="updateBatch">
+
+					<div class="row">
+						<div class="col-md-9">
+
+							<div class="form-horizontal">
+								<div class="row">
+
+									<div class="">
+										<div class="col-sm-6">
+											<label>Course ID</label> <input type="text"
+												class="form-control" disabled th:value="${course.id}"
+												name="courseId" id="courseId">
+										</div>
+
+										<div class="col-sm-6">
+											<label>Course Title</label> <input type="text"
+												class="form-control" disabled name="courseTitle"
+												id="courseTitle" th:value="${course.courseTitle}">
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+
+									<div class="">
+
+										<div class="col-sm-6">
+											<label>Start Date</label> <input type="date"
+												class="form-control" name="startDate" id="startDate"
+												placeholder="Enter the Course Batch Start Date"
+												th:value="${#dates.format(courseBatch.startDate, 'yyyy-MM-dd')}">
+
+										</div>
+
+										<div class="col-sm-6">
+											<label>End Date</label> <input type="date"
+												class="form-control" name="endDate" id="endDate"
+												placeholder="Enter the Course Batch End Date"
+												th:value="${#dates.format(courseBatch.endDate, 'yyyy-MM-dd')}">
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+
+
+							<!-- <div class="form-horizontal">
+          <div class="row">
+
+            <div class="">
+
+              <div class="col-sm-6">
+                <label>Start Time</label>
+                <input type="time" class="form-control" name="startTime" id="startTime"
+                       placeholder="Enter the Course Batch Start Time">
+              </div>
+
+              <div class="col-sm-6">
+                <label>End Time</label>
+                <input type="time" class="form-control" name="endTime" id="endTime"
+                       placeholder="Enter the Course Batch End Time">
+              </div>
+            </div>
+          </div>
+
+        </div> -->
+
+							<div class="row">
+								<div class="col-sm-6">
+									<label>Batch Name</label> <input type="text"
+										class="form-control" name="batchName" id="batchName"
+										placeholder="Enter the Course Batch Name"
+										th:value="${courseBatch.batchName}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>Class Timing</label> <input type="text"
+									class="form-control" name="classTiming" id="classTiming"
+									placeholder="Enter the Class Timings eg.. Monday to Friday from 10:00 AM to 1:00 PM"
+									th:value="${courseBatch.classTiming}">
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+
+										<div class="col-sm-6">
+											<label>Regular Price</label> <input type="number" min="0"
+												class="form-control" name="regularPrice" id="regularPrice"
+												placeholder="Enter the Course Batch Regular Price"
+												th:value="${courseBatch.regularPrice}">
+										</div>
+
+										<div class="col-sm-6">
+											<label>Sale Price</label> <input type="number" min="0"
+												class="form-control" name="salePrice" id="salePrice"
+												placeholder="Enter the Course Batch Sale Price"
+												th:value="${courseBatch.salePrice}">
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+
+										<div class="col-sm-6">
+											<label>Display Size</label> <input type="number" min="0"
+												class="form-control" name="displaySize" id="displaySize"
+												placeholder="Enter the Course Batch Display Size"
+												th:value="${courseBatch.displaySize}">
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+										<div class="col-sm-6">
+											<label>Validity</label> <input type="number" min="0"
+												class="form-control" name="validity" id="validity"
+												placeholder="Enter the Validity of the Course Batch"
+												th:value="${courseBatch.validity}">
+										</div>
+
+										<div class="col-sm-6">
+											<label>Course Validity For Display</label> <input type="text"
+												class="form-control" name="validityDisplay"
+												id="validityDisplay"
+												placeholder="Enter the Validity of the Course Batch For display"
+												th:value="${courseBatch.validityDisplay}">
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									\
+									<div class="">
+										<div class="col-sm-6">
+											<label>Duration</label> <input type="number" min="0"
+												class="form-control" name="duration" id="duration"
+												placeholder="Enter the Course duration"
+												th:value="${courseBatch.duration}">
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+										<div class="col-sm-6">
+											<label>No. Of Available Seats</label> <input type="number"
+												min="0" class="form-control" name="noOfSeats" id="noOfSeats"
+												th:value="${courseBatch.noOfAvailableSeats}">
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-horizontal">
+								<div class="row">
+									<div class="">
+										<div class="col-sm-6">
+											<label>No. Of Session</label> <input type="text"
+												class="form-control" name="noOfSession" id="noOfSession"
+												placeholder="Enter the no. of sessions..."
+												th:value="${courseBatch.noOfSession}">
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+
+							<label class="radio-inline" style="margin-top: 10px;"><input
+								type="radio" value="publish"
+								th:checked="${#strings.toString(courseBatch?.status)} == 'publish'"
+								name="status" checked>Publish</label> <label
+								class="radio-inline" style="margin-top: 10px;"><input
+								type="radio" value="draft"
+								th:checked="${#strings.toString(courseBatch?.status)} == 'draft'"
+								name="status">Draft</label>
+
+
+							<div class="row">
+
+								<div class="col-md-12">
+
+									<div class="row">
+										<div style="margin-top: 20px;" class="col-md-9">
+											<button class="submit btn btn-success" type="submit"
+												id="submitBatch" value="submit">Update</button>
+											<i class="fa fa-spinner fa-spin" id="loader"></i>
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	!--/*/
+	<th:block th:include="admin/footer"></th:block>
+	/*/-->
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+	<script th:inline="javascript">
+  /*<![CDATA[*/
+
+  var batchId = [[${courseBatch?.id}]];
+
+  /*]]>*/
+</script>
+	<script>
+
+  $('form[name=updateBatch]').validate({
+    rules: {
+      startDate: {
+        required: true
+      },
+      startTime: {
+        required: true
+      },
+      endTime: {
+        required: true
+      },
+      regularPrice: {
+        required: true
+      },
+      salePrice: {
+        required: true
+      },
+      displaySize: {
+        required: true
+      },
+      validity: {
+        required: true
+      },
+      duration: {
+        required: true
+      }
+    },
+    messages: {
+
+      startDate: {
+        required: "Please enter start date"
+      },
+      batchName: {
+        required: "Please enter the batch name"
+      },
+      regularPrice: {
+        required: "Please enter regular price"
+      },
+      salePrice: {
+        required: "Please enter sale price"
+      },
+      displaySize: {
+        required: "Please enter display size"
+      },
+      validity: {
+        required: "Please enter batch validity"
+      },
+      duration: {
+        required: "Please enter batch duration"
+      }
+    },
+    submitHandler: function () {
+      submitRequest();
+      $('#loader').show();
+    }
+
+  });
+
+  function submitRequest() {
+
+    var input = {
+      startDate: $('#startDate').val(),
+      endDate: $('#endDate').val(),
+      duration: $('#duration').val(),
+      batchName: $('#batchName').val(),
+      classTiming: $('#classTiming').val(),
+      discount: $('#instituteName').val(),
+      regularPrice: $('#regularPrice').val(),
+      salePrice: $('#salePrice').val(),
+      displaySize: $('#displaySize').val(),
+      noOfAvailableSeats: $('#noOfSeats').val(),
+      status: $('input[name=status]:checked', '#updateBatch').val(),
+      validity: $('#validity').val(),
+      course: {
+        id: $('#courseId').val(),
+      },
+      noOfSession: $('#noOfSession').val(),
+      validityDisplay: $('#validityDisplay').val()
+
+    };
+    $.ajax({
+      url: apiBasePath + "/admin_lmsadmin/coursebatches/" + batchId,
+      type: "PUT",
+      data: JSON.stringify(input),
+      contentType: "application/json",
+      processData: false,
+      <!--"headers": {-->
+        <!--"authorization": "Bearer "-->
+        <!--+ window.localStorage.getItem('access_token'),-->
+
+      <!--},-->
+
+      success: function (response) {
+        $('#loader').hide();
+        location.reload();
+        alert("Course batch Update successfully");
+
+      },
+
+      error: function (response) {
+        $('#loader').hide();
+        alert("Course batch add failed");
+
+      }
+    });
+
+  }
+
+
+</script>
+
+</body>
+
+</html>

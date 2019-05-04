@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>What our students have to say about us | NeoStencil</title>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+  <meta property="og:title"
+        content="What our students have to say about us | NeoStencil" />
+  <meta name="description"
+        content="See what our Toppers, Students & our users have to say about to us. Read more about what helped Toppers' IAS 2017 & 2016 to crack UPSC, IES/GATE exams">
+
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.css')}}"
+          rel="stylesheet" media="screen"/>
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick-theme.css')}}"
+          rel="stylesheet" media="screen"/>
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/blogs.css')}}"
+          rel="stylesheet" media="screen"/>
+
+
+  <link rel="canonical" href="https://neostencil.com/reviews-testimonials"/>
+
+
+  <style>
+
+    .testimonial-ellipsis {
+      display: -webkit-box;
+      max-width: 99%;
+      height: 152.68px !important;
+      margin: 8px 0 16px 0;
+      -webkit-line-clamp: 7;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: open sans;
+      line-height: 1.4 !important;
+    }
+
+    .testimonial-image {
+      border-radius: 50%;
+      width: 100px;
+    }
+
+    .testimonial-demo-ribbon {
+      width: 100%;
+      -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+      background-size: cover;
+      height: auto;
+    }
+
+    .testimonial-name-and-image {
+      background: #ffffff;
+    }
+
+    .testimonial-heading {
+      font-family: open sans;
+      font-size: 30px;
+      font-weight: 800;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.44;
+      letter-spacing: normal;
+      text-align: center;
+      z-index: 2;
+      margin-top: 40px;
+    }
+
+    .testimonial-heading-2 {
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .demo-ribbon-heading {
+      padding: 0 20px;
+    }
+
+    .masonry-card {
+      display: inline-block;
+      margin: 8px 0;
+      padding: 0;
+      width: calc(100% - 8px);
+    }
+
+    .mdl-card__supporting-text h4 {
+      color: #000000 !important;
+    }
+
+    @media screen and (max-width: 1024px) {
+      .masonry-card {
+        display: block;
+        margin: 8px 8px;
+        padding: 0;
+        width: calc(100% - 16px);
+      }
+    }
+    .mdl-shadow--2dp {
+      /*box-shadow: 0 2px 2px 0 rgba(21, 19, 19, 0.64), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);*/
+      box-shadow: 0 2px 2px 0 rgb(234, 226, 226), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0, 0, 0, 0.28);
+    }
+  </style>
+</head>
+<body class="blog-home">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+  <div class="mat-content mdl-layout__content">
+    <div class="testimonial-demo-ribbon">
+      <div class="container-header" style="padding: 13px; 0">
+        <div>
+          <div class="testimonial-heading">Our students are our best ambassadors</div>
+          <p class="testimonial-heading-2">This is what some of them have to say about us!</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container-header" style="margin-top: 24px;">
+
+
+      <div class="" >
+        <div class="masonry-card" th:each="testimonial : ${testimonials}" style="margin-bottom: 20px">
+          <section class="mdl-shadow--2dp"  th:if="${testimonial.position}%2 == 0">
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                <div class="mdl-card__supporting-text" style="width: 100%;padding: 0px;">
+                  <div style="padding: 11px;">
+                    <h4 style="margin-top: 0; font-size: 18px; line-height: 26px; font-weight: 600;"
+                        th:if="${#strings.toString(testimonial.testimonialTitle)} != ''"
+                        th:text="@{'&#34;' + ${testimonial.testimonialTitle}+ '&#34;'}"></h4>
+                    <!--<h4 style="margin-top: 0; font-size: 18px; line-height: 26px;"-->
+                    <!--th:unless="${#strings.toString(testimonial.testimonialTitle)} == ''"></h4>-->
+                    <span th:text="${testimonial.text}"
+                          style="font-size: 15px; line-height: 25px; color: #000000;"></span>
+                    <div style="margin-top:3px; color: #197ce3; margin-top: 20px; font-style: italic; font-size: 18px;">
+                      <a th:href="${testimonial.courseUrl}"
+                         th:if="${#strings.toString(testimonial.courseUrl)} != ''" style="text-decoration: underline;">
+                        View course
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="testimonial-name-and-image">
+                  <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--12-col mdl-cell--2-col-tablet mdl-cell--1-col-phone" style="">
+                      <div style="width: fit-content;margin: 0 auto;">
+                        <img class="testimonial-image"
+                             th:if="${testimonial.studentImage} != '' "
+                             th:src="@{${testimonial.studentImage}+'=w170-h172-cc'}"
+                             th:alt="${testimonial.studentName}">
+
+                        <img
+                                class="testimonial-image"
+                                th:unless="${testimonial.studentImage} != '' "
+                                src="https://artscimedia.case.edu/wp-content/uploads/sites/79/2016/12/14205134/no-user-image.gif">
+                      </div>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--12-col mdl-cell--2-col-tablet mdl-cell--3-col-phone" style="text-align: right;">
+                      <div style="width: fit-content; margin: 0 auto;">
+                        <h4 style="margin: 0;font-size: 16px;text-align: right!important;" th:text="${testimonial.studentName}"></h4>
+                        <img style="margin: 0 0 0 auto; height: 26px; display: block;" th:if="${testimonial.isNeostencilUser}" src="https://lh3.googleusercontent.com/MMHPSwSPZlEs1Gryl0sSQHuHQ8JbiE7TnRr39AcPn6qLGQ8oIZF3QKWG6hz6AmU_ImGLc5cTUbPY03P5QV9cJReoXMs=h30"/>
+
+                        <span th:if="${testimonial.studentRank != 0} "
+                              th:text="@{'AIR '+ ${testimonial.studentRank} +', '+ ${testimonial.exam}+'-' + ${testimonial.year}}"
+                              class="testimonials-rank-slick"></span> <span
+                              th:unless="${testimonial.studentRank == 0} "
+                              class="testimonials-rank-slick"></span> <br/>
+                        <span
+                                class="course-rating"><i class="material-icons">star_rate</i>
+          <i class="material-icons">star_rate</i> <i
+                                  class="material-icons">star_rate</i> <i
+                                  class="material-icons">star_rate</i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="mdl-shadow--2dp"  th:unless="${testimonial.position}%2 == 0">
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="testimonial-name-and-image">
+                  <div class="mdl-grid">
+                    <div
+                            class="mdl-cell mdl-cell--12-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                      <div style="width: fit-content; margin: 0 auto;">
+                        <img class="testimonial-image"
+                             th:if="${testimonial.studentImage} != '' "
+                             th:src="@{${testimonial.studentImage}+'=w170-h172-cc'}"
+                             th:alt="${testimonial.studentName}">
+
+                        <img
+                                class="testimonial-image"
+                                th:unless="${testimonial.studentImage} != '' "
+                                src="https://artscimedia.case.edu/wp-content/uploads/sites/79/2016/12/14205134/no-user-image.gif">
+                      </div>
+                    </div>
+                    <div
+                            class="mdl-cell mdl-cell--12-col mdl-cell--2-col-tablet mdl-cell--3-col-phone" style="">
+                      <div style="width: fit-content; margin: 0 auto;">
+                        <h4 style="margin: 0;font-size: 16px;" th:text="${testimonial.studentName}"></h4>
+                        <img style="height: 26px; display: block;" th:if="${testimonial.isNeostencilUser}" src="https://lh3.googleusercontent.com/MMHPSwSPZlEs1Gryl0sSQHuHQ8JbiE7TnRr39AcPn6qLGQ8oIZF3QKWG6hz6AmU_ImGLc5cTUbPY03P5QV9cJReoXMs=h30"/>
+
+                        <span th:if="${testimonial.studentRank != 0} "
+                              th:text="@{'AIR '+ ${testimonial.studentRank} +', '+ ${testimonial.exam}+'-' + ${testimonial.year}}"
+                              class="testimonials-rank-slick"></span> <span
+                              th:unless="${testimonial.studentRank == 0} "
+                              class="testimonials-rank-slick"></span> <br/>
+                        <span
+                                class="course-rating"><i class="material-icons">star_rate</i>
+                               <i class="material-icons">star_rate</i> <i
+                                  class="material-icons">star_rate</i> <i
+                                  class="material-icons">star_rate</i></span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+                <div class="mdl-card__supporting-text" style="width: 100%;padding: 0px;">
+                  <div style="padding: 11px;">
+                    <h4 style="margin-top: 0; font-size: 18px; line-height: 26px; font-weight: 600;"
+                        th:if="${#strings.toString(testimonial.testimonialTitle)} != ''"
+                        th:text="@{'&#34;' + ${testimonial.testimonialTitle}+ '&#34;'}"></h4>
+                    <!--<h4 style="margin-top: 0; font-size: 18px; line-height: 26px;"-->
+                    <!--th:unless="${#strings.toString(testimonial.testimonialTitle)} == ''"></h4>-->
+                    <span th:text="${testimonial.text}"
+                          style="font-size: 15px; line-height: 25px; color: #000000;"></span>
+                    <div style="margin-top:3px; color: #197ce3; margin-top: 20px; font-style: italic; font-size: 18px;">
+                      <a th:href="${testimonial.courseUrl}"
+                         th:if="${#strings.toString(testimonial.courseUrl)} != ''" style="text-decoration: underline;">
+                        View course
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+  </div>
+  <!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+</div>
+
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>
+<script>
+  $('document').ready(function () {
+    $("#header-menu nav > ul > li:nth-child(5) > a").addClass("active");
+  })
+</script>
+</body>
+</html>

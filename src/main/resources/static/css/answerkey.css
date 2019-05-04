@@ -1,0 +1,194 @@
+/* Answer Key Question-Answer */
+.ns-question-list-form .ns-user-details {
+	border: 1px dashed #ff6600;
+	padding: 15px 10px;
+	margin-bottom: 15px;
+}
+
+.ns-question-list-form .ns-user-details .ns-row {
+	margin-bottom: 10px;
+}
+
+.ns-question-list-form .ns-user-details .ns-row label {
+	width: 80px;
+	text-align: right;
+}
+
+.ns-question-list-form .ns-user-details .ns-row input,
+	.ns-question-list-form .ns-user-details .ns-row select {
+	width: 200px;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	padding: 5px;
+}
+
+.ns-question-list-form .ns-user-details .ns-row.required-notice {
+	font-style: italic;
+}
+
+.ns-question-list-form .ns-user-details .ns-row:last-child {
+	margin-bottom: 0;
+}
+
+.ns-question-list-form .ns-result, .ns-question-list-form .iasbaba-result,
+	.ns-question-list-form .insights-result {
+	background-color: #ff6600;
+	color: #fff;
+	font-size: 18px;
+	margin-top: 15px;
+	padding: 15px;
+	min-height: 188px;
+}
+
+.ns-question-list-form .ns-result span, .ns-question-list-form .iasbaba-result span,
+	.ns-question-list-form .insights-result span {
+	font-weight: bold;
+}
+
+.ns-question-list-form .ns-result, .ns-question-list-form .iasbaba-result,
+	.ns-question-list-form .insights-result {
+	display: none;
+}
+
+.ns-question-list-form.submitted .ns-result, .ns-question-list-form.submitted .iasbaba-result,
+	.ns-question-list-form.submitted .insights-result {
+	display: block;
+	width: calc(21.33% - -27px);
+	float: left;
+	margin: 16px 16px 16px 0;
+	border-radius: 4px;
+	background: #f3f3f2;
+	color: #000;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px
+		rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.ns-result h3, .iasbaba-result h3, .insights-result h3 {
+	color: #000000;
+}
+
+.ns-question-list-form.submitted .ns-correct label {
+	color: green;
+}
+
+.ns-question-list-form.submitted .ns-correct label::after {
+	content: ' - [correct answer as per NeoStencil]';
+	font-weight: bold;
+}
+
+.ns-question-list-form.submitted .ns-answered-correct label::after {
+	content: ' - [correct]';
+}
+
+.ns-question-list-form.submitted .ns-answered-incorrect label {
+	color: red;
+}
+
+.ns-question-list-form.submitted .ns-answered-incorrect label::after {
+	content: ' - [incorrect]';
+	font-weight: bold;
+}
+
+.ns-question-list {
+	margin-left: 15px;
+	font-size: 16px;
+}
+
+.ns-question-list .ns-question {
+	margin-bottom: 15px;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 15px;
+	list-style-type: decimal;
+}
+
+.ns-question-list .ns-question:last-child {
+	border: none;
+}
+
+.ns-question-list .ns-answer-list {
+	list-style: none;
+	margin-left: 15px;
+	padding-left: 0;
+	padding-top: 30px;
+}
+
+.ns-question-list .ns-answer-list:before {
+	content: 'Your answer';
+	margin-top: -28px;
+	float: right;
+	font-size: 12px;
+	color: #ffbb00;
+	font-weight: bold;
+	line-height: 12px;
+}
+
+.ns-question-list .ns-answer-list .ns-answer {
+	position: relative;
+}
+
+.ns-question-list .ns-answer-list .ns-answer label {
+	font-weight: normal;
+	padding-right: 20px;
+}
+
+.ns-question-list .ns-answer-list .ns-answer input[type=radio] {
+	position: absolute;
+	height: 16px;
+	width: 16px;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+}
+
+.ns-question-list .ns-answer-list .ns-answer.ns-correct label {
+	color: green;
+	font-weight: bold;
+}
+
+.ns-question-list .ns-view-source a {
+	font-size: 12px;
+}
+
+.ns-question-list-form .ns-submit input[type=submit] {
+	padding: 7px 24px;
+	line-height: 1.6;
+	background-color: #ff6600;
+	color: #FFF;
+	border: none;
+	border-radius: 2px;
+	outline: 0;
+	font-weight: 600;
+}
+
+#differences tr {
+	display: table-row;
+}
+
+#differences th, #differences td {
+	padding: 10px;
+	border: 1px solid #ddd;
+}
+
+#differences table {
+	border: 1px solid #ddd;
+	width: 100%;
+}
+
+#differences thead tr, #differences tbody tr:nth-child(even) {
+	background: #f2f2f2;
+}
+
+@media screen and (max-width: 767px) {
+	.ns-question-list-form.submitted .ns-result, .ns-question-list-form.submitted .iasbaba-result,
+		.ns-question-list-form.submitted .insights-result {
+		width: auto !important;
+		float: none;
+	}
+	#differences {
+		overflow: scroll;
+	}
+	.ns-question-list {
+		padding: 0;
+	}
+}
+
+/* Answer Key Question-Answer End */

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" style="background-color: #337ab7;">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<body>
+
+<div class="wrapper admin-login">
+
+  <div class="row col-md-4 col-md-offset-4">
+
+    <form class="form-signin" name="admin-signin">
+
+      <img class="center-block" src="https://lh3.googleusercontent.com/7Rek8EgYYxLRsyJ4cDf-L5gcAaQ6VCDvCqdt8tDAAnNdxzdciByhLQkteQMsK6nte6p9eRWhOXBa2-1-wsJotGaP9g"/>
+
+      <input type="email" class="form-control admin-login-input" name="useremail" id="useremail"
+             placeholder="Email" value="" required autofocus/>
+      <input type="password" class="form-control admin-login-input" name="password" id="password"
+             placeholder="Password" value="" required/>
+      <button class="btn btn-primary btn-block admin-submit" type="submit">
+        <span>Login</span>
+        <i class="fa fa-spinner fa-spin" id="loader"></i>
+      </button>
+
+      <div class="row">
+        <div class="col-md-9">
+          <label class="error-single" id="add-new-entity-error"></label>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/login.js')}}"
+></script>
+<script>
+
+  $(function () {
+    $("form[name='admin-signin']")
+    .validate(
+        {
+          rules: {
+            useremail: {
+              required: true,
+              email: true
+            },
+            password: {
+              required: true,
+              minlength: 5
+            }
+          },
+          messages: {
+            password: {
+              required: "Please provide a password",
+              minlength: "Your password must be at least 5 characters long"
+            },
+            useremail: {
+              required: "Please provide an email address",
+              email: "Please provide a valid email address"
+            }
+          },
+          submitHandler: function (form, e) {
+            var loginInput = {
+              emailId: $('#useremail').val(),
+              password: $('#password').val()
+
+            };
+
+            $
+            .ajax({
+              url: apiBasePath + "/login",
+              type: "post",
+              data: JSON.stringify(loginInput),
+              dataType: "json",
+              contentType: "application/json",
+              processData: false,
+
+              success: function (response) {
+                if (response.loginSucces == true) {
+                  e.preventDefault();
+                  loginUser(response.accessToken, "/admin");
+
+                }
+                else {
+                  alert(response.responseJSON.errorMessage);
+
+                }
+
+              },
+
+              error: function (response) {
+                alert(response.responseJSON.errorMessage);
+              }
+            });
+          }
+        });
+  });
+
+
+</script>
+
+</body>
+
+</html>

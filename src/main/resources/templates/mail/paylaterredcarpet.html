@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table, tr, th{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th{
+            padding:15px;
+        }
+    </style>
+</head>
+<body>
+<p>Hi, </p>
+<p>Please find below the student details for PayLater</p>
+<table>
+    <tr>
+        <th>Full Name</th>
+        <th><span th:text="${firstName}"></span>&nbsp;<span th:text="${lastName}"></span></th>
+    </tr>
+    <tr>
+        <th>Email Address</th>
+        <th><span th:text="${email}"></span></th>
+    </tr>
+    <tr>
+        <th>Mobile Number</th>
+        <th><span th:text="${mobile}"></span></th>
+    </tr>
+    <tr>
+        <th>College Name</th>
+        <th><span th:text="${collegeName}"></span></th>
+    </tr>
+    <tr>
+        <th>Current/Pass Year</th>
+        <th><span th:text="${passyear}"></span></th>
+    </tr>
+    <tr>
+        <th>City</th>
+        <th><span th:text="${city}"></span></th>
+    </tr>
+    <tr>
+        <th>Course Name</th>
+        <th><span th:text="${courseName}"></span></th>
+    </tr>
+    <tr>
+        <th>Course Price</th>
+        <th><span th:text="${coursePrice}"></span></th>
+    </tr>
+    <tr>
+        <th>Course Page</th>
+        <th><a th:href="${coursePage}"><span th:text="${coursePage}"></span></a></th>
+    </tr>
+</table>
+<br>
+<p>Thanks & Regards,<br>Neostencil Team</p>
+
+</body>
+</html>

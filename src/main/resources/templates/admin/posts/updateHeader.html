@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+  <link
+      href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+
+
+    <div class="container" id ="createNewHeader" style="display: none;padding-top: 15px;">
+      <div class="row voffsetneg10">
+        <div class="col-md-12">
+          <button type="submit" class="submit btn btn-default"
+                  id="allHeadersTbl">
+            <i class="fa fa-arrow-left"></i> All Headers
+          </button>
+        </div>
+      </div>
+      <h2>Create Announcement Header</h2>
+      <form  id="headerForm">
+        <div class="form-group">
+          <label for="headerText">Header Text:</label>
+          <input type="text" class="form-control" id="headerText" placeholder="Enter Header Text Here" name="headerText">
+        </div>
+        <div class="form-group">
+          <label for="headerUrl">Header URL (target Url)</label>
+          <input type="text" class="form-control" id="headerUrl" placeholder="Enter Header URL"  name="headerUrl">
+        </div>
+        <div class="form-group">
+          <label for="onPageToDisplay">Page Url (pages Displayed on)</label>
+          <input type="text" class="form-control" id="onPageToDisplay" placeholder="Enter the page URL"  name="onPageToDisplay">
+        </div>
+        <div class="form-group">
+          <label for="btnText">Button Text</label>
+          <input type="text" class="form-control" id="btnText" placeholder="Enter Button Text to display"  name="btnText">
+        </div>
+        <div>
+          <input type="checkbox" id="defaultHeader">
+          <span >IS DEFAULT HEADER ?</span>
+        </div>
+        </label>
+        <button onclick="changeAnnouncementHeader();" class="btn btn-primary">Submit</button>
+      </form>
+
+    </div>
+
+    <div class="container" id ="updateNewHeader" style="display: none;padding-top: 15px;">
+      <div class="row voffsetneg10">
+        <div class="col-md-12">
+          <button type="submit" class="submit btn btn-default"
+                  id="allHeadersTbl2">
+            <i class="fa fa-arrow-left"></i> All Headers
+          </button>
+        </div>
+      </div>
+      <h2>Update Announcement Header</h2>
+      <form  id="headerForm2">
+        <div class="form-group">
+          <label for="updateHeaderID">Update Header ID:</label>
+          <input type="text" class="form-control" id="updateHeaderID" placeholder="Enter Header Text Here" name="updateHeaderID">
+        </div>
+        <div class="form-group">
+          <label for="updateHeaderText">Update Header Text:</label>
+          <input type="text" class="form-control" id="updateHeaderText" placeholder="Enter Header Text Here" name="headerText">
+        </div>
+        <div class="form-group">
+          <label for="updateHeaderUrl">Update Header URL(target link)</label>
+          <input type="text" class="form-control" id="updateHeaderUrl" placeholder="Enter Header URL"  name="headerUrl">
+        </div>
+        <div class="form-group">
+          <label for="updateOnPageToDisplay">Update Page To display </label>
+          <input type="text" class="form-control" id="updateOnPageToDisplay" placeholder="Enter the page URL"  name="updateOnPageToDisplay">
+        </div>
+        <div class="form-group">
+          <label for="updateBtnText">Update Button Text</label>
+          <input type="text" class="form-control" id="updateBtnText" placeholder="Enter Button Text to display"  name="btnText">
+        </div>
+        <!--<div>-->
+          <!--<input type="checkbox" id="defaultHeader">-->
+          <!--<span >IS DEFAULT HEADER ?</span>-->
+        <!--</div>-->
+        </label>
+        <button onclick="updateAnnouncementHeader();" class="btn btn-primary">Submit</button>
+      </form>
+
+    </div>
+    <span id="allHeaders">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">Announcement Headers</h1>
+          </div>
+        </div>
+        <div class="row voffsetneg10">
+          <div class="col-md-12">
+              <button type="submit" class="submit btn btn-default"
+                      id="create-new-header">
+                <i class="fa fa-plus"></i> Create
+              </button>
+          </div>
+        </div>
+        <div class="row voffset10">
+          <div class="col-lg-12">
+            <!--<table id="all-posts" class="table table-bordered table-hover">-->
+            <div class="panel panel-default">
+              <div class="table-responsive panel-body">
+                <table
+                    class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
+                    id="all-headers" role="grid"
+                    aria-describedby="dataTables-example_info" style="width: 100%;">
+
+                  <thead>
+                  <tr>
+                    <th><input type="checkbox" name="select-all-headers"
+                               id="select-all-headers"></th>
+                    <th>ID</th>
+                    <th>Page Slug</th>
+                    <th>Header Text</th>
+                    <th>header Url</th>
+                    <th>Button Text</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="headers : ${headers}" >
+                  <td><input type="checkbox" name="select-post"
+                  class="select-post"th:value="${headers?.headerId}"></td>
+                  <td id="header-id"><a th:text="${headers?.headerId}"></a></td>
+                  <td id="page-slug"><a th:text="${headers?.onPageToDisplay}"></a></td>
+                  <td id="header-text" th:text="${headers?.headerText}"></td>
+                  <td th:text="${headers?.headerUrl}"></td>
+                  <td th:text="${headers?.btnText}" ></td>
+                  <td>
+                    <button class="btn btn-info updateHeader" th:data-id="${headers?.headerId}" th:data-header-text="${headers?.headerText}" th:data-header-url="${headers?.headerUrl}"th:data-onPageToDisplay="${headers?.onPageToDisplay}" th:data-btn-text="${headers?.btnText}">update Header</button>
+                    <button class="btn btn-primary deleteHeader" th:data="${headers?.headerId}" th:if="${headers?.headerId} == 1" style="display: none;">Delete Header</button>
+                    <button class="btn btn-primary deleteHeader" th:data="${headers?.headerId}" th:unless="${headers?.headerId} == 1" >Delete Header</button>
+                  </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+     </span>
+  </div>
+
+</div>
+
+
+<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+
+
+
+</body>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script
+    src="https://cdn.datatables.net/plug-ins/1.10.16/api/fnFindCellRowIndexes.js"></script>
+<script>
+  $( "#headerForm" ).submit(function( event ) {
+    event.preventDefault();
+
+  });
+  $('#create-new-header').click(function () {
+    $('#allHeaders').hide();
+    $('#createNewHeader').show();
+  });
+  $('#allHeadersTbl').click(function () {
+    window.location.reload();
+    $('#allHeaders').show();
+    $('#createNewHeader').hide();
+  });
+
+  $('#allHeadersTbl2').click(function () {
+    $('#allHeaders').show();
+    $('#createNewHeader').hide();
+    $('#updateNewHeader').hide();
+  });
+
+  $(document).ready(function() {
+    var table = $('#all-headers').DataTable();
+    table.order([ 6, 'desc' ]).draw();
+  });
+
+  $('.deleteHeader').click(function () {
+    var headerId = $(this).attr("data");
+
+    $.ajax({
+      "async" : true,
+      "crossDomain" : true,
+      "url" : apiBasePath + "/admin_editor/delete-header/" + headerId,
+      "method" : "DELETE",
+      "processData" : false,
+      "dataType" : "TEXT",
+      success : function(response) {
+        alert('header delete successfully');
+        window.location.reload();
+      },
+      error : function(response) {
+        alert("Error occurred while deleting header");
+      }
+    });
+
+  });
+
+  $('.updateHeader').click(function () {
+
+    $('#allHeaders').hide();
+    $('#updateNewHeader').show();
+    $('#updateHeaderID').val($(this).attr('data-id'));
+    $('#updateHeaderText').val($(this).attr('data-header-text'));
+    $('#updateHeaderUrl').val($(this).attr('data-header-url'));
+    $('#updateOnPageToDisplay').val($(this).attr('data-onPageToDisplay'));
+    $('#updateBtnText').val($(this).attr('data-btn-text'));
+  });
+
+  function updateAnnouncementHeader() {
+    var d = new Date();
+    var header = {
+      "headerId" : $('#updateHeaderID').val(),
+      "headerText" : $('#updateHeaderText').val(),
+      "headerUrl" : $('#updateHeaderUrl').val(),
+      "onPageToDisplay" : $('#updateOnPageToDisplay').val(),
+      "btnText" : $('#updateBtnText').val(),
+      "createdAt" : d,
+      "updatedAt" : d
+    }
+
+    $.ajax({
+      url: apiBasePath + "/admin_editor/change-header",
+      type: "POST",
+      data: JSON.stringify(header),
+      dataType: "json",
+      contentType: "application/json",
+      success: function (response) {
+        alert("Header Updated Successfully");
+        /*$("#headerForm").trigger('reset');*/
+        window.location.reload();
+      },
+      error: function (response) {
+        alert("Error while updating Header");
+      }
+    });
+  }
+
+
+
+</script>
+</html>

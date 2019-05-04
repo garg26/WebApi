@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Neostencil</title>
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/courses.css')}}"
+	rel="stylesheet" media="screen" />
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/thankyou.css')}}"
+	rel="stylesheet" media="screen" />
+<!-- <link
+      href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+      rel="stylesheet" media="screen" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+     -->
+
+</head>
+
+<body class="all-teachers-page">
+
+
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+		<!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+		<div class="mat-content mdl-layout__content">
+			<div class="landing-darken" style="display: none;"></div>
+			<section class="" style="margin-top: 50px;">
+				<div class="container">
+					<div class="mdl-grid">
+						<div
+							class="mdl-cell mdl-cell--1-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<i class="icon-success material-icons">check_circle</i>
+						</div>
+						<div
+							class="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<div class="heading">
+								<p>
+									Dear <span class="nameSummary"></span>,
+								</p>
+								<h3 class="thank-msg"></h3>
+								<p class="orderConfirmStatus">
+									<b
+										class="refNo"> </b>
+								</p>
+							</div>
+							<br /> <br />
+							<p class="backquote">
+								<b>Note:</b> Kindly check your e-mail to get further details
+								required for Order approval and get started or access of your
+								course.
+							</p>
+							<br />
+							<p class="p-common-1">Course Details have been sent to:</p>
+							<p class="p-common">
+								<b>SMS:</b> <span class="mobileSummary"></span> | <b>Email
+									ID:</b> <span class="emailSummary"></span>
+							</p>
+						</div>
+						<div
+							class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<p class="contact-info">
+								<i class="material-icons">phone</i>&nbsp;&nbsp;<a
+									href="tel:+91 959-907-5552 ">+91 9599 075 552</a>
+							</p>
+							<p class="contact-info">
+								<i class="material-icons">mail_outline</i>&nbsp;&nbsp;<a
+									href="mailto:info@neostencil.com" target="_top">info@neostencil.com</a>
+							</p>
+
+							<!-- <a onclick="" class="contact-info"> <i class="material-icons">print</i>&nbsp;&nbsp;Print
+								this confirmation
+							</a>
+							<p class="contact-info">
+								<i class="material-icons">file_download</i>&nbsp;&nbsp;Download
+								confirmation as PDF
+							</p> -->
+
+							<!-- <a onclick="" class="contact-info"> <i class="material-icons">print</i>&nbsp;&nbsp;Print
+                this confirmation
+            </a> -->
+							<!-- <p class="contact-info">
+                <i class="material-icons">file_download</i>&nbsp;&nbsp;Download
+                confirmation as PDF
+            </p> -->
+
+
+							<div class="share-with-friends" id="sharePurchasedCourse"></div>
+
+						</div>
+					</div>
+					<div class="mdl-grid">
+						<div
+							class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<h4>Your Order Details</h4>
+							<hr>
+							<div class="mdl-grid" style="padding: 0;">
+								<div
+									class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+									<p class="p-common">
+										<b>Order ID:</b>
+									</p>
+									<p class="p-common order-id"></p>
+								</div>
+								<!-- <div
+									class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+									<p class="p-common">
+										<b>Purchase Date:</b>
+									</p>
+									<p class="p-common" id="purchaseDate"></p>
+								</div> -->
+								<div
+									class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+									<p class="p-common">
+										<b>Total:</b>
+									</p>
+									<p class="p-common" id="orderTotal"></p>
+								</div>
+								<!-- <div
+									class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+									<p class="p-common">
+										<b>Payment Method:</b>
+									</p>
+									<p class="p-common" id="paymentMethod"></p>
+								</div> -->
+							</div>
+						</div>
+					</div>
+					<div class="mdl-grid">
+						<div
+							class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+							<div class="head-bg">ENROLLED COURSES</div>
+							<div class="thankyou-table">
+								<p class="p-common-1">Your Cart Item</p>
+								<hr>
+								<table id="" class="table mdl-data-table mdl-js-data-table">
+
+									<tbody id="oderItemsSummary">
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div class=" mdl-grid">
+						<div
+							class="address-section mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+							<div class="head-bg">
+								<div class="mdl-grid">
+									<div
+										class="table-border-thankyou mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+										<h5>Members Details</h5>
+									</div>
+									<div
+										class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+										<h5>Billing Details</h5>
+									</div>
+								</div>
+							</div>
+							<div class="thankyou-table">
+								<div class="mdl-grid">
+									<div
+										class="table-border-thankyou margin-table mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+										<p class="p-common-1" style="margin-top: 24px;">
+											<b>Contact</b><br /> <br /> <span class="nameSummary"></span><br />
+											<span class="mobileSummary"></span><br /> <span
+												class="emailSummary"></span>
+										</p>
+									</div>
+									<div
+										class="margin-table mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+										<p class="p-common-1" style="margin-top: 24px;">
+											<b>Address</b><br /> <br /> <span class="nameSummary"></span><br />
+											<span class="mobileSummary"></span><br /> <span
+												class="addressText"></span>
+										</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<br /> <br />
+				</div>
+			</section>
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+	</div>
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+	<script>
+		var orderId = getParameterByName('orderId');
+		$(document).ready(function() {
+			getMySummary();
+		})
+		function getMySummary() {
+			$
+					.ajax({
+						url : apiBasePath + '/order/' + orderId,
+						type : "GET",
+						dataType : "json",
+						contentType : "application/json; charset=utf-8",
+						success : function(response) {
+
+              if(response.paymentMethod=='zestmoney'){
+
+                $('.orderConfirmStatus').html("You will be notified shortly by ZestMoney.\n");
+                $('.thank-msg').html("Thank you for applying for the EMI facility.");
+
+							}else{
+                $('.orderConfirmStatus').html("Your order has been confirmed with reference number -");
+                $('.thank-msg').html("Thank you for your Enrollment.");
+							}
+
+							$('.nameSummary').html(
+
+									response.address.firstName + ' '
+											+ response.address.lastname);
+							$('.mobileSummary').html(
+									response.address.mobileNumber);
+							$('.emailSummary').html(username);
+							$('#purchaseDate').html(response.purchaseDate);
+							$('#orderTotal').html(
+									numberWithCommas(response.payAmount));
+							$('.order-id').html(orderId);
+							/* $('#paymentMethod').html(response.paymentMethod); */
+							$('.addressText').html(
+									response.address.addressText + ', '
+											+ response.address.city + ', '
+											+ response.address.state + ', '
+											+ response.address.pincode);
+							$('.refNo').html(response.paymentId);
+							var htmlToShow = '';
+							// var htmlToShowAtShare ='';
+							var ordersList = '<tr> <td class="mdl-data-table__cell--non-numeric"><img src="#imageUrl#" height="86px" width="128px"></td> <td style="text-align: left;"> <a style="white-space: normal;" href="course/#slug#" class="cartCourseName">#title#</a>  <br /> </td>  </tr>';
+							// var socialSharetype='<hr class="hr1"> <span>Share with your friend &nbsp;&nbsp; <a href="http://www.facebook.com/share.php?u=https://neostencil.com/course/#slug#" data-placement="top" title="Share on Facebook" target="_blank"> <i class="fa fa-facebook-f"></i>&nbsp;&nbsp; </a> <a href="http://twitter.com/share?url=https://neostencil.com/course/#slug#" data-placement="top" title="Share on Twitter" target="_blank"> <i class="fa fa-twitter"></i>&nbsp;&nbsp; </a> <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://neostencil.com/course/#slug#" data-placement="top" title="Share on LinkedIn" target="_blank"> <i class="fa fa-linkedin"></i>&nbsp;&nbsp; </a> <a href="@{\'https://plus.google.com/share?url=https://neostencil.com/course/#slug#" data-placement="top" title="Share on Google plus" target="_blank"> <i class="fa fa-google-plus"></i>&nbsp;&nbsp; </a> <a href="https://api.whatsapp.com/send?phone=whatsappphonenumber&text=https://neostencil.com/course/#slug#" data-placement="top" title="Share on WhatsApp" target="_blank"> <i class="fa fa-whatsapp"></i> </a> </span> <hr class="hr2">';
+
+
+        if (response.items != null) {
+          $
+          .each(
+              response.items,
+              function(index, element) {
+                htmlToShow = htmlToShow += ordersList;
+                htmlToShow = htmlToShow
+                .replace(
+                    "#title#",
+                    element.title);
+                htmlToShow = htmlToShow
+                .replace(
+                    "#price#",
+                    numberWithCommas(element.subTotal));
+                htmlToShow = htmlToShow
+                .replace(
+                    "#imageUrl#",
+                    element.imageUrl);
+                htmlToShow = htmlToShow
+                .replace(
+                    "#slug#",
+                    element.productSlug);
+                htmlToShow = htmlToShow
+                .replace(
+                    "#totalPrice#",
+                    numberWithCommas(element.price));
+                /* htmlToShow = htmlToShow
+                    .replace(
+                        "#startDate#",
+                        element.subtotal); */
+                /* htmlToShow = htmlToShow
+                    .replace(
+                        "#startTime#",
+                        element.subtotal); */
+              });
+          $('#oderItemsSummary').html(htmlToShow);
+        }
+              // if (response.items != null) {
+              //   $
+              //   .each(
+              //       response.items,
+              //       function(index, element) {
+              //         htmlToShowAtShare = htmlToShowAtShare += socialSharetype;
+							//
+              //         htmlToShowAtShare = htmlToShowAtShare
+              //         .replace(
+              //             "#slug#",
+              //             element.productSlug);
+							//
+              //       });
+              //   $('#sharePurchasedCourse').html(htmlToShowAtShare);
+              // }
+      },
+      error : function(response) {
+
+      }
+    });
+  }
+
+</script>
+</body>
+</html>

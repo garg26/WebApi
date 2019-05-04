@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
+            rel="stylesheet">
+</head>
+<body>
+
+<div id="wrapper">
+
+    <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+    <div id="page-wrapper">
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">New Quiz</h1>
+                </div>
+            </div>
+
+            <form name="newquiztemplate" id="newquiztemplate">
+
+                <div class="row">
+                    <div class="col-md-5">
+
+                        <div class="form-group">
+                            <label>Title</label> <input class="form-control"
+                                                        type="text" id="title"
+                                                        placeholder="Enter Title">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Slug</label> <input class="form-control"
+                                                       type="text" id="slug"
+                                                       placeholder="Enter Slug">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quiz Instructions</label> <textarea class="form-control" name="quiz-description"
+                                                                       id="quiz-description"></textarea>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 10px;">
+                            <label>ExamSegment</label> <select
+                                name="quizExamSegment" required id="quizExamSegment"
+                                class="form-control">
+                        </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quiz Type</label> <select name="quizType" required
+                                                             id="quizType" class="form-control">
+                            <option value="0" disabled selected>Select Quiz Type</option>
+                            <option value="PRACTICE_QUIZ">Practice Test</option>
+                            <option value="MOCK_TEST">Mock Test</option>
+                            <option value="SCHOLARSHIP_TEST">Scholarship Test</option>
+                        </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="container"><input type="checkbox"
+                                                            name="quiz-topic-wise-question"
+                                                            id="quiz-topic-wise-question">Show Topic Wise
+                                Question</label>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="container"><input type="checkbox"
+                                                            name="quiz-topic-wise-analysis"
+                                                            id="quiz-topic-wise-analysis">Show Topic Wise
+                                Analysis</label>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="container"><input type="checkbox"
+                                                            name="quiz-topic-wise-analysis"
+                                                            id="shuffle-question">Shuffle Question</label>
+
+                        </div>
+
+                        <div class="">
+                            <label>Import Quiz Question</label>
+                            <div>
+
+                                <label class="custom-file"> <input type="file" required
+                                                                   id="quiz-question-file" class="custom-file-input">
+                                    <span
+                                            class="custom-file-control"></span>
+                                </label>
+
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 10px;">
+
+                            <div class="">
+
+                                <div class="col-sm-6">
+                                    <label>Total Question</label> <input class="form-control" name="quiz-total-question"
+                                                                         required
+                                                                         type="text" id="quiz-total-question"
+                                                                         placeholder="Enter quiz total question number">
+
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label>Total Marks</label> <input class="form-control" name="quiz-total-marks"
+                                                                      required
+                                                                      type="text" id="quiz-total-marks"
+                                                                      placeholder="Enter quiz total marks">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 10px;">
+
+                            <div class="">
+
+                                <div class="col-sm-6">
+                                    <label>+ Mark/Question</label> <input class="form-control"
+                                                                          name="quiz-total-question"
+                                                                          placeholder="Positive mark per question"
+                                                                          required
+                                                                          type="text" id="positive-mark-per-question">
+
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label>- Mark/Question</label> <input class="form-control" name="quiz-total-marks"
+                                                                          placeholder="Negative mark per question"
+                                                                          required
+                                                                          type="text" id="negative-mark-per-question">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label>Quiz Time Limit(in mins)</label><input class="form-control"
+                                                                          name="quiz-time-limit" required
+                                                                          type="number" id="quiz-time-limit"
+                                                                          placeholder="Enter a quiz time limit in mins">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Meta Title</label> <input class="form-control"
+                                                             type="text" id="meta-title"
+                                                             placeholder="Enter Title">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="radio-inline" style="margin-top: 10px;"><input
+                                    type="radio" name="status" id="quiz-publish" value="publish">Publish</label>
+                            <label class="radio-inline" style="margin-top: 10px;"><input
+                                    type="radio" name="status" id="quiz-draft" value="draft">Draft</label>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-9" style="margin-top: 20px;">
+                                <button class="submit btn btn-success" id="addQuizBtn"
+                                        value="submit">Submit
+                                </button>
+                                <i class="fa fa-spinner fa-spin" id="loader"></i> <a
+                                    href="/admin_writer_editor/quiz/all-quiz" class="btn btn-default"
+                                    style="margin-left: 60px;">All Quiz</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-1.255.4.js"></script>
+<!--/*/
+<th:block th:include="admin/footer"></th:block>
+/*/-->
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script
+        src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script
+        src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/bootstrap-maxlength.js')}}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        getExamSegment();
+
+        $('#quiz-description').summernote({
+            styleTags: ['p', 'h2'],
+            height: 200, // set editor height
+            focus: true
+        });
+    });
+
+    $('#addQuizBtn').click(function (event) {
+
+        event.preventDefault();
+
+        if (document.getElementById('quiz-topic-wise-question').checked) {
+            $('#quiz-topic-wise-question').attr('checked', true);
+            $('input[name="quiz-topic-wise-question"]').val(true);
+        } else {
+            $('#quiz-topic-wise-question').attr('checked', false);
+            $('input[name="quiz-topic-wise-question"]').val(false);
+        }
+
+        if (document.getElementById('quiz-topic-wise-analysis').checked) {
+            $('#quiz-topic-wise-analysis').attr('checked', true);
+            $('input[name="quiz-topic-wise-analysis"]').val(true);
+        } else {
+            $('#quiz-topic-wise-analysis').attr('checked', false);
+            $('input[name="quiz-topic-wise-analysis"]').val(false);
+        }
+
+        if (document.getElementById('shuffle-question').checked) {
+            $('#shuffle-question').attr('checked', true);
+            $('input[name="shuffle-question"]').val(true);
+        } else {
+            $('#shuffle-question').attr('checked', false);
+            $('input[name="shuffle-question"]').val(false);
+        }
+
+
+        var input = {
+            title: $('#title').val(),
+            description: $('#quiz-description').summernote('code'),
+            topicWiseQuestion: $('#quiz-topic-wise-question').val(),
+            topicWiseAnalysis: $('#quiz-topic-wise-analysis').val(),
+            shuffleQuestion: $('#shuffle-question').val(),
+            quizType: $('#quizType').val(),
+            publishStatus: getQuizStatus(),
+            timeLimit: $('#quiz-time-limit').val(),
+            totalNoOfQuestion: $('#quiz-total-question').val(),
+            totalMarks: $('#quiz-total-marks').val(),
+            positiveMarkPerQuestion: $('#positive-mark-per-question').val(),
+            negativeMarkPerQuestion: $('#negative-mark-per-question').val()
+
+        };
+
+        var files = $('#quiz-question-file')[0].files[0];
+        var fd = new FormData();
+        fd.append("file", files);
+        fd.append("quiz", JSON.stringify(input));
+
+        $
+            .ajax({
+                async: true,
+                crossDomain: true,
+                type: 'POST',
+                url: apiBasePath + "/admin_techops_lmsadmin/createquiz",
+                data: fd,
+                mimeType: "multipart/form-data",
+                processData: false,
+                contentType: false,
+
+                success: function (response) {
+                    if (response != null) {
+                        lms = JSON.parse(response).quizId;
+
+                        if (lms != null) {
+                            createQuizTemplate(lms);
+                        }
+                    } else {
+                        alert("Failed while creating quiz");
+                    }
+                },
+
+                error: function (response) {
+                    alert("Failed while importing question");
+                }
+            });
+    });
+
+
+    function createQuizTemplate(quizId) {
+
+        var input = {
+            slug: $('#slug').val(),
+            quiz: {
+                quizId: quizId
+            },
+            examSegment: $('#quizExamSegment').val(),
+            titleTag: $('#meta-title').val(),
+            status: getQuizStatus(),
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: apiBasePath + "/admin_techops_lmsadmin_writer_editor/createquiztemplate",
+            data: JSON.stringify(input),
+            processData: false,
+            contentType: "application/json",
+
+            success: function (response) {
+                if (response != null) {
+                    alert("Successfully");
+                } else {
+                    alert("Failed while creating quiz");
+                }
+            },
+
+            error: function (response) {
+                alert("Failed while creating quiz");
+            }
+        });
+
+    };
+
+    function getQuizStatus() {
+        var status;
+        if (document.getElementById('quiz-publish').checked) {
+            status = document.getElementById('quiz-publish').value;
+        } else if (document.getElementById('quiz-draft').checked) {
+            status = document.getElementById('quiz-draft').value;
+        } else {
+            status = document.getElementById('quiz-draft').value;
+        }
+
+        return status;
+    }
+
+    function getExamSegment() {
+        $
+            .ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: apiBasePath + "/examsegments",
+
+                success: function (response) {
+                    var htmlToShow = '<option value="0" disabled selected>Select Exam Segment</option>';
+                    var examSegmentList = '<option value="#key#">#value#</option>';
+                    if (response != null) {
+                        $.each(response, function (key, value) {
+                            htmlToShow = htmlToShow += examSegmentList;
+                            htmlToShow = htmlToShow.replace(/#key#/g,
+                                key);
+                            htmlToShow = htmlToShow.replace(/#value#/g,
+                                value);
+
+                        });
+                        $('#quizExamSegment').html(htmlToShow);
+
+                    } else {
+                        $('#quizExamSegment').html("");
+                    }
+                },
+
+                error: function (response) {
+
+                }
+            });
+    }
+
+</script>
+
+</body>
+</html>

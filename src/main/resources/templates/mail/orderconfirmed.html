@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:mc="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Order Confirmation</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+		p {
+    		margin: 0 0 10px;
+		}
+	</style>
+</head>
+<body style="background: #ffff;">
+<table align="center" style=" margin-top: 35px;margin-bottom: 35px;border:solid 0.7px #999999;max-width: 600px;">
+    <thead>
+    <tr><td colspan="3" style="border-bottom:solid 0.7px #999999; display: block;"><center><img src="https://lh3.googleusercontent.com/5CAgFZ2_TQ3CPX42dMMhGi8nx2GwfkuSCUx4oWmpMUSKYbIvTqo7OuTyl1WXr2iHUKUFiSL7CiXrvN5SOBxmMByUAA" style="margin-bottom: 30px;margin-top: 30px;"></img></center></td></tr>
+    <tr>
+        <td colspan="3" style="display: block;position: relative;">
+            <!--<img src="email-header-bg-2.png" style="width: 100%;height: auto;"></img>-->
+            <!--<p style="position: absolute; top: 30px; left: 50px; font-family: Arial;   font-style: normal; font-stretch: normal;  letter-spacing: normal; color: #ffffff; font-size: 32px; font-weight: bold; line-height: 0.88;">Order <br><span style="font-family: Arial; font-size: 22px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.27; letter-spacing: normal; color: #ffffff;">Confirmed</span></p>-->
+            <div style="background-image: url('https://lh3.googleusercontent.com/eWNrGcCV9gZaqqIpoEopFlob5AeO-6skIsPyQ3JSK1pXbm5n1U1d3PlrdAyiJRdDXctKbN6mhPG6xqNqFiqtcXD7H7E');height: 180px;background-repeat: no-repeat;width: 100%;background-size: contain;"><span style="
+				font-family: Arial;	font-style: normal;	font-stretch: normal;letter-spacing: normal;color: #ffffff;	font-size: 32px;font-weight: bold;	line-height: 0.88;	margin: 38px 28px;	display: inline-block;">Order <br><span style="font-family: Arial; font-size: 22px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.27; letter-spacing: normal; color: #ffffff;">Confirmed!</span></span></div>
+        </td>
+    </tr>
+    </thead>
+
+    <tbody style="padding: 27px 42px;background: white;margin: auto;margin-top: 18px;display: block;padding: 10px 30px;">
+
+
+    <tr>
+        <td colspan="3"><p style="font-family: Arial; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #333333;margin-bottom: 18px;">Dear <span th:text="${fullName}"></span>,</p></td>
+    </tr>
+
+    <tr>
+        <td colspan="3"><p style="font-family: Arial; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.57; letter-spacing: normal; color: #333333;margin-bottom:0px;">Your recent order has been completed. Your Order <b>#<span th:text="${orderId}"></span>.</b></p>
+            <p style="font-family: Arial; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.57; letter-spacing: normal; color: #333333;margin-bottom:18px;">You can now access the course from My Courses section of website. OR start the course by simple click on get started button.</p></td>
+    </tr>
+
+    <tr>
+        <td><a href="https://neostencil.com/user-dashboard" style="font-family: Arial; font-size: 16px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #ffffff;background: orange; padding: 8px 47px; display: inline-block;border: 2.8px solid orange;margin-bottom:16px;">Get started</a></td>
+    </tr>
+
+    <tr>
+        <td style="font-family: Arial; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.57; letter-spacing: normal; color: #333333;">
+            <p style="margin-bottom:5px;"><b>Important Term &amp; Condition:</b></p>
+            <ul style="margin-bottom: 19px;">
+                <li>Before starting the course, please go through the <a href="https://neostencil.com/terms"> terms &amp; conditions </a> carefully.</li>
+                <li>Sharing your NeoStencil account or any Course Content is prohibited.</li>
+                <li>NeoStencil closely monitors account usage and takes strict action against all   possible cases of theft of Intellectual Property. </li>
+                <li>Cyber Crime and Criminal Offenses such as downloading or sharing   copyrighted material shall fall under Moral Turpitude and may lead to debarring   an eligible candidate from joining a cadre of services even if selected.</li>
+            </ul>
+        </td>
+    </tr>
+
+
+    <tr>
+        <td style="font-family: Arial; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.57; letter-spacing: normal; color: #333333;background-color: #f4fbfe;padding: 21px 10px;">
+            <p style="margin-bottom:5px;"><b><u>Save More and Earn More with NeoCash</u></b></p>
+            <ul>
+                <li>Earn Rs.3000 NeoCash with every SignUp.</li>
+                <li>Earn Rs.1000 NeoCash & Rs.1000 Paytm every time your referred friend buys a paid course.</li>
+                <li>Pay 10% of your course value with NeoCash.</li>
+                <li>BONUS: Get 50% of your redeemed NeoCash back in your account after your purchase</li>
+            </ul>
+
+
+            <p style="margin-bottom:5px;"><b>Conditions for referral scheme:</b></p>
+            <ul>
+                <li>You should be a student of NeoStencil</li>
+                <li>Your friend must purchase a paid course</li>
+            </ul>
+            <p style="margin-bottom:5px;"><b>Process:</b></p>
+            <ul>
+                <li>Share your friends details with us (phone number, email address, course   he/she wants to enrol in)</li>
+                <li>For Verification, we will call your friend.</li>
+                <li>Once the referred friend purchases the course, you will earn Rs.1000 NeoCash & Rs.1000 Paytm cash.</li>
+            </ul>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <b><p style="margin-top: 24px;">Here’s what you ordered (#<span th:text="${orderId}"></span>): </p></b>
+        </td>
+    </tr>
+
+
+    <tr>
+        <td colspan="3">
+            <table style="border:solid 0.7px #999999; width:100%;">
+                <tr style="border-bottom:solid 0.7px #999999">
+
+                    <td style="padding:10px;" colspan="2">ITEM</td>
+                    <td style="padding:10px;">QTY</td>
+                    <td style="text-align:center;padding: 10px;">AMOUNT</td>
+
+                </tr>
+                <tr th:each="oi : ${orderItems}" style="border-bottom:solid 0.7px #999999;">
+                    <td style="padding:10px;"><img th:src="${oi?.product?.imageUrl}" style="height: 38px;width: 60px;"></td>
+                    <td style="padding:10px;"><span th:text="${oi?.product?.productTitle}"></span></td>
+                    <td style="padding:10px;"><span th:text="${oi?.quantity}"></span></td>
+                    <td style="text-align:center;padding:10px;"><span th:text="${oi?.price}"></span></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="3"><p style="font-family: HelveticaNeue; font-size: 14px; font-weight: 700; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #000000;margin-bottom: 8px;margin-top:23px;">Billing Address: </p>
+            <p style="margin-bottom:36px;"><span th:text="${orderAddress?.firstName}"></span> <span th:text="${orderAddress?.lastname}"></span><br>
+                <span th:text="${orderAddress?.mobileNumber}"></span><br>
+                <span th:text="${orderAddress?.addressText}"></span><br>
+                <span th:text="${orderAddress?.city}"></span> - <span th:text="${orderAddress?.pincode}"></span> ,  <span th:text="${orderAddress?.state}"></span></p>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="3"><p style="font-family: HelveticaNeue; font-size: 14px; font-weight: 700; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #000000;margin-bottom: 8px;">Happy Learning,</p></td>
+    </tr>
+
+    <tr>
+        <td colspan="3"><p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #333333;">The NeoStencil team</p></td>
+    </tr>
+    </tbody>
+    <tfoot align="center" style="border-top:solid 0.7px #999999;display: block;    padding: 20px 20px 37px 20px;">
+
+    <tr>
+        <td colspan="3"> <center><img src="https://lh3.googleusercontent.com/yp2UqdV5HbaPBrqtPvJh0QPykqn8X6pqp3IpfwpfuLcw9f8Pz1dHB4OcNHDpBeJVUg7FPEQFS-UZPte7VLEaQ_qsyXQ" style="margin-bottom: 7px;"></img></center></td>
+    </tr>
+
+
+    <tr>
+        <td colspan="3"> <p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.67; letter-spacing: normal; text-align: center; color: #666666;line-height: 1.83;margin-bottom: 0px;">© 2014-2018. All rights reserved.</p></td>
+    </tr>
+
+
+    <tr>
+        <td colspan="3"><p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.67; letter-spacing: normal; text-align: center; color: #666666;line-height: 1.83;margin-bottom: 0px;">#337, Udyog Vihar Phase II, Sector 20, Gurgaon | contact@neostencil.com | +91 9599075552/3  </p></td>
+    </tr>
+
+    <tr>
+        <td colspan="3"><p style="font-family: HelveticaNeue; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.67; letter-spacing: normal; text-align: center; color: #666666;margin-bottom: 0px;">Not interested in e-mail updates? <a href="#" style="color: #0077e2;">Unsubscribe from this list.</a></p></td>
+    </tr>
+
+    <tr>
+        <td colspan="3" style="text-align: center; margin-bottom: 18px;">
+            <p style=" font-size: 12px;line-height: 18px;color: black;text-align: center;margin-top: 7px;margin-bottom: 0px;">
+                <a style="margin:6px;" href="https://www.facebook.com/NeoStencil" target="_blank"><img src="https://lh3.googleusercontent.com/ddiziJcZi1WokLGFfBT2bvWyncLnJ2s9lpeJOjKHgBTXusxeDu_Etkj4kzfIMZaPKSHHXopdogMIP72PzxIFUhsIKzAE"></img></a>
+                <a style="margin:6px;" href="https://twitter.com/NeoStencil" target="_blank"><img src="https://lh3.googleusercontent.com/SMmwZnsdoF8nsXobPm0CxitWKGtYzZTfG8__-C0fSV0l_9lh2chNIUpwS5XxzKU1gYnxOYwJhVx_L23n2puDAvWqb_xw"></img></a>
+                <a style="margin:6px;" href="https://www.linkedin.com/company/neostencil-inc-/" target="_blank"><img src="https://lh3.googleusercontent.com/aaOEZItJUcrcBBPRVUikuaAGK_Ypjtg3kd3rKUAXE77GB_hdkdEukxYB1xk9fJd2nQLV7VmQrsjtJewlmXcUDdPH0Fc"></img></a>
+                <a style="margin:6px;" href="https://plus.google.com/+Neostencil" target="_blank"><img src="https://lh3.googleusercontent.com/1jDuugHH_o1dKPpu5tMP0_IyFNNLzkIfMy46XFlK8c7t2Uv7ygq4C-28pExEetHhnFI2uyQSf9vGrx-sPuPahosWLw"></img></a></p>
+        </td>
+    </tr>
+    </tfoot>
+</table>
+</body>
+</html>

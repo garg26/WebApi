@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+  <title th:utext="${course?.titleTag}"></title>
+
+  <meta th:if="${#strings.toString(course?.status)} != 'publish'" name="robots" content="nofollow, noindex"/>
+  <meta th:each="metaTag : ${course?.metaList}"
+        th:if="${metaTag.attributeType} != 'property'"
+        th:attr="name=${metaTag.type},content=${metaTag.content}"/>
+
+  <meta th:each="metaTag : ${course?.metaList}"
+        th:if="${metaTag.attributeType} == 'property'"
+        th:attr="property=${metaTag.type},content=${metaTag.content}"/>
+
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/courses.css')}}"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/jwPlayer.css')}}"/>
+  <link rel="stylesheet" media="screen"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+  <link rel="stylesheet" media="screen"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+  <link rel="stylesheet" media="screen"
+        th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dialog-polyfill.css')}}"/>
+
+  <link rel="canonical"
+        th:href="${'https://neostencil.com/course/'+course?.courseOldSlug}"/>
+
+  <style>
+    @media screen and (max-width: 1024px) {
+      ul.course-nav-ul > li {
+        padding: 0 16px !important;
+      }
+
+      #reviews.reviews .margin-zero {
+        width: 100%;
+      }
+
+      .pay-options #Capa_1 {
+        position: relative;
+        top: 3px;
+      }
+    }
+
+    .slick-track {
+      margin-left: 0;
+    }
+
+    .ui-accordion div {
+      height: auto !important;
+    }
+
+    i.free-lectures {
+      min-width: 102px;
+      height: 24px;
+      border-radius: 41.2px;
+      background-color: #3fbf53;
+      float: right;
+      color: #fff !important;
+      text-align: center;
+      line-height: 24px;
+      font-size: 14px !important;
+      font-style: italic;
+      margin-top: 10px;
+    }
+
+    .sticky {
+      position: fixed;
+      width: 405px !important;
+      top: 0;
+    }
+    .hubSpotFormSticky {
+      position: fixed;
+      width: 405px !important;
+      top: 0px;
+    }
+
+    .buy-course, .add-to-cart, .pay-later {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    #sendEnquiryDialog input{
+      width: calc(100% - 32px) !important;
+      border: 1px solid #ddd;
+      outline: 0;
+      color: #666;
+      border-radius: 8px;
+      padding: 8px 16px;
+    }
+    #sendEnquiryDialog {
+      position: fixed;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+    #sendEnquiryDialog input[type=number]::-webkit-inner-spin-button,
+    #sendEnquiryDialog  input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    @-moz-document url-prefix() {
+      #sendEnquiryDialog input[type=number]{
+        -moz-appearance: textfield;
+      }
+    }
+    .batch-index .fa-info-circle {
+      cursor: pointer;
+      float: left;
+      margin-right: 5px;
+      outline: 0;
+      color: #444;
+    }
+    #hs-form-iframe-0 {
+      width: 100% !important;
+    }
+
+    .hbspt-form input.hs-button.primary.large {
+      height: 48px;
+      border-radius: 2px;
+      background-color: #f60 !important;
+      background: #f60;
+      box-shadow: 0 3px 15px 1px rgba(0,0,0,0.1);
+      font-family: open sans;
+      font-size: 18px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #fff;
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+      margin-bottom: 8px;
+      width: 100% !important;
+      line-height: 47px;
+    }
+    .hbspt-form input{
+      width: -webkit-fill-available;
+      width: -moz-available;
+      height: 44px;
+      border-radius: 2px;
+      background-color: #fff;
+      border-style: none;
+      border: 1px solid #979797;
+      outline: 0;
+      padding: 0 10px;
+      margin: 0 0 25px 0;
+    }
+    .hubSpotFormFixed h3 {
+      margin: 15px 0 ;
+      font-size: 24px;
+      font-weight: 600;
+      color: #000000;
+      font-family: arimo;
+    }
+
+  </style>
+
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.10/dialog-polyfill.js"></script>
+
+</head>
+
+<body class="all-teachers-page" >
+<!--oncontextmenu="return false;"-->
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+  <!-- <div class="mat-drawer mdl-layout__drawer">
+
+<span class="mdl-layout-title">
+</span>
+
+</div> -->
+
+
+  <div class="mat-content mdl-layout__content">
+    <div class="landing-darken" style="display: none;"></div>
+    <!--/*/ <th:block th:include="common/breadCrumb"></th:block> /*/-->
+
+    <section class="course-details">
+      <div class="container-header">
+        <div class="mdl-grid" style="padding-top: 0;">
+          <div
+              class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+              style="margin-top: 0;">
+            <h1 th:text="${course?.courseTitle}"></h1>
+            <ul class="course-details-border">
+              <li>
+                <img th:if="${#lists.size(course?.instructors)} == 1"
+                     th:src="@{${course.instructors[0].displayPictureUrl}+ '=cc-s64'}"
+                     th:alt="${course?.instructors[0].teacherName}">
+                <img th:unless="${#lists.size(course.instructors)} == 1"
+                     th:src="@{${course?.institute?.imageUrl}+ '=cc-s64'}"
+                     th:alt="${course?.institute?.name}">
+              </li>
+
+              <li><label>Instructor</label> <a
+                  th:each="teacherDetail : ${course.instructors}"
+                  th:href="@{'/teacher/' + ${teacherDetail.slug}}"><span
+                  th:text="${teacherDetail.teacherName}"></span> </a> <a
+                  th:href="@{'/institute/' + ${course?.institute?.instituteSlug}}"><span
+                  th:text="${course?.institute?.name}" style="color: #666666;">
+									</span> </a></li>
+
+              <li><label>No. of Sessions</label> <span
+                  th:utext="${nofOfSessionText}"> </span></li>
+
+
+              <li><label>Course Validity</label> <span> <span
+                  class="white-space-wrap" th:text="${course?.courseValidity}"></span>
+								</span></li>
+              <li><label>Students</label> <span
+                  th:text="${course?.studentsEnrolled}"></span></li>
+
+              <li><label>Rating</label>
+                <div id="spanRating"></div>
+              </li>
+            </ul>
+
+            <script type="text/javascript" th:inline="javascript">
+
+
+              var ratingHtml = '';
+              ratingHtml = ratingHtml + '<span class=\"course-rating\">';
+
+              var j = /*[[${course?.courseRating}]]*/;
+
+              for (j; j >= 1; j--) {
+                ratingHtml = ratingHtml
+                    + '<i class=\"material-icons\">star_rate</i>';
+              }
+              if (j < 1 && j > 0) {
+                ratingHtml = ratingHtml
+                    + "<i class=\"material-icons\">star_half</i>";
+              }
+              ratingHtml = ratingHtml + '</span>';
+              document.getElementById("spanRating").innerHTML = ratingHtml;
+
+
+            </script>
+
+            <!--<img id="playDemoVideo" width="100%"
+                 src="/images/background/Allcourse/coursevideoimage.png">-->
+            <img id="playDemoVideo" width="100%"
+                 src="https://lh3.googleusercontent.com/VuyiPGfHyot-UuhLkVz0PfPQjGvaHikio3BCXcryzb33JpuHK3N7bvUVM9zKEUh66uHm8dQF9-Hvkoo-8VjLoygdjSk">
+
+            <img style="display: none;"
+                 id="noDemoVideo" width="100%"
+                 src="/images/background/Allcourse/videonotavailable.png">
+            <div style="margin-top: 20px;">
+              <ul class="course-nav course-nav-ul">
+                <li class="active"><a href="#course-description-card"><i
+                    class="fa fa-file-text-o" aria-hidden="true"></i>
+                  &nbsp;&nbsp;Description</a></li>
+                <li><a href="#session"><i class="fa fa-list"
+                                          aria-hidden="true"></i> &nbsp;&nbsp;Curriculum</a></li>
+                <li th:if="${not #strings.isEmpty(course.schedule)}"><a
+                    href="#schedule"><i class="fa fa-list" aria-hidden="true"></i>
+                  &nbsp;&nbsp;Schedule</a></li>
+                <li th:if="${not #lists.isEmpty(reviews)}"><a
+                    href="#reviews"><i class="fa fa-star-o" aria-hidden="true"></i>
+                  &nbsp;&nbsp;Reviews</a></li>
+              </ul>
+              <a
+                  th:attr="data-messageTo=${course.instructors[0]?.emailId},data-topic=${course.courseTitle}"
+                  style="display: block;" class="send-enquiry"
+                  id="sendEnquiryButton">Send Enquiry</a>
+            </div>
+
+            <div id="course-description-card" class="about-this-course">
+              <div>
+                <div class="logo-font mat-teachers-slogan">About this
+                  course
+                </div>
+                <div class="underline" style="margin: 8px 0;"></div>
+                <p th:utext="${course?.courseAbout}"></p>
+                <div class="batches" style="height: auto; background-color: #f9f9f9">
+                  <div class="mdl-grid padding-zero">
+                    <div
+                        class="mdl-cell mdl-cell--1-col mdl-cell--2-col-tablet mdl-cell--1-col-phone margin-zero">
+                      <img src="/images/icons/like.png" class=""
+                           style="margin: 0 auto; display: block;">
+                    </div>
+                    <div
+                        class="mdl-cell mdl-cell--11-col mdl-cell--6-col-tablet mdl-cell--3-col-phone margin-zero">
+                      <p style="margin: 0;">
+                        <b>Suitable for</b> <span th:text="${course?.suitableFor}"></span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <hr th:if="${course.courseAdditional}"
+                    style="margin: 32px 0 16px 0;">
+                <div th:if="${course.courseAdditional}"
+                     class="logo-font mat-teachers-slogan">Course highlights
+                </div>
+                <div class="mdl-grid">
+                  <div
+                      class="what-will-you-learn mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--12-col-phone"
+                      th:each="courseAdditional : ${course?.courseAdditional}">
+                    <div class="mdl-grid padding-zero">
+
+                      <div
+                          class="what-will-you-learn mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone margin-zero">
+                        <div class="">
+                          <label><b style="color: #1e4864;"
+                                    th:text="${courseAdditional?.text}"></b></label><br/>
+                          <span
+                              th:text="${courseAdditional?.description}"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div
+              class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+              style="margin-top: 0;">
+              <div
+                  class="demo-card-wide mdl-card mdl-shadow--2dp price-card-fixed"
+                  style="width: 100%; margin-top: 7px;">
+                <div class="course-title-price" style="height:40px;line-height: 40px;padding: 20px;"
+                     th:if="${#numbers.formatDecimal(course?.batches[0].salePrice, 0, 'COMMA', 0, 'POINT')} < ${#numbers.formatDecimal(course?.batches[0].regularPrice, 0, 'COMMA', 0, 'POINT')}">
+                  <label><i class="fa fa-inr"></i>&nbsp; <label
+                      th:text="${#numbers.formatDecimal(course?.batches[0].salePrice, 0, 'COMMA', 0, 'POINT')}"></label>
+                  </label>
+                  &nbsp;
+                  <strike style="color: #ffffff">
+                  <span><i class="fa fa-inr"></i>&nbsp; <span
+                      th:text="${#numbers.formatDecimal(course?.batches[0].regularPrice, 0, 'COMMA', 0, 'POINT')}"></span>
+                  </span>
+                  </strike>&nbsp;
+                  <span id="discountInPercentage" style="color: #FFFFFF; font-size: 16px;"></span>
+                  <p style="color: #64d61d; font-size: 15px; display: none" class="ZeroEmi">
+                    <b > 0% EMI Available </b>
+                  </p>
+                </div>
+                <div class="course-title-price" style="height:40px;line-height: 22px;padding: 20px;"
+                     th:unless="${#numbers.formatDecimal(course?.batches[0].salePrice, 0, 'COMMA', 0, 'POINT')} < ${#numbers.formatDecimal(course?.batches[0].regularPrice, 0, 'COMMA', 0, 'POINT')}">
+                  <label><i class="fa fa-inr"></i>&nbsp; <label
+                      th:text="${#numbers.formatDecimal(course?.batches[0].salePrice, 0, 'COMMA', 0, 'POINT')}"></label>
+                  </label>
+                  <p style="color: #64d61d; font-size: 15px; display: none" class="ZeroEmi">
+                    <b > 0% EMI Available </b>
+                  </p>
+                </div>
+                <div class="mdl-grid padding-zero"
+                     style="width: calc(100% - 16px);">
+                  <div
+                      class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                    <p class="select-batch">Select Batch</p>
+                    <div class="batches-wrapper">
+                      <div class="batches batch-index"
+                           th:each="batch, itr : ${course?.batches}">
+                        <label class="batch-date"
+                               th:text="${#dates.format(batch.startDate, 'dd MMM yyyy')}"></label>
+                        <br/> <input class="noOfAvailableSeats" type="hidden"
+                                     th:value="${batch.noOfAvailableSeats}"/>
+                        <span th:if="${#strings.length(batch?.classTiming)} > 32 "
+                              id="batchMdlToolTip">
+                        <i class="fa fa-info-circle" th:id="${batch?.classTiming}"></i> &nbsp;
+                        <div class="mdl-tooltip mdl-tooltip--right"
+                             th:for="${batch?.classTiming}"
+                             th:text="${batch?.classTiming}"></div>
+                        </span>
+                        <span th:unless="${#strings.length(batch?.classTiming)} > 32">
+                        <div class="mdl-tooltip mdl-tooltip--right"
+                             th:for="${batch?.classTiming}"
+                             th:text="${batch?.classTiming}"></div>
+                        </span>
+
+                        <span
+                            class="batch-timings batch_ellipis" th:id="${itr?.index}"
+                            th:text="${batch?.classTiming}"></span> <label
+                          class="float-right mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                          th:for="${batch?.id}"> <input
+                          th:if="${batch.noOfAvailableSeats &gt; 0}" type="radio"
+                          th:id="${batch?.id}"
+                          class="mdl-radio__button radio-checked"
+                          th:name="batchesRadio" th:value="${batch?.id}"
+                          th:onchange="@{'selectBatch('+${batch.salePrice}+','+${batch?.id}+',\''+change+'\')'}"
+                          th:attr="data-price=${batch.salePrice}"/> <input
+                          th:if="${batch.noOfAvailableSeats &lt; 1}" type="radio"
+                          th:id="${batch?.id}"
+                          class="mdl-radio__button radio-checked"
+                          th:name="batchesRadio" th:value="${batch?.id}" disabled/>
+                        <span class="mdl-radio__label"><i class="fa fa-inr"></i>&nbsp;
+                            <span
+                                th:text="${#numbers.formatDecimal(batch.salePrice, 0, 'COMMA', 0, 'POINT')}"></span></span></label>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pay-options">
+                  <div class="mdl-grid" style="padding: 0 8px;">
+                    <div
+                        class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                      <button onclick="addToCart('addToCart');" class="add-to-cart"
+                              id="">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                                 id="Capa_1" x="0px" y="0px" viewBox="0 0 459.529 459.529"
+                                                 style="enable-background: new 0 0 459.529 459.529;"
+                                                 xml:space="preserve">
+<g>
+  <g>
+    <path
+                d="M17,55.231h48.733l69.417,251.033c1.983,7.367,8.783,12.467,16.433,12.467h213.35c6.8,0,12.75-3.967,15.583-10.2    l77.633-178.5c2.267-5.383,1.7-11.333-1.417-16.15c-3.117-4.817-8.5-7.65-14.167-7.65H206.833c-9.35,0-17,7.65-17,17    s7.65,17,17,17H416.5l-62.9,144.5H164.333L94.917,33.698c-1.983-7.367-8.783-12.467-16.433-12.467H17c-9.35,0-17,7.65-17,17    S7.65,55.231,17,55.231z"/>
+        <path
+                d="M135.433,438.298c21.25,0,38.533-17.283,38.533-38.533s-17.283-38.533-38.533-38.533S96.9,378.514,96.9,399.764    S114.183,438.298,135.433,438.298z"/>
+        <path
+                d="M376.267,438.298c0.85,0,1.983,0,2.833,0c10.2-0.85,19.55-5.383,26.35-13.317c6.8-7.65,9.917-17.567,9.35-28.05    c-1.417-20.967-19.833-37.117-41.083-35.7c-21.25,1.417-37.117,20.117-35.7,41.083    C339.433,422.431,356.15,438.298,376.267,438.298z"/>
+  </g>
+</g>
+</svg>
+
+                        &nbsp;ADD TO CART
+                      </button>
+                    </div>
+                    <!--<div
+                        class="mdl-cell mdl-cell&#45;&#45;6-col mdl-cell&#45;&#45;4-col-tablet mdl-cell&#45;&#45;2-col-phone">
+                      <button id="btn-pay-later" class="pay-later">
+                        &nbsp;PAY<b>LATER</b>
+                      </button>
+                    </div>-->
+                  </div>
+                </div>
+                <div class="mdl-grid padding-zero"
+                     style="width: calc(100% - 16px);">
+                  <div id="buy-now-desktop"
+                       class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                    <a onclick="addToCart('buyNow');"
+                       class="buy-course mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">ENROL
+                      NOW</a>
+                  </div>
+                </div>
+
+            </div>
+            <!--<div-->
+                <!--class="demo-card-wide mdl-card mdl-shadow&#45;&#45;2dp hubSpotFormFixed "-->
+                <!--style="height: auto; padding: 10px;">-->
+              <!--<h3><img-->
+                  <!--src="https://lh3.googleusercontent.com/n7a2JC3r8ZqWWMO4yIF_IrM1gGjjWj9yJLtyIRVwv8tEvt1Fjuna0VPU6szbavJOwDmtH2W0g3PgvTTvC_goMyYXrQ=s40"-->
+                  <!--style=" float: right; position: relative; top: -9px; ">Interested in this course?</h3>-->
+
+            <!--</div>-->
+
+            <div class="share-with-friends" style="display: none;">
+              <hr class="hr1">
+              <span>Share with your friend &nbsp;&nbsp; <a
+                  th:href="@{'http://www.facebook.com/share.php?u=https://neostencil.com/course/' + ${course.courseOldSlug}}"
+                  data-placement="top" title="Share on Facebook" target="_blank">
+										<i class="fa fa-facebook-f"></i>&nbsp;&nbsp;
+								</a> <a
+                  th:href="@{'http://twitter.com/share?url=https://neostencil.com/course/'+ ${course.courseOldSlug}}"
+                  data-placement="top" title="Share on Twitter" target="_blank">
+										<i class="fa fa-twitter"></i>&nbsp;&nbsp;
+								</a> <a
+                  th:href="@{'http://www.linkedin.com/shareArticle?mini=true&url=https://neostencil.com/course/' + ${course.courseOldSlug}}"
+                  data-placement="top" title="Share on LinkedIn" target="_blank">
+										<i class="fa fa-linkedin"></i>&nbsp;&nbsp;
+								</a> <a
+                  th:href="@{'https://plus.google.com/share?url=https://neostencil.com/course/' +  ${course.courseOldSlug} }"
+                  data-placement="top" title="Share on Google plus"
+                  target="_blank"> <i class="fa fa-google-plus"></i>&nbsp;&nbsp;
+								</a> <a
+                  th:href="@{'https://api.whatsapp.com/send?phone=whatsappphonenumber&text=https://neostencil.com/course/' + ${course.courseOldSlug} }"
+                  data-placement="top" title="Share on WhatsApp" target="_blank">
+										<i class="fa fa-whatsapp"></i>
+								</a>
+
+
+								</span>
+              <hr class="hr2">
+            </div>
+
+            <div
+                class="refer-a-friend demo-card-wide mdl-card mdl-shadow--2dp"
+                style="display: none;">
+              <h3>Extra 5% OFF on Refer a Friend</h3>
+              <p>Refer a friends mail ID, after registration you will get
+                5% discount.</p>
+              <a href="/terms/">Term and Conditions*</a>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="session" class="reviews">
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div style="display: none;" class="text-center"
+                 id="loader-accordian">
+              <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
+            <div id="accordion"></div>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div th:if="${not #strings.isEmpty(course.schedule)}" id="schedule"
+         class="container-header">
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone make-table-responsive"
+            th:utext="${course.schedule}"></div>
+      </div>
+    </div>
+    <div class="" th:if="${course.courseInclusions}">
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div id="" class="about-this-course">
+              <div th:if="${not #strings.isEmpty(course?.courseInclusions)}">
+                <div class="logo-font mat-teachers-slogan">What you will
+                  get
+                </div>
+                <!-- <p class="text-course">Learn Pub. Ad with the best faculty
+  for the subject. This course helps in the conceptual
+  understanding of the subject and answer writing improvement for
+  Mains exam.</p> -->
+                <div class="mdl-grid">
+                  <div
+                      class="what-will-you-learn mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone"
+                      th:each="courseInclusions : ${course?.courseInclusions}">
+                    <div class="mdl-grid padding-zero">
+
+                      <div
+                          class="what-will-you-learn mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone margin-zero">
+                        <div class="">
+                          <label><b style="color: #1e4864;"
+                                    th:text="${courseInclusions?.text}"></b></label><br/>
+                          <span
+                              th:text="${courseInclusions?.description}"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section id="reviews" class="reviews"
+             th:if="${not #lists.isEmpty(reviews)}">
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone margin-zero">
+            <hr style="margin: 8px -8px 16px 8px;">
+            <div class="mdl-grid">
+              <div
+                  class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone margin-zero">
+                <div class="logo-font mat-teachers-slogan">Reviews</div>
+
+                <!--<div class="mdl-grid padding-zero">
+                  <div
+                    class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone"
+                    style="margin: 0;">
+                    <div class="rating-box">
+                      <h2 id="ratingInText" th:ext="${course?.courseRating}"></h2>
+                      <span th:id="spanRatingReviewsTotal"></span>
+                      <script type="text/javascript" th:inline="javascript">
+
+                      var ratingHtmlTotal = '';
+                      ratingHtmlTotal = ratingHtmlTotal + '<span class=\"course-rating\">';
+                      var j = /*[[${course?.courseRating}]]*/;
+                      for (j; j >= 1; j&#45;&#45;) {
+                        ratingHtmlTotal = ratingHtmlTotal
+                + '<i class=\"material-icons\">star_rate</i>';
+          }
+          if (j < 1 && j > 0) {
+            ratingHtmlTotal = ratingHtmlTotal
+                + "<i class=\"material-icons\">star_half</i>";
+          }
+                      ratingHtmlTotal = ratingHtmlTotal + '</span>';
+                      document.getElementById(
+                          "spanRatingReviewsTotal").innerHTML = ratingHtmlTotal;
+
+
+                    </script>
+                      <p>
+                        <span th:text="${statistics.total}"></span> Ratings
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="mdl-cell mdl-cell&#45;&#45;8-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone"
+                    style="margin: 0;">
+                    <div class="rating-stars">
+                      <div class="mdl-grid">
+                        <div
+                          class="rating-margin mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                          <span class="course-rating"><i
+                            class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i><i
+                            class="material-icons">star_rate</i></span>
+                        </div>
+                        <div
+                          class="mdl-cell mdl-cell&#45;&#45;8-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;3-col-phone">
+                          <div class="rating-bar"
+                            th:style="${statistics.response.Five == 0} ? 'background: #f2f2f2;width: 100%' : @{'width:'+${statistics.response.Five} / ${statistics.total}*100+'%;'}"></div>
+                        </div>
+                        <div
+                          class="mdl-cell mdl-cell&#45;&#45;1-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;1-col-phone">
+                          <div class="number-of-ratings-given"
+                            th:text="${statistics.response.Five}"></div>
+                        </div>
+                      </div>
+                      <div class="mdl-grid">
+                        <div
+                          class="rating-margin mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                          <span class="course-rating"><i
+                            class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i></span>
+                        </div>
+                        <div
+                          class="mdl-cell mdl-cell&#45;&#45;8-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;3-col-phone">
+                          <div class="rating-bar"
+                            th:style="${statistics.response.Four == 0} ? 'background: #f2f2f2;width: 100%' : @{'width:'+${statistics.response.Four} / ${statistics.total}*100+'%;'}"></div>
+                        </div>
+                        <div
+                          class="mdl-cell mdl-cell&#45;&#45;1-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;1-col-phone">
+                          <div class="number-of-ratings-given"
+                            th:text="${statistics.response.Four}"></div>
+                        </div>
+                      </div>
+                      <div class="mdl-grid">
+                        <div
+                          class="rating-margin mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                          <span class="course-rating"><i
+                            class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i></span>
+                        </div>
+                        <div
+                          class="mdl-cell mdl-cell&#45;&#45;8-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;3-col-phone">
+                          <div class="rating-bar"
+                            th:style="${statistics.response.Three == 0} ? 'background: #f2f2f2;width: 100%' : @{'width:'+${statistics.response.Three} / ${statistics.total}*100+'%;'}"></div>
+                        </div>
+                        <div
+                          class="mdl-cell mdl-cell&#45;&#45;1-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;1-col-phone">
+                          <div class="number-of-ratings-given"
+                            th:text="${statistics.response.Three}"></div>
+                        </div>
+                      </div>
+                      <div class="mdl-grid">
+                        <div
+                          class="rating-margin mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                          <span class="course-rating"><i
+                            class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i></span>
+                        </div>
+                        <div
+                          class="mdl-cell mdl-cell&#45;&#45;8-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;3-col-phone">
+                          <div class="rating-bar"
+                            th:style="${statistics.response.Two == 0} ? 'background: #f2f2f2;width: 100%' : @{'width:'+${statistics.response.Two} / ${statistics.total}*100+'%;'}"></div>
+                        </div>
+                        <div
+                          class="mdl-cell mdl-cell&#45;&#45;1-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;1-col-phone">
+                          <div class="number-of-ratings-given"
+                            th:text="${statistics.response.Two}"></div>
+                        </div>
+                      </div>
+                      <div class="mdl-grid">
+                        <div
+                          class="rating-margin mdl-cell mdl-cell&#45;&#45;3-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;12-col-phone">
+                          <span class="course-rating"><i
+                            class="material-icons">star_rate</i></span>
+                        </div>
+                        <div
+                          class="mdl-cell mdl-cell&#45;&#45;8-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;3-col-phone">
+                          <div class="rating-bar"
+                            th:style="${statistics.response.One == 0} ? 'background: #f2f2f2;width: 100%' : @{'width:'+${statistics.response.One} / ${statistics.total}*100+'%;'}"></div>
+                        </div>
+                        <div
+                          class="mdl-cell mdl-cell&#45;&#45;1-col mdl-cell&#45;&#45;12-col-tablet mdl-cell&#45;&#45;1-col-phone">
+                          <div class="number-of-ratings-given"
+                            th:text="${statistics.response.One}"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>-->
+              </div>
+            </div>
+            <br/>
+            <div class="mdl-grid" style="padding: 0 8px;">
+              <div
+                  class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                  style="margin: 0 8px;">
+                <div class="review" th:each="review,iterator : ${reviews}">
+                  <img th:if="${not #strings.isEmpty(review.avatar)}"
+                       th:src="@{${review.avatar}+'=cc'}" th:alt="${review.name}"
+                       width="64px" class="float-left"> <img
+                    th:unless="${not #strings.isEmpty(review.avatar)}"
+                    src="https://lh3.googleusercontent.com/Z4uHbjIjELCl1WaD_fGK7VnkE9sXzT_b4SLAmmapf7JbmtR9pNF17JW58z3vA7JsRuCGl0BiovQc7zuHiuOp6PZi7Cw=cc"
+                    width="64px" class="float-left">
+
+                  <div class="user-detail float-left">
+                    <span th:text="${review.name}"></span><br/> <span
+                      th:id="@{'spanRatingReviews'+${iterator?.index}}"></span>
+                    <script type="text/javascript" th:inline="javascript">
+
+                      var ratingHtml = '';
+                      ratingHtml = ratingHtml + '<span class=\"course-rating\">';
+                      var j = /*[[${review?.reviewRating}]]*/;
+                      var index = /*[[${iterator?.index}]]*/;
+                      for (j; j >= 1; j--) {
+                        ratingHtml = ratingHtml
+                            + '<i class=\"material-icons\">star_rate</i>';
+                      }
+                      if (j < 1 && j > 0) {
+                        ratingHtml = ratingHtml
+                            + "<i class=\"material-icons\">star_half</i>";
+                      }
+                      ratingHtml = ratingHtml + '</span>';
+                      document.getElementById("spanRatingReviews" + index).innerHTML = ratingHtml;
+
+
+                    </script>
+
+                  </div>
+                  <p th:text="${review?.text}"></p>
+                  <hr>
+                </div>
+                <!-- <hr> -->
+                <!-- <span class="load-more-reviews">Read All 19 reviews</span>
+<hr> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Related Courses slider-->
+    <br/>
+
+    <div id="trending-courses" class="" th:if="${course.relatedCourses}">
+      <div class="container-header">
+        <div class="mdl-grid" style="padding: 0 8px;">
+          <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+              style="margin: 0 8px;">
+            <div class="logo-font mat-teachers-slogan">Related Courses</div>
+            <div class="underline" style="margin: 8px 0;"></div>
+
+            <section id="single-course-slider-1" class="regular slider">
+
+
+              <div th:each="course :${course.relatedCourses}">
+                <div class="trending-courses-card mdl-card__media">
+                  <!-- <i class="fav material-icons">favorite_border</i> <i
+  style="display: none;" class="unfav material-icons">favorite</i> -->
+                  <a th:href="@{'/course/' + ${course.courseOldSlug}}"> <img
+                      th:src="@{${course.courseImageUrl}+'=w300-h185-s'}"
+                      th:alt="${course.courseTitle}" style="width: 100%;">
+                  </a>
+
+                  <!-- <div class="courses-label">IAS Essay</div> -->
+
+                </div>
+                <div class="ns-card">
+
+										<span class="course-rating"
+                          th:id="@{'RE'+ ${course.courseOldSlug}}"> </span>
+                  <script type="text/javascript" th:inline="javascript">
+
+                    var ratingHtml = '';
+
+                    var j = /*[[${course?.courseRating}]]*/;
+                    var courseId = /*[[@{'RE' + ${course?.courseOldSlug}}]]*/;
+
+                    for (j; j >= 1; j--) {
+                      ratingHtml = ratingHtml
+                          + '<i class=\"material-icons\">star_rate</i>';
+                    }
+                    if (j < 1 && j > 0) {
+                      ratingHtml = ratingHtml
+                          + "<i class=\"material-icons\">star_half</i>";
+                    }
+
+                    document.getElementById(courseId).innerHTML = ratingHtml;
+                  </script>
+
+
+                  <span class="starts-on">Start Date: <span
+                      class="starts-on-date" th:text="${course.startDate}">27-nov-2017</span>
+										</span> <a th:href="@{'/course/' + ${course.courseOldSlug}}">
+                  <h3 class="course-title-ellipis"
+                      th:text="${course.courseTitle}"></h3>
+
+                </a>
+
+
+                  <p class="ns-card-p">
+											<span class="p-grid-1"><i>by </i> <a
+                          th:href="@{'/teacher/'+ ${course.instructorSlug}}"> <!--th:if="${course.teacherName == course.instructorName}">-->
+													<span class="ns-card-teacher"
+                                th:text="${course.instructorName}"></span>
+											</a> <br> <a style="display: block; height: 22px;"
+                                   th:href="@{'/institute/'+${course.instituteSlug}}"> <span
+                          class="slideItem-institite"
+                          th:text="${course.instituteName}"></span>
+											</a> </span>
+
+                  </p>
+
+
+                  <div class="">
+
+                    <h3 th:if="${course.price > 0}" class="price">
+                      <i class="fa fa-inr">&nbsp;</i><span
+                        th:text="${#numbers.formatDecimal(course.price, 0, 'COMMA', 0, 'POINT')}"></span>
+                    </h3>
+                    <h3 th:if="${course.price == 0}" class="price">
+                      <span style="color: green;">FREE</span>
+                    </h3>
+                    <span class="number-students float-right"> <i
+                        class="fa fa-user"></i> <span
+                        th:text="${course.studentsEnrolled}"></span>&nbsp; <span>Students</span>
+											</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Frequently bought Together slider-->
+    <div class="container-header">
+      <div class="mdl-grid" style="padding: 0 8px;">
+        <div
+            class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+            style="margin: 0 8px;">
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="" th:if="${course.boughtTogetherCourses}">
+      <div class="container-header">
+        <div class="mdl-grid" style="padding: 0 8px;">
+          <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+              style="margin: 0 8px;">
+            <div class="logo-font mat-teachers-slogan">Frequently
+              Bought together
+            </div>
+            <div class="underline" style="margin: 8px 0;"></div>
+
+            <section id="single-course-slider-4" class="regular slider">
+              <div th:each="course :${course.boughtTogetherCourses}">
+                <div class="trending-courses-card mdl-card__media">
+                  <!-- <i class="fav material-icons">favorite_border</i> <i
+  style="display: none;" class="unfav material-icons">favorite</i> -->
+                  <a th:href="@{'/course/' + ${course.courseOldSlug}}"> <img
+                      th:src="@{${course.courseImageUrl}+'=w300-h185-s'}"
+                      th:alt="${course.courseTitle}" style="width: 100%;">
+                  </a>
+                  <!-- <div class="courses-label">IAS Essay</div> -->
+
+                </div>
+                <div class="ns-card">
+
+										<span class="course-rating"
+                          th:id="@{'FQ'+${course?.courseOldSlug}}"> </span>
+                  <script type="text/javascript" th:inline="javascript">
+
+                    var ratingHtml = '';
+
+                    var j = /*[[${course?.courseRating}]]*/;
+                    var qwerty = /*[[@{'FQ'+${course?.courseOldSlug}}]]*/;
+
+                    for (j; j >= 1; j--) {
+                      ratingHtml = ratingHtml
+                          + '<i class=\"material-icons\">star_rate</i>';
+                    }
+                    if (j < 1 && j > 0) {
+                      ratingHtml = ratingHtml
+                          + "<i class=\"material-icons\">star_half</i>";
+                    }
+                    document.getElementById(qwerty).innerHTML = ratingHtml;
+                  </script>
+
+
+                  <span class="starts-on">Start Date: <span
+                      class="starts-on-date" th:text="${course.startDate}">27-nov-2017</span>
+										</span> <a th:href="@{'/course/' + ${course.courseOldSlug}}">
+                  <h3 class="course-title-ellipis"
+                      th:text="${course.courseTitle}"></h3>
+                </a>
+
+
+                  <p class="ns-card-p">
+											<span class="p-grid-1"><i>by </i> <a
+                          th:href="@{'/teacher/'+ ${course.instructorSlug}}"> <span
+                          class="ns-card-teacher" th:text="${course.instructorName}"></span>
+											</a> <br> <a style="display: block; height: 22px;"
+                                   th:href="@{'/institute/' + ${course.instituteSlug}}"> <span
+                          class="slideItem-institite"
+                          th:text="${course.instituteName}"></span>
+											</a> </span>
+
+                  </p>
+
+
+                  <div class="">
+
+                    <h3 th:if="${course.price > 0}" class="price">
+                      <i class="fa fa-inr">&nbsp;</i><span
+                        th:text="${#numbers.formatDecimal(course.price, 0, 'COMMA', 0, 'POINT')}"></span>
+                    </h3>
+                    <h3 th:if="${course.price == 0}" class="price">
+                      <span style="color: green;">FREE</span>
+                    </h3>
+
+                    <span class="number-students float-right"> <i
+                        class="fa fa-user"></i> <span
+                        th:text="${course.studentsEnrolled}"></span>&nbsp; <span>Students</span>
+											</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a id="buy-now-mobile" onclick="addToCart('buyNow')"
+       class="buy-course mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+       style="display: none; pointer-events: all; opacity: 1; z-index: 1;">
+      <i class="fa fa-inr"></i>&nbsp; <span
+        th:text="${#numbers.formatDecimal(course?.batches[0].salePrice, 0, 'COMMA', 0, 'POINT')}">
+			</span><span id="boughtOrNotMobile"> | ENROL NOW</span>
+    </a>
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+
+  </div>
+</div>
+
+
+<!-- Pay Later Details Form -->
+<dialog id="payLaterDialog" class="mdl-dialog mdl-dialog-payLater" style="position: fixed;">
+  <div id="pay-later-model" class="pay-later-modal">
+    <button
+        class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+      <i class="material-icons">close</i>
+    </button>
+    <div class="modal-header" style="background: #162840;">
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+          <h3 th:text="${course?.courseTitle}"></h3>
+          <div class="by-line">
+            <div class="instructor_course">
+              <h5 class="course_instructor">
+                <a th:href="@{'/teacher/' + ${course.instructors[0].slug}}">by
+                  <span th:text="${course?.instructors[0].teacherName}"></span>
+                </a> | <a
+                  th:href="@{'/institute/' + ${course?.instructors[0]?.institute?.instituteSlug}}">
+									<span th:if="${!course?.instructors.empty}"
+                        th:text="${course?.instructors[0]?.institute?.name}"></span>
+              </a>
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div
+            class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+          <div class="modal-course-price">
+            <strong><span class="amount"><i class="fa fa-inr"></i>&nbsp;
+								<label id="payLaterBatchPrice"
+                       th:text="${#numbers.formatDecimal(course?.price, 0, 'COMMA', 0, 'POINT')}"></label></span></strong><i
+              class="icon-wallet-money right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--12-col-phone criteria">
+          <span>EMI OPTION IS AVAILABLE TO</span>
+          <p>
+            &bull; All college students studying in any of below mentioned
+            cities<br> &bull; College pass-outs currently working in
+            Delhi-NCR region<br> NeoStencil will facilitate Equated
+            monthly instalments (EMI) on all the purchases of products across
+            the platform. The EMI option will be available for 3/6/9/12 months
+            at 2% per month (in which 1% will be borne by NeoStencil). The
+            minimum down payment will be 20% of the course amount. Please
+            check the detailed terms and conditions before you proceed. <br>
+            Note: If the amount is paid back within 30 days, then there will
+            be no interest charges levied.
+          </p>
+        </div>
+      </div>
+      <div class="mdl-grid">
+        <div
+            class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+          <span><b>Enter the Details</b></span>
+        </div>
+      </div>
+      <form name="pay-later-form" class="pay-later-form">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+            <label for="first-name" class="col-form-label">*First Name</label>
+            <input type="text" class="form-control" id="first-name"
+                   name="firstName" required>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+            <label for="last-name" class="col-form-label">*Last Name</label> <input
+              type="text" class="form-control" id="last-name" name="lastName"
+              required>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+            <label class="col-form-label">*Email address</label> <input
+              type="email" class="form-control" id="emailId" name="email"
+              required>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+            <label for="mobile" class="col-form-label">*Mobile</label> <input
+              type="text" class="form-control" id="mobile" name="mobile"
+              pattern="\d*" maxlength="10" minlength="10" required>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+            <label for="college-name" class="col-form-label"> *Enter
+              Your College Name</label> <input type="text" class="form-control"
+                                               id="college-name" name="collegeName" required>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+            <label for="college-year" class="col-form-label">*Current/Pass
+              Year</label> <select class="form-control" id="college-year"
+                                   name="passyear" required>
+            <option disabled selected value>Select your Current Work</option>
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+            <option value="4th Year">4th Year</option>
+            <option value="Working Professional">Working
+              Professional
+            </option>
+          </select>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+            <label for="city" class="col-form-label">*City</label><br/> <select
+              class="form-control" id="city" name="city" required>
+            <option disabled selected value>Select City</option>
+            <option value="Ambala">Ambala</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Bhatinda">Bhatinda</option>
+            <option value="Bhopal">Bhopal</option>
+            <option value="Bhubaneswar">Bhubaneswar</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Channapatna">Channapatna</option>
+            <option value="Dehradun">Dehradun</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Faridabad">Faridabad</option>
+            <option value="Ghaziabad">Ghaziabad</option>
+            <option value="Gurgaon">Gurgaon</option>
+            <option value="Indore">Indore</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Jalandhar">Jalandhar</option>
+            <option value="Kanpur">Kanpur</option>
+            <option value="Kapurthala">Kapurthala</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Meerut">Meerut</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Navi Mumbai">Navi Mumbai</option>
+            <option value="New Delhi">New Delhi</option>
+            <option value="Noida">Noida</option>
+            <option value="Palghar">Palghar</option>
+            <option value="Patiala">Patiala</option>
+            <option value="Pune">Pune</option>
+            <option value="Purulia">Purulia</option>
+            <option value="Solan">Solan</option>
+            <option value="Thane">Thane</option>
+            <option value="Vidisha">Vidisha</option>
+          </select>
+          </div>
+        </div>
+        <div class="hidden-fields">
+          <input type="hidden" th:value="${course?.courseTitle}"
+                 id="course-name" name="course-name"> <input type="hidden"
+                                                             id="course-price" name="course-price">
+          <input
+              type="hidden"
+              th:value="@{'https://neostencil.com/course/' + ${course?.courseOldSlug}}"
+              id="course-page" name="course-page">
+        </div>
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <button type="submit"
+                    class="btn-success btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                    id="modal-submit-btn" value="">Submit Details
+            </button>
+            <div style="display: none;" class="text-center"
+                 id="loader-pay-later">
+              <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--12-col-phone text-center">
+            <div class="modal-toc-wrapper">
+              <p>
+                Please check the detailed <a id="read-toc"
+                                             style="cursor: pointer; color: #dd9933;">Terms &amp;
+                Conditions&#9662; </a> before you proceed
+              </p>
+
+              <ol class="modal-toc-box" id="modal-toc-box"
+                  style="display: none;">
+                <strong>For college students:</strong>
+                <li>The applicant should be 18 years old or above and
+                  should have at least 6 months left for the completion of
+                  graduation from a regular college only.
+                </li>
+                <li>The applicant should be a student based in a college
+                  out of any of these cities: Ambala, Bengaluru, Bhatinda,
+                  Bhopal, Bhubaneswar, Chandigarh, Channapatna, Dehradun, Delhi,
+                  Faridabad, Ghaziabad, Gurgaon, Indore, Jaipur, Jalandhar,
+                  Kanpur, Kapurthala, Lucknow, Meerut, Mumbai, Nagpur, Navi
+                  Mumbai, New Delhi, Noida, Palghar, Patiala, Pune, Purulia,
+                  Solan, Thane, Vidisha.
+                </li>
+                <li>The applicant shall be eligible to avail the EMI option
+                  with a maximum of 12-months payback period.
+                </li>
+                <li>The applicant should be an Android user only.</li>
+                <strong>For working individuals:</strong>
+                <li>Applicants should have completed their graduation and
+                  should not be pursuing any higher studies from a regular
+                  college currently.
+                </li>
+                <li>The applicant must be an employee and a resident of
+                  Delhi-NCR region only.
+                </li>
+                <li>The applicant must be less than 35 years of age.</li>
+                <li>The applicant should not be earning more than INR
+                  20,000 from all sources of income.
+                </li>
+                <li>The student should be an Android user only.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="modal-footer text-center" style="background: #F2F2F2;">
+        <div class="col-sm-6">
+					<span>Powered by <img
+              src="https://cdnn.neostencil.com/wp-content/themes/neostencil/images/redcarpet.png"></span>
+        </div>
+        <div class="col-sm-6">
+					<span>In Collaboration with <img
+              src="https://cdnn.neostencil.com/wp-content/themes/neostencil/images/neostencil.png">
+					</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Thank You Dialog after Pay Later -->
+<dialog id="thankyou-paylater" class="mdl-dialog mdl-dialog-payLater">
+  <div class="modal thankyou fade" id="thankyou-modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <button
+          class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+        <i class="material-icons">close</i>
+      </button>
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <div class="success-icon">
+            <img
+                src="https://cdnn.neostencil.com/wp-content/themes/neostencil/images/success-icon.png"/>
+          </div>
+          <div class="ty-msg">
+            <p class="ty-msg-ty">Thank you for choosing PayLater.</p>
+          </div>
+          <div class="cont-msg">
+            <p>Our executive from the Red Carpet team will get back to you
+              on this shortly.</p>
+            <div class="text-center">
+              <a href="/courses"
+                 class="btn btn-success btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pay-later-courses">Explore
+                Other Courses</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</dialog>
+
+
+<!--free video dialog starts here-->
+
+<dialog class="mdl-dialog mdl-dialog-video" id="free-vid-dialog">
+  <div class="mdl-dialog__content">
+    <div id="freeVideoContent"></div>
+    <p id="footerNotes"></p>
+    <button
+        class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
+</dialog>
+
+<!--free video dialog ends here-->
+<!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+
+
+<!-- send enquiry dialog -->
+<dialog id="sendEnquiryDialog" class="mdl-dialog" >
+  <div class="mdl-dialog__content">
+    <div class="show-dialog-form">
+      <form id="sendEnquiryForm">
+        <div class="mdl-grid" style="padding: 0px; margin-bottom: 10px">
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+               style="">
+            <label for="emailAddress">Email<sup style="color: red">*</sup></label><br>
+            <input type="email" id="emailAddress" name="email" required="required" placeholder="Enter valid Email address">
+          </div>
+
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+               style="">
+            <label for="mobileNumber">Mobile No.<sup style="color: red;">*</sup></label><br>
+            <input type="number" pattern="/^-?\d+\.?\d*$/" required="required" placeholder="Enter 10 digit Mobile no."
+                   onKeyPress="if(this.value.length==10){return false;}" id="mobileNumber"
+                   name="mobileNumber" style=""/>
+          </div>
+          <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+               style="">
+            <textarea placeholder="Write a message.." rows="4" required="required" id="textBox"></textarea>
+
+          </div>
+        </div>
+        <label style="display: none;" class="emptyMessage error">Please
+          enter a message</label>
+
+        <button type="button"
+                class="close mdl-button mdl-js-button mdl-js-ripple-effect" style="margin-top: 10px">Close
+        </button>
+        <input type="submit"
+               class="send-enquiry-common mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="SEND" style="width: 100px !important;margin-top: 10px; color: #ffffff;line-height: 10px;border: 0px;border-radius: 2px !important;"/>
+      </form>
+    </div>
+    <div style="display: none;" class="message-has-been-sent">
+      <p>Your message has been sent and is on its way</p>
+      <button type="button"
+              class="close mdl-button mdl-js-button mdl-js-ripple-effect">Close
+      </button>
+      <a href="/user-dashboard?goto=messages"
+         class="view-sent-messages mat-signup mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sent
+        Messages</a>
+    </div>
+
+
+</dialog>
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://content.jwplatform.com/libraries/5GazV5WI.js"></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/courses.js')}}"></script>
+<script
+    th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/dialog-polyfill.js')}}"></script>
+<script>
+  var navWrap, nav, startPosition, stopPosition, hubSpotNavWrap, hubSpotNav, hubSpotStartPosition,
+      hubSpotStopPosition;
+  $(document).ready(function () {
+    if(demoUnitID ==""){
+      $('#playDemoVideo').hide();
+    }
+    if(salePrice != 0 ){
+      $('.ZeroEmi').show();
+    }
+    $('.start-course').hide();
+    navWrap = $('.price-card-fixed');
+    nav = $('nav');
+    startPosition = navWrap.offset().top;
+    stopPosition = $('#session').offset().top - navWrap.offset().top;
+
+    $('.batch-index input:radio:not(:disabled):first').attr("checked", "checked");
+    selectBatch($('.batch-index input:radio:not(:disabled):first').attr("data-price"),
+        $('.batch-index input:radio:not(:disabled):first').attr("id"), "ready");
+    $("#mobile").keydown(function (e) {
+      if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+          (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+          (e.keyCode >= 35 && e.keyCode <= 40)) {
+        return;
+      }
+      if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode
+          > 105)) {
+        e.preventDefault();
+      }
+    });
+    $("#read-toc").click(function () {
+      $("#modal-toc-box").toggle();
+    });
+    var difference = regularPrice - salePrice;
+    var discount = difference / regularPrice * 100;
+    var discountUpToTwoDecimal = discount.toFixed(0);
+    $('#discountInPercentage').text('(' + discountUpToTwoDecimal + '% Off)')
+
+  });
+  $(window).scroll(function () {
+    var x = $(window).width();
+    if (x > 1080) {
+      var y = $(this).scrollTop() + navWrap.outerHeight();
+      if (y > startPosition) {
+        navWrap.addClass('sticky');
+        if (y > stopPosition) {
+          navWrap.css('top', stopPosition - y + startPosition);
+        } else {
+          navWrap.css('top', startPosition);
+        }
+      } else {
+        navWrap.removeClass('sticky');
+        navWrap.css('top', 0);
+      }
+    }
+  });
+  /* send enquiry dialog */
+
+  (function () {
+    'use strict';
+    var dialogButton = document.querySelector('#sendEnquiryButton');
+    var dialog = document.querySelector('#sendEnquiryDialog');
+    if (!dialog.showModal) {
+      dialogPolyfill.registerDialog(dialog);
+    }
+    dialogButton.addEventListener('click', function () {
+      $('.send-enquiry-common').removeClass("btn-disabled");
+      $('#emailAddress').val("");
+      $('#mobileNumber').val("");
+      $('#textBox').val("");
+      dialog.showModal();
+      $('.emptyMessage').hide();
+      $('#sendEnquiryDialog').find('textarea').attr("data-id",
+          $('#sendEnquiryButton').attr("data-messageTo"));
+      $('#sendEnquiryDialog').find('textarea').attr("data-title",
+          $('#sendEnquiryButton').attr("data-topic"));
+    });
+    dialog.querySelector('.show-dialog-form .close').addEventListener('click',
+        function () {
+          dialog.close();
+          $('.show-dialog-form').show();
+          $('.message-has-been-sent').hide();
+        });
+    dialog.querySelector('.message-has-been-sent .close').addEventListener(
+        'click', function () {
+          dialog.close();
+          $('.show-dialog-form').show();
+          $('.message-has-been-sent').hide();
+        });
+  }());
+
+  function playFreeUnit(unitId) {
+    if (isUserLoggedIn() == true) {
+      $.ajax({
+        async: false,
+        type: 'GET',
+        dataType: 'json',
+        url: apiBasePath + "/units/" + unitId,
+        success: function (response) {
+          $('.course-details #myplayer' + demoUnitID).remove();
+          $('#playDemoVideo').show();
+          openFreeVideDialog(unitId, response);
+          var intervalId = setInterval(function () {
+            if ($('.jw-logo-bottom-left').length < 1 || $('.jw-logo-bottom-left').css("display") != "block") {
+              jwplayer().remove();
+              dialogFreeVideo.close();
+              $('#playDemoVideo').show();
+              if ($('#playDemoVideo').length == 1) {
+                clearInterval(intervalId);
+              }
+            }
+          }, 1000);
+
+        },
+        error: function (response) {
+          $('.mat-content').css("opacity", "1");
+        }
+      });
+    } else {
+      if ($(window).width() > '767') {
+        matLoginClick();
+      } else {
+        window.location = "/login";
+      }
+    }
+
+  }
+
+  var dialogFreeVideo = document.querySelector('#free-vid-dialog');
+
+  function openFreeVideDialog(unitId, response) {
+    'use strict';
+    var dialogButtonFreeVideo = document.querySelector('#playFreeBtn' + unitId);
+    var dialogFreeVideo = document.querySelector('#free-vid-dialog');
+    if (!dialogFreeVideo.showModal) {
+      dialogPolyfill.registerDialog(dialogFreeVideo);
+    }
+    if (response != null) {
+      if (response.lectureScript != null) {
+        if (response.lecture.footerNotes != null && response.lecture.footerNotes != "") {
+          $('#footerNotes').html(response.lecture.footerNotes);
+        }
+        $('#free-vid-dialog #freeVideoContent').html(
+            '<h4 id = "lectureHeading">' + response.lecture.heading + '</h4><div id="' + unitId + '" class="">' + '<h3 class="">'
+            + '</h3>' + '<div id="myplayer' + unitId + '"></div>'
+            + response.lectureScript + '</div>');
+        /* $('#myModal').modal('show'); */
+      } else if (response.assignment != null) {
+        $('#free-vid-dialog #freeVideoContent').html(
+            '<div id="' + unitId + '" class="">' + '<h3 class="">'
+            + '</h3>' + response.assignment.description + '</div> ');
+        $('html,body').animate({scrollTop: 0});
+      } else if (response.note != null) {
+        $('#free-vid-dialog #freeVideoContent').html(
+            '<div id="' + unitId + '" class="">' + '<h3 class="">'
+            + '</h3>' + response.note.description + '</div> ');
+        $('html,body').animate({scrollTop: 0});
+      }
+    }
+    dialogFreeVideo.showModal();
+    $('.mat-content').css("opacity", "1");
+  }
+
+  dialogFreeVideo.querySelector('.close-dialog').addEventListener('click',
+      function () {
+        dialogFreeVideo.close();
+        $('.jw-video').attr("src", "");
+      });
+</script>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var demoUnitID = [[${course?.demoUnitID}]];
+  var regularPrice = [[${#numbers.formatDecimal(course?.batches[0].regularPrice, 0, 0, 'POINT')}]];
+  var salePrice = [[${#numbers.formatDecimal(course?.batches[0].salePrice, 0, 0, 'POINT')}]]
+
+  /*]]>*/
+</script>
+<script>
+  $("#playDemoVideo").click(function () {
+    $(this).hide();
+    $.ajax({
+      async: false,
+      type: 'GET',
+      dataType: 'json',
+      url: apiBasePath + "/units/" + demoUnitID,
+      success: function (response) {
+        if (response.lectureScript != null && response.lectureScript != "") {
+          $('#freeVideoContent #myplayer' + demoUnitID).remove();
+          $('#playDemoVideo').after('<div id="myplayer' + demoUnitID
+              + '"></div>' + response.lectureScript);
+          // h = $('#myplayer'+demoUnitID).outerWidth(true) -50;
+          // w = $('#myplayer'+demoUnitID).outerHeight(true) - 50;
+          // setInterval(function(){
+          //   if ($( '#myplayer'+demoUnitID).length == 1 ){
+          //     animateDiv();
+          //   }
+          // }, 1000);
+
+        } else {
+          $('#noDemoVideo').show();
+        }
+
+      },
+      error: function (response) {
+        $('#noDemoVideo').show();
+      }
+    });
+  });
+</script>
+</body>
+</html>

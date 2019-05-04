@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title>Blog | NeoStencil</title>
+	<meta property="og:title"
+		  content="Blog | NeoStencil" />
+<meta name="description"
+	content="Get Free study material, topper's seminars, strategy blogs, answer writing, daily mcqs, current affairs & more for IAS, IES/GATE, State PCS & SSC exams. Get latest and previous year answer keys.">
+
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/blogs.css')}}"
+	rel="stylesheet" media="screen" />
+
+</head>
+<body class="blog-home">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+		<div class="mat-content mdl-layout__content">
+			<div class="tags-first-level">
+				<div class="container">
+					<ul>
+						<li ><a class=" mdl-button mdl-js-button"
+							th:href="@{/blog/ias(size=${posts.size}, page=1)}">IAS</a></li>
+						<li><a class=" mdl-button mdl-js-button"
+							th:href="@{/blog/ies(size=${posts.size}, page=1)}">IES</a></li>
+						<li><a class=" mdl-button mdl-js-button"
+							th:href="@{/blog/state-psc(size=${posts.size}, page=1)}">STATE PSC</a></li>
+						<li><a class=" mdl-button mdl-js-button"
+							th:href="@{/blog/ssc-cgl(size=${posts.size}, page=1)}">SSC CGL</a></li>
+					</ul>
+					<input type="hidden" id="tag-value" th:value="${tag}">
+				</div>
+			</div>
+			<a onclick="showHideTags();" class="tags-second-level-mobile"> <span
+				id="showOrHide">Show</span> tags of <span th:text="${tag}"></span>
+			</a>
+			<div class="tags-second-level-desktop"
+				style="padding: 16px; text-align: center;">
+				<span th:each="tag : ${tags}" class="mdl-chip tags-second-level">
+					<span class="mdl-chip__text"><a
+						th:href="@{'/blog/'+${#strings.toLowerCase(#strings.replace(tag,' ', '-'))}(size=${posts.size}, page=1)}"
+						th:text="${tag}"></a></span>
+				</span>
+			</div>
+
+			<div class="container">
+				<!--<h3 class="blog-heading">ALL POSTS</h3>-->
+				<!--<div class="line line-left"></div>-->
+				<article class="masonry">
+					<section class="masonry-card" th:each="post : ${posts}">
+						<div>
+							<div class="trending-courses-card mdl-card__media">
+								<img th:if="@{${post?.featuredImage?.url} != null}"
+									th:src="@{${post?.featuredImage?.url}+'=w339'}"
+									th:alt="${post.title}" width="100%"> <img
+									th:if="@{${post?.featuredImage?.url} == null}"
+									src="https://lh3.googleusercontent.com/UQVP9x-aRbA1lrOehA7eqMiOsx4xe9aedMTZeVXyKQBQ-59_Sn2CAhJfXJJzmD3VsiRJErcZBUlHI8G9wH5308zSUCvR=w339-h176"
+									th:alt="${post.title}" width="100%">
+							</div>
+							<div class="ns-card">
+								<!-- <span class="blog-genre" th:text="${post.category}"></span><br /> -->
+								<span class="date-of-blog-slider"><span class="month"
+									th:text="${#dates.format(post.createdAt, 'MMM')}"></span>&nbsp;<span
+									th:text="${#dates.format(post.createdAt, 'dd')}"></span>,<span
+									th:text="${#dates.format(post.createdAt, 'yyyy')}"></span>&nbsp;</span>
+								&nbsp;&nbsp;&nbsp; <span class="share-blog shareBlogButton"
+									th:data-id="${post.postId}" th:data-Title="${post.title}"><i
+									class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a
+									class="share-blog-social" th:href="@{'/' + ${post.postSlug}}">
+									<h3 th:text="${post.title}"></h3>
+								</a>
+								<p th:text="${post.brief}"></p>
+								<br /> <span class="minutes-read"
+									th:if="${not #strings.isEmpty(post.readTime)}"
+									th:utext="@{${#strings.substring(post.readTime,0,2)}  + ' mins read'}"></span>
+								<!-- <i class="fa fa-eye"></i> -->
+								<!-- <span
+									th:text="${post.noOfViews}"></span> -->
+
+							</div>
+						</div>
+
+					</section>
+				</article>
+				<div class="pagination">
+					<span class="next-prev"></span>
+					<div class="pagination-blog" th:each="pageNumber : ${pageNumbers}">
+						<a th:if="${tag}"
+							th:href="@{'/blog/'+${tag}(size=${posts.size}, page=${pageNumber})}"
+							th:text="${pageNumber}"
+							th:class="${pageNumber==posts.number + 1} ? active"></a> <a
+							th:unless="${tag}"
+							th:href="@{/blog(size=${posts.size}, page=${pageNumber})}"
+							th:text="${pageNumber}"
+							th:class="${pageNumber==posts.number + 1} ? active"></a>
+					</div>
+					<span class="next-prev"></span>
+				</div>
+			</div>
+
+			<div class="subscribe" id="subscribe">
+				<div class="container">
+					<img width="120px" class="heading-icon"
+						src="/images/icons/newsletter-icon.svg"
+						alt="Subscribe 	Newsletter">
+					<h3 style="margin-bottom: 0;">Join our weekly Newsletter</h3>
+					<p class="mdl-card__supporting-text">Want to recieve Latest
+						News, Tutorials, Articles and the best resources for your
+						preparation?</p>
+					<form class="subscribe-to-newsletter-form" name="subscribe">
+						<div class="mdl-grid">
+							<div
+								class="mdl-cell mdl-cell--7-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+								<div
+									class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									<input class="mdl-textfield__input input_subscribe"
+										type="email" name="input_subscribe"> <label
+										class="mdl-textfield__label" for="sample3">Yourname@example.com</label>
+								</div>
+							</div>
+							<div
+								class="mdl-cell mdl-cell--5-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+								<button class="btn-subscribe ">Subscribe</button>
+							</div>
+						</div>
+						<div style="display: none; margin: 0 auto;" class="common-loader"
+							id="loader-subscribe">
+							<div class="mdl-spinner mdl-js-spinner is-active"></div>
+						</div>
+						<label class="error-single" id="subscribeError"></label>
+					</form>
+				</div>
+			</div>
+
+
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+		<!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+	</div>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.10/dialog-polyfill.js"></script>
+	<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+
+	<dialog class="mdl-dialog " id="share-blog-dialog">
+	<div class="mdl-dialog__content"></div>
+	</dialog>t
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/custom.js')}}"></script>
+	<script>
+		var tagText = $('#tag-value').val().replace(/\-/g," ").toUpperCase();
+		function CopyBlogShareUrl() {
+			var copyText = document.getElementById("linkUrl");
+			copyText.select();
+			document.execCommand("copy");
+		}
+		$(document).ready(
+				function() {
+					if (window.location.href.indexOf("page") != -1) {
+						var activePage = getParameterByName('page');
+					} else {
+						var activePage = '1';
+					}
+					if (activePage > 4) {
+						if ($(window).width() > '767') {
+							$('.pagination-blog').slice(
+									parseInt(activePage) - 5,
+									parseInt(activePage) + 5).show();
+						} else {
+							$('.pagination-blog').slice(
+									parseInt(activePage) - 2,
+									parseInt(activePage) + 2).show();
+						}
+
+					} else {
+						if ($(window).width() > '767') {
+							$('.pagination-blog').slice(
+									0,
+									parseInt(activePage) + 5 + 5
+											- parseInt(activePage)).show();
+						} else {
+							$('.pagination-blog').slice(
+									0,
+									parseInt(activePage) + 3 + 3
+											- parseInt(activePage)).show();
+						}
+					}
+					$('.tags-first-level li').each(function(e) {
+						if ($(this).find('a').html() == tagText) {
+							$(this).addClass("active");
+							$(this).siblings().removeClass("active");
+						} else if (tagText == '' && e == 0) {
+							$(this).addClass("active");
+						}
+					})
+					if (tagText == '') {
+						$('.tags-second-level-mobile').hide();
+					}
+				});
+		function showHideTags() {
+			if (tagText != '') {
+				$('.tags-second-level-desktop').toggle();
+				if ($('.tags-second-level-mobile').find('#showOrHide').html() == 'Show') {
+					$('.tags-second-level-mobile').find('#showOrHide').html(
+							'Hide');
+				} else {
+					$('.tags-second-level-mobile').find('#showOrHide').html(
+							'Show');
+				}
+			}
+		}
+		$(".ns-card .shareBlogButton")
+				.click(
+						function() {
+
+							var postUrl = $(this)
+									.siblings('.share-blog-social')
+									.attr("href");
+							var postTitle = $(this).attr("data-Title");
+
+							var dialog = document
+									.querySelector('#share-blog-dialog');
+							if (!dialog.showModal) {
+								dialogPolyfill.registerDialog(dialog);
+							}
+
+							if ($(this).attr("data-id") != undefined) {
+								dialog.showModal();
+								/* $('#showContentInDialog').attr("src",$(this).attr("data-image"));*/
+								$('.mdl-dialog__content')
+										.html(
+												"<div class=\"ShareBlogDialogContainer\">\n"
+														+ "\t\t\t\t<h3 class=\"heading_share_blog_dialog\"> SHARE THIS BLOG </h3>\n<h6 style='text-align: center;'>"
+														+ postTitle
+														+ " </h6>"
+														+ "\t\t\t\t\n"
+														+ "\t\t\t<a href=\"http://www.facebook.com/share.php?u=https://neostencil.com/"
+														+ postUrl
+														+ "\" target=\\\"_blank\\\"> <div class=\"blogShareContainer\"><i class=\"fa fa-facebook blog_social_icons\"></i></div>\t</a>\n"
+														+ "\t\t\t<a href=\"http://twitter.com/share?url=https://neostencil.com/"
+														+ postUrl
+														+ "\"><div class=\"blogShareContainer\"><i class=\"fa fa-twitter blog_social_icons\"></i></div>\t</a>\n"
+														+ "\t\t\t<a href=\"http://www.linkedin.com/shareArticle?mini=true&url=https://neostencil.com/"
+														+ postUrl
+														+ "\"><div class=\"blogShareContainer\"><i class=\"fa fa-linkedin blog_social_icons\"></i></div>\t</a>\n"
+														+ "\t\t\t<a href=\"https://plus.google.com/share?url=https://neostencil.com/"
+														+ postUrl
+														+ "\"><div class=\"blogShareContainer\"><i class=\"fa fa-google-plus blog_social_icons\"></i></div>\t</a>\n"
+														+ "\t\t\t<a href=\"https://api.whatsapp.com/send?phone=whatsappphonenumber&text=https://neostencil.com/"
+														+ postUrl
+														+ "\"><div class=\"blogShareContainer\"><i class=\"fa fa-whatsapp blog_social_icons\"></i></div>\t</a>\n"
+														+ "\t\t\t<div style=\"clear: both;\"></div>\n"
+														+ "\t\t\t<h4 class=\"other-option\">or copy this link to share </h4>\n"
+														+ "\t\t\t<div class=\"copy-icon\" onclick=\"CopyBlogShareUrl();\"><i class=\"fa fa-external-link\"></i></div>\n"
+														+ "\t\t\t<input type=\"textbox\" name=\"URL\" id =\"linkUrl\" class=\"custom-share-link\" value=https://neostencil.com/"
+
+          + postUrl + "\>\n"
+														+ "\t\t\t        <button\n"
+          + "\t\t\t            class=\"close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect\">\n"
+														+ "\t\t\t          <i class=\"material-icons\">close</i>\n"
+														+ "        \t\t\t</button>\n"
+														+ "        </div>");
+							}
+
+							dialog.querySelector('button:not([disabled])')
+									.addEventListener('click', function() {
+										dialog.close();
+
+									});
+						});
+
+		/* social sharing dialog ends here*/
+    /*$(document).ready(function() {
+      if (window.location.pathname == '/blog/ias') {
+        $('#accordion-announcements a ').attr("https://neostencil.com/course/public-administration-optional-pavan-kumar-ias-upsc-mains?utm_source=Internal&utm_medium=header_bp&utm_campaign=Dec_5_pavan_Pubad");
+      }
+    });*/
+
+
+	</script>
+</body>
+</html>

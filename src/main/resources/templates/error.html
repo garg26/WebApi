@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title>Neostencil</title>
+
+
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+<!-- <link
+    href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+    rel="stylesheet" media="screen" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+   -->
+
+
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/contact.css')}}"
+	rel="stylesheet" media="screen" />
+
+<style>
+.error {
+	background: #f7f7f6;
+}
+
+.error {
+	padding: 100px 0;
+	min-height: 500px;
+}
+
+.error h1 {
+	font-size: 60px;
+	line-height: 60px;
+}
+
+.error .mdl-card__supporting-text {
+	margin: 0;
+	padding: 10px 0;
+	font-size: 18px;
+	color: #000;
+	line-height: 36px;
+	padding: 0;
+}
+
+.error ul {
+	padding: 0 4px;
+	list-style: none;
+}
+
+.error a {
+	color: #f26722;
+}
+
+.error a.explore-error {
+	height: 40px;
+	border-radius: 2px;
+	background-image: linear-gradient(to bottom, #f26722, #e24d08);
+	font-family: open sans;
+	font-size: 18px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 40px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #ffffff;
+	padding: 0 40px;
+	text-transform: none;
+}
+
+@media
+only
+screen
+and
+(max-width:
+767px)
+{
+.error img {
+	display: none;
+}
+
+.error {
+	padding: 0;
+}
+}
+</style>
+</head>
+
+<body>
+
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+		<div class="mat-content mdl-layout__content">
+			<div class="landing-darken" style="display: none;"></div>
+			<div class="error">
+				<div class="container-header">
+					<div class="mdl-grid">
+						<div
+							class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<img src="/images/background/error/error.png" width="100%">
+						</div>
+						<div
+							class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<h1>I swear I didn't eat it!</h1>
+							<div class="mdl-card__supporting-text">Something broke, we
+								are not sure what! Don't worry, we are on it!</div>
+							<div class="mdl-card__supporting-text">Here are some
+								helpful links instead:</div>
+							<ul>
+								<li><a href="/user-dashboard">Dashboard</a></li>
+								<li><a href="/courses">Courses</a></li>
+								<li><a href="/teachers">Teachers</a></li>
+								<li><a th:href="@{/blog/IAS(size=12, page=1)}">Blogs</a></li>
+							</ul>
+							<br /> <a href="/"
+								class="explore-error mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+								Go Back Home </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+	</div>
+
+
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"></script>
+</body>
+</html>

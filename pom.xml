@@ -1,0 +1,314 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.2.RELEASE</version>
+  </parent>
+  <properties>
+    <java.version>11</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <hibernate-core.version>5.4.1.Final</hibernate-core.version>
+    <hibernate-search.version>5.11.0.Final</hibernate-search.version>
+    <psql.version>42.2.5</psql.version>
+    <jjwt.version>0.9.1</jjwt.version>
+    <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+    <actuator.version>2.1.2.RELEASE</actuator.version>
+    <googleapiservicesdrive.version>v3-rev136-1.25.0</googleapiservicesdrive.version>
+    <jaxbapi.version>2.3.1</jaxbapi.version>
+    <mysqlconnector.version>5.1.6</mysqlconnector.version>
+    <jsoup.version>1.11.3</jsoup.version>
+    <jacksoncore.version>2.9.8</jacksoncore.version>
+    <specification-with-projections.version>2.0.0</specification-with-projections.version>
+    <google-cloud-storage.version>1.61.0</google-cloud-storage.version>
+    <google-api-services-sheets.version>v4-rev553-1.25.0</google-api-services-sheets.version>
+    <google-api-client.version>1.28.0</google-api-client.version>
+    <google-oauth-client-jetty.version>1.28.0</google-oauth-client-jetty.version>
+    <gson.version>2.8.5</gson.version>
+  </properties>
+
+  <groupId>com.neostencil</groupId>
+  <artifactId>NSWebCore</artifactId>
+  <version>1.0</version>
+  <name>NS Complete</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-rest</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-drive</artifactId>
+      <version>${googleapiservicesdrive.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-aws</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-ses</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-sns</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${psql.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysqlconnector.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate-core.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-orm -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-search-orm</artifactId>
+      <version>${hibernate-search.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+    <dependency>
+      <groupId>com.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>4.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>${jjwt.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate4 -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-hibernate5</artifactId>
+      <version>2.9.6</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jacksoncore.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>th.co.geniustree.springdata.jpa</groupId>
+      <artifactId>specification-with-projections</artifactId>
+      <version>${specification-with-projections.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.razorpay</groupId>
+      <artifactId>razorpay-java</artifactId>
+      <version>1.3.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.keyos</groupId>
+      <artifactId>keyos-authxml-signer</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-storage</artifactId>
+      <version>${google-cloud-storage.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.modelmapper</groupId>
+      <artifactId>modelmapper</artifactId>
+      <version>2.1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-sheets</artifactId>
+      <version>${google-api-services-sheets.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+    <dependency>
+      <groupId>com.google.api-client</groupId>
+      <artifactId>google-api-client</artifactId>
+      <version>${google-api-client.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
+    <dependency>
+      <groupId>com.google.oauth-client</groupId>
+      <artifactId>google-oauth-client-jetty</artifactId>
+      <version>${google-oauth-client-jetty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.zwobble.mammoth</groupId>
+      <artifactId>mammoth</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-lgpl -->
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-core-lgpl</artifactId>
+      <version>1.9.13</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>${jaxbapi.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <version>${actuator.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>${jsoup.version}</version>
+    </dependency>
+
+		<!-- Google Guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>${gson.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.rometools/rome -->
+    <dependency>
+      <groupId>com.rometools</groupId>
+      <artifactId>rome</artifactId>
+      <version>1.12.0</version>
+    </dependency>
+
+
+
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+  <repositories>
+    <repository>
+      <!-- DO NOT set id to "local" because it is reserved by Maven -->
+      <id>lib</id>
+      <url>file://${project.basedir}/lib</url>
+    </repository>
+  </repositories>
+
+  <build>
+    <plugins>
+
+      <!-- Includes the runtime dependencies -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <executable>true</executable>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.samaxes.maven</groupId>
+        <artifactId>minify-maven-plugin</artifactId>
+        <version>1.7.6</version>
+        <configuration>
+          <skipMerge>true</skipMerge>
+          <jsEngine>CLOSURE</jsEngine>
+          <nosuffix>true</nosuffix>
+          <cssSourceIncludes>
+            <cssSourceInclude>**/*.css</cssSourceInclude>
+          </cssSourceIncludes>
+          <cssSourceExcludes>
+            <cssSourceExclude>**/*.min.css</cssSourceExclude>
+          </cssSourceExcludes>
+
+          <jsSourceIncludes>
+            <jsSourceInclude>**/*.js</jsSourceInclude>
+          </jsSourceIncludes>
+          <jsSourceExcludes>
+            <jsSourceExclude>**/*.min.js</jsSourceExclude>
+          </jsSourceExcludes>
+        </configuration>
+
+        <executions>
+          <execution>
+            <id>default-minify-resources</id>
+            <configuration>
+              <webappSourceDir>${basedir}</webappSourceDir>
+              <webappTargetDir>${project.build.directory}</webappTargetDir>
+              <cssSourceDir>src/main/resources</cssSourceDir>
+              <jsSourceDir>src/main/resources</jsSourceDir>
+              <jsTargetDir>classes</jsTargetDir>
+              <cssTargetDir>classes</cssTargetDir>
+            </configuration>
+            <goals>
+              <goal>minify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

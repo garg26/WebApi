@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>75+ India's Top Teachers for IAS, IES/GATE, IIT-JEE, NEET, PCS Exams | NeoStencil</title>
+
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+	<meta property="og:title"
+		  content="75+ India's Top Teachers for IAS, IES/GATE, IIT-JEE, NEET, PCS Exams | NeoStencil" />
+<meta name="description"
+	content="Study for IAS, IES/GATE, IIT-JEE, NEET, State PCS, SSC & RRB from India's Top teachers - Salamuddin Ansari, Pavan Kumar, Praveen Kishore, Mitra Sir, Alok Ranjan, MK Yadav, Dr. Qaisar Hafiz, NV Sir and more">
+
+
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/teachers.css')}}"
+	rel="stylesheet" media="screen" />
+
+<link rel="canonical" href="https://neostencil.com/teachers" />
+
+
+<!-- <link
+    href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+    rel="stylesheet" media="screen" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+   -->
+
+</head>
+
+<body class="all-teachers-page">
+
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+		<!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+		<!-- <div class="mat-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title">
+  </span>
+
+</div> -->
+
+
+		<div class="mat-content mdl-layout__content">
+			<div class="landing-darken" style="display: none;"></div>
+
+			<div class="skew">
+				<section class="teachers-listing">
+					<div class="container-header">
+						<div class="mdl-grid">
+							<div
+								class="teachers-filter-card mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
+								<div class="demo-card-square mdl-card mdl-shadow--2dp">
+									<button class="btn-explore apply-filter-mobile">Apply
+										filter</button>
+									<div class="teachers-filter-header">
+										Teacher Filter
+										<button onclick="reset();"
+											class="reset mdl-button mdl-js-button mdl-js-ripple-effect">
+											Reset</button>
+									</div>
+									<!-- <select class="teacherSortBy" name="" id="">
+										<option value="Select" disabled="disabled" selected="selected">Sort
+											by</option>
+										<option value="popular">Popular</option>
+										<option value="atoz">Order: A to Z</option>
+										<option value="ztoa">Order: Z to A</option>
+									</select> -->
+									<div id="teacherDynamicFilters"></div>
+								</div>
+							</div>
+							<div
+								class="teachers-listing-card mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+								<div class="">
+									<a class="show-filter-mobile">Filter Teachers</a>
+									<div class="teachers-filter-header">Partner Teachers And
+										Institutes</div>
+									<div id="filtersTab"></div>
+									<div class="all-teachers-section">
+										<div class="mdl-grid">
+											<div
+												class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+												<h3 class="teachers-card-head">
+													<label id="totalTeachers"></label>
+												</h3>
+											</div>
+											<!-- <div
+												class=" mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+												<div class="float-right">
+													<select class="" name="" id="teacherSortBy">
+														<option value="Select" disabled="disabled"
+															selected="selected">Sort by</option>
+														<option value="popular">Popular</option>
+														<option value="atoz">Order: A to Z</option>
+														<option value="ztoa">Order: Z to A</option>
+													</select>
+												</div>
+											</div> -->
+										</div>
+										<div style="display: none;" class="common-loader"
+											id="loader-all-teachers">
+											<div class="mdl-spinner mdl-js-spinner is-active"></div>
+										</div>
+										<div class="mdl-grid" id="teachersList"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+		<!--/*/ <th:block th:include="common/dialogs"></th:block> /*/-->
+	</div>
+
+
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/teachers.js')}}"></script>
+	<script>
+		$(document).ready(function() {
+			fetchFilters('IAS', 'atoz');
+		})
+	</script>
+</body>
+</html>

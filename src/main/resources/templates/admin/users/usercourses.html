@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+<head>
+<link
+	href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+			<div>
+				<h3 th:text="${response?.courseBatchName}"></h3>
+
+			</div>
+			<div class="row voffset10">
+				<div class="col-md-12">
+					<!--<table id="all-users" class="table table-bordered table-hover">-->
+					<table id="all-linkages" class="table table-striped table-bordered"
+						cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th data-field="id" data-checkbox="true"><input
+									type="checkbox" name="select-all-users" id="select-all-users"></th>
+								<th data-field="userId">User ID</th>
+								<th data-field="userName">Name</th>
+								<th data-field="email">Email</th>
+								<th data-field="enrolledOn">EnrolledOn</th>
+								<th data-field="expiryDate">Expiry Date</th>
+								<th data-field="Status">Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="linkage : ${response?.linkages}">
+								<td><input type="checkbox" id="${linkage?.user?.userId}"
+									name="select-user" class="select-user"
+									th:value="${linkage?.user?.emailId}"></td>
+								<td th:text="${linkage?.user?.userId}" data-field="userId"></td>
+								<td th:text="${linkage?.user?.fullName}" data-field="name"></td>
+								<td th:text="${linkage?.user?.emailId}" data-field="email"></td>
+								<td th:text="${linkage?.enrolledOn}"></td>
+								<td th:text="${linkage?.expiryDate}"></td>
+								<td th:text="${linkage?.status}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div id="actionDiv" class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button"
+					data-toggle="dropdown">
+					Actions <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li class="dropdown-header">Select Action</li>
+					<li><a onclick="openMessageModal();">Send Message</a></li>
+					<li><a onclick="openValidityModal();">Edit Validity</a></li>
+					<li><a onclick="openPaidExtensionModal();">Give Paid
+							Extension</a></li>
+
+				</ul>
+			</div>
+			<div id="messageModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					Modal content
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4>
+								<span></span> Send Message
+							</h4>
+						</div>
+						<div class="modal-body" style="padding: 40px 50px;">
+							<form role="form">
+								<div class="form-group">
+									<label for="lblmessage"><span
+										class="glyphicon glyphicon-envelope"></span>Message</label>
+									<textarea class="form-control" id="txtmessage"
+										placeholder="Enter message"></textarea>
+									<button class="btn btn-primary" onclick="sendMessage(this);">Send</button>
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div id="validityModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				Modal content
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4>
+							<span></span> Update Validity
+						</h4>
+					</div>
+					<div class="modal-body" style="padding: 40px 50px;">
+						<form role="form">
+							<div class="form-group">
+								<label for="lblvalidity"><span></span>Validity</label> <input
+									type="text" class="form-control" id="txtvalidity"
+									placeholder="Enter Validity"></input>
+								<button class="btn btn-primary btn-block"
+									th:if="${not #lists.isEmpty(response?.linkages)}"
+									th:onclick="|updateValidity('${response?.linkages[0]?.courseBatch?.id}')|">Update</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="paidExtModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				Modal content
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4>
+							<span></span> Paid Extension
+						</h4>
+					</div>
+					<div class="modal-body" style="padding: 40px 50px;">
+						<form role="form">
+							<div class="form-group">
+
+								<label for="lblExtValidity"><span></span>Validity</label> <input
+									type="number" class="form-control" id="txtExtValidity"
+									placeholder="Enter Extended Validity"></input> <label
+									for="lblAmount"><span></span>Amount</label> <input
+									type="number" class="form-control" id="txtAmount"
+									placeholder="Enter Amount"></input>
+
+								<div class="form-group">
+									<label> Payment Mode</label> <select class="form-control"
+										id="dropPayMode">
+										<option value="razorpay">RazorPay</option>
+										<option value="BANK_TRANSFER">Bank Transfer</option>
+									</select>
+								</div>
+
+								<button class="btn btn-primary btn-block"
+									th:if="${not #lists.isEmpty(response?.linkages)}"
+									th:onclick="|givePaidExtension('${response?.linkages[0]?.courseBatch?.id}')|">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/courseusers.js')}}"></script>
+</body>
+
+</html>

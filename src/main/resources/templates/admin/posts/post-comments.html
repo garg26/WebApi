@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+<head>
+  <link
+      href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+
+    <!--<div class="panel-body">-->
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">Comments</h1>
+      </div>
+    </div>
+    <!--<div class="row voffsetneg10">-->
+      <!--<div class="col-md-12">-->
+        <!--<a href="/admin_writer/posts/add-post">-->
+          <!--<button type="submit" class="submit btn btn-default"-->
+                  <!--id="create-new-post">-->
+            <!--<i class="fa fa-plus"></i> Create-->
+          <!--</button>-->
+        <!--</a>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="row voffset10">
+      <div class="col-lg-12">
+        <!--<table id="all-posts" class="table table-bordered table-hover">-->
+        <div class="panel panel-default">
+          <div class="table-responsive panel-body">
+            <table
+                class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
+                id="all-posts" role="grid"
+                aria-describedby="dataTables-example_info" style="width: 100%;">
+              <!--<table id="all-posts" class="table table-striped table-bordered"
+                              cellspacing="0" width="100%">-->
+              <thead>
+              <tr>
+                <th><input type="checkbox" name="select-all-posts"
+                           id="select-all-posts"></th>
+                <th>ID</th>
+                <th>Comment Text</th>
+                <th>Commented By</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Commented At</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="comment : ${comments?.content}">
+                <td><input type="checkbox" name="select-post"
+                           class="select-post" th:value="${comment?.commentId}"></td>
+                <td th:text="${comment?.commentId}"></td>
+                <td th:text="${comment?.text}"></td>
+                <td th:text="${comment?.name}"></td>
+                <td th:text="${comment?.email}"></td>
+                <td th:text="${comment?.status}"></td>
+                <td th:text="${comment?.date}"></td>
+                <td><span>
+                  <!--<a class="btn btn-primary" style="color: white" th:data="${comment.commentId}">Publish</a>-->
+												<button class="btn btn-info draftComments" th:disabled="${#strings.toString(comment?.status)} == 'draft'"
+                                th:data="${comment.commentId}" th:data-value="draft">Draft</button>
+                  <button class="btn btn-primary draftComments" th:disabled="${#strings.toString(comment?.status)} == 'publish'"
+                          th:data="${comment.commentId}" th:data-value="publish">Publish</button>
+
+                 </span></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--	</div>-->
+    <!--	</div>-->
+
+  </div>
+
+</div>
+
+<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+<script
+    src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script
+    src="https://cdn.datatables.net/plug-ins/1.10.16/api/fnFindCellRowIndexes.js"></script>
+<!--<script-->
+    <!--th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/post.js')}}"></script>-->
+
+<script>
+  $(document).ready(function() {
+    var table = $('#all-posts').DataTable();
+    table.order([ 6, 'desc' ]).draw();
+  });
+</script>
+<script>
+
+    $('.draftComments').click(function(){
+      var input = {
+        "commentId": $(this).attr("data"),
+        "status": $(this).attr("data-value")
+
+      }
+      $.ajax({
+        async: true,
+        url: apiBasePath + "/admin_writer/updatepostcommentstatus",
+        type: "PUT",
+        processData: false,
+        dataType: "text",
+        data: JSON.stringify(input),
+        contentType: "application/json",
+
+        success: function (response) {
+          alert("Comment Status updated successfully");
+          location.reload();
+        },
+        error: function (response) {
+          alert("Error while updating comment status");
+          location.reload();
+        }
+      });
+    })
+
+
+</script>
+
+</body>
+
+</html>
+

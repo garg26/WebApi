@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<style>
+.mdl-layout__content {
+	margin-top: 118px!important;
+}
+</style>
+<head>
+<title>Neostencil</title>
+
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/dashboard.css')}}"
+	rel="stylesheet" media="screen" />
+<style>
+.noteDisplayCard {
+	margin: 0 auto;
+	width: 70%;
+	padding: 30px;
+	display: block;
+	background-color: #FFF9C4;
+	color: #212121;
+	min-height: 20px !important;
+}
+</style>
+</head>
+<body>
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+		<div class="mat-content mdl-layout__content">
+			<div class="container-header" style="min-height: 500px;">
+				<div class="mdl-grid">
+					<div class="container-header">
+						<!--<div
+							class="demo-card-wide mdl-card mdl-shadow&#45;&#45;2dp noteDisplayCard">
+							<div style="font-size: 18px; line-height: 36px;">
+								<strong> Note:&nbsp;</strong> Due to website migration, you
+								might face issues with your orders. While we are resolving the
+								issue on a priority basis, we request you to kindly bear for
+								some time.
+							</div>
+							<div class="mdl-card__menu">
+								<button
+									class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect"
+									id="closeNote">
+									<i class="material-icons">close</i>
+								</button>
+							</div>
+
+
+						</div>	-->
+					<div class="common-loader" id="loader-orders">
+							<div class="mdl-spinner mdl-js-spinner is-active"></div>
+						</div>
+						<div id="orderTables"></div>
+					</div>
+				</div>
+
+			</div>
+
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+	</div>
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/custom.js')}}"></script>
+	<script>
+		$(document).ready(function() {
+			getMyOrders();
+		})
+		function getMyOrders() {
+			$
+					.ajax({
+						url : apiBasePath + '/get_orders',
+						type : "GET",
+						dataType : "json",
+						contentType : "application/json; charset=utf-8",
+						success : function(response) {
+							console.log(response);
+							$('#loader-orders').hide();
+							var htmlToShow = '';
+							var ordersList = '<div style="overflow:auto;"><table class="orders-table mdl-data-table mdl-js-data-table mdl-shadow--2dp"> <thead> <tr> <th class="mdl-data-table__cell--non-numeric">Your Order Item &nbsp;<b style="color: #color#">#status#</b></th> <th>Price</th> <th>Quantity</th> <th>Total</th> </tr> </thead><tbody>#tableBody#</tbody></table></div>';
+							var tableBody = '<tr> <td class="mdl-data-table__cell--non-numeric"><div class="mdl-grid course-in-cart"> <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"> <img src="#imgUrl#"> </div> <div class="mdl-cell-cart mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"> <p>#title# </p> </div> </div></td> <td class="table-price"><i class="fa fa-inr"></i> #subTotal#</td> <td class="table-price">#quantity#</td> <td class="table-price"><i class="fa fa-inr"></i>#totalPrice#</td> </tr>';
+							if (response != '') {
+								$
+										.each(
+												response,
+												function(index, element) {
+													htmlToShow = htmlToShow += ordersList;
+													htmlToShow = htmlToShow
+															.replace(
+																	"#status#",
+																	'('
+																			+ element.statusType
+																			+ ')');
+													if (element.statusType == 'APPROVED') {
+														htmlToShow = htmlToShow
+																.replace(
+																		"#color#",
+																		'green');
+													} else if (element.statusType == 'PROCESSED') {
+														htmlToShow = htmlToShow
+																.replace(
+																		"#color#",
+																		'#ff9800');
+													} else if (element.statusType == 'CANCELLED') {
+														htmlToShow = htmlToShow
+																.replace(
+																		"#color#",
+																		'#f44336');
+													}
+													var htmlToShowBody = '';
+													$
+															.each(
+																	element.items,
+																	function(
+																			index,
+																			item) {
+																		htmlToShowBody = htmlToShowBody += tableBody;
+																		htmlToShowBody = htmlToShowBody
+																				.replace(
+																						"#title#",
+																						item.title);
+																		htmlToShowBody = htmlToShowBody
+																				.replace(
+																						"#quantity#",
+																						item.quantity);
+																		htmlToShowBody = htmlToShowBody
+																				.replace(
+																						"#subTotal#",
+																						numberWithCommas(item.subTotal));
+																		htmlToShowBody = htmlToShowBody
+																				.replace(
+																						"#totalPrice#",
+																						numberWithCommas(item.price));
+																		htmlToShowBody = htmlToShowBody
+																				.replace(
+																						"#imgUrl#",
+																						item.imageUrl
+																								+ '=w157-h97-s');
+																	});
+													htmlToShow = htmlToShow
+															.replace(
+																	"#tableBody#",
+																	htmlToShowBody);
+												})
+								$('#orderTables').html(htmlToShow);
+								$('#orderTables').show();
+							} else {
+								$('#orderTables')
+										.html(
+												'<p style="text-align: center;">No order has been placed yet!</p>');
+							}
+
+						},
+
+						error : function(response) {
+							$('#loader-orders').hide();
+						}
+					});
+		}
+		$('#closeNote').click(function() {
+			$('.noteDisplayCard').hide();
+		})
+	</script>
+</body>
+</html>

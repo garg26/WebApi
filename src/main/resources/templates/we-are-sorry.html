@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title>Neostencil</title>
+
+
+<!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+<!-- <link
+    href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css"
+    rel="stylesheet" media="screen" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="coverflow/carousel.css">
+   -->
+
+
+<link
+	th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/contact.css')}}"
+	rel="stylesheet" media="screen" />
+
+<style>
+.error {
+	background: #f7f7f6;
+}
+
+.error {
+	padding: 100px 0;
+	min-height: 500px;
+}
+
+.error h1 {
+	font-size: 60px;
+	line-height: 60px;
+}
+
+.error .mdl-card__supporting-text {
+	margin: 0;
+	padding: 10px 0;
+	font-size: 18px;
+	color: #000;
+	line-height: 36px;
+	padding: 0;
+}
+
+.error ul {
+	padding: 0 4px;
+	list-style: none;
+}
+
+.error a {
+	color: #f26722;
+}
+
+.error a.explore-error {
+	height: 40px;
+	border-radius: 2px;
+	background-image: linear-gradient(to bottom, #f7a053, #e24d08);
+	font-family: open sans;
+	font-size: 18px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 40px;
+	letter-spacing: normal;
+	text-align: left;
+	color: #ffffff;
+	padding: 0 40px;
+	text-transform: none;
+}
+.hs-form-iframe{
+	height: 237px !important;
+}
+
+@media only screen and (max-width: 767px) {
+	.error img {
+		display: none;
+	}
+	.error {
+		padding: 0;
+	}
+}
+</style>
+</head>
+
+<body>
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+
+		<div class="mat-content mdl-layout__content">
+			<div class="landing-darken" style="display: none;"></div>
+			<div class="error">
+				<div class="container-header">
+					<div class="mdl-grid">
+						<div
+							class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<img src="/images/background/error/404-webpage.png" width="450px">
+						</div>
+						<div
+							class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+							<h1>It's not you, it's us! :(</h1>
+							<div class="mdl-card__supporting-text">We just moved to new
+								platform and we are extremely sorry for not having the page you
+								are looking for.</div>
+							<div class="mdl-card__supporting-text">Here are some
+								helpful links:</div>
+							<ul>
+								<li><a href="/">Home</a> | <a href="/user-dashboard">Dashboard</a> | <a
+									href="/courses">Courses</a> | <a href="/teachers">Teachers</a>
+									| <a th:href="@{/blog/IAS(size=12, page=1)}">Blogs</a></li>
+							</ul>
+							<!--  <a href="/"
+								class="explore-error mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+								Go Back Home </a> -->
+							<h5 id="userReview"
+								style="height: 31px; font-weight: 900;">
+								Let us know what we missed</h5>
+							<span id="hbspt-form-1540815111818-1360380610" class="hbspt-form">
+								<!--[if lte IE 8]>
+								<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+								<![endif]--> <script charset="utf-8" type="text/javascript"
+									src="//js.hsforms.net/forms/v2.js"></script> <script>
+										hbspt.forms
+												.create({
+													portalId : "3966107",
+													formId : "5af02a93-6d11-4cf1-8aff-e9a925e8e41d",
+													target : "#hbspt-form-1540815111818-1360380610"
+												});
+									</script>
+
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+		</div>
+	</div>
+
+
+	<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<script>
+		/*   $( "#userReview" ).click(function() {
+		 $('.hbspt-form').toggle(500);
+		 }); */
+		$('.hbspt-form').css({
+			"width" : "500px",
+			"height" : "250px"
+		});
+
+	</script>
+
+
+</body>
+</html>

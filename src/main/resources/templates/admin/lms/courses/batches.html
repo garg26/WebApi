@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<title>NeoStencil</title>
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+<head>
+<link
+	href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<div id="wrapper">
+
+		<!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+		<div id="page-wrapper">
+
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">All Courses</h1>
+					</div>
+				</div>
+				<div class="row voffsetneg10">
+					<div class="col-md-12">
+						<a href="/admin_lmsadmin/lms/courses/add">
+							<button type="submit" class="submit btn btn-default"
+								id="create-batch">
+								<i class="fa fa-plus"></i> Create
+							</button>
+						</a>
+						<button type="submit" class="submit btn btn-default"
+							id="edit-batch">
+							<i class="fa fa-edit"></i> Edit
+						</button>
+						<button type="submit" class="submit btn btn-default"
+							id="trash-batch">
+							<i class="fa fa-trash"></i> Trash
+						</button>
+						<button type="submit" class="submit btn btn-default"
+							id="preview-batch">
+							<i class="fa fa-eye"></i> Preview
+						</button>
+						<button type="submit" class="submit btn btn-default"
+							id="clone-batch">
+							<i class="fa fa-copy"></i> Clone
+						</button>
+						<label class="error-single input-error"></label>
+						<div class="pull-right">
+							<label><span>View: </span></label> <select name="course-status"
+								id="course-status" class="form-control">
+								<option value="">Select Batch Status</option>
+								<option value="Published">Published</option>
+								<option value="Draft">Draft</option>
+								<option value="Trash">Trash</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row voffset10">
+
+
+					<div class="col-md-12">
+						<table id="all-courses" class="table table-striped table-bordered"
+							cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th><input type="checkbox" name="select-all-courses"
+										id="select-all-batches"></th>
+									<th>ID</th>
+									<th>Slug (URL)</th>
+									<th>Name</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="course : ${courses}">
+									<td class="no-sort"><input type="checkbox"
+										name="select-course" class="select-course"
+										th:value="${course.courseOldSlug}"></td>
+									<td id="course-id" th:text="${course.id}"></td>
+									<td id="course-slug" th:text="${course.courseOldSlug}"></td>
+									<td id="course-name" th:text="${course.courseName}"></td>
+									<td><a
+										th:href="@{'/admin_lmsadmin/lms/courses/add-course-batch/' + ${course.courseOldSlug}}"
+										class="btn btn-info">Add Batch</a> <a
+										th:href="@{'/admin/lms/courses/add-unit/' + ${course.courseOldSlug}}"
+										class="btn btn-info">Add Unit</a> <a
+										th:href="@{'/admin/lms/courses/add-unit/' + ${course.courseOldSlug}}"
+										class="btn btn-info">Add Unit</a></td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+
+	<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+	<script
+		src="https://cdn.datata8bles.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script
+		th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/js/course.js')}}"></script>
+</body>
+
+</html>

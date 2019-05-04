@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <link
+      th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/admin/dist/css/loader.css')}}"
+      rel="stylesheet" media="screen"/>
+  <!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
+      rel="stylesheet">
+</head>
+<body>
+
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">Add New Unit</h1>
+        </div>
+      </div>
+
+      <form name="newUnit" id="newUnit">
+
+        <div class="row">
+          <div class="col-md-9">
+
+            <h1 style="font-size: 24px;">Course Info</h1>
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Course ID</label> <input type="text"
+                                                    class="form-control" disabled
+                                                    th:value="${course?.id}"
+                                                    name="courseId" id="courseId">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Course Title</label> <input type="text"
+                                                       class="form-control" disabled
+                                                       th:value="${course?.courseTitle}"
+                                                       name="courseTitle"
+                                                       id="courseTitle">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <h1 style="font-size: 24px;">Course Batch Info</h1>
+            <div class="form-group" style="margin-top: 10px">
+              <label>Course Batch</label>
+              <select name="courseBatch" required
+                      id="courseBatch" class="form-control selectpicker"
+                      data-live-search="true" title="Select Multiple Course Batch">
+                <option th:each="batch : ${course?.batches}"
+                        th:value="${batch?.id}" th:data-subtext="${batch?.id}"
+                        th:text="${batch?.batchName}"></option>
+
+
+              </select>
+
+            </div>
+
+            <h1 style="font-size: 24px;">Unit Info</h1>
+
+            <div class="form-group">
+              <label>Unit Title</label> <input class="form-control"
+                                               type="text" id="txtTitle" th:value="${unit?.title}"
+                                               placeholder="Enter Unit Title">
+            </div>
+
+            <div id="upload-attachment">
+              <label>Upload Attachment</label>
+              <div>
+
+                <label class="custom-file"> <input type="file"
+                                                   id="uploadAttachment" class="custom-file-input">
+                  <span
+                      class="custom-file-control"></span>
+                </label> <input type="button" class="button btn-primary" value="Upload"
+                                id="but_upload">
+                <div style="display: none;" id="loaderUploadAttachment">
+                  <img width="30px" height="30px"
+                       src="http://www.sbif.cl/recursos/sbifweb3/img/throbber_13.gif">
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="form-group" style="margin-top: 40px">
+              <label>Unit Description</label>
+              <textarea id="unitDescription" name="unitDescription"></textarea>
+            </div>
+
+            <div class="form-horizontal" style="margin-top: 10px">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Unit Topic</label> <select name="unitTopic"
+                                                      id="unitTopic" class="form-control">
+                    <option value="0" selected>Select Unit Topic</option>
+
+                    <option th:each="topic : ${topics}" th:value="${topic}"
+                            th:text="${topic}" th:selected="${unit?.topic == topic}"></option>
+                  </select> <a id="addTopic" onclick="addTopic();"><i
+                      class="glyphicon glyphicon-plus"></i></a> <input type="text"
+                                                                       id="txtTopic"/>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="container"><input type="checkbox"
+                                              name="product" id="product"
+                                              th:checked="${unit?.product}"
+                                              onchange="showPrice();">Product</label>
+              <label class="container"><input type="checkbox"
+                                              name="publiclyBuyable" id="publiclyBuyable"th:checked="${unit?.publiclyBuyable}" >Publically Buyable</label>
+              <label
+                id="lblPrice">Price</label>
+              <input type="number" min="0" class="form-control" name="price"
+                     id="price" th:value="${unit?.price}"
+                     placeholder="Enter the unit's Price">
+            </div>
+
+            <div class="form-group">
+              <label class="container"><input type="checkbox"
+                                              name="free" id="free" th:checked="${unit?.free}">is
+                Free</label>
+            </div>
+
+
+            <label class="radio-inline" style="margin-top: 10px;"><input
+                type="radio" value="publish"
+                th:checked="${#strings.toString(unit?.status)} == 'publish'"
+                name="status" checked>Publish</label> <label
+              class="radio-inline" style="margin-top: 10px;"><input
+              type="radio" value="draft"
+              th:checked="${#strings.toString(unit?.status)} == 'draft'"
+              name="status">Draft</label>
+
+
+            <div class="row">
+              <div style="margin-top: 20px;" class="col-md-9">
+                <button class="submit btn btn-primary" type="submit"
+                        id="btnSubmit" value="submit">Submit
+                </button>
+                <i class="fa fa-spinner fa-spin" id="loader"></i>
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+!--/*/
+<th:block th:include="admin/footer"></th:block>
+/*/-->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var price = [[${unit.price}]];
+  var type = [[${unit.type}]];
+  var unitDescription = [[${unit.description}]];
+
+  /*]]>*/
+</script>
+
+<script>
+
+  $(document).ready(function () {
+
+    $('#unitDescription').summernote('code', unitDescription);
+    $('#txtTopic').hide();
+
+    if (document.getElementById('product').checked) {
+      $('#price').show();
+      $('#lblPrice').show();
+      $('#price').val(price);
+    } else {
+      $('#price').hide();
+      $('#lblPrice').hide();
+    }
+
+
+  });
+
+  $('#newUnit').validate({
+
+    rules: {
+      getBatchData: {
+        required: true
+      },
+
+      unitType: {
+        required: true
+      }
+    },
+
+    messages: {
+      getBatchData: {
+        required: "Please select course batch"
+      },
+
+      unitType: {
+        required: "Please select unit type"
+      }
+    },
+
+    submitHandler: function () {
+      postUnit();
+      $('#loader').show();
+    }
+
+  });
+  function postUnit() {
+
+    if (document.getElementById('product').checked) {
+      $('#product').attr('checked', true);
+      $('input[name="product"]').val(true);
+    }
+    else {
+      $('#product').attr('checked', false);
+      $('input[name="product"]').val(false);
+    }
+
+    if (document.getElementById('free').checked) {
+      $('#free').attr('checked', true);
+      $('input[name="free"]').val(true);
+    } else {
+      $('#free').attr('checked', false);
+      $('input[name="free"]').val(false);
+    }
+
+    if (document.getElementById('publiclyBuyable').checked) {
+      $('#publiclyBuyable').attr('checked', true);
+      $('input[name="publiclyBuyable"]').val(true);
+    } else {
+      $('#publiclyBuyable').attr('checked', false);
+      $('input[name="publiclyBuyable"]').val(false);
+    }
+
+    var input = {
+      description: $('#unitDescription').summernote('code'),
+      type: type,
+      title: $('#txtTitle').val(),
+      product: $('#product').val(),
+      publiclyBuyable : $('#publiclyBuyable').val(),
+      batch: {id: $('#courseBatch').val()},
+      free: $('#free').val(),
+      price: ($('#price').val() != null) ? $('#price').val() : 0,
+      status: $('input[name=status]:checked', '#newUnit').val()
+
+    };
+    if ($('#unitTopic').val() != 0) {
+      input["topic"] = $('#unitTopic').val();
+    } else {
+      input["topic"] = $('#txtTopic').val();
+    }
+
+
+    $.ajax({
+      url: apiBasePath + "/admin_techops_lmsadmin/units",
+      type: "POST",
+      data: JSON.stringify(input),
+      dataType: "json",
+      contentType: "application/json",
+      processData: false,
+      <!--"headers": {-->
+      <!--"authorization": "Bearer " + window.localStorage.getItem('access_token'),-->
+
+      <!--},-->
+
+      success: function (response) {
+        $('#loader').hide();
+        location.reload();
+        alert("Unit Add Successfully");
+
+      },
+
+      error: function (response) {
+        $('#loader').hide();
+        alert("Failed in creating unit");
+
+      }
+    });
+  }
+
+
+  function showPrice() {
+    if (document.getElementById('product').checked) {
+      $('#price').show();
+      $('#lblPrice').show();
+    } else {
+      $('#price').hide();
+      $('#lblPrice').hide();
+    }
+  }
+
+  function addTopic() {
+    $('#txtTopic').show();
+  }
+
+  $("#but_upload").click(function (e) {
+    e.preventDefault();
+    var formData = new FormData();
+
+    fileName = $('#uploadAttachment')[0].files[0].name;
+    fileType = $('#uploadAttachment')[0].files[0].type;
+
+    formData.append('file', $('#uploadAttachment')[0].files[0]);
+    formData.append('type', 'assignments');
+    formData.append('contentType', fileType);
+
+    if (fileType == 'application/pdf') {
+      $('#loaderUploadAttachment').show();
+      $.ajax({
+        "async": true,
+        "crossDomain": true,
+        "url": apiBasePath
+        + "/user/uploadfile",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": formData,
+
+        success: function (response) {
+          $('#loaderUploadAttachment').hide();
+          alert("Upload File " + fileName + " " + "successfully");
+
+          if (response != null) {
+            $('#upload-attachment-url').remove();
+            var mydiv = document.getElementById("upload-attachment");
+            var aTag = document.createElement('a');
+            aTag.setAttribute('href', response);
+            aTag.setAttribute('id', "upload-attachment-url");
+            aTag.innerHTML = response;
+            mydiv.appendChild(aTag);
+          }
+          else {
+            var mydiv = document.getElementById("upload-attachment");
+            var aTag = document.createElement('a');
+            aTag.setAttribute('href', response);
+            aTag.setAttribute('id', "upload-attachment-url");
+            aTag.innerHTML = response;
+            mydiv.appendChild(aTag);
+          }
+
+        },
+        error: function (response) {
+          $('#loaderUploadAttachment').hide();
+          alert('Failed to Upload File');
+
+        }
+      });
+    }
+    else {
+      uploadFile(formData, function (response) {
+        if (response != null) {
+
+          getImageUrl(response, function (callback) {
+            fileUrl = callback;
+            alert("Upload File " + fileName + " " + "successfully");
+            $('#loaderUploadAttachment').hide();
+
+            if (fileUrl != null) {
+              $('#upload-attachment-url').remove();
+              var mydiv = document.getElementById("upload-attachment");
+              var aTag = document.createElement('a');
+              aTag.setAttribute('href', fileUrl);
+              aTag.setAttribute('id', "upload-attachment-url");
+              aTag.innerHTML = fileUrl;
+              mydiv.appendChild(aTag);
+            }
+            else {
+              var mydiv = document.getElementById("upload-attachment");
+              var aTag = document.createElement('a');
+              aTag.setAttribute('href', fileUrl);
+              aTag.setAttribute('id', "upload-attachment-url");
+              aTag.innerHTML = fileUrl;
+              mydiv.appendChild(aTag);
+            }
+
+          });
+
+        }
+
+        else {
+          $('#loaderUploadAttachment').hide();
+
+        }
+
+      });
+
+    }
+  });
+
+
+</script>
+
+</body>
+</html>

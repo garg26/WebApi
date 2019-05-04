@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+
+  <title>Neostencil</title>
+<!--  <link href="/css/home.min.css" rel="stylesheet" media="screen"/>-->
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/home.css')}}"
+          rel="stylesheet" media="screen" />
+  <!--/*/ <th:block th:include="common/commonHead"></th:block> /*/-->
+
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.css"
+      rel="stylesheet" media="screen"/>
+
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/freePrep.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick-theme.css')}}"
+          rel="stylesheet" media="screen" />
+  <link
+          th:href="@{${@mvcResourceUrlProvider.getForLookupPath('/css/blogs.css')}}"
+          rel="stylesheet" media="screen" />
+  <style>
+.mat-be-together-section {
+	height: 400px;
+	padding: 250px 0 0;
+}
+
+.mdl-layout__header.is-casting-shadow {
+	background: #fff !important;
+}
+
+.swiper-button-prev, .swiper-button-next {
+	background-image: none;
+}
+
+.freepreps-slider {
+	height: 500px;
+	background-color: #f4fcfe;
+	padding: 80px 0;
+	margin-top: 0;
+	background: url(../images/background/Homepage/Hometeacherbg.png) center
+		no-repeat;
+	background-size: cover;
+	padding: 100px 0 367px 0;
+}
+
+.video-caption {
+	border: none;
+	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.toppers-talk {
+	font-family: open sans;
+	font-size: 24px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 46px;
+	letter-spacing: normal;
+	text-align: center !important;
+	color: #000000;
+}
+
+.explore-all-courses h3, .our-impact .blog-heading {
+	text-align: center !important;
+	display: block;
+	margin: 22px auto;
+}
+
+.mat-view-all-teachers {
+	background-image: none;
+}
+
+.blog-heading {
+	text-align: center !important;
+	margin-bottom: 20px !important;
+}
+
+.ns-card {
+	background-color: #ffffff;
+}
+
+.masonry-card {
+	width: 400px;
+}
+
+
+
+  </style>
+</head>
+
+<body>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <!--/*/ <th:block th:include="common/header"></th:block> /*/-->
+  <div class="mat-drawer mdl-layout__drawer">
+			<span class="mdl-layout-title"> <img class="mat-logo-image"
+                                           src="https://neostencil.com/wp-content/themes/neostencil/images/head-logo.png"></span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Courses</a> <a
+        class="mdl-navigation__link" href="">Teachers</a> <a
+        class="mdl-navigation__link" href="">Test Series</a>
+    </nav>
+  </div>
+
+
+  <div class="mat-content mdl-layout__content">
+    <div class="landing-darken" style="display: none;"></div>
+    <!-- <div class="load-bar">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div> -->
+    <div class="mat-be-together-section mdl-typography--text-center">
+
+      <div class="container">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"></div>
+          <div
+              class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div class="logo-font mat-slogan" style="text-align: center;">We
+              gave India close to Half of Its IAS this year
+            </div>
+            <br/>
+
+            <div class="mdl-grid">
+              <div
+                  class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <p>
+                  <b class="exam-segment-text-orange">100</b><br/> <span
+                    class="exam-segment-text-white">Out of 1009 Selected
+											from Our Partner Institutes.</span>
+                </p>
+              </div>
+              <div
+                  class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <p>
+                  <b class="exam-segment-text-orange">500</b><br/> <span
+                    class="exam-segment-text-white">Of Our Online Students
+											Selected.</span>
+                </p>
+              </div>
+              <div
+                  class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <p>
+                  <b class="exam-segment-text-orange">43</b><br/> <span
+                    class="exam-segment-text-white">Students In top<br/>100.
+										</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="freepreps-slider">
+      <div class="container-header">
+        <h3 class="toppers-talk">Toppers' talk</h3>
+        <div class="underline" style="margin-bottom: 32px;"></div>
+        <section id="freepreps-slider" class="regular slider">
+          <div>
+            <iframe src="https://www.youtube.com/embed/0DCX5R7G2sE?rel=0"
+                    width="480" height="320" frameborder="0"
+                    allowfullscreen="allowfullscreen">sefaef
+            </iframe>
+            <div class="video-caption">
+              IAS Topper Interview of Abhilash Mishra (AIR 5) <span>How
+									studying online helped him?</span>
+            </div>
+          </div>
+          <div>
+            <iframe src="https://www.youtube.com/embed/0DCX5R7G2sE?rel=0"
+                    width="480" height="320" frameborder="0"
+                    allowfullscreen="allowfullscreen">sefaef
+            </iframe>
+            <div class="video-caption">
+              IAS Topper Interview of Abhilash Mishra (AIR 5) <span>How
+									studying online helped him?</span>
+            </div>
+          </div>
+          <div>
+            <iframe src="https://www.youtube.com/embed/0DCX5R7G2sE?rel=0"
+                    width="480" height="320" frameborder="0"
+                    allowfullscreen="allowfullscreen">sefaef
+            </iframe>
+            <div class="video-caption">
+              IAS Topper Interview of Abhilash Mishra (AIR 5) <span>How
+									studying online helped him?</span>
+            </div>
+          </div>
+          <div>
+            <iframe src="https://www.youtube.com/embed/0DCX5R7G2sE?rel=0"
+                    width="480" height="320" frameborder="0"
+                    allowfullscreen="allowfullscreen">sefaef
+            </iframe>
+            <div class="video-caption">
+              IAS Topper Interview of Abhilash Mishra (AIR 5) <span>How
+									studying online helped him?</span>
+            </div>
+          </div>
+          <div>
+            <iframe src="https://www.youtube.com/embed/0DCX5R7G2sE?rel=0"
+                    width="480" height="320" frameborder="0"
+                    allowfullscreen="allowfullscreen">sefaef
+            </iframe>
+            <div class="video-caption">
+              IAS Topper Interview of Abhilash Mishra (AIR 5) <span>How
+									studying online helped him?</span>
+            </div>
+          </div>
+          <div></div>
+        </section>
+      </div>
+    </div>
+
+
+    <div class="mat-view-all-teachers mdl-typography--text-center">
+
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <img src="images/icons/common heading ICON.svg"> <br/>
+            <div class="logo-font mat-teachers-slogan">
+              India's Top Coaching<br/> Institutes and Best Teach…
+            </div>
+            <div class="underline"></div>
+            <p>We partner only with the most reputed institutes and
+              experienced teachers - with an unparalleled track record of
+              giving high….</p>
+            <br/> <a href="teachers" id="comingSoon"
+                     class="btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            VIEW ALL TEACHERS</a>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <img src="images/background/Homepage/homepagetestimonialbg.png"
+                 style="position: absolute; right: 12%; z-index: -1;">
+            <!-- Swiper -->
+            <div class="row swiper-container-teachers swiper-container">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" th:each="teacher : ${teachers}">
+                  <div class="mdl-shadow--2dp">
+                    <div class="trending-courses-card mdl-card__media">
+                      <img
+                          th:src="@{'/images/teachers/' + ${teacher.displayPicture}}">
+
+                    </div>
+                    <div class="coverflow-card">
+                      <h3>
+                        <a th:href="@{'/teacher/' + ${teacher.slug}}"
+                           class="teacher-institute" th:text="${teacher.teacherName}"></a>
+                        <br/> <span class="slideItem-institite"> <a
+                          th:href="${teacher.institute!=null}?@{'/institute/' + ${teacher.institute.instituteSlug}}:''"
+                          th:text="${teacher.institute!=null}?${teacher.institute.name}:'not found'"></a>
+													</span>
+                      </h3>
+                      <br/> <span class="mdl-chip"
+                                  th:each="subject : ${teacher.subjects}"> <span
+                        class="mdl-chip__text" th:text="${subject}"></span>&nbsp;
+												</span>&nbsp;<span class="mdl-chip"> <span
+                        class="mdl-chip__text">All Courses</span>
+												</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Add Arrows -->
+              <div class="swiper-button-next">&gt;</div>
+              <div class="swiper-button-prev">&lt;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="explore-all-courses">
+      <div class="container-header">
+        <img class="heading-icon"
+             src="images/icons/common heading ICON.svg">
+        <h3>Join the Best Coaching Classes Today!</h3>
+        <div class="underline"></div>
+        <div class="mdl-card__supporting-text">
+          Choose your dream job and courses that suit your preparation from
+          a list of online classes.<br/> We have courses available for
+          UPSC IAS, IES, GATE, SSC-Banking, and State Services.
+        </div>
+        <div class="row swiper-container-courses swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" th:each="course : ${courses}">
+              <div style="padding: 0 4px;">
+                <div class="mdl-shadow--2dp">
+                  <div class="trending-courses-card mdl-card__media">
+                    <!-- <i class="fav material-icons">favorite_border</i> <i
+                style="display: none;" class="unfav material-icons">favorite</i> -->
+                    <!--<img src="images/courses/course-img.png">-->
+                    <a th:href="@{'/course/' + ${course.courseId}}"><img
+                        th:src="@{'/images/courses/' + ${course.courseImage}}"></a>
+                    <!-- <div class="courses-label">IAS Essay</div> -->
+
+                  </div>
+                  <div class="ns-card" style="width: 90%;">
+											<span class="course-rating"><i class="material-icons">star_rate</i>
+												<i class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i> <i
+                            class="material-icons">star_rate</i></span> <span class="starts-on">Starts
+												on <span class="starts-on-date">15 Jan 2018</span>
+											</span> <a th:href="@{'/course/' + ${course.courseOldSlug}}">
+                    <h3 class="course-title-ellipis"
+                        th:text="${course.courseTitle}"></h3>
+                  </a>
+                    <p class="ns-card-p">
+												<span class="p-grid-1"><i>by</i> <span
+                            class="ns-card-teacher" th:text="${course.instructorName}"></span>
+													<span></span> </span>
+                    </p>
+                    <div class="price-and-students">
+                      <h3 class="price">
+                        <i class="fa fa-inr">&nbsp;</i><span>50,000</span>
+                      </h3>
+                      <span class="enrolled-students float-right">Enrolled
+													Students: <span
+                            th:text="${course.noOfStudentsCurrentlyEnrolled}"></span>
+												</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Add Arrows -->
+          <div class="swiper-button-next">&gt;</div>
+          <div class="swiper-button-prev">&lt;</div>
+        </div>
+        <a href="courses"
+           class="btn-all-courses btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">VIEW
+          ALL COURSES</a>
+      </div>
+    </div>
+
+
+    <div class="our-impact">
+      <div class="container-header">
+        <h3 class="blog-heading">POPULAR</h3>
+        <article class="masonry">
+          <section class="masonry-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}"
+                   style="height: 150px;">
+            </div>
+            <div class="ns-card">
+              <span class="blog-genre">Education</span><br/> <span
+                class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+									2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+              Discussion Untill Mains Lukmaan Academy</h3></a>
+              <p>Importance of Guidance in UPSC Preparation for those who
+                given feedback is…</p>
+              <br/> <span class="minutes-read">8 min read
+									&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+								</span>
+            </div>
+          </section>
+          <section class="masonry-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}"
+                   style="height: 250px;">
+            </div>
+            <div class="ns-card">
+              <span class="blog-genre">Education</span><br/> <span
+                class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+									2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+              Discussion Untill Mains Lukmaan Academy</h3></a>
+              <p>Importance of Guidance in UPSC Preparation for those who
+                given feedback is…</p>
+              <br/> <span class="minutes-read">8 min read
+									&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+								</span>
+            </div>
+          </section>
+          <section class="masonry-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}"
+                   style="height: 237px;">
+            </div>
+            <div class="ns-card">
+              <span class="blog-genre">Education</span><br/> <span
+                class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+									2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+              Discussion Untill Mains Lukmaan Academy</h3></a>
+              <p>Importance of Guidance in UPSC Preparation for those who
+                given feedback is…</p>
+              <br/> <span class="minutes-read">8 min read
+									&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+								</span>
+            </div>
+          </section>
+          <section class="masonry-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}"
+                   style="height: 150px;">
+            </div>
+            <div class="ns-card">
+              <span class="blog-genre">Education</span><br/> <span
+                class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+									2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+              Discussion Untill Mains Lukmaan Academy</h3></a>
+              <p>Importance of Guidance in UPSC Preparation for those who
+                given feedback is…</p>
+              <br/> <span class="minutes-read">8 min read
+									&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+								</span>
+            </div>
+          </section>
+          <section class="masonry-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}"
+                   style="height: 150px;">
+            </div>
+            <div class="ns-card">
+              <span class="blog-genre">Education</span><br/> <span
+                class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+									2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+              Discussion Untill Mains Lukmaan Academy</h3></a>
+              <p>Importance of Guidance in UPSC Preparation for those who
+                given feedback is…</p>
+              <br/> <span class="minutes-read">8 min read
+									&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+								</span>
+            </div>
+          </section>
+          <section class="masonry-card">
+            <div class="trending-courses-card mdl-card__media">
+              <img th:src="@{/images/courses/course-img.png}"
+                   style="height: 150px;">
+            </div>
+            <div class="ns-card">
+              <span class="blog-genre">Education</span><br/> <span
+                class="date-of-blog-slider"><span class="month">OCT&nbsp;</span>
+									2, 2017</span>&nbsp;&nbsp;&nbsp;<span class="share-blog"><i
+                class="fa fa-share"></i>&nbsp;&nbsp;Share</span> <a href="generic"><h3>Editorial
+              Discussion Untill Mains Lukmaan Academy</h3></a>
+              <p>Importance of Guidance in UPSC Preparation for those who
+                given feedback is…</p>
+              <br/> <span class="minutes-read">8 min read
+									&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;&nbsp;180
+								</span>
+            </div>
+          </section>
+        </article>
+
+      </div>
+    </div>
+    <div class="mat-free-prep mdl-typography--text-center">
+
+      <div class="container-header">
+        <div class="mdl-grid">
+          <div
+              class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <img src="images/icons/common heading ICON.svg"> <br/>
+            <div class="logo-font mat-teachers-slogan">
+              Free prep section<br/> Why Join NeoStencil
+            </div>
+            <div class="underline"></div>
+            <p>NeoStencil partners with the best teachers and institutes
+              to make sure that our students achieve the highest possible AIR
+              score.</p>
+            <br/> <a href="/free-videos" id="comingSoon"
+                     class="btn-explore btn-cta-secondary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            VIEW FREE DEMO</a>
+          </div>
+          <div
+              class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div class="mdl-grid">
+              <div
+                  class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="box-1-free-demo">
+                  <img src="images/icons/refund icon.svg"><br/>
+                  <h3 class="box-heading">3 Day Refund Policy</h3>
+                  <p class="box-p">You will get full refund within 3 days</p>
+                </div>
+              </div>
+              <div
+                  class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="box-2-free-demo">
+                  <img src="images/icons/limitless learning icon.svg"><br/>
+                  <h3 class="box-heading">Limitless Learning</h3>
+                  <p class="box-p">You will get full refund within 3 days</p>
+                </div>
+              </div>
+              <div
+                  class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="box-3-free-demo">
+                  <img src="images/icons/course icon.svg"><br/>
+                  <h3 class="box-heading">Unlimited Access</h3>
+                  <p class="box-p">You will get full refund within 3 days</p>
+                </div>
+              </div>
+              <div
+                  class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="box-4-free-demo">
+                  <img src="images/icons/extended icon.svg"><br/>
+                  <h3 class="box-heading">Extended Validity</h3>
+                  <p class="box-p">You will get full refund within 3 days</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!--/*/ <th:block th:include="common/footer"></th:block> /*/-->
+
+  </div>
+</div>
+
+<dialog tabindex="1" class="mdl-dialog mdl-dialog-video">
+  <div class="mdl-dialog__content">
+    <iframe id="video" width="100%" height="500px"
+            src="https://www.youtube.com/embed/Wi6DObEp4vU" allowfullscreen>
+    </iframe>
+    <button
+        class="close-dialog mat-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
+</dialog>
+
+<!-- include scripts -->
+<!--/*/ <th:block th:include="common/commonJS"></th:block> /*/-->
+
+
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/slick/slick.js')}}"
+></script>
+<script
+        th:src="@{${@mvcResourceUrlProvider.getForLookupPath('/js/slider.js')}}"
+></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+<script>
+		var swiper = new Swiper('.swiper-container-teachers', {
+			effect : 'coverflow',
+			loop : true,
+			centeredSlides : true,
+			slidesPerView : 3,
+			initialSlide : 3,
+			keyboardControl : true,
+			mousewheelControl : false,
+			lazyLoading : true,
+			preventClicks : false,
+			preventClicksPropagation : false,
+			lazyLoadingInPrevNext : true,
+			nextButton : '.swiper-button-next',
+			prevButton : '.swiper-button-prev',
+			coverflow : {
+				rotate : 0,
+				stretch : 50,
+				depth : 150,
+				modifier : 1,
+				slideShadows : false,
+			}
+		});
+		var swiper2 = new Swiper('.swiper-container-testimonials', {
+			effect : 'coverflow',
+			loop : true,
+			centeredSlides : true,
+			slidesPerView : 2,
+			initialSlide : 3,
+			keyboardControl : true,
+			mousewheelControl : false,
+			lazyLoading : true,
+			preventClicks : false,
+			preventClicksPropagation : false,
+			lazyLoadingInPrevNext : true,
+			nextButton : '.swiper-button-next',
+			prevButton : '.swiper-button-prev',
+			width : 440,
+			spaceBetween : -280,
+			coverflow : {
+				rotate : 0,
+				stretch : 0,
+				depth : 250,
+				modifier : 1,
+				slideShadows : false,
+			}
+		});
+		var swiper3 = new Swiper('.swiper-container-courses', {
+			effect : 'coverflow',
+			loop : true,
+			centeredSlides : true,
+			slidesPerView : 5,
+			initialSlide : 1,
+			keyboardControl : true,
+			mousewheelControl : false,
+			lazyLoading : true,
+			nextButton : '.swiper-button-next',
+			prevButton : '.swiper-button-prev',
+			preventClicks : false,
+			preventClicksPropagation : false,
+			slidesPerGroup : 3,
+			coverflow : {
+				rotate : 0,
+				stretch : 0,
+				depth : 0,
+				modifier : 1,
+				slideShadows : false,
+			}
+		});
+		var swiper4 = new Swiper('.swiper-container-press', {
+			effect : 'coverflow',
+			loop : true,
+			centeredSlides : true,
+			slidesPerView : 4,
+			initialSlide : 1,
+			keyboardControl : true,
+			mousewheelControl : false,
+			lazyLoading : true,
+			nextButton : '.swiper-button-next',
+			prevButton : '.swiper-button-prev',
+			preventClicks : false,
+			preventClicksPropagation : false,
+			slidesPerGroup : 4,
+			coverflow : {
+				rotate : 0,
+				stretch : 0,
+				depth : 0,
+				modifier : 1,
+				slideShadows : false,
+			}
+		});
+		$(
+				'.testimonials .swiper-button-next, .testimonials .swiper-button-prev')
+				.click(function() {
+					hideShowTestimonials();
+				})
+		$('document').ready(function() {
+			hideShowTestimonials();
+		})
+		function hideShowTestimonials() {
+			var activeTestimonialId = $('.testimonials .swiper-slide-active')
+					.attr("id");
+			$('.testimonial-text').find("#testimonial_" + activeTestimonialId)
+					.parent('.test-text-wrapper').show();
+			$('.testimonial-text').find("#testimonial_" + activeTestimonialId)
+					.parent('.test-text-wrapper')
+					.siblings('.test-text-wrapper').hide();
+		}
+
+
+
+</script>
+
+</body>
+
+</html>

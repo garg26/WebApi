@@ -1,0 +1,63 @@
+<dialog id="examSegmentDialog" class="mdl-dialog" style="position: fixed;top: 50%; transform: translate(0, -50%);">
+  <div style="display: none; width: -moz-fit-content; width: fit-content; margin: 0 auto; margin-top: 10px;"
+       id="loader-dialog">
+    <div class="mdl-spinner mdl-js-spinner is-active" style="width: 100px; height: 100px;"></div>
+  </div>
+  <h4 id="saving">  Your Exam segments is being saved. Please wait....</h4>
+  <div class="dialog-content">
+    <div>
+      <h2 class="mdl-card__title-text" style="width: fit-content; width: -moz-fit-content;margin: 0 auto;padding: 15px;font-weight: 600;">Select Exam(s) you are interested in</h2>
+      <div style="width: fit-content; width: -moz-fit-content;margin: 0 auto;"><div class="underline-jee" style="border: solid 3px #e5ebef; width: 71px; margin: 0px 0 20px 0;"></div></div>
+    </div>
+    <div class="mdl-dialog__content">
+      <div class="mdl-shadow--2dp">
+        <div class="mdl-card__supporting-text" style="width: fit-content; width: -moz-fit-content; margin: 0 auto;padding-bottom: 0px">
+                    <span type="button" class="mdl-chip" data-id="IAS">
+                      <span class="mdl-chip__text">IAS</span>
+                    </span>
+          <span type="button" class="mdl-chip" data-id="IES-GATE">
+                      <span class="mdl-chip__text">IES/GATE</span>
+                    </span>
+          <span type="button" class="mdl-chip" data-id="IIT-JEE">
+                      <span class="mdl-chip__text">IIT-JEE</span>
+                    </span>
+          <span type="button" class="mdl-chip" data-id="NEET">
+                      <span class="mdl-chip__text">NEET</span>
+                    </span>
+          <span type="button" class="mdl-chip" data-id="STATE_PCS">
+                      <span class="mdl-chip__text">STATE PCS</span>
+                    </span>
+          <span type="button" class="mdl-chip" data-id="OTHERS">
+                      <span class="mdl-chip__text">OTHERS</span>
+                    </span>
+
+          <div style="color: #ff0000;width: fit-content; width: -moz-fit-content;margin: 0 auto; display: none;" id="errorMessage"> Error while updating exam segment</div>
+        </div>
+        <form>
+          <div class="mdl-grid" style="width: -moz-fit-content;width: fit-content;margin: 0 auto;">
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+              <input type="text" placeholder="Enter your City" class="examTextBox" id="searchCity">
+              <p id="errorSearchCity" style="color: red; margin: 0;    font-size: 12px; display: none;">please select your city</p>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+              <input type="number"   class="examTextBox" id="userMobileNumber" pattern="/^-?\d+\.?\d*$/" required="required" placeholder="Enter 10 digit Mobile no."
+                     onKeyPress="if(this.value.length==10){return false;}">
+              <p id="errorUserMobileNumber" style="color: red; margin:0 ;    font-size: 12px; display: none;">please enter 10 digit mobile number</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="mdl-dialog__actions" style="padding: 10px 0;">
+      <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="saveExamSegments">SAVE</button>
+      <!--<button type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect" id="closeDialogButton">I'll do it later</button>-->
+    </div>
+  </div>
+</dialog>
+<!--<script>-->
+<!--function activatePlacesSearch(){-->
+<!--var input =document.getElementById('searchCity');-->
+<!--var autocomplete = new google.maps.places.Autocomplete(input);-->
+<!--}-->
+<!--</script>-->
+<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3KMP9bhOx7Msb_RnBlOqYUWmzKAb3ZGw&libraries=places&callback=activatePlacesSearch"></script>-->

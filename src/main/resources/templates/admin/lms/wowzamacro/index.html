@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<title>NeoStencil</title>
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+<head>
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet"
+          type="text/css">
+</head>
+<body>
+
+<div id="wrapper">
+
+    <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+    <div id="page-wrapper">
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">WowzaMacro</h1>
+                </div>
+            </div>
+            <div class="row voffsetneg10">
+                <div class="col-md-12">
+                    <a href="/admin/lms/wowzamacro/create-wowzamacro">
+
+                        <button type="submit" class="submit btn btn-default" id="create-wowzamacro"><i
+                                class="fa fa-plus"></i> Create
+                        </button>
+                    </a>
+
+                </div>
+            </div>
+            <div class="row voffset10">
+
+
+                <div class="col-md-12">
+                    <table id="wowzamacro" class="table table-striped table-bordered" cellspacing="0"
+                           width="100%">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Validity</th>
+                            <th>Server IP</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="wowzaMacro:${wowzaMacros}">
+                            <td id="wowzamacro-id" th:text="${wowzaMacro.name}"></td>
+                            <td id="wowzamacro-timing" th:text="${wowzaMacro.description}"></td>
+                            <td id="wowzamacro-validity" th:text="${wowzaMacro.validity}"></td>
+                            <td id="wowzamacro-status" th:text="${wowzaMacro.serverIp}"></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<!--/*/ <th:block th:include="admin/footer"></th:block> /*/-->
+<script src="https://cdn.datata8bles.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

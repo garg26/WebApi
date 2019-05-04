@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--/*/ <th:block th:include="admin/head"></th:block> /*/-->
+
+<head>
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
+      rel="stylesheet">
+
+  <style>
+    .note-codable{
+      display: block!important;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="wrapper">
+
+  <!--/*/ <th:block th:include="admin/navigation"></th:block> /*/-->
+
+  <div id="page-wrapper">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">Update Lecture</h1>
+
+        </div>
+      </div>
+
+      <form role="form" name="lectureForm" id="lectureForm">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 style="font-size: 24px;">Course Info</h1>
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Course ID</label> <input type="text"
+                                                    class="form-control" disabled
+                                                    th:value="${course?.id}"
+                                                    name="courseId" id="courseId">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Course Title</label> <input type="text"
+                                                       class="form-control" disabled
+                                                       th:value="${course?.courseTitle}"
+                                                       name="courseTitle"
+                                                       id="courseTitle">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <h1 style="font-size: 24px;">Course Batch Info</h1>
+            <div class="form-horizontal">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Course Batch ID</label> <input type="text"
+                                                          class="form-control" disabled
+                                                          th:value="${batch?.id}"
+                                                          name="courseBatchId" id="courseBatchId">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Course Batch Name</label> <input type="text"
+                                                            class="form-control" disabled
+                                                            th:value="${batch?.batchName}"
+                                                            name="courseBatchName"
+                                                            id="courseBatchName">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="form-group" style="margin-top: 10px">
+              <label>Course Batch</label> <select name="getBatchData" required
+                                                  id="courseBatch" class="form-control">
+              <option selected th:value="${batch.id}"
+                      th:data-subtext="${batch.startDate + ' to ' + batch.endDate}"
+                      th:text="${batch.batchName}"></option>
+
+            </select>
+            </div>
+
+            <h1 style="font-size: 24px;">Unit Info</h1>
+
+            <div class="form-group" style="margin-top: 10px">
+              <label>Unit ID</label> <input type="text" class="form-control"
+                                            disabled th:value="${unit?.unitId}" name="unitId"
+                                            id="unitId">
+            </div>
+            <div class="form-group">
+              <label>Unit Title</label> <input class="form-control"
+                                               type="text" id="txtTitle" th:value="${unit?.title}"
+                                               placeholder="Enter Unit Title">
+            </div>
+
+
+            <div class="form-horizontal" style="margin-top: 10px">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Unit Topic</label> <select name="unitTopic"
+                                                      id="unitTopic" class="form-control">
+                    <option value="0" selected>Select Unit Topic</option>
+
+                    <option th:each="topic : ${topics}" th:value="${topic}"
+                            th:text="${topic}" th:selected="${unit?.topic == topic}"></option>
+                  </select> <a id="addTopic" onclick="addTopic();"><i
+                      class="glyphicon glyphicon-plus"></i></a> <input type="text"
+                                                                       id="txtTopic"/>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Unit Position</label> <input type="number" min="0"
+                                                        class="form-control"
+                                                        th:value="${unit?.position}"
+                                                        name="unitPosition" id="unitPosition">
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="container"><input type="checkbox"
+                                              name="free" id="free" th:checked="${unit?.free}">is
+                Free</label>
+            </div>
+
+            <div class="form-group">
+              <label class="container"><input type="checkbox"
+                                              name="product" id="product"
+                                              th:checked="${unit?.product}"
+                                              onchange="showPrice();">Product</label>
+              <label class="container"><input type="checkbox"
+                                              name="publiclyBuyable" id="publiclyBuyable"  th:checked="${unit?.publiclyBuyable}">Publically Buyable</label><label
+                id="lblPrice">Price</label>
+              <input type="number" min="0" class="form-control" name="price"
+                     id="price" th:value="${unit?.price}"
+                     placeholder="Enter the unit's Price">
+            </div>
+
+
+            <h1 style="font-size: 24px;">Lecture Info</h1>
+            <div class="form-horizontal" style="margin-top: 10px">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Lecture Id</label> <input type="text" disabled
+                                                     class="form-control" name="lectureId"
+                                                     id="lectureId"
+                                                     th:value="${lecture?.id}">
+                  </div>
+                  <div class="col-sm-6">
+                    <label>Name</label> <input type="text" class="form-control"
+                                               name="name" id="name" disabled
+                                               placeholder="Enter the Name of the lecture">
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="row" style="margin-top: 10px;">
+              <div class="">
+
+                <div class="col-sm-6">
+                  <label>Duration</label> <input type="time"
+                                                 th:value="${lecture?.duration}"
+                                                 class="form-control"
+                                                 name="duration" id="duration"
+                                                 placeholder="Enter the duration of the lecture">
+                </div>
+
+
+              </div>
+            </div>
+
+            <div class="form-horizontal" style="margin-top: 10px">
+              <div class="row">
+
+                <div class="">
+                  <div class="col-sm-6">
+                    <label>Wowza Link</label> <input type="text"
+                                                     class="form-control" name="url" id="url"
+                                                     th:value="${lecture?.url}"
+                                                     placeholder="Enter the Url of the lecture">
+                  </div>
+                  <div class="col-sm-6">
+                    <label>Release Date</label>
+                    <div class='input-group datepicker'>
+                      <input type='text' class="form-control" id='releaseDate'
+                             th:value="${lecture?.releaseDate}" name="releaseDate"/> <span
+                        class="input-group-addon"> <span
+                        class="glyphicon glyphicon-calendar"></span>
+												</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="row" style="margin-top: 10px;">
+
+              <div class="col-sm-6">
+                <label>JWMacro</label> <select name="jwMacro" id="jwMacro"
+                                               value="" class="form-control">
+                <option th:each="jwMacro : ${jwMacros}"
+                        th:text="${jwMacro?.name}" th:value="${jwMacro?.name}"
+                        th:selected="${lecture?.jwMacro?.name == jwMacro?.name}"></option>
+
+              </select>
+              </div>
+
+            </div>
+
+            <div class="form-group" style="margin-top: 10px	">
+              <label>Heading</label> <input class="form-control" row="2"
+                                            type="text" id="heading" name="heading"
+                                            th:value="${lecture?.heading}"
+                                            placeholder="Enter the lecture heading">
+            </div>
+
+            <div class="form-group">
+              <label>Note</label> <textarea id="footerNotes" name="footerNotes"
+                                            placeholder="Enter the instructor name of the lecture"></textarea>
+            </div>
+
+
+            <label class="radio-inline" style="margin-top: 10px;"><input
+                type="radio" value="publish"
+                th:checked="${#strings.toString(unit?.status)} == 'publish'"
+                name="status" checked>Publish</label> <label
+              class="radio-inline" style="margin-top: 10px;"><input
+              type="radio" value="draft"
+              th:checked="${#strings.toString(unit?.status)} == 'draft'"
+              name="status">Draft</label>
+
+
+            <div class="row">
+              <div style="margin-top: 20px;" class="col-md-9">
+                <button class="submit btn btn-success" type="submit"
+                        id="btnSubmit" value="submit">Update
+                </button>
+                <i class="fa fa-spinner fa-spin" id="loader"></i>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+!--/*/
+<th:block th:include="admin/footer"></th:block>
+/*/-->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script
+    src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+
+  var lecture = [[${lecture}]];
+  var price = [[${unit.price}]];
+  var type = [[${unit.type}]];
+
+  /*]]>*/
+</script>
+<script>
+
+  $(document).ready(function () {
+
+    $('#footerNotes').summernote('code', lecture.footerNotes);
+
+    $('#releaseDate').datepicker({
+      format: 'dd-mm-yyyy',
+      autoclose: true,
+      todayHighlight: true,
+    });
+
+    $('#txtTopic').hide();
+
+    if (document.getElementById('product').checked) {
+      $('#price').show();
+      $('#lblPrice').show();
+      $('#price').val(price);
+    } else {
+      $('#price').hide();
+      $('#lblPrice').hide();
+    }
+
+    if (lecture.status == 'publish') {
+      $("#publish").attr('checked', 'checked');
+    }
+    else {
+      $("#draft").attr('checked', 'checked');
+    }
+  });
+
+  $('#btnSubmit').on('click', function (event) {
+    event.preventDefault();
+    $('#loader').show();
+    if (document.getElementById('free').checked) {
+      $('#free').attr('checked', true);
+      $('input[name="free"]').val(true);
+    }
+    else {
+      $('#free').attr('checked', false);
+      $('input[name="free"]').val(false);
+    }
+
+    updateLecture(function (updatedLecture) {
+
+      if (updatedLecture != null) {
+        updateUnit(updatedLecture, function (updatedUnit) {
+
+          if (updatedUnit != null) {
+            $('#loader').hide();
+            alert("Successfully update unit");
+            location.reload();
+          }
+
+          else {
+            $('#loader').hide();
+            alert("Failed in updating unit");
+          }
+
+        });
+      }
+      else {
+        $('#loader').hide();
+        alert("Failed in updating unit");
+      }
+
+    });
+  });
+
+  function updateLecture(callBack) {
+
+    var lectureInput = {
+      url: $('#url').val(),
+      releaseDate: $('#releaseDate').val(),
+      duration: $('#duration').val(),
+      free: $('#free').val(),
+      heading: $('#heading').val(),
+      footerNotes: $('#footerNotes').summernote('code'),
+      jwMacro: {name: $('#jwMacro').val()}
+    };
+
+    $.ajax({
+      async: true,
+      url: apiBasePath + "/admin_techops/lectures/" + $('#lectureId').val(),
+      type: "PUT",
+      data: JSON.stringify(lectureInput),
+      contentType: "application/json",
+      processData: false,
+
+      success: function (response) {
+        if (callBack) {
+          return callBack(response);
+        }
+
+      },
+      error: function (response) {
+        if (callBack) {
+          return callBack(null);
+        }
+      }
+
+    });
+
+  }
+
+  function updateUnit(updatedLecture, callBack) {
+
+    if (document.getElementById('product').checked) {
+      $('#product').attr('checked', true);
+      $('input[name="product"]').val(true);
+    }
+    else {
+      $('#product').attr('checked', false);
+      $('input[name="product"]').val(false);
+    }
+
+    if (document.getElementById('free').checked) {
+      $('#free').attr('checked', true);
+      $('input[name="free"]').val(true);
+    } else {
+      $('#free').attr('checked', false);
+      $('input[name="free"]').val(false);
+    }
+
+    if (document.getElementById('publiclyBuyable').checked) {
+      $('#publiclyBuyable').attr('checked', true);
+      $('input[name="publiclyBuyable"]').val(true);
+    } else {
+      $('#publiclyBuyable').attr('checked', false);
+      $('input[name="publiclyBuyable"]').val(false);
+    }
+
+    var input = {
+      type: type,
+      title: $('#txtTitle').val(),
+      typeId: updatedLecture.id,
+      product: $('#product').val(),
+      publiclyBuyable : $('#publiclyBuyable').val(),
+      position: $('#unitPosition').val(),
+      free: $('#free').val(),
+      status: $('input[name=status]:checked', '#lectureForm').val()
+
+    };
+    if ($('#unitTopic').val() != 0) {
+      input["topic"] = $('#unitTopic').val();
+    } else {
+      input["topic"] = $('#txtTopic').val();
+    }
+
+    if ($('#product').val() == 'true') {
+      input["price"] = $('#price').val();
+    }
+    else {
+      input["price"] = 0;
+    }
+
+    $.ajax({
+      async: true,
+      url: apiBasePath + "/admin_techops_lmsadmin/units/" + $('#unitId').val(),
+      type: "PUT",
+      data: JSON.stringify(input),
+      dataType: "json",
+      contentType: "application/json",
+      processData: false,
+
+      success: function (response) {
+        if (callBack) {
+          return callBack(response);
+        }
+
+      },
+      error: function (response) {
+        if (callBack) {
+          return callBack(null);
+        }
+      }
+
+    });
+
+  }
+
+  function getCourseBatch() {
+    list = [];
+    $("#courseBatch").val().forEach(function (value, index) {
+      list.push({
+        id: value
+      });
+    });
+    return list;
+  }
+
+  function showPrice() {
+    if (document.getElementById('product').checked) {
+      $('#price').show();
+      $('#lblPrice').show();
+      $('#price').val(price);
+    } else {
+      $('#price').hide();
+      $('#lblPrice').hide();
+    }
+  }
+
+  function addTopic() {
+    $('#txtTopic').show();
+  }
+
+
+</script>
+
+</body>
+</html>

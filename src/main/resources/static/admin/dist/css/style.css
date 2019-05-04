@@ -1,0 +1,230 @@
+html,
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+}
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus,
+.form-control:focus {
+    border-color: none;
+    box-shadow: none;
+    outline: 0 none;
+}
+a {
+    color: black;
+}
+a:hover,
+a:focus {
+    text-decoration: none;
+}/*
+.navbar-default {
+    background-color: white;
+    font-size: 16px;
+    margin-top: auto;
+    position: fixed;
+    border-radius: 0;
+    height: 100%;
+}*/
+.sidebar ul li {
+    border-bottom: none;
+}
+label {
+    font-weight: 400;
+    font-size: medium;
+}
+.nav-second-level {
+    text-indent: 10px;
+}
+/*.btn {
+    border-radius: 0px;
+}*/
+#coupon-creation h3 {
+    background: whitesmoke;
+    padding: 10px;
+    color: black;
+}
+#loader {
+    display: none;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 4px;
+    font-size: 24px;
+}
+#add-new-entity-error {
+    color: red;
+    margin-top: 10px;
+    position: absolute;
+    font-size: small;
+}
+#add-new-post-text-error {
+    display: none;
+    color: red;
+    font-size: small;
+    position: absolute;
+    margin-top: -20px;
+}
+#add-new-post-error {
+    margin-top: 10px;
+}
+.input-error {
+    position: absolute;
+    color: red;
+    margin-top: 6px;
+    margin-left: 10px;
+}
+label.error {
+    color: red;
+    font-size: small;
+}
+#page-navigation {
+    padding-left: 15px;
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
+#all-coupons a,
+#all-posts a,
+#all-courses a {
+    color: #337ab7;
+    text-decoration: none;
+}
+.page-header {
+    margin: 10px 0 20px;
+}
+#all-coupons #description,
+#all-posts #post-title,
+#all-posts #post-id {
+    word-wrap: break-word;
+   /* min-width: 300px;*/
+    max-width: 300px;
+}
+/*.page-header {
+    margin-top: -40px;
+    margin-right: 20px;
+}*/
+#all-posts input[type='checkbox'] {
+    transform: scale(1.4);
+    margin-left: 7px;
+    margin-top: 3px;
+    margin-right: -8px;
+}
+#all-coupons input[type='checkbox'],
+#all-users input[type='checkbox'],
+#all-courses input[type='checkbox'],
+#all-orders input[type='checkbox'] {
+    transform: scale(1.4);
+    margin-left: 7px;
+    margin-top: 3px;
+}
+.voffsetneg10 {
+    margin-top: 0px;
+}
+.voffset10 {
+    margin-top: 16px;
+}
+.btn{
+    white-space: normal;
+    min-width: 100px;
+    margin: 2px 0px;
+}
+@import "bourbon";
+.admin-login {
+    margin-top: 10%;
+    margin-bottom: 80px;
+    margin-right: 15px;
+}
+.admin-login img {
+    margin-bottom: 40px;
+}
+.form-signin {
+    max-width: 380px;
+    padding: 60px 35px 80px;
+    margin: 0 auto;
+    background-color: #fff;
+.form-signin-heading,
+.checkbox {
+    margin-bottom: 30px;
+}
+.checkbox {
+    font-weight: normal;
+}
+.form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+@include box-sizing(border-box);
+&:focus {
+     z-index: 2;
+ }
+border-radius: 0px;
+}
+input[type="text"] {
+    margin-bottom: 14px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+input[type="password"] {
+    margin-bottom: 14px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+}
+.admin-login-input {
+    margin-bottom: 14px;
+    border-radius: 0px;
+    height: 50px;
+    font-size: 20px;
+    border: 0;
+    box-shadow: none;
+    border-bottom: 1px solid gray;
+    padding: 0;
+}
+.admin-submit {
+    height: 50px;
+    font-size: 20px;
+    margin-top: 40px;
+}
+.form-control {
+    border-radius: 0px;
+}
+/*#admin-dashboard {
+    margin-top: 60px;
+}*/
+/*.navbar-header {
+    padding: 16px;
+}*/
+/*#course-status,
+#coupon-status,
+#order-status,
+#post-status {
+    width: 80%;
+    display: inline-block;
+}*/
+#create-course:hover,
+#edit-course:hover,
+#trash-course:hover,
+#preview-course:hover,
+#clone-course:hover {
+    background-color: #337ab7;
+    color: white;
+}
+@media screen and (max-width: 767px) {
+    .btn {
+        white-space: normal;
+    }
+}
+
